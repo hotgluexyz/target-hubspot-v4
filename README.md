@@ -2,7 +2,6 @@
 
 `target-hubspot-v4` is a Singer target for Hubspot-v4.
 
-Build with the [Meltano Target SDK](https://sdk.meltano.com).
 
 ## Installation
 
@@ -37,7 +36,7 @@ environment variable is set either in the terminal context or in the `.env` file
 
 ## Usage
 
-You can easily run `target-hubspot-v4` by itself or in a pipeline using [Meltano](https://meltano.com/).
+You can easily run `target-hubspot-v4` by itself.
 
 ### Executing the Target Directly
 
@@ -47,10 +46,6 @@ target-hubspot-v4 --help
 # Test using the "Carbon Intensity" sample:
 tap-carbon-intensity | target-hubspot-v4 --config /path/to/target-hubspot-v4-config.json
 ```
-
-## Developer Resources
-
-- [ ] `Developer TODO:` As a first step, scan the entire project for the text "`TODO:`" and complete any recommended steps, deleting the "TODO" references once completed.
 
 ### Initialize your Development Environment
 
@@ -74,34 +69,7 @@ You can also test the `target-hubspot-v4` CLI interface directly using `poetry r
 poetry run target-hubspot-v4 --help
 ```
 
-### Testing with [Meltano](https://meltano.com/)
-
-_**Note:** This target will work in any Singer environment and does not require Meltano.
-Examples here are for convenience and to streamline end-to-end orchestration scenarios._
-
-Your project comes with a custom `meltano.yml` project file already created. Open the `meltano.yml` and follow any _"TODO"_ items listed in
-the file.
-
-Next, install Meltano (if you haven't already) and any needed plugins:
-
-```bash
-# Install meltano
-pipx install meltano
-# Initialize meltano within this directory
-cd target-hubspot-v4
-meltano install
-```
-
-Now you can test and orchestrate using Meltano:
-
-```bash
-# Test invocation:
-meltano invoke target-hubspot-v4 --version
-# OR run a test `elt` pipeline with the Carbon Intensity sample tap:
-meltano elt tap-carbon-intensity target-hubspot-v4
-```
-
 ### SDK Dev Guide
 
-See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the Meltano SDK to
+See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to
 develop your own Singer taps and targets.
