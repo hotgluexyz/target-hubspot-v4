@@ -45,3 +45,10 @@ class HubspotSink(HotglueSink):
         if self.api_key:
             return {"hapikey": self.api_key}
         return {}
+    
+    @property
+    def http_headers(self) -> dict:
+        """Return the http headers needed."""
+        headers = {}
+        headers.update(self.authenticator.auth_headers or {})
+        return headers
