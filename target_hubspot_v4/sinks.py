@@ -28,6 +28,6 @@ class FallbackSink(HubspotSink):
             if id:
                 method = "PUT"
                 endpoint = f"{endpoint}/{id}"
-            response = self.request_api(method, endpoint=endpoint, request_data=record)
+            response = self.request_api(method, endpoint=endpoint, request_data={"properties": record})
             id = response.json()[pk]
             return id, True, state_updates
