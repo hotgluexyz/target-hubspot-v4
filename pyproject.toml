@@ -37,3 +37,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
 # CLI declaration
 target-hubspot-v4 = 'target_hubspot_v4.target:TargetHubspotv4.cli'
+target-hubspot-v2 = 'target_hubspot_v4.target:TargetHubspotv4.cli'
+target-hubspot = 'target_hubspot_v4.target:TargetHubspotv4.cli'
