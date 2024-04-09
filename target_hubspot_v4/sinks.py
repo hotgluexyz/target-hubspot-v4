@@ -15,7 +15,16 @@ class FallbackSink(HubspotSink):
 
     def preprocess_record(self, record: dict, context: dict) -> None:
         """Process the record."""
-        return record
+        for key, value in record.items():
+            record[key] = self.parse_objs(value)
+        # wrap all in properties if properties is not in the payload
+        if not record.get("properties"):
+            new_record = {}
+            new_record["properties"] = record
+        else:
+            new_record = record
+        return new_record
+
 
     def upsert_record(self, record: dict, context: dict):
         state_updates = dict()
@@ -28,6 +37,6 @@ class FallbackSink(HubspotSink):
             if id:
                 method = "PUT"
                 endpoint = f"{endpoint}/{id}"
-            response = self.request_api(method, endpoint=endpoint, request_data={"properties": record})
+            response = self.request_api(method, endpoint=endpoint, request_data=record)
             id = response.json()[pk]
             return id, True, state_updates
