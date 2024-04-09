@@ -3,6 +3,8 @@ from singer_sdk.plugin_base import PluginBase
 from typing import Dict, List, Optional, Any
 from target_hubspot_v4.auth import HubspotAuthenticator, HubspotApiKeyAuthenticator
 from target_hotglue.auth import Authenticator
+import ast
+import json
 
 class HubspotSink(HotglueSink):
 
@@ -52,3 +54,12 @@ class HubspotSink(HotglueSink):
         headers = {}
         headers.update(self.authenticator.auth_headers or {})
         return headers
+    
+    def parse_objs(self, obj):
+        try:
+            try:
+                return ast.literal_eval(obj)
+            except:
+                return json.loads(obj)
+        except:
+            return obj
