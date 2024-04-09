@@ -30,8 +30,9 @@ class FallbackSink(HubspotSink):
             record[key] = self.parse_objs(value)
         # wrap all in properties if properties is not in the payload
         if not record.get("properties"):
-            record["properties"] = record
-        return record
+            new_record = {}
+            new_record["properties"] = record
+        return new_record
     
 
     def upsert_record(self, record: dict, context: dict):
