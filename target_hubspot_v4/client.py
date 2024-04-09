@@ -25,6 +25,13 @@ class HubspotSink(HotglueSink):
 
     base_url = "https://api.hubapi.com/crm/v3/objects"
     api_key = None
+
+    @property
+    def default_headers(self):
+        headers = self.http_headers
+        if self.authenticator:
+            headers.update(self.authenticator.auth_headers)
+        return headers
     
     @property
     def authenticator(self):

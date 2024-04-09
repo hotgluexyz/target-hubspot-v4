@@ -1,6 +1,8 @@
 """Hubspot-v4 target sink class, which handles writing streams."""
 
 from target_hubspot_v4.client import HubspotSink
+import ast
+import json
 
 class FallbackSink(HubspotSink):
     """Precoro target sink class."""
@@ -12,10 +14,25 @@ class FallbackSink(HubspotSink):
     @property
     def name(self):
         return self.stream_name
+    
+    def parse_objs(self, obj):
+        try:
+            try:
+                return ast.literal_eval(obj)
+            except:
+                return json.loads(obj)
+        except:
+            return obj
 
     def preprocess_record(self, record: dict, context: dict) -> None:
         """Process the record."""
+        for key, value in record.items():
+            record[key] = self.parse_objs(value)
+        # wrap all in properties if properties is not in the payload
+        if not record.get("properties"):
+            record["properties"] = record
         return record
+    
 
     def upsert_record(self, record: dict, context: dict):
         state_updates = dict()
