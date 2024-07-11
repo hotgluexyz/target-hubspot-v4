@@ -11,6 +11,8 @@ from singer_sdk.sinks import Sink
 from target_hubspot_v4.sinks import (
     FallbackSink,
 )
+from target_hubspot_v4.unified import UnifiedSink
+
 
 class TargetHubspotv4(TargetHotglue):
     """Sample target for Hubspot-v4."""
@@ -48,6 +50,10 @@ class TargetHubspotv4(TargetHotglue):
     ).to_dict()
 
     def get_sink_class(self, stream_name: str) -> Type[Sink]:
+        # Check if unified sinks are enabled
+        if self.config.get("unified_api_schema", False):
+            return UnifiedSink
+
         for sink_class in self.SINK_TYPES:
             return FallbackSink
 
