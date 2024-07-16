@@ -3,33 +3,94 @@
 import re
 
 from singer_sdk.sinks import BatchSink
+from target_hotglue.client import HotglueSink
 
 from target_hubspot_v4.utils import request_push, request, search
 from pendulum.parser import parse
+from singer_sdk.plugin_base import PluginBase
+from typing import Dict, List, Optional
 
 
-class UnifiedSink(BatchSink):
+class UnifiedSink(HotglueSink):
     """UnifiedSink target sink class."""
+
+    def __init__(
+        self,
+        target: PluginBase,
+        stream_name: str,
+        schema: Dict,
+        key_properties: Optional[List[str]],
+    ) -> None:
+        self._state = dict(target._state)
+        self._target = target
+        super().__init__(target, stream_name, schema, key_properties)
 
     max_size = 10  # Max records to write in one batch
     contacts = []
     base_url = "https://api.hubapi.com/crm/v3/objects"
 
+    @property
+    def name(self):
+        return self.stream_name
+    
+    def preprocess_record(self, record: dict, context: dict) -> dict:
+        return record
+    
     def process_record(self, record: dict, context: dict) -> None:
-        if self.stream_name.lower() in ["contacts", "contact", "customer", "customers"]:
-            self.process_contacts(record)
-        if self.stream_name.lower() in ["activities", "activity"]:
-            self.process_activities(record)
-        if self.stream_name.lower() in ["companies", "company"]:
-            self.upload_company(record)
-        if self.stream_name.lower() in ["deals", "deal", "opportunities"]:
-            self.upload_deal(record)
+        if not self.latest_state:
+            self.init_state()
+
+        hash = self.build_record_hash(record)
+
+        existing_state =  self.get_existing_state(hash)
+
+        if existing_state:
+            return self.update_state(existing_state, is_duplicate=True)
+
+        state = {"hash": hash}
+
+        id = None
+        success = False
+        state_updates = dict()
+
+        external_id = record.pop("externalId", None)
+
+        try:
+            if self.stream_name.lower() in ["contacts", "contact", "customer", "customers"]:
+                id, success, state_updates = self.process_contacts(record)
+            if self.stream_name.lower() in ["activities", "activity"]:
+                id, success, state_updates = self.process_activities(record)
+            if self.stream_name.lower() in ["companies", "company"]:
+                id, success, state_updates = self.upload_company(record)
+            if self.stream_name.lower() in ["deals", "deal", "opportunities"]:
+                id, success, state_updates = self.upload_deal(record)
+        except Exception as e:
+            self.logger.exception(f"Upsert record error {str(e)}")
+            state_updates['error'] = str(e)
+
+        if success:
+            self.logger.info(f"{self.name} processed id: {id}")
+
+        state["success"] = success
+
+        if id:
+            state["id"] = id
+
+        if external_id:
+            state["externalId"] = external_id
+
+        if state_updates and isinstance(state_updates, dict):
+            state = dict(state, **state_updates)
+
+        self.update_state(state)
+
 
     def process_activities(self, record):
         if record.get("type") == "call":
-            self.process_call(record)
+            res = self.process_call(record)
         if record.get("type") == "task":
-            self.upload_task(record)
+            res = self.upload_task(record)
+        return True, res.get("id"), {}
 
     def process_call(self, record):
         url = f"{self.base_url}/calls"
@@ -71,6 +132,8 @@ class UnifiedSink(BatchSink):
                 dealId = deal.get("toObjectId")
                 url = f"{self.base_url}/calls/{callId}/associations/deal/{dealId}/call_to_deal"
                 request_push(dict(self.config), url, {}, method="PUT")
+        return data
+
 
     def process_contacts(self, record):
         phone_numbers = record.get("phone_numbers")
@@ -136,7 +199,10 @@ class UnifiedSink(BatchSink):
         # self.contacts.append(row)
         # for now process one contact at a time because if on contact is duplicate whole batch will fail
         self.logger.info(f"Uploading contact = {row}")
-        self.contact_upload(row)
+        res = self.contact_upload(row)
+        res = res.json()
+        return True, res.get("id"), {}
+
 
     def process_contacts_custom_fields(self, custom_fields):
         url = "https://api.hubapi.com/crm/v3/properties/contacts"
@@ -178,8 +244,9 @@ class UnifiedSink(BatchSink):
             del contact["id"]
             method = "PATCH"
         resp = request_push(dict(self.config), url, contact, None, method)
-        if resp.status_code in [400] or resp.status_code >= 500:
+        if resp.status_code not in [200, 201, 204]:
             raise Exception(resp.text)
+        return resp
 
     def contacts_batch_upload(self):
         url = f"{self.base_url}/contacts/batch/create"
@@ -218,6 +285,8 @@ class UnifiedSink(BatchSink):
         res = res.json()
         if "id" in res:
             print(f"Comany id:{res['id']}, name:{mapping['name']}  {action}")
+        return True, res.get("id"), {}
+    
 
     def upload_deal(self, record):
         method = "POST"
@@ -271,6 +340,8 @@ class UnifiedSink(BatchSink):
                 self.upload_deal_contact_association(
                     res["id"], record["contact_id"], None
                 )
+        return True, res.get("id"), {}
+    
 
     def upload_deal_contact_association(self, deal_id, contact_id, contact_email=None):
         if contact_email:
@@ -324,6 +395,7 @@ class UnifiedSink(BatchSink):
         res = res.json()
         if "id" in res:
             print(f"Task id:{res['id']}, name:{mapping['hs_task_subject']}  {action}")
+        return res
 
     def match_field_type_to_type(self, type):
         map_of_types = {
