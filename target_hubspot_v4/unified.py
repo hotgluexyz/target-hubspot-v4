@@ -57,13 +57,13 @@ class UnifiedSink(HotglueSink):
 
         try:
             if self.stream_name.lower() in ["contacts", "contact", "customer", "customers"]:
-                id, success, state_updates = self.process_contacts(record)
+                success, id, state_updates = self.process_contacts(record)
             if self.stream_name.lower() in ["activities", "activity"]:
-                id, success, state_updates = self.process_activities(record)
+                success, id, state_updates = self.process_activities(record)
             if self.stream_name.lower() in ["companies", "company"]:
-                id, success, state_updates = self.upload_company(record)
+                success, id, state_updates = self.upload_company(record)
             if self.stream_name.lower() in ["deals", "deal", "opportunities"]:
-                id, success, state_updates = self.upload_deal(record)
+                success, id, state_updates = self.upload_deal(record)
         except Exception as e:
             self.logger.exception(f"Upsert record error {str(e)}")
             state_updates['error'] = str(e)
