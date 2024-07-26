@@ -1,6 +1,7 @@
 """HubspotV2 target sink class, which handles writing streams."""
 
 import re
+import json
 
 from singer_sdk.sinks import BatchSink
 from target_hotglue.client import HotglueSink
@@ -199,7 +200,24 @@ class UnifiedSink(HotglueSink):
         # self.contacts.append(row)
         # for now process one contact at a time because if on contact is duplicate whole batch will fail
         self.logger.info(f"Uploading contact = {row}")
-        res = self.contact_upload(row)
+        try:
+            res = self.contact_upload(row)
+        except Exception as e:
+            try:
+                # In rare cases, the contact can be created right before we make this call and give a CONFLICT error
+                # { "status": "error", "message": "Contact already exists. Existing ID: ...", "correlationId": "...", "category": "CONFLICT" }
+                error = json.loads(str(e))
+                error_prefix = "Contact already exists. Existing ID: "
+                if error.get("category") == "CONFLICT" and error.get("message").startswith(error_prefix):
+                    contact_id = error["message"].replace(error_prefix, "")
+                    row.update({"id": contact_id})
+                    self.logger.info(f"Reattempting uploading contact = {row}")
+                    res = self.contact_upload(row)
+                else:
+                    raise e
+            except:
+                raise e
+
         res = res.json()
         return True, res.get("id"), {}
 
