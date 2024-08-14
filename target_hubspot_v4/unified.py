@@ -160,6 +160,7 @@ class UnifiedSink(HotglueSink):
                 # "hubspot_owner_id":record["owner_id"],
                 "company": record.get("company_name"),
                 "phone": phone,
+                "date_of_birth": record.get("birthdate")
             }
         }
 
