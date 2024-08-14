@@ -162,7 +162,7 @@ class UnifiedSink(HotglueSink):
                 "phone": phone,
                 "date_of_birth": record.get("birthdate"),
                 "industry": record.get("industry"),
-                "unsubscribed": record.get("hs_email_optout")
+                "hs_email_optout": record.get("unsubscribed")
             }
         }
 
