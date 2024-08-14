@@ -188,6 +188,8 @@ class UnifiedSink(HotglueSink):
                     row["properties"][field["name"].lower()] = self.check_time_value(
                         field["value"]
                     )
+                elif field.get("type") == "bool":
+                    row["properties"][field["name"].lower()] = field["value"] if isinstance(field["value"], bool) else field["value"].lower() == "true"
                 else:
                     row["properties"][field["name"].lower()] = field["value"]
 
