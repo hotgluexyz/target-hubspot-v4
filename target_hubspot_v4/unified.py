@@ -160,7 +160,8 @@ class UnifiedSink(HotglueSink):
                 # "hubspot_owner_id":record["owner_id"],
                 "company": record.get("company_name"),
                 "phone": phone,
-                "date_of_birth": record.get("birthdate")
+                "date_of_birth": record.get("birthdate"),
+                "industry": record.get("industry"),
             }
         }
 
@@ -173,6 +174,7 @@ class UnifiedSink(HotglueSink):
                 "city": address.get("city"),
                 "state": address.get("state"),
                 "country": address.get("country"),
+                "zip": address.get("postal_code"),
             }
             row["properties"].update(address_dict)
 
