@@ -33,9 +33,9 @@ class FallbackSink(HubspotSink):
         pk = self.key_properties[0] if self.key_properties else "id"
         if record:
             # post or put record
-            id = record.get(pk)
+            id = record['properties'].pop(pk, None) if record.get("properties") else record.pop(pk, None)
             if id:
-                method = "PUT"
+                method = "PATCH"
                 endpoint = f"{endpoint}/{id}"
             response = self.request_api(method, endpoint=endpoint, request_data=record)
             id = response.json()[pk]
