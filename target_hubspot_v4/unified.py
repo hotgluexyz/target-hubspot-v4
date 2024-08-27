@@ -162,6 +162,8 @@ class UnifiedSink(HotglueSink):
                 "phone": phone,
                 "date_of_birth": record.get("birthdate"),
                 "industry": record.get("industry"),
+                "annualrevenue": record.get("annual_revenue"),
+                "salutation": record.get("salutation")
             }
         }
 
