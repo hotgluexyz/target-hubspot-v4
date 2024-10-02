@@ -64,5 +64,5 @@ class HubspotSink(HotglueSink):
         except:
             pass
         if isinstance(obj, dict) or isinstance(obj, list):
-            obj = str(obj)
+            obj = json.dumps(obj)
         return obj
