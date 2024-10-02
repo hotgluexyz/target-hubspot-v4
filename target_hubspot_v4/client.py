@@ -58,8 +58,11 @@ class HubspotSink(HotglueSink):
     def parse_objs(self, obj):
         try:
             try:
-                return ast.literal_eval(obj)
+                obj = ast.literal_eval(obj)
             except:
-                return json.loads(obj)
+                obj = json.loads(obj)
         except:
-            return obj
+            pass
+        if isinstance(obj, dict) or isinstance(obj, list):
+            obj = json.dumps(obj)
+        return obj
