@@ -235,23 +235,40 @@ class UnifiedSink(HotglueSink):
 
         config = dict(self.config)
 
-        try: 
+        try:
             # try first with v3
             contact_cf = request(config, url)
-            contact_cf = [field.get("name", "").lower() for field in contact_cf.json().get("results", [])]
+            contact_cf = [
+                field.get("name", "").lower()
+                for field in contact_cf.json().get("results", [])
+            ]
         except Exception as e:
             # try with v1
-            self.logger.info(f"Unable to retrieve custom contact fields with v3. {e}")
+            self.logger.info(
+                f"Unable to retrieve custom contact fields with v3. Cause: {e}"
+            )
             try:
                 contact_cf = request(config, url_v1)
-                contact_cf = [field.get("name", "").lower() for field in (contact_cf.json())]
+                contact_cf = [
+                    field.get("name", "").lower() for field in (contact_cf.json())
+                ]
             except Exception as e:
-                self.logger.info(f"Unable to retrieve custom contact fields with v1. {e}. Attempting to create all custom fields")
+                self.logger.info(
+                    f"Unable to retrieve custom contact fields with v1. Cause: {e}. Attempting to create all custom fields"
+                )
                 contact_cf = []
 
+        processed_custom_fields = []
         for field in custom_fields:
+            # check if field has name
+            if not field.get("name"):
+                self.logger.info(
+                    f"Contact custom field with no name: {field}, skipping."
+                )
+                continue
             # if field already exists skip creating custom field
             if field["name"].lower() in contact_cf:
+                processed_custom_fields.append(field)
                 continue
             payload = {
                 "groupName": "contactinformation",
@@ -270,16 +287,17 @@ class UnifiedSink(HotglueSink):
             response = request_push(config, url, payload, "POST")
             if response.status_code == 409:
                 self.logger.info(f"Custom field {field['name'].lower()} already exists")
+                processed_custom_fields.append(field)
             elif response.status_code == 201:
                 self.logger.info(f"Custom field {field['name'].lower()} created")
+                processed_custom_fields.append(field)
             else:
                 self.logger.error(
-                    f"Error creating custom field {field['name'].lower()}"
+                    f"Error creating custom field {field['name'].lower()}, skipping custom field."
                 )
-                custom_fields.remove(field)
                 self.logger.error(response.json())
 
-        return custom_fields
+        return processed_custom_fields
 
     def contact_upload(self, contact):
         method = "POST"
