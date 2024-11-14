@@ -3,11 +3,9 @@
 import re
 import json
 
-from singer_sdk.sinks import BatchSink
 from target_hotglue.client import HotglueSink
 
 from target_hubspot_v4.utils import request_push, request, search
-from pendulum.parser import parse
 from singer_sdk.plugin_base import PluginBase
 from typing import Dict, List, Optional
 

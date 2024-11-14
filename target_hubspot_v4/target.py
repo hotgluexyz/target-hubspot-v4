@@ -28,7 +28,6 @@ class TargetHubspotv4(TargetHotglue):
         super().__init__(config, parse_env_config, validate_config)
 
     name = "target-hubspot-v4"
-    SINK_TYPES = [FallbackSink]
 
     config_jsonschema = th.PropertiesList(
         th.Property(
@@ -53,9 +52,7 @@ class TargetHubspotv4(TargetHotglue):
         # Check if unified sinks are enabled
         if self.config.get("unified_api_schema", False):
             return UnifiedSink
-
-        for sink_class in self.SINK_TYPES:
-            return FallbackSink
+        return FallbackSink
 
 if __name__ == "__main__":
     TargetHubspotv4.cli()
