@@ -150,21 +150,28 @@ class UnifiedSink(HotglueSink):
         else:
             phone = None
 
-        row = {
-            "properties": {
-                "firstname": record.get("first_name"),
-                "lastname": record.get("last_name"),
-                "email": record.get("email"),
-                # "hubspot_owner_id":record["owner_id"],
-                "company": record.get("company_name"),
-                "phone": phone,
-                "date_of_birth": record.get("birthdate"),
-                "industry": record.get("industry"),
-                "annualrevenue": record.get("annual_revenue"),
-                "salutation": record.get("salutation"),
-                "jobtitle": record.get("title")
-            }
-        }
+        row = {"properties": {}}
+        
+        if "first_name" in record:
+            row["properties"]["firstname"] = record.get("first_name")
+        if "last_name" in record:
+            row["properties"]["lastname"] = record.get("last_name")
+        if "email" in record:
+            row["properties"]["email"] = record.get("email") 
+        if "company_name" in record:
+            row["properties"]["company"] = record.get("company_name")
+        if "phone_numbers" in record:
+            row["properties"]["phone"] = phone
+        if "birthdate" in record:
+            row["properties"]["date_of_birth"] = record.get("birthdate")
+        if "industry" in record:
+            row["properties"]["industry"] = record.get("industry")
+        if "annual_revenue" in record:
+            row["properties"]["annualrevenue"] = record.get("annual_revenue")
+        if "salutation" in record:
+            row["properties"]["salutation"] = record.get("salutation")
+        if "title" in record:
+            row["properties"]["jobtitle"] = record.get("title")
 
         # add address to customers
         addresses = record.get("addresses")
