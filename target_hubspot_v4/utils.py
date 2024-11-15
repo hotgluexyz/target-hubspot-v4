@@ -22,18 +22,6 @@ class SourceUnavailableException(Exception):
     pass
 
 
-def clean_null(input):
-    if isinstance(input, list):
-        return [clean_null(i) for i in input]
-    elif isinstance(input, dict):
-        output = {}
-        for k, v in input.items():
-            if v is not None:
-                output[k] = clean_null(v)
-        return output
-    return input
-
-
 def giveup(exc):
     return (
         exc.response is not None
@@ -119,7 +107,6 @@ def get_params_and_headers(config, params):
 def request_push(config, url, payload, params=None, method="POST"):
 
     params, headers = get_params_and_headers(config, params)
-    payload = clean_null(payload)
 
     req = requests.Request(
         method, url, json=payload, headers=headers, params=params
