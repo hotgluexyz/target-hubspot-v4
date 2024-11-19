@@ -53,7 +53,7 @@ class TargetHubspotv4(TargetHotglue):
         # Check if unified sinks are enabled
         if self.config.get("unified_api_schema", False):
             return UnifiedSink
-
+        
         for sink_class in self.SINK_TYPES:
             return FallbackSink
 
