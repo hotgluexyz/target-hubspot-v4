@@ -20,12 +20,18 @@ class HubspotSink(HotglueSink):
         super().__init__(target, stream_name, schema, key_properties)
 
     auth_state = {}
+    marketing_sinks = ["campaigns"]
 
     @property
     def current_division(self):
         return self.config.get("current_division")
+    
+    @property
+    def base_url(self):
+        if self.name in self.marketing_sinks:
+            return "https://api.hubapi.com/marketing/v3"
+        return "https://api.hubapi.com/crm/v3/objects"
 
-    base_url = "https://api.hubapi.com/crm/v3/objects"
     api_key = None
     
     @property
@@ -63,6 +69,7 @@ class HubspotSink(HotglueSink):
                 obj = json.loads(obj)
         except:
             pass
+        # hubspot doesn't allow dicts or strings
         if isinstance(obj, dict) or isinstance(obj, list):
             obj = json.dumps(obj)
         return obj

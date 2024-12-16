@@ -15,12 +15,13 @@ class FallbackSink(HubspotSink):
 
     def preprocess_record(self, record: dict, context: dict) -> None:
         """Process the record."""
+        if record.get("properties"):
+            # some send record wrapped in properties key
+            # denesting properties to parse all values inside properly
+            record = record["properties"] 
         for key, value in record.items():
-            record[key] = self.parse_objs(value)
-        # wrap all in properties if properties is not in the payload
-        if not record.get("properties"):
-            record = {"properties": record}
-        return record
+            record[key] = self.parse_objs(value)   
+        return {"properties": record}
     
     def upsert_record(self, record: dict, context: dict):
         state_updates = dict()
