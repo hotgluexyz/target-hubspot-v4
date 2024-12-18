@@ -94,6 +94,26 @@ def get_params_and_headers(config, params):
 
     return params, headers
 
+def raise_for_status(response):
+    http_error_msg = ''
+    if isinstance(response.reason, bytes):
+        try:
+            reason = response.reason.decode('utf-8')
+        except UnicodeDecodeError:
+            reason = response.reason.decode('iso-8859-1')
+    else:
+        reason = response.reason
+
+    if 400 <= response.status_code < 500:
+        http_error_msg = u'%s Client Error: %s for url: %s' % (response.status_code, reason, response.url)
+
+    elif 500 <= response.status_code < 600:
+        http_error_msg = u'%s Server Error: %s for url: %s' % (response.status_code, reason, response.url)
+
+    if http_error_msg:
+        resp_json = response.json() if response.text else ""
+        http_error_msg = f"{http_error_msg}, Api response: {resp_json}, Payload: {response.request.body}, Url: {response.url}"
+        raise requests.exceptions.HTTPError(http_error_msg, response=response)
 
 @backoff.on_exception(
     backoff.constant,
@@ -101,7 +121,6 @@ def get_params_and_headers(config, params):
     max_tries=5,
     jitter=None,
     giveup=giveup,
-    on_giveup=on_giveup,
     interval=10,
 )
 def request_push(config, url, payload, params=None, method="POST"):
@@ -126,7 +145,7 @@ def request_push(config, url, payload, params=None, method="POST"):
         resp_json = resp.json()
         if resp_json.get("status") == "error":
             logger.warning(f"API response: {resp_json.get('message')}")
-        resp.raise_for_status()
+        raise_for_status(resp)
     return resp
 
 

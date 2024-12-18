@@ -219,16 +219,16 @@ class UnifiedSink(HotglueSink):
             try:
                 # In rare cases, the contact can be created right before we make this call and give a CONFLICT error
                 # { "status": "error", "message": "Contact already exists. Existing ID: ...", "correlationId": "...", "category": "CONFLICT" }
-                error = json.loads(str(e))
                 error_prefix = "Contact already exists. Existing ID: "
-                if error.get("category") == "CONFLICT" and error.get("message").startswith(error_prefix):
+                if error_prefix in str(e) and '"category":"CONFLICT"' in str(e):
+                    error = json.loads(str(e))
                     contact_id = error["message"].replace(error_prefix, "")
                     row.update({"id": contact_id})
                     self.logger.info(f"Reattempting uploading contact = {row}")
                     res = self.contact_upload(row)
                 else:
                     raise e
-            except:
+            except Exception as e:
                 raise e
 
         res = res.json()
