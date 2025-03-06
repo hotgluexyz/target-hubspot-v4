@@ -175,7 +175,6 @@ def request(config, url, params=None):
 
 def search_contact_by_email(config, email):
     params, headers = get_params_and_headers(config, None)
-    # Dirty, but leave it like this for now
     url = f"https://api.hubapi.com/crm/v3/objects/contacts/{email}?idProperty=email"
     req = requests.Request("GET", url, params=params, headers=headers).prepare()
     response = SESSION.send(req)

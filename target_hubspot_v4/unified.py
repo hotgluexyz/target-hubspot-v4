@@ -207,8 +207,7 @@ class UnifiedSink(HotglueSink):
         if "id" not in row and row["properties"].get("email"):
             contact_search = search_contact_by_email(dict(self.config), row["properties"].get("email"))
             if contact_search:
-                if contact_search.get("id"):
-                    row.update({"id": contact_search["id"]})
+                row.update({"id": contact_search.get("id")})
         # self.contacts.append(row)
         # for now process one contact at a time because if on contact is duplicate whole batch will fail
         self.logger.info(f"Uploading contact = {row}")
