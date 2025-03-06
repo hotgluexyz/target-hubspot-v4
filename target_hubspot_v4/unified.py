@@ -5,7 +5,7 @@ import json
 
 from target_hotglue.client import HotglueSink
 
-from target_hubspot_v4.utils import request_push, request, search
+from target_hubspot_v4.utils import request_push, request, search_contact_by_email
 from singer_sdk.plugin_base import PluginBase
 from typing import Dict, List, Optional
 
@@ -205,11 +205,9 @@ class UnifiedSink(HotglueSink):
             row.update({"id": record.get("id")})
 
         if "id" not in row and row["properties"].get("email"):
-            contact_search = search(dict(self.config), row["properties"].get("email"))
+            contact_search = search_contact_by_email(dict(self.config), row["properties"].get("email"))
             if contact_search:
-                if len(contact_search) > 0:
-                    if contact_search[0].get("id"):
-                        row.update({"id": contact_search[0]["id"]})
+                row.update({"id": contact_search.get("id")})
         # self.contacts.append(row)
         # for now process one contact at a time because if on contact is duplicate whole batch will fail
         self.logger.info(f"Uploading contact = {row}")

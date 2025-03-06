@@ -173,21 +173,11 @@ def request(config, url, params=None):
     return resp
 
 
-def search(config, term, key="email", object="contacts"):
+def search_contact_by_email(config, email):
     params, headers = get_params_and_headers(config, None)
-    # Dirty, but leave it like this for now
-    url = f"https://api.hubapi.com/crm/v3/objects/{object}/search"
-    filters = {
-        "filterGroups": [
-            {"filters": [{"propertyName": key, "operator": "EQ", "value": term}]}
-        ]
-    }
-    req = requests.Request(
-        "POST", url, params=params, headers=headers, json=filters
-    ).prepare()
-    logger.info("GET %s", req.url)
-    resp = SESSION.send(req)
-    if resp.status_code == 200:
-        return resp.json().get("results")
-    else:
-        logger.warn(f"Search failed with following message: {resp.text}")
+    url = f"https://api.hubapi.com/crm/v3/objects/contacts/{email}?idProperty=email"
+    req = requests.Request("GET", url, params=params, headers=headers).prepare()
+    response = SESSION.send(req)
+    if response.status_code == 200:
+        return response.json()
+    return None
