@@ -212,9 +212,6 @@ class UnifiedSink(HotglueSink):
                         row.update({"id": contact_search[0]["id"]})
         # self.contacts.append(row)
         # for now process one contact at a time because if on contact is duplicate whole batch will fail
-        if not row.get("properties",{}):
-            self.logger.info(f"Skipping contact = {row}")
-            return False, None, {}
         self.logger.info(f"Uploading contact = {row}")
         try:
             res = self.contact_upload(row)
@@ -237,8 +234,8 @@ class UnifiedSink(HotglueSink):
         res = res.json()
         
         if record.get("lists"):
-            subscribe_status = record.get("subscribe_status") or "subscribed"
-            if subscribe_status == "subscribed":
+            should_subscribe = False if record.get("subscribe_status") == "unsubscribed" else True
+            if should_subscribe:
                 self.subscribe_to_lists(res.get("id"), record.get("lists"))
             else:
                 self.unsubscribe_from_lists(res.get("id"), record.get("lists"))
@@ -252,7 +249,7 @@ class UnifiedSink(HotglueSink):
             if not list_exists:
                 self.logger.info(f"Creating new list: {list_name}")
                 list_id = self.create_list(list_name)
-            if not self.contact_subscribed_to_list(contact_id, list_id):
+            if not self.is_contact_subscribed_to_list(contact_id, list_id):
                 self.logger.info(f"Subscribing contact {contact_id} to list: {list_name} - id: {list_id}")
                 self.subscribe_to_list(contact_id, list_id)
             self.logger.info(f"Contact {contact_id} subscribed to list: {list_name} - id: {list_id}")
@@ -261,7 +258,7 @@ class UnifiedSink(HotglueSink):
         """Unsubscribe a contact from multiple lists if they are subscribed."""
         for list_name in lists:
             list_exists, list_id = self.list_exists(list_name)
-            if list_exists and self.contact_subscribed_to_list(contact_id, list_id):
+            if list_exists and self.is_contact_subscribed_to_list(contact_id, list_id):
                 self.logger.info(f"Unsubscribing contact {contact_id} from list: {list_name} - id: {list_id}")
                 self.unsubscribe_from_list(contact_id, list_id)
             
@@ -324,7 +321,7 @@ class UnifiedSink(HotglueSink):
             self.logger.error(f"Error unsubscribing contact {contact_id} from list {list_id}: {str(e)}")
             raise
     
-    def contact_subscribed_to_list(self, contact_id, list_id):
+    def is_contact_subscribed_to_list(self, contact_id, list_id):
         """Check if a contact is subscribed to a specific list."""
         url = f"https://api.hubapi.com/crm/v3/lists/{list_id}/memberships/join-order"
         try:
