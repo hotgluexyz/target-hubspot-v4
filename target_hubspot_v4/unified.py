@@ -230,7 +230,106 @@ class UnifiedSink(HotglueSink):
                 raise e
 
         res = res.json()
+        
+        if record.get("lists"):
+            should_subscribe = False if record.get("subscribe_status") == "unsubscribed" else True
+            if should_subscribe:
+                self.subscribe_to_lists(res.get("id"), record.get("lists"))
+            else:
+                self.unsubscribe_from_lists(res.get("id"), record.get("lists"))
+        
         return True, res.get("id"), {}
+    
+    def subscribe_to_lists(self, contact_id, lists):
+        """Subscribe a contact to multiple lists, creating lists if they don't exist."""
+        for list_name in lists:
+            list_exists, list_id = self.list_exists(list_name)
+            if not list_exists:
+                self.logger.info(f"Creating new list: {list_name}")
+                list_id = self.create_list(list_name)
+            if not self.is_contact_subscribed_to_list(contact_id, list_id):
+                self.logger.info(f"Subscribing contact {contact_id} to list: {list_name} - id: {list_id}")
+                self.subscribe_to_list(contact_id, list_id)
+            self.logger.info(f"Contact {contact_id} subscribed to list: {list_name} - id: {list_id}")
+
+    def unsubscribe_from_lists(self, contact_id, lists):
+        """Unsubscribe a contact from multiple lists if they are subscribed."""
+        for list_name in lists:
+            list_exists, list_id = self.list_exists(list_name)
+            if list_exists and self.is_contact_subscribed_to_list(contact_id, list_id):
+                self.logger.info(f"Unsubscribing contact {contact_id} from list: {list_name} - id: {list_id}")
+                self.unsubscribe_from_list(contact_id, list_id)
+            
+    def list_exists(self, list_name):
+        """Check if a list exists in HubSpot."""
+        url = f"https://api.hubapi.com/crm/v3/lists/object-type-id/0-1/name/{list_name}"
+        try:
+            response = request(dict(self.config), url)
+            return response.status_code == 200, response.json().get("list",{}).get("listId")
+        except Exception as e:
+            self.logger.error(f"Error checking if list exists: {list_name} - {str(e)}")
+            return False, None
+
+    def create_list(self, list_name):
+        """Create a new contact list in HubSpot."""
+        url = "https://api.hubapi.com/crm/v3/lists"
+        payload = {
+            "name": list_name,
+            "objectTypeId": "0-1",
+            "processingType": "MANUAL"
+        }
+        try:
+            response = request_push(dict(self.config), url, payload)
+            if response.status_code not in [200, 201]:
+                self.logger.error(f"Failed to create list {list_name}: {response.text}")
+            return response.json().get("list",{}).get("listId")
+        except Exception as e:
+            self.logger.error(f"Error creating list {list_name}: {str(e)}")
+            raise
+    
+    def subscribe_to_list(self, contact_id, list_id):
+        """Add a contact to a specific list."""
+        url = f"https://api.hubapi.com/crm/v3/lists/{list_id}/memberships/add-and-remove"
+        payload = {
+            "recordIdsToRemove": [],
+            "recordIdsToAdd": [contact_id],
+            "listId": list_id
+        }
+        try:
+            response = request_push(dict(self.config), url, payload, method="PUT")
+            if response.status_code not in [200, 201]:
+                self.logger.error(f"Failed to subscribe contact {contact_id} to list {list_id}: {response.text}")
+        except Exception as e:
+            self.logger.error(f"Error subscribing contact {contact_id} to list {list_id}: {str(e)}")
+            raise
+    
+    def unsubscribe_from_list(self, contact_id, list_id):
+        """Remove a contact from a specific list."""
+        url = f"https://api.hubapi.com/crm/v3/lists/{list_id}/memberships/add-and-remove"
+        payload = {
+            "recordIdsToRemove": [contact_id],
+            "recordIdsToAdd": [],
+            "listId": list_id
+        }
+        try:
+            response = request_push(dict(self.config), url, payload, method="PUT")
+            if response.status_code not in [200, 204]:
+                self.logger.error(f"Failed to unsubscribe contact {contact_id} from list {list_id}: {response.text}")
+        except Exception as e:
+            self.logger.error(f"Error unsubscribing contact {contact_id} from list {list_id}: {str(e)}")
+            raise
+    
+    def is_contact_subscribed_to_list(self, contact_id, list_id):
+        """Check if a contact is subscribed to a specific list."""
+        url = f"https://api.hubapi.com/crm/v3/lists/{list_id}/memberships/join-order"
+        try:
+            response = request(dict(self.config), url)
+            response = response.json()
+            members = [member.get("recordId") for member in response.get("results",[])]
+            return contact_id in members
+        except Exception as e:
+            self.logger.error(f"Error checking if contact {contact_id} is subscribed to list {list_id}: {str(e)}")
+            return False
 
 
     def process_contacts_custom_fields(self, custom_fields):
