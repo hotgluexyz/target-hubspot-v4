@@ -5,11 +5,9 @@ import json
 import os
 from target_hotglue.client import HotglueSink
 
-from target_hubspot_v4.utils import request_push, request, search_contact_by_email
+from target_hubspot_v4.utils import request_push, request, search_contact_by_email, map_country
 from singer_sdk.plugin_base import PluginBase
 from typing import Dict, List, Optional
-
-__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
 class UnifiedSink(HotglueSink):
     """UnifiedSink target sink class."""
@@ -182,7 +180,7 @@ class UnifiedSink(HotglueSink):
                 "address": address.get("line1"),
                 "city": address.get("city"),
                 "state": address.get("state"),
-                "country": self.map_country(address.get("country")),
+                "country": map_country(address.get("country")),
                 "zip": address.get("postal_code"),
             }
             row["properties"].update(address_dict)
@@ -401,7 +399,7 @@ class UnifiedSink(HotglueSink):
             if len(record["addresses"]) > 0:
                 mapping.update({"city": record["addresses"][0]["city"]})
                 mapping.update({"state": record["addresses"][0]["state"]})
-                mapping.update({"country": self.map_country(record["addresses"][0]["country"])})
+                mapping.update({"country": map_country(record["addresses"][0]["country"])})
 
         url = f"{self.base_url}/companies"
         if record.get("id"):
@@ -549,19 +547,3 @@ class UnifiedSink(HotglueSink):
             return timestamp_regex.group()
         else:
             return val
-    
-    def read_json_file(self, filename):
-        with open(os.path.join(__location__, f"{filename}"), "r") as filetoread:
-            data = filetoread.read()
-
-        content = json.loads(data)
-
-        return content
-    
-    def map_country(self, country):
-        if country:
-            countries = self.read_json_file("countries.json")
-            mapped_country = countries.get(country) or (country if country in countries.values() else None)
-            if not mapped_country:
-                self.logger.info(f"Country '{country}' is not a valid value, not sending country in the payload.")
-            return mapped_country
