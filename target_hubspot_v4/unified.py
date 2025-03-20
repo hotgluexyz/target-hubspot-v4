@@ -2,7 +2,7 @@
 
 import re
 import json
-import os
+
 from target_hotglue.client import HotglueSink
 
 from target_hubspot_v4.utils import request_push, request, search_contact_by_email, map_country
