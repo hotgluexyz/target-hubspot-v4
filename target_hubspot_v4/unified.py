@@ -5,10 +5,9 @@ import json
 
 from target_hotglue.client import HotglueSink
 
-from target_hubspot_v4.utils import request_push, request, search_contact_by_email
+from target_hubspot_v4.utils import request_push, request, search_contact_by_email, map_country
 from singer_sdk.plugin_base import PluginBase
 from typing import Dict, List, Optional
-
 
 class UnifiedSink(HotglueSink):
     """UnifiedSink target sink class."""
@@ -181,7 +180,7 @@ class UnifiedSink(HotglueSink):
                 "address": address.get("line1"),
                 "city": address.get("city"),
                 "state": address.get("state"),
-                "country": address.get("country"),
+                "country": map_country(address.get("country")),
                 "zip": address.get("postal_code"),
             }
             row["properties"].update(address_dict)
@@ -400,7 +399,7 @@ class UnifiedSink(HotglueSink):
             if len(record["addresses"]) > 0:
                 mapping.update({"city": record["addresses"][0]["city"]})
                 mapping.update({"state": record["addresses"][0]["state"]})
-                mapping.update({"country": record["addresses"][0]["country"]})
+                mapping.update({"country": map_country(record["addresses"][0]["country"])})
 
         url = f"{self.base_url}/companies"
         if record.get("id"):
