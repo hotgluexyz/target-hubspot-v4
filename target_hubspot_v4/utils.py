@@ -173,9 +173,33 @@ def request(config, url, params=None):
     return resp
 
 
-def search_contact_by_email(config, email):
+def search_contact_by_email(config, email, properties=[]):
     params, headers = get_params_and_headers(config, None)
     url = f"https://api.hubapi.com/crm/v3/objects/contacts/{email}?idProperty=email"
+    if properties:
+        url += f"&properties={','.join(properties)}"
+    req = requests.Request("GET", url, params=params, headers=headers).prepare()
+    response = SESSION.send(req)
+    if response.status_code == 200:
+        return response.json()
+    return None
+
+def search_call_by_id(config, id, properties=[]):
+    params, headers = get_params_and_headers(config, None)
+    url = f"https://api.hubapi.com/crm/v3/objects/calls/{id}"
+    if properties:
+        url += f"?properties={','.join(properties)}"
+    req = requests.Request("GET", url, params=params, headers=headers).prepare()
+    response = SESSION.send(req)
+    if response.status_code == 200:
+        return response.json()
+    return None
+
+def search_task_by_id(config, id, properties=[]):
+    params, headers = get_params_and_headers(config, None)
+    url = f"https://api.hubapi.com/crm/v3/objects/tasks/{id}"
+    if properties:
+        url += f"?properties={','.join(properties)}"
     req = requests.Request("GET", url, params=params, headers=headers).prepare()
     response = SESSION.send(req)
     if response.status_code == 200:
