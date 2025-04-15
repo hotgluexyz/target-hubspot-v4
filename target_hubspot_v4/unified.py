@@ -5,7 +5,7 @@ import json
 
 from target_hotglue.client import HotglueSink
 
-from target_hubspot_v4.utils import request_push, request, search_contact_by_email, map_country
+from target_hubspot_v4.utils import request_push, request, search_contact_by_email, map_country, search_call_by_id, search_task_by_id
 from singer_sdk.plugin_base import PluginBase
 from typing import Dict, List, Optional
 
@@ -107,6 +107,15 @@ class UnifiedSink(HotglueSink):
             }
         }
 
+        if record.get("id"):
+           
+            if self.config.get("only_upsert_empty_fields", False):
+                matched_call = search_call_by_id(dict(self.config), record.get("id"), properties=list(call["properties"].keys()))
+                if matched_call:
+                    for key in call["properties"].keys():
+                        if matched_call["properties"].get(key, None) is not None:
+                            call["properties"][key] = matched_call["properties"][key]
+
         resp = request_push(dict(self.config), url, call)
         data = resp.json()
 
@@ -203,11 +212,18 @@ class UnifiedSink(HotglueSink):
         if record.get("id"):
             row.update({"id": record.get("id")})
 
-        if "id" not in row and row["properties"].get("email"):
-            contact_search = search_contact_by_email(dict(self.config), row["properties"].get("email"))
+        contact_search = search_contact_by_email(dict(self.config), row["properties"].get("email"), properties=list(row["properties"].keys()))
+
+        if "id" not in row and row["properties"].get("email"):    
             if contact_search:
                 row.update({"id": contact_search.get("id")})
-        # self.contacts.append(row)
+
+
+        if self.config.get("only_upsert_empty_fields", False) and contact_search:
+            for key in row["properties"].keys():
+                if contact_search.get("properties", {}).get(key, None) is not None:
+                    row["properties"][key] = contact_search.get("properties", {}).get(key)
+        # self.contacts.append(row)ƒ
         # for now process one contact at a time because if on contact is duplicate whole batch will fail
         self.logger.info(f"Uploading contact = {row}")
         try:
@@ -446,6 +462,7 @@ class UnifiedSink(HotglueSink):
         ]:
             mapping["dealstage"] = record.get("status")
 
+
         url = f"{self.base_url}/deals"
         if record.get("id"):
             url = f"{url}/{record.get('id')}"
@@ -510,6 +527,14 @@ class UnifiedSink(HotglueSink):
         }
         if record.get("owner_id"):
             mapping.update({"hubspot_owner_id": record.get("owner_id")})
+
+
+        if record.get("id") and self.config.get("only_upsert_empty_fields", False):
+                matched_task = search_task_by_id(dict(self.config), record.get("id"), properties=list(mapping.keys()))
+                if matched_task:
+                    for key in mapping.keys():
+                        if matched_task["properties"].get(key, None) is not None:
+                            mapping[key] = matched_task["properties"][key]
 
         url = f"{self.base_url}/tasks"
         if record.get("id"):
