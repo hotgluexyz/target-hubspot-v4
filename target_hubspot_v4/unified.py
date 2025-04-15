@@ -113,7 +113,7 @@ class UnifiedSink(HotglueSink):
                 matched_call = search_call_by_id(dict(self.config), record.get("id"), properties=list(call["properties"].keys()))
                 if matched_call:
                     for key in call["properties"].keys():
-                        if key in matched_call["properties"]:
+                        if matched_call["properties"].get(key, None) is not None:
                             call["properties"][key] = matched_call["properties"][key]
 
         resp = request_push(dict(self.config), url, call)
@@ -221,7 +221,7 @@ class UnifiedSink(HotglueSink):
 
         if self.config.get("only_upsert_empty_fields", False) and contact_search:
             for key in row["properties"].keys():
-                if contact_search.get("properties", {}).get(key):
+                if contact_search.get("properties", {}).get(key, None) is not None:
                     row["properties"][key] = contact_search.get("properties", {}).get(key)
         # self.contacts.append(row)ƒ
         # for now process one contact at a time because if on contact is duplicate whole batch will fail
@@ -533,7 +533,7 @@ class UnifiedSink(HotglueSink):
                 matched_task = search_task_by_id(dict(self.config), record.get("id"), properties=list(mapping.keys()))
                 if matched_task:
                     for key in mapping.keys():
-                        if key in matched_task["properties"]:
+                        if matched_task["properties"].get(key, None) is not None:
                             mapping[key] = matched_task["properties"][key]
 
         url = f"{self.base_url}/tasks"
