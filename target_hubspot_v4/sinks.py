@@ -1,6 +1,7 @@
 """Hubspot-v4 target sink class, which handles writing streams."""
 
 from target_hubspot_v4.client import HubspotSink
+from target_hubspot_v4.utils import search_contact_by_email
 
 class FallbackSink(HubspotSink):
     """Precoro target sink class."""
@@ -20,7 +21,13 @@ class FallbackSink(HubspotSink):
             # denesting properties to parse all values inside properly
             record = record["properties"] 
         for key, value in record.items():
-            record[key] = self.parse_objs(value)   
+            record[key] = self.parse_objs(value)
+
+        if self.name.lower() == "contacts":
+            # look contact by email and update id if found
+            existing_contact = search_contact_by_email(dict(self.config), record["email"], list(record.keys()))
+            if existing_contact:
+                record["id"] = existing_contact["id"]
         return {"properties": record}
     
     def upsert_record(self, record: dict, context: dict):
