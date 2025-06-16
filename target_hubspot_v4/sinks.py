@@ -24,9 +24,11 @@ class FallbackSink(HubspotSink):
             record[key] = self.parse_objs(value)
 
         if self.name.lower() == "contacts" and record.get("email"):
+            self.logger.info(f"Searching for contact by email = {record['email']}")
             # look contact by email and update id if found
             existing_contact = search_contact_by_email(dict(self.config), record["email"], list(record.keys()))
             if existing_contact:
+                self.logger.info(f"Found contact by email with id '{existing_contact['id']}'")
                 record["id"] = existing_contact["id"]
         return {"properties": record}
     
