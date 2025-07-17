@@ -31,6 +31,25 @@ class UnifiedSink(HotglueSink):
     def name(self):
         return self.stream_name
     
+    @property
+    def contacts_unified_to_hubspot_mapping(self):
+        """
+        This property returns the mapping of the unified schema to the HubSpot schema.
+        """
+        return {
+            "first_name": "firstname",
+            "last_name": "lastname", 
+            "email": "email",
+            "company_name": "company",
+            "phone_numbers": "phone",
+            "birthdate": "date_of_birth",
+            "industry": "industry",
+            "annual_revenue": "annualrevenue",
+            "salutation": "salutation",
+            "title": "jobtitle",
+            "addresses":["address", "city", "state", "country", "zip"]
+        }
+    
     def preprocess_record(self, record: dict, context: dict) -> dict:
         return record
     
@@ -217,11 +236,24 @@ class UnifiedSink(HotglueSink):
         if "id" not in row and row["properties"].get("email"):    
             if contact_search:
                 row.update({"id": contact_search.get("id")})
-
-
-        if self.config.get("only_upsert_empty_fields", False) and contact_search:
+    
+        only_upsert_empty_fields = self.config.get("only_upsert_empty_fields", False)
+        if only_upsert_empty_fields and contact_search:
+            fields_to_exclude = []
+            if isinstance(only_upsert_empty_fields, list):
+                for field in only_upsert_empty_fields:
+                    if field in self.contacts_unified_to_hubspot_mapping:
+                        value = self.contacts_unified_to_hubspot_mapping[field]
+                        if isinstance(value, list):
+                            fields_to_exclude.extend(value)
+                        else:
+                            fields_to_exclude.append(value)
+                    else:
+                        fields_to_exclude.append(field) 
+            
             for key in row["properties"].keys():
-                if contact_search.get("properties", {}).get(key, None) is not None:
+                existing_value = contact_search.get("properties", {}).get(key, None)
+                if existing_value is not None and key not in fields_to_exclude:
                     row["properties"][key] = contact_search.get("properties", {}).get(key)
         # self.contacts.append(row)ƒ
         # for now process one contact at a time because if on contact is duplicate whole batch will fail
