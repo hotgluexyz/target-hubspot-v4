@@ -1,7 +1,8 @@
 # target-hubspot-v4
 
-`target-hubspot-v4` is a Singer target for Hubspot-v4.
+**target-hubspot-v4** is a Singer Target for writing data to Hubspot.
 
+**target-hubspot-v4** can be run on [hotglue](https://hotglue.com), an embedded integration platform for running Singer Taps and Targets.
 
 ## Installation
 
