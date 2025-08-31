@@ -170,7 +170,7 @@ class UnifiedSink(HotglueSink):
         elif isinstance(only_upsert_empty_fields_flag, list):
             hubspot_fields_to_check = [self.contacts_unified_to_hubspot_mapping.get(k, k) for k in only_upsert_empty_fields_flag]
             return [
-                self.contacts_unified_to_hubspot_mapping.get(k, k)
+                k
                 for k in hubspot_fields_to_check
                 if existing_contact.get("properties", {}).get(k) is not None
             ]
@@ -178,6 +178,12 @@ class UnifiedSink(HotglueSink):
 
 
     def process_contacts(self, record):
+
+
+
+        row = {"properties": {}}
+
+
         phone_numbers = record.get("phone_numbers")
         phone = None
         if phone_numbers:
@@ -193,28 +199,12 @@ class UnifiedSink(HotglueSink):
         else:
             phone = None
 
-        row = {"properties": {}}
-        
-        if "first_name" in record:
-            row["properties"]["firstname"] = record.get("first_name")
-        if "last_name" in record:
-            row["properties"]["lastname"] = record.get("last_name")
-        if "email" in record:
-            row["properties"]["email"] = record.get("email") 
-        if "company_name" in record:
-            row["properties"]["company"] = record.get("company_name")
-        if "phone_numbers" in record:
+        if phone:
             row["properties"]["phone"] = phone
-        if "birthdate" in record:
-            row["properties"]["date_of_birth"] = record.get("birthdate")
-        if "industry" in record:
-            row["properties"]["industry"] = record.get("industry")
-        if "annual_revenue" in record:
-            row["properties"]["annualrevenue"] = record.get("annual_revenue")
-        if "salutation" in record:
-            row["properties"]["salutation"] = record.get("salutation")
-        if "title" in record:
-            row["properties"]["jobtitle"] = record.get("title")
+
+        for key in ["first_name", "last_name", "email", "company_name", "birthdate", "industry", "annual_revenue", "salutation", "title"]:
+            if key in record:
+                row["properties"][self.contacts_unified_to_hubspot_mapping.get(key, key)] = record.get(key)
 
         # add address to customers
         addresses = record.get("addresses")
