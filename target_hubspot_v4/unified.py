@@ -160,6 +160,22 @@ class UnifiedSink(HotglueSink):
                 request_push(dict(self.config), url, {}, method="PUT")
         return data
 
+    def get_contact_field_keep_list(self, existing_contact, only_upsert_empty_fields_flag):
+        if isinstance(only_upsert_empty_fields_flag, bool) and only_upsert_empty_fields_flag:
+            return [
+                k 
+                for k in list(existing_contact.get("properties", {}).keys())
+                if existing_contact.get("properties", {}).get(k) is not None    
+            ]
+        elif isinstance(only_upsert_empty_fields_flag, list):
+            hubspot_fields_to_check = [self.contacts_unified_to_hubspot_mapping.get(k, k) for k in only_upsert_empty_fields_flag]
+            return [
+                self.contacts_unified_to_hubspot_mapping.get(k, k)
+                for k in hubspot_fields_to_check
+                if existing_contact.get("properties", {}).get(k) is not None
+            ]
+        return []
+
 
     def process_contacts(self, record):
         phone_numbers = record.get("phone_numbers")
@@ -239,34 +255,15 @@ class UnifiedSink(HotglueSink):
     
         only_upsert_empty_fields = self.config.get("only_upsert_empty_fields", False)
         if only_upsert_empty_fields and contact_search:
-            fields_to_preserve = []
+            fields_to_preserve = self.get_contact_field_keep_list(contact_search, only_upsert_empty_fields)
             
-            if isinstance(only_upsert_empty_fields, bool) and only_upsert_empty_fields:
-                # Boolean True: preserve all fields that have existing values
-                for key in row["properties"].keys():
-                    existing_value = contact_search.get("properties", {}).get(key, None)
-                    if existing_value is not None:
-                        fields_to_preserve.append(key)
-            
-            elif isinstance(only_upsert_empty_fields, list):
-                # List: preserve only the specified unified fields
-                for field in only_upsert_empty_fields:
-                    if field in self.contacts_unified_to_hubspot_mapping:
-                        value = self.contacts_unified_to_hubspot_mapping[field]
-                        if isinstance(value, list):
-                            fields_to_preserve.extend(value)
-                        else:
-                            fields_to_preserve.append(value)
-                    else:
-                        # for custom fields
-                        fields_to_preserve.append(field)
-            
+
             # Apply the preservation logic
             for key in row["properties"].keys():
                 existing_value = contact_search.get("properties", {}).get(key, None)
-                if existing_value is not None and key in fields_to_preserve:
+                if key in fields_to_preserve:
                     row["properties"][key] = contact_search.get("properties", {}).get(key)
-        # self.contacts.append(row)ƒ
+
         # for now process one contact at a time because if on contact is duplicate whole batch will fail
         self.logger.info(f"Uploading contact = {row}")
         try:
@@ -296,7 +293,7 @@ class UnifiedSink(HotglueSink):
             else:
                 self.unsubscribe_from_lists(res.get("id"), record.get("lists"))
         
-        return True, res.get("id"), {}
+        return True, res.get("id"), {"is_updated": bool(contact_search)}
     
     def subscribe_to_lists(self, contact_id, lists):
         """Subscribe a contact to multiple lists, creating lists if they don't exist."""
