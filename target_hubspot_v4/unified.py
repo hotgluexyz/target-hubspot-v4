@@ -5,7 +5,7 @@ import json
 
 from target_hotglue.client import HotglueSink
 
-from target_hubspot_v4.utils import request_push, request, search_contact_by_email, map_country, search_call_by_id, search_task_by_id
+from target_hubspot_v4.utils import request_push, request, search_contact_by_email, map_country, search_call_by_id, search_task_by_id, flatten_string_list
 from singer_sdk.plugin_base import PluginBase
 from typing import Dict, List, Optional
 
@@ -169,6 +169,7 @@ class UnifiedSink(HotglueSink):
             ]
         elif isinstance(only_upsert_empty_fields_flag, list):
             hubspot_fields_to_check = [self.contacts_unified_to_hubspot_mapping.get(k, k) for k in only_upsert_empty_fields_flag]
+            hubspot_fields_to_check = flatten_string_list(hubspot_fields_to_check)
             return [
                 k
                 for k in hubspot_fields_to_check
