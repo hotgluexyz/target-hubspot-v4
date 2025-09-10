@@ -5,7 +5,7 @@ import json
 
 from target_hotglue.client import HotglueSink
 
-from target_hubspot_v4.utils import request_push, request, search_contact_by_email, map_country, search_call_by_id, search_task_by_id
+from target_hubspot_v4.utils import request_push, request, search_contact_by_email, map_country, search_call_by_id, search_task_by_id, flatten_string_list
 from singer_sdk.plugin_base import PluginBase
 from typing import Dict, List, Optional
 
@@ -30,6 +30,25 @@ class UnifiedSink(HotglueSink):
     @property
     def name(self):
         return self.stream_name
+    
+    @property
+    def contacts_unified_to_hubspot_mapping(self):
+        """
+        This property returns the mapping of the unified schema to the HubSpot schema.
+        """
+        return {
+            "first_name": "firstname",
+            "last_name": "lastname", 
+            "email": "email",
+            "company_name": "company",
+            "phone_numbers": "phone",
+            "birthdate": "date_of_birth",
+            "industry": "industry",
+            "annual_revenue": "annualrevenue",
+            "salutation": "salutation",
+            "title": "jobtitle",
+            "addresses":["address", "city", "state", "country", "zip"]
+        }
     
     def preprocess_record(self, record: dict, context: dict) -> dict:
         return record
@@ -141,8 +160,31 @@ class UnifiedSink(HotglueSink):
                 request_push(dict(self.config), url, {}, method="PUT")
         return data
 
+    def get_contact_field_keep_list(self, existing_contact, only_upsert_empty_fields_flag):
+        if isinstance(only_upsert_empty_fields_flag, bool) and only_upsert_empty_fields_flag:
+            return [
+                k 
+                for k in list(existing_contact.get("properties", {}).keys())
+                if existing_contact.get("properties", {}).get(k) is not None    
+            ]
+        elif isinstance(only_upsert_empty_fields_flag, list):
+            hubspot_fields_to_check = [self.contacts_unified_to_hubspot_mapping.get(k, k) for k in only_upsert_empty_fields_flag]
+            hubspot_fields_to_check = flatten_string_list(hubspot_fields_to_check)
+            return [
+                k
+                for k in hubspot_fields_to_check
+                if existing_contact.get("properties", {}).get(k) is not None
+            ]
+        return []
+
 
     def process_contacts(self, record):
+
+
+
+        row = {"properties": {}}
+
+
         phone_numbers = record.get("phone_numbers")
         phone = None
         if phone_numbers:
@@ -158,28 +200,12 @@ class UnifiedSink(HotglueSink):
         else:
             phone = None
 
-        row = {"properties": {}}
-        
-        if "first_name" in record:
-            row["properties"]["firstname"] = record.get("first_name")
-        if "last_name" in record:
-            row["properties"]["lastname"] = record.get("last_name")
-        if "email" in record:
-            row["properties"]["email"] = record.get("email") 
-        if "company_name" in record:
-            row["properties"]["company"] = record.get("company_name")
-        if "phone_numbers" in record:
+        if phone:
             row["properties"]["phone"] = phone
-        if "birthdate" in record:
-            row["properties"]["date_of_birth"] = record.get("birthdate")
-        if "industry" in record:
-            row["properties"]["industry"] = record.get("industry")
-        if "annual_revenue" in record:
-            row["properties"]["annualrevenue"] = record.get("annual_revenue")
-        if "salutation" in record:
-            row["properties"]["salutation"] = record.get("salutation")
-        if "title" in record:
-            row["properties"]["jobtitle"] = record.get("title")
+
+        for key in ["first_name", "last_name", "email", "company_name", "birthdate", "industry", "annual_revenue", "salutation", "title"]:
+            if key in record:
+                row["properties"][self.contacts_unified_to_hubspot_mapping.get(key, key)] = record.get(key)
 
         # add address to customers
         addresses = record.get("addresses")
@@ -217,13 +243,18 @@ class UnifiedSink(HotglueSink):
         if "id" not in row and row["properties"].get("email"):    
             if contact_search:
                 row.update({"id": contact_search.get("id")})
+    
+        only_upsert_empty_fields = self.config.get("only_upsert_empty_fields", False)
+        if only_upsert_empty_fields and contact_search:
+            fields_to_preserve = self.get_contact_field_keep_list(contact_search, only_upsert_empty_fields)
+            
 
-
-        if self.config.get("only_upsert_empty_fields", False) and contact_search:
+            # Apply the preservation logic
             for key in row["properties"].keys():
-                if contact_search.get("properties", {}).get(key, None) is not None:
+                existing_value = contact_search.get("properties", {}).get(key, None)
+                if key in fields_to_preserve:
                     row["properties"][key] = contact_search.get("properties", {}).get(key)
-        # self.contacts.append(row)ƒ
+
         # for now process one contact at a time because if on contact is duplicate whole batch will fail
         self.logger.info(f"Uploading contact = {row}")
         try:
@@ -253,7 +284,7 @@ class UnifiedSink(HotglueSink):
             else:
                 self.unsubscribe_from_lists(res.get("id"), record.get("lists"))
         
-        return True, res.get("id"), {}
+        return True, res.get("id"), {"is_updated": bool(contact_search)}
     
     def subscribe_to_lists(self, contact_id, lists):
         """Subscribe a contact to multiple lists, creating lists if they don't exist."""
