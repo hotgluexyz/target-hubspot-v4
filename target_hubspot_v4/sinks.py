@@ -71,6 +71,7 @@ class FallbackSink(HubspotSink):
         for association in associations:
             to_id = association.get("to", {}).get("id")
             to_object_name = association.get("to", {}).get("objectType")
+            qualified_from_object_name = association.get("from", {}).get("objectType")
             if not to_id:
                 raise Exception(f"to id is required for {association}")
 
@@ -81,7 +82,7 @@ class FallbackSink(HubspotSink):
             if not types:
                 raise Exception(f"types is required for {association}")
 
-            from_object_name = self.name
+            from_object_name = qualified_from_object_name or self.name
 
             associations_url = f"https://api.hubapi.com/crm/v4/objects/{from_object_name}/{id}/associations/{to_object_name}/{to_id}"
             
