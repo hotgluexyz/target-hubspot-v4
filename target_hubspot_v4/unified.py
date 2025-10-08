@@ -84,11 +84,14 @@ class UnifiedSink(HotglueSink):
 
 
     def process_activities(self, record):
+        res = None
         if record.get("type") == "call":
             res = self.process_call(record)
         if record.get("type") == "task":
             res = self.upload_task(record)
-        return True, res.get("id"), {}
+        if res:
+            return True, res.get("id"), {}
+        return False, None, {"error": f"Failed to process activity because type is not supported or was not found, type: {record.get('type')}"}
 
     def process_call(self, record):
         url = f"{self.base_url}/calls"
