@@ -5,7 +5,9 @@ from target_hubspot_v4.auth import HubspotAuthenticator, HubspotApiKeyAuthentica
 from target_hotglue.auth import Authenticator
 import ast
 import json
-
+import backoff
+import requests
+from target_hubspot_v4 import utils
 class HubspotSink(HotglueSink):
 
     def __init__(
@@ -73,3 +75,16 @@ class HubspotSink(HotglueSink):
         if isinstance(obj, dict) or isinstance(obj, list):
             obj = json.dumps(obj)
         return obj
+
+
+    @backoff.on_exception(
+        backoff.constant,
+    (requests.exceptions.RequestException, requests.exceptions.HTTPError),
+    max_tries=5,
+    jitter=None,
+    giveup=utils.giveup,
+    on_giveup=utils.on_giveup,
+    interval=10,
+    )
+    def request_api(self, method, endpoint, request_data=None):
+        return super().request_api(method, endpoint=endpoint, request_data=request_data)
