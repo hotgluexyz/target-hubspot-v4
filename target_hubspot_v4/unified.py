@@ -62,6 +62,8 @@ class UnifiedSink(HotglueSink):
                 success, id, state_updates = self.upload_company(record)
             if self.stream_name.lower() in ["deals", "deal", "opportunities"]:
                 success, id, state_updates = self.upload_deal(record)
+            if self.stream_name.lower() in ["notes", "note"]:
+                success, id, state_updates = self.process_notes(record)
         except Exception as e:
             self.logger.exception(f"Upsert record error {str(e)}")
             state_updates['error'] = str(e)
@@ -551,6 +553,63 @@ class UnifiedSink(HotglueSink):
         if "id" in res:
             print(f"Task id:{res['id']}, name:{mapping['hs_task_subject']}  {action}")
         return res
+
+    def process_notes(self, record):
+        url = f"{self.base_url}/notes"
+
+        mapping = {
+            "hs_timestamp": int(record.get("created_at").timestamp()),
+            "hs_note_body": record.get("content")
+            # "hubspot_owner_id": record.get("customer_id")
+        }
+
+        mapping = {k: v for k, v in mapping.items() if v is not None}
+
+        associations = []
+
+        if record.get("company_id"):
+            associations.append({
+                "to": {"id": record.get("company_id")},
+                "types": [
+                    {
+                        "associationCategory": "HUBSPOT_DEFINED",
+                        "associationTypeId": 190
+                    }
+                ]
+            })
+
+        if record.get("deal_id"):
+            associations.append({
+                "to": {"id": record.get("deal_id")},
+                "types": [
+                    {
+                        "associationCategory": "HUBSPOT_DEFINED",
+                        "associationTypeId": 214
+                    }
+                ]
+            })
+
+        payload = {"properties": mapping}
+        if associations:
+            payload["associations"] = associations
+
+        if record.get("id"):
+            url = f"{url}/{record.get('id')}"
+            method = "PATCH"
+            action = "updated"
+        else:
+            method = "POST"
+            action = "created"
+
+        res = request_push(
+            dict(self.config), url, payload, None, method
+        )
+        res = res.json()
+        if "id" in res:
+            self.logger.info(
+                f"Note id:{res['id']}, body:{mapping.get('hs_note_body', '')}  {action}"
+            )
+        return True, res.get("id"), {}
 
     def match_field_type_to_type(self, type):
         map_of_types = {
