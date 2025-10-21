@@ -206,6 +206,52 @@ def search_task_by_id(config, id, properties=[]):
         return response.json()
     return None
 
+def search_company_by_name(config, name):
+    params, headers = get_params_and_headers(config, None)
+    filters = {
+        "filterGroups": [
+            {
+                "filters": [
+                    {
+                        "propertyName": "name",
+                        "operator": "EQ",
+                        "value": name
+                    }
+                ]
+            }
+        ]
+    }
+    url = "https://api.hubapi.com/crm/v3/objects/companies/search"
+    req = requests.Request("POST", url, params=params, headers=headers, json=filters).prepare()
+    response = SESSION.send(req)
+    if response.status_code == 200:
+        res = response.json()
+        return res['results']
+    return None
+
+def search_deal_by_name(config, name):
+    params, headers = get_params_and_headers(config, None)
+    filters = {
+        "filterGroups": [
+            {
+                "filters": [
+                    {
+                        "propertyName": "dealname",
+                        "operator": "EQ",
+                        "value": name
+                    }
+                ]
+            }
+        ]
+    }
+    url = "https://api.hubapi.com/crm/v3/objects/deals/search"
+    req = requests.Request("POST", url, params=params, headers=headers, json=filters).prepare()
+    response = SESSION.send(req)
+    if response.status_code == 200:
+        res = response.json()
+        return res['results']
+    return None
+
 COUNTRY_MAPPING = {
     "AF": "Afghanistan",
     "AL": "Albania",

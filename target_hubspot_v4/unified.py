@@ -5,7 +5,7 @@ import json
 
 from target_hotglue.client import HotglueSink
 
-from target_hubspot_v4.utils import request_push, request, search_contact_by_email, map_country, search_call_by_id, search_task_by_id
+from target_hubspot_v4.utils import request_push, request, search_company_by_name, search_contact_by_email, map_country, search_call_by_id, search_deal_by_name, search_task_by_id
 from singer_sdk.plugin_base import PluginBase
 from typing import Dict, List, Optional
 
@@ -559,8 +559,8 @@ class UnifiedSink(HotglueSink):
 
         mapping = {
             "hs_timestamp": int(record.get("created_at").timestamp()),
-            "hs_note_body": record.get("content")
-            # "hubspot_owner_id": record.get("customer_id")
+            "hs_note_body": record.get("content"),
+            "hubspot_owner_id": record.get("customer_id")
         }
 
         mapping = {k: v for k, v in mapping.items() if v is not None}
@@ -577,6 +577,24 @@ class UnifiedSink(HotglueSink):
                     }
                 ]
             })
+        
+        if record.get("company_name"):
+            companies = search_company_by_name(dict(self.config), record.get("company_name"))
+            if len(companies) == 1:
+                company = companies[0]
+                associations.append({
+                    "to": {"id": company["id"]},
+                    "types": [
+                        {
+                            "associationCategory": "HUBSPOT_DEFINED",
+                            "associationTypeId": 190
+                        }
+                    ]
+                })
+            elif len(companies) > 1:
+                return False, None, {"error": f"More than one company found for the provided company name"}
+            else:
+                return False, None, {"error": f"No company found for the provided company name"}
 
         if record.get("deal_id"):
             associations.append({
@@ -588,6 +606,24 @@ class UnifiedSink(HotglueSink):
                     }
                 ]
             })
+        
+        if record.get("deal_name"):
+            deals = search_deal_by_name(dict(self.config), record.get("deal_name"))
+            if len(deals) == 1:
+                deal = deals[0]
+                associations.append({
+                    "to": {"id": deal["id"]},
+                    "types": [
+                        {
+                            "associationCategory": "HUBSPOT_DEFINED",
+                            "associationTypeId": 214
+                        }
+                    ]
+                })
+            elif len(deals) > 1:
+                return False, None, {"error": f"More than one deal found for the provided deal name"}
+            else:
+                return False, None, {"error": f"No deal found for the provided deal name"}
 
         payload = {"properties": mapping}
         if associations:
