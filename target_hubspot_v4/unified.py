@@ -5,7 +5,7 @@ import json
 
 from target_hotglue.client import HotglueSink
 
-from target_hubspot_v4.utils import request_push, request, search_contact_by_email, map_country, search_call_by_id, search_task_by_id
+from target_hubspot_v4.utils import request_push, request, search_company_by_name, search_contact_by_email, map_country, search_call_by_id, search_deal_by_name, search_task_by_id
 from singer_sdk.plugin_base import PluginBase
 from typing import Dict, List, Optional
 
@@ -62,6 +62,8 @@ class UnifiedSink(HotglueSink):
                 success, id, state_updates = self.upload_company(record)
             if self.stream_name.lower() in ["deals", "deal", "opportunities"]:
                 success, id, state_updates = self.upload_deal(record)
+            if self.stream_name.lower() in ["notes", "note"]:
+                success, id, state_updates = self.process_notes(record)
         except Exception as e:
             self.logger.exception(f"Upsert record error {str(e)}")
             state_updates['error'] = str(e)
@@ -551,6 +553,99 @@ class UnifiedSink(HotglueSink):
         if "id" in res:
             print(f"Task id:{res['id']}, name:{mapping['hs_task_subject']}  {action}")
         return res
+
+    def process_notes(self, record):
+        url = f"{self.base_url}/notes"
+
+        mapping = {
+            "hs_timestamp": int(record.get("created_at").timestamp()*1000),
+            "hs_note_body": record.get("content"),
+            "hubspot_owner_id": record.get("customer_id")
+        }
+
+        mapping = {k: v for k, v in mapping.items() if v is not None}
+
+        associations = []
+
+        if record.get("company_id"):
+            associations.append({
+                "to": {"id": record.get("company_id")},
+                "types": [
+                    {
+                        "associationCategory": "HUBSPOT_DEFINED",
+                        "associationTypeId": 190
+                    }
+                ]
+            })
+        
+        if record.get("company_name"):
+            companies = search_company_by_name(dict(self.config), record.get("company_name"))
+            if len(companies) == 1:
+                company = companies[0]
+                associations.append({
+                    "to": {"id": company["id"]},
+                    "types": [
+                        {
+                            "associationCategory": "HUBSPOT_DEFINED",
+                            "associationTypeId": 190
+                        }
+                    ]
+                })
+            elif len(companies) > 1:
+                return False, None, {"error": f"More than one company found for the provided company name"}
+            else:
+                return False, None, {"error": f"No company found for the provided company name"}
+
+        if record.get("deal_id"):
+            associations.append({
+                "to": {"id": record.get("deal_id")},
+                "types": [
+                    {
+                        "associationCategory": "HUBSPOT_DEFINED",
+                        "associationTypeId": 214
+                    }
+                ]
+            })
+        
+        if record.get("deal_name"):
+            deals = search_deal_by_name(dict(self.config), record.get("deal_name"))
+            if len(deals) == 1:
+                deal = deals[0]
+                associations.append({
+                    "to": {"id": deal["id"]},
+                    "types": [
+                        {
+                            "associationCategory": "HUBSPOT_DEFINED",
+                            "associationTypeId": 214
+                        }
+                    ]
+                })
+            elif len(deals) > 1:
+                return False, None, {"error": f"More than one deal found for the provided deal name"}
+            else:
+                return False, None, {"error": f"No deal found for the provided deal name"}
+
+        payload = {"properties": mapping}
+        if associations:
+            payload["associations"] = associations
+
+        if record.get("id"):
+            url = f"{url}/{record.get('id')}"
+            method = "PATCH"
+            action = "updated"
+        else:
+            method = "POST"
+            action = "created"
+
+        res = request_push(
+            dict(self.config), url, payload, None, method
+        )
+        res = res.json()
+        if "id" in res:
+            self.logger.info(
+                f"Note id:{res['id']}, body:{mapping.get('hs_note_body', '')}  {action}"
+            )
+        return True, res.get("id"), {}
 
     def match_field_type_to_type(self, type):
         map_of_types = {
