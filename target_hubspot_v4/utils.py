@@ -222,8 +222,7 @@ def search_company_by_name(config, name):
         ]
     }
     url = "https://api.hubapi.com/crm/v3/objects/companies/search"
-    req = requests.Request("POST", url, params=params, headers=headers, json=filters).prepare()
-    response = SESSION.send(req)
+    response = request_push(config, url, filters, params, "POST")
     if response.status_code == 200:
         res = response.json()
         return res['results']
@@ -245,8 +244,7 @@ def search_deal_by_name(config, name):
         ]
     }
     url = "https://api.hubapi.com/crm/v3/objects/deals/search"
-    req = requests.Request("POST", url, params=params, headers=headers, json=filters).prepare()
-    response = SESSION.send(req)
+    response = request_push(config, url, filters, params, "POST")
     if response.status_code == 200:
         res = response.json()
         return res['results']
