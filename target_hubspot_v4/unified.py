@@ -558,7 +558,7 @@ class UnifiedSink(HotglueSink):
         url = f"{self.base_url}/notes"
 
         mapping = {
-            "hs_timestamp": int(record.get("created_at").timestamp()),
+            "hs_timestamp": int(record.get("created_at").timestamp()*1000),
             "hs_note_body": record.get("content"),
             "hubspot_owner_id": record.get("customer_id")
         }
