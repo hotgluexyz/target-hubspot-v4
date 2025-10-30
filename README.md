@@ -35,6 +35,31 @@ environment variable is set either in the terminal context or in the `.env` file
 
 - [ ] `Developer TODO:` If your target requires special access on the source system, or any special authentication requirements, provide those here.
 
+## Features
+
+### Subscription Preferences (New!)
+For subscription management features, ensure your OAuth app includes:
+- `communication_preferences.statuses.batch.write` - Required for managing subscription statuses
+
+Manage email subscription preferences, including unsubscribing contacts from all email communications.
+
+**Stream Names:**
+Use any stream name containing `subscribe` or `subscription` - the target will automatically detect it and use the subscription sink. Examples: `subscriptions`, `unsubscribe`, `subscription_preferences`, `email_subscriptions`, etc.
+
+**Example Usage:**
+### Single contact unsubscribe
+```json
+{"type":"SCHEMA","stream":"subscriptions","schema":{"type":"object","properties":{"email":{"type":"string"}}},"key_properties":[]}
+{"type":"RECORD","stream":"subscriptions","record":{"email":"test1@hubspot.com"}}
+{"type": "STATE", "value": {}}
+```
+### Multiple contacts unsubscribe
+```json
+{"type": "SCHEMA", "stream": "unsubscribe", "schema": {"type": "object", "properties": {"emails": {"type": "array", "items": {"type": "string"}}}}, "key_properties": []}
+{"type": "RECORD", "stream": "unsubscribe", "record": {"emails": ["test1@hubspot.com", "test2@hubspot.com", "test3@hubspot.com"]}}
+{"type": "STATE", "value": {}}
+```
+
 ## Usage
 
 You can easily run `target-hubspot-v4` by itself.

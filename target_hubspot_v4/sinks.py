@@ -3,6 +3,82 @@
 from target_hubspot_v4.client import HubspotSink
 from target_hubspot_v4.utils import search_contact_by_email, request_push
 
+# For sample payloads see README.md
+class SubscriptionSink(HubspotSink):
+    """Sink for managing HubSpot subscription preferences (unsubscribe-all)."""
+
+    @property
+    def endpoint(self):
+        return "/communication-preferences/v4/statuses/batch/unsubscribe-all"
+    
+    @property
+    def name(self):
+        return self.stream_name
+    
+    @property
+    def base_url(self):
+        return "https://api.hubapi.com"
+
+    def preprocess_record(self, record: dict, context: dict) -> None:
+        """
+        Process the record for subscription updates.
+        
+        Expected record format:
+        {
+            "email": "contact@example.com"  # single email
+        }
+        OR
+        {
+            "emails": ["contact1@example.com", "contact2@example.com"]  # batch
+        }
+        """
+        emails = []
+        
+        # Handle single email
+        if record.get("email"):
+            emails.append(record["email"])
+        
+        # Handle batch emails
+        if record.get("emails"):
+            if isinstance(record["emails"], list):
+                emails.extend(record["emails"])
+        
+        if not emails:
+            raise ValueError("Record must contain either 'email' or 'emails' field")
+
+        return {"inputs": emails}
+    
+    def upsert_record(self, record: dict, context: dict):
+        """
+        Unsubscribe contact(s) from all email subscriptions.
+        """
+        state_updates = dict()
+        
+        if not record or not record.get("inputs"):
+            self.logger.warning("No emails to unsubscribe")
+            return None, False, state_updates
+        
+        url = f"{self.base_url}{self.endpoint}?channel=EMAIL&verbose=true"
+        
+        self.logger.info(f"Unsubscribing {len(record['inputs'])} contact(s) from all email subscriptions")
+        
+        response = request_push(
+            dict(self.config),
+            url,
+            payload=record,
+            method="POST"
+        )
+        
+        self.validate_response(response)
+        
+        if response.status_code == 200 and response.json()["status"] == 'COMPLETE':
+            self.logger.info(f"Successfully unsubscribed contacts: {record.get('inputs')}")
+            return len(record['inputs']), True, state_updates
+
+        self.logger.error(f"Failed to unsubscribe contacts: {response.json()}")
+        return len(record['inputs']), False, state_updates
+
+
 class FallbackSink(HubspotSink):
     """Precoro target sink class."""
 
@@ -88,4 +164,3 @@ class FallbackSink(HubspotSink):
             
             response = request_push(dict(self.config), associations_url, payload=types, method="PUT")
             self.validate_response(response)
-
