@@ -49,8 +49,8 @@ Use any stream name containing `subscribe` or `subscription` - the target will a
 **Example Usage:**
 ### Single contact unsubscribe
 ```json
-{"type":"SCHEMA","stream":"subscriptions","schema":{"type":"object","properties":{"email":{"type":"string"}}},"key_properties":[]}
-{"type":"RECORD","stream":"subscriptions","record":{"email":"test1@hubspot.com"}}
+{"type":"SCHEMA","stream":"unsubscribe","schema":{"type":"object","properties":{"email":{"type":"string"}}},"key_properties":[]}
+{"type":"RECORD","stream":"unsubscribe","record":{"email":"test1@hubspot.com"}}
 {"type": "STATE", "value": {}}
 ```
 ### Multiple contacts unsubscribe
