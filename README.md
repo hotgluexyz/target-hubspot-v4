@@ -36,32 +36,26 @@ environment variable is set either in the terminal context or in the `.env` file
 - [ ] `Developer TODO:` If your target requires special access on the source system, or any special authentication requirements, provide those here.
 
 ## Features
+### Full API Paths (Advanced Usage)
 
-### Subscription Preferences (New!)
-For subscription management features, ensure your OAuth app includes:
-- `communication_preferences.statuses.batch.write` - Required for managing subscription statuses
+For any HubSpot API endpoint not covered by standard CRM objects, use the **full API path** (including query parameters) as the stream name.
 
-Manage email subscription preferences, including unsubscribing contacts from all email communications.
+**How it works:**
+- If your stream name contains `/`, it's treated as a full API path
+- The target constructs the URL as: `https://api.hubapi.com{stream_name}`
+- Your record data is sent directly without modification
 
-**Stream Names:**
-Use any stream name containing `subscribe` or `subscription` - the target will automatically detect it and use the subscription sink. Examples: `subscriptions`, `unsubscribe`, `subscription_preferences`, `email_subscriptions`, etc.
+**Example: Unsubscribe from All Email**
 
-**Example Usage:**
-### Single contact unsubscribe
 ```json
-{"type":"SCHEMA","stream":"unsubscribe","schema":{"type":"object","properties":{"email":{"type":"string"}}},"key_properties":[]}
-{"type":"RECORD","stream":"unsubscribe","record":{"email":"test1@hubspot.com"}}
+{"type": "SCHEMA", "stream": "/communication-preferences/v4/statuses/batch/unsubscribe-all?channel=EMAIL", "schema": {"type": "object", "properties": {"inputs": {"type": "array", "items": {"type": "string"}}}}, "key_properties": []}
+{"type": "RECORD", "stream": "/communication-preferences/v4/statuses/batch/unsubscribe-all?channel=EMAIL", "record": {"inputs": ["test1@hubspot.com", "test2@hubspot.com", "test3@hubspot.com"]}}
 {"type": "STATE", "value": {}}
 ```
-### Multiple contacts unsubscribe
-```json
-{"type": "SCHEMA", "stream": "unsubscribe", "schema": {"type": "object", "properties": {"emails": {"type": "array", "items": {"type": "string"}}}}, "key_properties": []}
-{"type": "RECORD", "stream": "unsubscribe", "record": {"emails": ["test1@hubspot.com", "test2@hubspot.com", "test3@hubspot.com"]}}
-{"type": "STATE", "value": {}}
-```
+
+This flexibility allows you to call **any HubSpot API endpoint** by simply using its path as the stream name.
 
 ## Usage
-
 You can easily run `target-hubspot-v4` by itself.
 
 ### Executing the Target Directly
