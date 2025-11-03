@@ -7,7 +7,14 @@ class FallbackSink(HubspotSink):
     """Precoro target sink class."""
 
     @property
+    def is_full_path(self):
+        return '/' in self.stream_name
+
+    @property
     def endpoint(self):
+        if self.is_full_path and self.stream_name.startswith("/"):
+            return self.stream_name
+
         return f"/{self.stream_name}"
     
     @property
@@ -16,6 +23,8 @@ class FallbackSink(HubspotSink):
 
     def preprocess_record(self, record: dict, context: dict) -> None:
         """Process the record."""
+        if self.is_full_path:
+            return record
 
         associations = record.pop("associations", None)
 
@@ -59,6 +68,10 @@ class FallbackSink(HubspotSink):
             if record.get("properties") or record.get("associations"):
                 response = self.request_api(method, endpoint=endpoint, request_data=record)
                 id = response.json()[pk]
+            elif self.is_full_path:
+                full_url = f"https://api.hubapi.com{self.endpoint}"
+                response = request_push(dict(self.config), full_url, payload=record, method=method)
+                id = response.json().get(pk)
 
             if associations:
                 self.put_associations(id, associations)
@@ -88,4 +101,3 @@ class FallbackSink(HubspotSink):
             
             response = request_push(dict(self.config), associations_url, payload=types, method="PUT")
             self.validate_response(response)
-

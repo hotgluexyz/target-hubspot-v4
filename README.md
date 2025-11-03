@@ -35,8 +35,27 @@ environment variable is set either in the terminal context or in the `.env` file
 
 - [ ] `Developer TODO:` If your target requires special access on the source system, or any special authentication requirements, provide those here.
 
-## Usage
+## Features
+### Full API Paths (Advanced Usage)
 
+For any HubSpot API endpoint not covered by standard CRM objects, use the **full API path** (including query parameters) as the stream name.
+
+**How it works:**
+- If your stream name contains `/`, it's treated as a full API path
+- The target constructs the URL as: `https://api.hubapi.com{stream_name}`
+- Your record data is sent directly without modification
+
+**Example: Unsubscribe from All Email**
+
+```json
+{"type": "SCHEMA", "stream": "/communication-preferences/v4/statuses/batch/unsubscribe-all?channel=EMAIL", "schema": {"type": "object", "properties": {"inputs": {"type": "array", "items": {"type": "string"}}}}, "key_properties": []}
+{"type": "RECORD", "stream": "/communication-preferences/v4/statuses/batch/unsubscribe-all?channel=EMAIL", "record": {"inputs": ["test1@hubspot.com", "test2@hubspot.com", "test3@hubspot.com"]}}
+{"type": "STATE", "value": {}}
+```
+
+This flexibility allows you to call **any HubSpot API endpoint** by simply using its path as the stream name.
+
+## Usage
 You can easily run `target-hubspot-v4` by itself.
 
 ### Executing the Target Directly

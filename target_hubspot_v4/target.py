@@ -7,7 +7,6 @@ from singer_sdk import typing as th
 from typing import Type
 from singer_sdk.sinks import Sink
 
-
 from target_hubspot_v4.sinks import (
     FallbackSink,
 )
@@ -53,7 +52,7 @@ class TargetHubspotv4(TargetHotglue):
         # Check if unified sinks are enabled
         if self.config.get("unified_api_schema", False):
             return UnifiedSink
-        
+
         for sink_class in self.SINK_TYPES:
             return FallbackSink
 
