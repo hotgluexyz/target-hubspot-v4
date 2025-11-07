@@ -54,9 +54,9 @@ class FallbackSink(HubspotSink):
         endpoint = self.endpoint
         pk = self.key_properties[0] if self.key_properties else "id"
 
-        if record:
+        if record is not None:
             # post or put record
-            id = record['properties'].pop(pk, None) if record.get("properties") else record.pop(pk, None)
+            id = record.get('properties', {}).pop(pk, None) if record.get("properties") else record.pop(pk, None)
 
             associations = None
             if id:
