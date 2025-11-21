@@ -54,31 +54,34 @@ class FallbackSink(HubspotSink):
         endpoint = self.endpoint
         pk = self.key_properties[0] if self.key_properties else "id"
 
-        if record is not None:
-            # post or put record
-            id = record.get('properties', {}).pop(pk, None) if record.get("properties") else record.pop(pk, None)
+        try:
+            if record is not None:
+                # post or put record
+                id = record.get('properties', {}).pop(pk, None) if record.get("properties") else record.pop(pk, None)
 
-            associations = None
-            if id:
-                method = "PATCH"
-                endpoint = f"{endpoint}/{id}"
-                # Hubspot only supports including associations in POST object
-                associations = record.pop("associations", None)
+                associations = None
+                if id:
+                    method = "PATCH"
+                    endpoint = f"{endpoint}/{id}"
+                    # Hubspot only supports including associations in POST object
+                    associations = record.pop("associations", None)
 
-            if record.get("properties") or record.get("associations"):
-                response = self.request_api(method, endpoint=endpoint, request_data=record)
-                id = response.json()[pk]
-            elif self.is_full_path:
-                full_url = f"https://api.hubapi.com{self.endpoint}"
-                response = request_push(dict(self.config), full_url, payload=record, method=method)
-                id = response.json().get(pk)
+                if record.get("properties") or record.get("associations"):
+                    response = self.request_api(method, endpoint=endpoint, request_data=record)
+                    id = response.json()[pk]
+                elif self.is_full_path:
+                    full_url = f"https://api.hubapi.com{self.endpoint}"
+                    response = request_push(dict(self.config), full_url, payload=record, method=method)
+                    id = response.json().get(pk)
 
-            if associations:
-                self.put_associations(id, associations)
+                if associations:
+                    self.put_associations(id, associations)
 
 
-            
-            return id, True, state_updates
+                
+                return id, True, state_updates
+        except Exception as e:
+            return "fake_id", False, {"error": str(e)}
 
     def put_associations(self, id, associations):
         for association in associations:
