@@ -354,8 +354,45 @@ class UnifiedSink(HotglueSink):
 
     def process_contacts_custom_fields(self, custom_fields):
         url = "https://api.hubapi.com/crm/v3/properties/contacts"
+        url_v1 = "https://api.hubapi.com/properties/v1/contacts/properties"
 
+        config = dict(self.config)
+
+        try:
+            # try first with v3
+            contact_cf = request(config, url)
+            contact_cf = [
+                field.get("name", "").lower()
+                for field in contact_cf.json().get("results", [])
+            ]
+        except Exception as e:
+            # try with v1
+            self.logger.info(
+                f"Unable to retrieve custom contact fields with v3. Cause: {e}"
+            )
+            try:
+                contact_cf = request(config, url_v1)
+                contact_cf = [
+                    field.get("name", "").lower() for field in (contact_cf.json())
+                ]
+            except Exception as e:
+                self.logger.info(
+                    f"Unable to retrieve custom contact fields with v1. Cause: {e}. Attempting to create all custom fields"
+                )
+                contact_cf = []
+
+        processed_custom_fields = []
         for field in custom_fields:
+            # check if field has name
+            if not field.get("name"):
+                self.logger.info(
+                    f"Contact custom field with no name: {field}, skipping."
+                )
+                continue
+            # if field already exists skip creating custom field
+            if field["name"].lower() in contact_cf:
+                processed_custom_fields.append(field)
+                continue
             payload = {
                 "groupName": "contactinformation",
                 "hidden": False,
@@ -370,19 +407,20 @@ class UnifiedSink(HotglueSink):
                 payload["type"] = field.get("type")
                 payload["fieldType"] = self.match_field_type_to_type(field.get("type"))
 
-            response = request_push(dict(self.config), url, payload, "POST")
+            response = request_push(config, url, payload, "POST")
             if response.status_code == 409:
                 self.logger.info(f"Custom field {field['name'].lower()} already exists")
+                processed_custom_fields.append(field)
             elif response.status_code == 201:
                 self.logger.info(f"Custom field {field['name'].lower()} created")
+                processed_custom_fields.append(field)
             else:
                 self.logger.error(
-                    f"Error creating custom field {field['name'].lower()}"
+                    f"Error creating custom field {field['name'].lower()}, skipping custom field."
                 )
-                custom_fields.remove(field)
                 self.logger.error(response.json())
 
-        return custom_fields
+        return processed_custom_fields
 
     def contact_upload(self, contact):
         method = "POST"
