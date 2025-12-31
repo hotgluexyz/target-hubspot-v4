@@ -55,6 +55,18 @@ class HubspotSink(HotglueSink):
         if self.api_key:
             return {"hapikey": self.api_key}
         return {}
+
+    @property
+    def lookup_fields(self):
+        lookup_field_configuration = self.config.get("lookup_fields", {"contacts": "email"})
+        stream_lookup_field = lookup_field_configuration.get(self.name.lower())
+        if isinstance(stream_lookup_field, str):
+            return [stream_lookup_field]
+        return stream_lookup_field
+
+    @property
+    def lookup_method(self):
+        return self.config.get("lookup_method", "all")
     
     @property
     def http_headers(self) -> dict:

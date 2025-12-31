@@ -1,0 +1,3 @@
+{"type": "SCHEMA", "stream": "companies", "schema": {"type": ["object", "null"], "properties": {"name": {"type": ["string", "null"]}, "domain": {"type": ["string", "null"]}}}, "key_properties": []}
+{"type": "RECORD", "stream": "companies", "record": {"name": "EXAMPLE COMPANY A", "domain": "example-a.com"}}
+{"type": "RECORD", "stream": "companies", "record": {"name": "EXAMPLE COMPANY B", "domain": "example-b.com"}}

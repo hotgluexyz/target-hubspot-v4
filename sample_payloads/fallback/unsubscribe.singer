@@ -1,0 +1,6 @@
+{"type": "SCHEMA", "stream": "communication-preferences/v4/statuses/myemail+jsigsdino@hotglue.io/unsubscribe-all?channel=EMAIL", "schema": {"type": ["object", "null"], "properties": {}}, "key_properties": []}
+{"type": "RECORD", "stream": "communication-preferences/v4/statuses/myemail+jsigsdino@hotglue.io/unsubscribe-all?channel=EMAIL", "record": {}}
+{"type": "STATE", "value": {}}
+{"type": "SCHEMA", "stream": "communication-preferences/v4/statuses/myemail+5@hotglue.io/unsubscribe-all?channel=EMAIL", "schema": {"type": ["object", "null"], "properties": {}}, "key_properties": []}
+{"type": "RECORD", "stream": "communication-preferences/v4/statuses/myemail+5@hotglue.io/unsubscribe-all?channel=EMAIL", "record": {}}
+{"type": "STATE", "value": {}}
