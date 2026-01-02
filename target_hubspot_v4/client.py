@@ -58,8 +58,12 @@ class HubspotSink(HotglueSink):
 
     @property
     def lookup_fields(self):
-        lookup_field_configuration = self.config.get("lookup_fields", {"contacts": "email"})
+        lookup_field_configuration = self.config.get("lookup_fields", {})
         stream_lookup_field = lookup_field_configuration.get(self.name.lower())
+
+        if not stream_lookup_field and self.name == 'contacts':
+            return ['email']
+
         if isinstance(stream_lookup_field, str):
             return [stream_lookup_field]
         return stream_lookup_field
