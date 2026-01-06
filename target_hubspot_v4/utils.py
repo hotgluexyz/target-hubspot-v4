@@ -184,6 +184,41 @@ def search_contact_by_email(config, email, properties=[]):
         return response.json()
     return None
 
+def search_objects_by_property(config: dict, object_name: str, properties: list[dict]):
+    """
+    Search for CRM objects by a specific property value using the HubSpot search API.
+    
+    Args:
+        config: Configuration dictionary with authentication details
+        object_name: The type of object to search (e.g., 'contacts', 'companies', 'deals')
+        properties: List of dictionaries with property name and value
+    
+    Returns:
+        List of matching objects
+    """
+    params, _headers = get_params_and_headers(config, None)
+    filters = {
+        "filterGroups": [
+            {
+                "filters": [
+                    {
+                        "propertyName": property["property_name"],
+                        "operator": "EQ",
+                        "value": property["value"]
+                    }
+                    for property in properties
+                ]
+            }
+        ]
+    }
+    url = f"https://api.hubapi.com/crm/v3/objects/{object_name}/search"
+    response = request_push(config, url, filters, params, "POST")
+    raise_for_status(response)
+
+    res = response.json()
+    return res.get('results', [])
+
+
 def search_call_by_id(config, id, properties=[]):
     params, headers = get_params_and_headers(config, None)
     url = f"https://api.hubapi.com/crm/v3/objects/calls/{id}"

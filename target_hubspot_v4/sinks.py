@@ -1,7 +1,7 @@
 """Hubspot-v4 target sink class, which handles writing streams."""
 
 from target_hubspot_v4.client import HubspotSink
-from target_hubspot_v4.utils import search_contact_by_email, request_push
+from target_hubspot_v4.utils import request_push, search_objects_by_property
 
 class FallbackSink(HubspotSink):
     """Precoro target sink class."""
@@ -21,6 +21,35 @@ class FallbackSink(HubspotSink):
     def name(self):
         return self.stream_name
 
+    def perform_object_lookup(self, record: dict, lookup_fields: list[str]):
+        if len(lookup_fields) == 0:
+            return []
+        if len(lookup_fields) == 1:
+            lookup_field = lookup_fields[0]
+            if not record.get(lookup_field):
+                return []
+
+            return search_objects_by_property(
+                dict(self.config), 
+                self.name, 
+                [{"property_name": lookup_field, "value": record[lookup_field]}]
+            )
+        else:
+            if self.lookup_method == "sequential":
+                for lookup_field in lookup_fields:
+                    matches = self.perform_object_lookup(record, [lookup_field])
+                    if matches and len(matches) == 1:
+                        return [matches[0]]
+                return []
+            else:
+                if not all(record.get(lookup_field) for lookup_field in lookup_fields):
+                    return []
+                return search_objects_by_property(
+                    dict(self.config), 
+                    self.name, 
+                    [{"property_name": lookup_field, "value": record[lookup_field]} for lookup_field in lookup_fields]
+                )
+
     def preprocess_record(self, record: dict, context: dict) -> None:
         """Process the record."""
         if self.is_full_path:
@@ -35,13 +64,16 @@ class FallbackSink(HubspotSink):
         for key, value in record.items():
             record[key] = self.parse_objs(value)
 
-        if self.name.lower() == "contacts" and record.get("email"):
-            self.logger.info(f"Searching for contact by email = {record['email']}")
+        
+        if self.lookup_fields:
+            self.logger.debug(f"Searching for object by {self.lookup_fields}")
             # look contact by email and update id if found
-            existing_contact = search_contact_by_email(dict(self.config), record["email"], list(record.keys()))
-            if existing_contact:
-                self.logger.info(f"Found contact by email with id '{existing_contact['id']}'")
-                record["id"] = existing_contact["id"]
+            existing_objects = self.perform_object_lookup(record, self.lookup_fields)
+            if existing_objects and len(existing_objects) > 1:
+                raise Exception(f"Multiple objects found for lookup fields {self.lookup_fields} on record {record}")
+            if existing_objects and len(existing_objects) == 1:
+                self.logger.info(f"Found object by {self.lookup_fields} with id '{existing_objects[0]['id']}'")
+                record["id"] = existing_objects[0]["id"]
 
         payload = {"properties": record}
         if associations:
