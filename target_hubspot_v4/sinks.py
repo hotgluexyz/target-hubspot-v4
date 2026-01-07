@@ -21,7 +21,7 @@ class FallbackSink(HubspotSink):
     def name(self):
         return self.stream_name
 
-    def perform_object_lookup(self, record: dict, lookup_fields: list[str]):
+    def perform_object_lookup(self, record: dict, lookup_fields):
         if len(lookup_fields) == 0:
             return []
         if len(lookup_fields) == 1:

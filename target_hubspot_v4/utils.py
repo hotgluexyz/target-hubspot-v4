@@ -184,7 +184,7 @@ def search_contact_by_email(config, email, properties=[]):
         return response.json()
     return None
 
-def search_objects_by_property(config: dict, object_name: str, properties: list[dict]):
+def search_objects_by_property(config: dict, object_name: str, properties):
     """
     Search for CRM objects by a specific property value using the HubSpot search API.
     
