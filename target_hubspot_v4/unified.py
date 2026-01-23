@@ -35,6 +35,9 @@ class UnifiedSink(HotglueSink):
         return record
 
     def upsert_record(self, record: dict, context: dict):
+        id = None
+        success = False
+        state_updates = dict()
         if self.stream_name.lower() in ["contacts", "contact", "customer", "customers"]:
             success, id, state_updates = self.process_contacts(record)
         if self.stream_name.lower() in ["activities", "activity"]:
