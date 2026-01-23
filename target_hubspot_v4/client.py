@@ -1,8 +1,7 @@
-from target_hotglue.client import HotglueSink
-from singer_sdk.plugin_base import PluginBase
+from hotglue_singer_sdk.target_sdk.client import HotglueSink
+from hotglue_singer_sdk.plugin_base import PluginBase
 from typing import Dict, List, Optional, Any
 from target_hubspot_v4.auth import HubspotAuthenticator, HubspotApiKeyAuthenticator
-from target_hotglue.auth import Authenticator
 import ast
 import json
 import backoff
