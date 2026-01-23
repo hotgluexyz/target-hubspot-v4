@@ -7,6 +7,7 @@ import json
 import backoff
 import requests
 from target_hubspot_v4 import utils
+
 class HubspotSink(HotglueSink):
 
     def __init__(
@@ -91,6 +92,9 @@ class HubspotSink(HotglueSink):
             obj = json.dumps(obj)
         return obj
 
+    def validate_response(self, response: requests.Response) -> None:
+        utils.raise_etl_exceptions(response)
+        return super().validate_response(response)
 
     @backoff.on_exception(
         backoff.constant,

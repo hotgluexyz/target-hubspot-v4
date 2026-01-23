@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 
 import backoff
 import requests
+from hotglue_etl_exceptions import InvalidCredentialsError, InvalidPayloadError
 
 logger = logging.getLogger("target-hubspot-v4")
 logging.basicConfig(
@@ -12,14 +13,6 @@ logging.basicConfig(
 SESSION = requests.Session()
 
 BASE_URL = "https://api.hubapi.com"
-
-
-class InvalidAuthException(Exception):
-    pass
-
-
-class SourceUnavailableException(Exception):
-    pass
 
 
 def giveup(exc):
@@ -54,8 +47,12 @@ def acquire_access_token_from_refresh_token(config):
     }
 
     resp = requests.post(BASE_URL + "/oauth/v1/token", data=payload)
-    if resp.status_code == 403:
-        raise InvalidAuthException(resp.content)
+    if 400 <= resp.status_code < 500:
+        try:
+            error_message = resp.json()["message"]
+        except:
+            error_message = resp.content
+        raise InvalidCredentialsError(error_message)
 
     resp.raise_for_status()
     auth = resp.json()
@@ -115,6 +112,25 @@ def raise_for_status(response):
         http_error_msg = f"{http_error_msg}, Api response: {resp_json}, Payload: {response.request.body}, Url: {response.url}"
         raise requests.exceptions.HTTPError(http_error_msg, response=response)
 
+def raise_etl_exceptions(response):
+    if response.status_code == 400 and "error" in response.text:
+        try:
+            resp_json = response.json()
+            if "errors" in resp_json:
+                errors = resp_json["errors"]
+                error_message = ", ".join([error["message"] for error in errors])
+            else:
+                error_message = resp_json["message"]
+        except:
+            error_message = response.text
+        raise InvalidPayloadError(error_message)
+    elif response.status_code == 403:
+        try:
+            error_message = response.json()["message"]
+        except:
+            error_message = response.text
+        raise InvalidCredentialsError(error_message)
+
 @backoff.on_exception(
     backoff.constant,
     (requests.exceptions.RequestException, requests.exceptions.HTTPError),
@@ -134,9 +150,8 @@ def request_push(config, url, payload, params=None, method="POST"):
     resp = SESSION.send(req)
     logger.debug(resp.text)
 
-    if resp.status_code == 403:
-        raise SourceUnavailableException(resp.content)
-    elif resp.status_code == 409:
+    raise_etl_exceptions(resp)
+    if resp.status_code == 409:
         # ignore duplicate error and proceed
         return resp
     elif resp.status_code == 404:
@@ -165,10 +180,8 @@ def request(config, url, params=None):
     req = requests.Request("GET", url, params=params, headers=headers).prepare()
     logger.info("GET %s", req.url)
     resp = SESSION.send(req)
-    if resp.status_code == 403:
-        raise SourceUnavailableException(resp.content)
-    else:
-        resp.raise_for_status()
+    raise_etl_exceptions(resp)
+    resp.raise_for_status()
 
     return resp
 
