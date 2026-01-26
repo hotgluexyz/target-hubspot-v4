@@ -3,10 +3,10 @@
 import re
 import json
 
-from target_hotglue.client import HotglueSink
+from hotglue_singer_sdk.target_sdk.client import HotglueSink
 
 from target_hubspot_v4.utils import request_push, request, search_company_by_name, search_contact_by_email, map_country, search_call_by_id, search_deal_by_name, search_task_by_id
-from singer_sdk.plugin_base import PluginBase
+from hotglue_singer_sdk.plugin_base import PluginBase
 from typing import Dict, List, Optional
 
 class UnifiedSink(HotglueSink):
@@ -33,57 +33,22 @@ class UnifiedSink(HotglueSink):
     
     def preprocess_record(self, record: dict, context: dict) -> dict:
         return record
-    
-    def process_record(self, record: dict, context: dict) -> None:
-        if not self.latest_state:
-            self.init_state()
 
-        hash = self.build_record_hash(record)
-
-        existing_state =  self.get_existing_state(hash)
-
-        if existing_state:
-            return self.update_state(existing_state, is_duplicate=True)
-
-        state = {"hash": hash}
-
+    def upsert_record(self, record: dict, context: dict):
         id = None
         success = False
         state_updates = dict()
-
-        external_id = record.pop("externalId", None)
-
-        try:
-            if self.stream_name.lower() in ["contacts", "contact", "customer", "customers"]:
-                success, id, state_updates = self.process_contacts(record)
-            if self.stream_name.lower() in ["activities", "activity"]:
-                success, id, state_updates = self.process_activities(record)
-            if self.stream_name.lower() in ["companies", "company"]:
-                success, id, state_updates = self.upload_company(record)
-            if self.stream_name.lower() in ["deals", "deal", "opportunities"]:
-                success, id, state_updates = self.upload_deal(record)
-            if self.stream_name.lower() in ["notes", "note"]:
-                success, id, state_updates = self.process_notes(record)
-        except Exception as e:
-            self.logger.exception(f"Upsert record error {str(e)}")
-            state_updates['error'] = str(e)
-
-        if success:
-            self.logger.info(f"{self.name} processed id: {id}")
-
-        state["success"] = success
-
-        if id:
-            state["id"] = id
-
-        if external_id:
-            state["externalId"] = external_id
-
-        if state_updates and isinstance(state_updates, dict):
-            state = dict(state, **state_updates)
-
-        self.update_state(state)
-
+        if self.stream_name.lower() in ["contacts", "contact", "customer", "customers"]:
+            success, id, state_updates = self.process_contacts(record)
+        if self.stream_name.lower() in ["activities", "activity"]:
+            success, id, state_updates = self.process_activities(record)
+        if self.stream_name.lower() in ["companies", "company"]:
+            success, id, state_updates = self.upload_company(record)
+        if self.stream_name.lower() in ["deals", "deal", "opportunities"]:
+            success, id, state_updates = self.upload_deal(record)
+        if self.stream_name.lower() in ["notes", "note"]:
+            success, id, state_updates = self.process_notes(record)
+        return id, success, state_updates
 
     def process_activities(self, record):
         res = None

@@ -1,11 +1,11 @@
 """Hubspot-v4 target class."""
 
-from target_hotglue.target import TargetHotglue
-from typing import List, Optional, Union
+from hotglue_singer_sdk.target_sdk.target import TargetHotglue
+from typing import List, Optional, Union, Type
 from pathlib import PurePath
-from singer_sdk import typing as th
-from typing import Type
-from singer_sdk.sinks import Sink
+from hotglue_singer_sdk import typing as th
+from hotglue_singer_sdk.sinks import Sink
+from hotglue_singer_sdk.helpers.capabilities import AlertingLevel
 
 from target_hubspot_v4.sinks import (
     FallbackSink,
@@ -27,6 +27,7 @@ class TargetHubspotv4(TargetHotglue):
         super().__init__(config, parse_env_config, validate_config)
 
     name = "target-hubspot-v4"
+    alerting_level = AlertingLevel.WARNING
     SINK_TYPES = [FallbackSink]
 
     config_jsonschema = th.PropertiesList(

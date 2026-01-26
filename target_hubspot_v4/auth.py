@@ -1,7 +1,5 @@
 import json
-from datetime import datetime, timedelta
-from typing import Optional
-from base64 import b64encode
+from datetime import datetime
 from typing import Any, Dict, Optional
 
 import logging
