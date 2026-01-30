@@ -27,7 +27,7 @@ class TargetHubspotv4(TargetHotglue):
         super().__init__(config, parse_env_config, validate_config)
 
     name = "target-hubspot-v4"
-    alerting_level = AlertingLevel.WARNING
+    alerting_level = AlertingLevel.ERROR
     SINK_TYPES = [FallbackSink]
 
     config_jsonschema = th.PropertiesList(

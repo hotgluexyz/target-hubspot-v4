@@ -114,7 +114,7 @@ def raise_for_status(response):
         raise requests.exceptions.HTTPError(http_error_msg, response=response)
 
 def raise_etl_exceptions(response):
-    if response.status_code == 400 and "error" in response.text:
+    if response.status_code in [400, 404] and "error" in response.text:
         try:
             resp_json = response.json()
             if "errors" in resp_json:
