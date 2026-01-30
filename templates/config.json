@@ -1,0 +1,14 @@
+{
+  "client_id": "your-oauth-client-id",
+  "client_secret": "your-oauth-client-secret",
+  "refresh_token": "your-oauth-refresh-token",
+  "redirect_uri": "https://your-app.com/oauth/callback",
+  "unified_api_schema": false,
+  "only_upsert_empty_fields": false,
+  "current_division": null,
+  "lookup_fields": {
+    "contacts": "email",
+    "companies": "name"
+  },
+  "lookup_method": "all"
+}
