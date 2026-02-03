@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from hotglue_etl_exceptions import InvalidCredentialsError
 from typing import Any, Dict, Optional
 
 import logging
@@ -74,8 +75,8 @@ class HubspotAuthenticator:
             self.logger.info("OAuth authorization attempt was successful.")
         except Exception as ex:
             self.state.update({"auth_error_response": token_response.text})
-            raise RuntimeError(
-                f"Failed OAuth login, response was '{token_response.text()}'. {ex}"
+            raise InvalidCredentialsError(
+                f"Failed OAuth login, response was '{token_response.text}'. {ex}"
             )
         token_json = token_response.json()
         #Log the refresh_token
