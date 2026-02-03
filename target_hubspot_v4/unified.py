@@ -575,14 +575,8 @@ class UnifiedSink(HotglueSink):
         
         if record.get("deal_name"):
             deals = search_deal_by_name(dict(self.config), record.get("deal_name"))
-            if len(deals) >= 1:
-                # Use the first match if multiple deals found (log warning)
+            if len(deals) == 1:
                 deal = deals[0]
-                if len(deals) > 1:
-                    self.logger.warning(
-                        f"Multiple deals found with name '{record.get('deal_name')}'. "
-                        f"Using first match (id: {deal['id']}). Found {len(deals)} total matches."
-                    )
                 associations.append({
                     "to": {"id": deal["id"]},
                     "types": [
@@ -592,11 +586,10 @@ class UnifiedSink(HotglueSink):
                         }
                     ]
                 })
+            elif len(deals) > 1:
+                return False, None, {"error": f"More than one deal found for the provided deal name"}
             else:
-                self.logger.warning(
-                    f"No deal found for the provided deal name: '{record.get('deal_name')}'. "
-                    f"Note will be created without deal association."
-                )
+                return False, None, {"error": f"No deal found for the provided deal name"}
 
         payload = {"properties": mapping}
         if associations:
