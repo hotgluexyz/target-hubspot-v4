@@ -1,5 +1,6 @@
 """HubspotV2 target sink class, which handles writing streams."""
 
+from datetime import datetime
 import re
 import json
 
@@ -397,7 +398,7 @@ class UnifiedSink(HotglueSink):
         )
         res = res.json()
         if "id" in res:
-            print(f"Comany id:{res['id']}, name:{mapping['name']}  {action}")
+            self.logger.info(f"Company id:{res['id']}, name:{mapping['name']}  {action}")
         return True, res.get("id"), {}
     
 
@@ -516,14 +517,14 @@ class UnifiedSink(HotglueSink):
         )
         res = res.json()
         if "id" in res:
-            print(f"Task id:{res['id']}, name:{mapping['hs_task_subject']}  {action}")
+            self.logger.info(f"Task id:{res['id']}, name:{mapping['hs_task_subject']}  {action}")
         return res
 
     def process_notes(self, record):
         url = f"{self.base_url}/notes"
 
         mapping = {
-            "hs_timestamp": int(record.get("created_at").timestamp()*1000),
+            "hs_timestamp": int(datetime.fromisoformat(record.get("created_at").replace('Z', '+00:00')).timestamp()*1000),
             "hs_note_body": record.get("content"),
             "hubspot_owner_id": record.get("customer_id")
         }
