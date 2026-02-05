@@ -186,7 +186,15 @@ def request(config, url, params=None):
 
     return resp
 
-
+@backoff.on_exception(
+    backoff.constant,
+    (requests.exceptions.RequestException, requests.exceptions.HTTPError),
+    max_tries=5,
+    jitter=None,
+    giveup=giveup,
+    on_giveup=on_giveup,
+    interval=10,
+)
 def search_contact_by_email(config, email, properties=[]):
     params, headers = get_params_and_headers(config, None)
     url = f"https://api.hubapi.com/crm/v3/objects/contacts/{email}?idProperty=email"
@@ -196,6 +204,10 @@ def search_contact_by_email(config, email, properties=[]):
     response = SESSION.send(req)
     if response.status_code == 200:
         return response.json()
+    elif response.status_code == 404:
+        return None
+    else:
+        raise_for_status(response)
     return None
 
 def search_objects_by_property(config: dict, object_name: str, properties):
