@@ -204,6 +204,10 @@ def search_contact_by_email(config, email, properties=[]):
     response = SESSION.send(req)
     if response.status_code == 200:
         return response.json()
+    elif response.status_code == 404:
+        return None
+    else:
+        raise_for_status(response)
     return None
 
 def search_objects_by_property(config: dict, object_name: str, properties):
