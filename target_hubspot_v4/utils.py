@@ -186,11 +186,24 @@ def request(config, url, params=None):
 
     return resp
 
-
+@backoff.on_exception(
+    backoff.constant,
+    (requests.exceptions.RequestException, requests.exceptions.HTTPError),
+    max_tries=5,
+    jitter=None,
+    giveup=giveup,
+    on_giveup=on_giveup,
+    interval=10,
+)
 def search_contact_by_email(config, email, properties=[]):
-    candidates = search_objects_by_property(config, "contacts", [{"property_name": "email", "value": email}])
-    if candidates:
-        return candidates[0]
+    params, headers = get_params_and_headers(config, None)
+    url = f"https://api.hubapi.com/crm/v3/objects/contacts/{email}?idProperty=email"
+    if properties:
+        url += f"&properties={','.join(properties)}"
+    req = requests.Request("GET", url, params=params, headers=headers).prepare()
+    response = SESSION.send(req)
+    if response.status_code == 200:
+        return response.json()
     return None
 
 def search_objects_by_property(config: dict, object_name: str, properties):
@@ -229,6 +242,7 @@ def search_objects_by_property(config: dict, object_name: str, properties):
 
 
 def search_call_by_id(config, id, properties=[]):
+    params, headers = get_params_and_headers(config, None)
     url = f"https://api.hubapi.com/crm/v3/objects/calls/{id}"
     if properties:
         url += f"?properties={','.join(properties)}"
