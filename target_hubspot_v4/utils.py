@@ -5,6 +5,12 @@ import backoff
 import requests
 from hotglue_etl_exceptions import InvalidCredentialsError, InvalidPayloadError
 
+TRANSIENT_EXCEPTIONS = (
+    requests.exceptions.ConnectionError,
+    requests.exceptions.Timeout,
+    requests.exceptions.SSLError,
+)
+
 logger = logging.getLogger("target-hubspot-v4")
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
@@ -37,6 +43,7 @@ def on_giveup(details):
     )
 
 
+@backoff.on_exception(backoff.expo, TRANSIENT_EXCEPTIONS, max_tries=5)
 def acquire_access_token_from_refresh_token(config):
     payload = {
         "grant_type": "refresh_token",
@@ -245,6 +252,7 @@ def search_objects_by_property(config: dict, object_name: str, properties):
     return res.get('results', [])
 
 
+@backoff.on_exception(backoff.expo, TRANSIENT_EXCEPTIONS, max_tries=5)
 def search_call_by_id(config, id, properties=[]):
     params, headers = get_params_and_headers(config, None)
     url = f"https://api.hubapi.com/crm/v3/objects/calls/{id}"
@@ -256,6 +264,8 @@ def search_call_by_id(config, id, properties=[]):
         return response.json()
     return None
 
+
+@backoff.on_exception(backoff.expo, TRANSIENT_EXCEPTIONS, max_tries=5)
 def search_task_by_id(config, id, properties=[]):
     params, headers = get_params_and_headers(config, None)
     url = f"https://api.hubapi.com/crm/v3/objects/tasks/{id}"
