@@ -66,10 +66,9 @@ def acquire_access_token_from_refresh_token(config):
     auth = resp.json()
     config["access_token"] = auth["access_token"]
     config["refresh_token"] = auth["refresh_token"]
-    config["token_expires"] = datetime.utcnow() + timedelta(
-        seconds=auth["expires_in"] - 600
-    )
-    logger.info("Token refreshed. Expires at %s", config["token_expires"])
+    expires_at = datetime.utcnow() + timedelta(seconds=auth["expires_in"] - 600)
+    config["token_expires"] = expires_at.timestamp()
+    logger.info("Token refreshed. Expires at %s", expires_at)
 
 
 def get_params_and_headers(config, params):
@@ -82,10 +81,8 @@ def get_params_and_headers(config, params):
     params = params or {}
     hapikey = config.get("hapikey")
     if hapikey is None:
-        if (
-            config.get("token_expires") is None
-            or config.get("token_expires") < datetime.utcnow()
-        ):
+        now_ts = datetime.utcnow().timestamp()
+        if config.get("token_expires") is None or config.get("token_expires") < now_ts:
             acquire_access_token_from_refresh_token(config)
         headers = {"Authorization": "Bearer {}".format(config["access_token"])}
     else:
