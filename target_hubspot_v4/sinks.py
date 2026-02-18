@@ -30,8 +30,8 @@ class FallbackSink(HubspotSink):
                 return []
 
             return search_objects_by_property(
-                dict(self.config), 
-                self.name, 
+                self._target._config,
+                self.name,
                 [{"property_name": lookup_field, "value": record[lookup_field]}]
             )
         else:
@@ -45,8 +45,8 @@ class FallbackSink(HubspotSink):
                 if not all(record.get(lookup_field) for lookup_field in lookup_fields):
                     return []
                 return search_objects_by_property(
-                    dict(self.config), 
-                    self.name, 
+                    self._target._config,
+                    self.name,
                     [{"property_name": lookup_field, "value": record[lookup_field]} for lookup_field in lookup_fields]
                 )
 
@@ -102,7 +102,7 @@ class FallbackSink(HubspotSink):
                 id = response.json()[pk]
             elif self.is_full_path:
                 full_url = f"https://api.hubapi.com{self.endpoint}"
-                response = request_push(dict(self.config), full_url, payload=record, method=method)
+                response = request_push(self._target._config, full_url, payload=record, method=method)
                 id = response.json().get(pk)
 
             if associations:
@@ -131,5 +131,5 @@ class FallbackSink(HubspotSink):
 
             associations_url = f"https://api.hubapi.com/crm/v4/objects/{from_object_name}/{id}/associations/{to_object_name}/{to_id}"
             
-            response = request_push(dict(self.config), associations_url, payload=types, method="PUT")
+            response = request_push(self._target._config, associations_url, payload=types, method="PUT")
             self.validate_response(response)

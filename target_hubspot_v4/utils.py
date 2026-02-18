@@ -5,6 +5,12 @@ import backoff
 import requests
 from hotglue_etl_exceptions import InvalidCredentialsError, InvalidPayloadError
 
+TRANSIENT_EXCEPTIONS = (
+    requests.exceptions.ConnectionError,
+    requests.exceptions.Timeout,
+    requests.exceptions.SSLError,
+)
+
 logger = logging.getLogger("target-hubspot-v4")
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
@@ -37,6 +43,7 @@ def on_giveup(details):
     )
 
 
+@backoff.on_exception(backoff.expo, TRANSIENT_EXCEPTIONS, max_tries=5)
 def acquire_access_token_from_refresh_token(config):
     payload = {
         "grant_type": "refresh_token",
@@ -59,10 +66,9 @@ def acquire_access_token_from_refresh_token(config):
     auth = resp.json()
     config["access_token"] = auth["access_token"]
     config["refresh_token"] = auth["refresh_token"]
-    config["token_expires"] = datetime.utcnow() + timedelta(
-        seconds=auth["expires_in"] - 600
-    )
-    logger.info("Token refreshed. Expires at %s", config["token_expires"])
+    expires_at = datetime.utcnow() + timedelta(seconds=auth["expires_in"] - 600)
+    config["token_expires"] = expires_at.timestamp()
+    logger.info("Token refreshed. Expires at %s", expires_at)
 
 
 def get_params_and_headers(config, params):
@@ -75,10 +81,8 @@ def get_params_and_headers(config, params):
     params = params or {}
     hapikey = config.get("hapikey")
     if hapikey is None:
-        if (
-            config.get("token_expires") is None
-            or config.get("token_expires") < datetime.utcnow()
-        ):
+        now_ts = datetime.utcnow().timestamp()
+        if config.get("token_expires") is None or config.get("token_expires") < now_ts:
             acquire_access_token_from_refresh_token(config)
         headers = {"Authorization": "Bearer {}".format(config["access_token"])}
     else:
@@ -245,6 +249,7 @@ def search_objects_by_property(config: dict, object_name: str, properties):
     return res.get('results', [])
 
 
+@backoff.on_exception(backoff.expo, TRANSIENT_EXCEPTIONS, max_tries=5)
 def search_call_by_id(config, id, properties=[]):
     params, headers = get_params_and_headers(config, None)
     url = f"https://api.hubapi.com/crm/v3/objects/calls/{id}"
@@ -256,6 +261,8 @@ def search_call_by_id(config, id, properties=[]):
         return response.json()
     return None
 
+
+@backoff.on_exception(backoff.expo, TRANSIENT_EXCEPTIONS, max_tries=5)
 def search_task_by_id(config, id, properties=[]):
     params, headers = get_params_and_headers(config, None)
     url = f"https://api.hubapi.com/crm/v3/objects/tasks/{id}"

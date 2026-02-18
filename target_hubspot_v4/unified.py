@@ -81,13 +81,13 @@ class UnifiedSink(HotglueSink):
         if record.get("id"):
            
             if self.config.get("only_upsert_empty_fields", False):
-                matched_call = search_call_by_id(dict(self.config), record.get("id"), properties=list(call["properties"].keys()))
+                matched_call = search_call_by_id(self._target._config, record.get("id"), properties=list(call["properties"].keys()))
                 if matched_call:
                     for key in call["properties"].keys():
                         if matched_call["properties"].get(key, None) is not None:
                             call["properties"][key] = matched_call["properties"][key]
 
-        resp = request_push(dict(self.config), url, call)
+        resp = request_push(self._target._config, url, call)
         data = resp.json()
 
         # Defining the association call -> contact
@@ -97,11 +97,11 @@ class UnifiedSink(HotglueSink):
 
         url = f"{self.base_url}/calls/{callId}/associations/contact/{contactId}/call_to_contact"
 
-        request_push(dict(self.config), url, {}, method="PUT")
+        request_push(self._target._config, url, {}, method="PUT")
 
         url = f"https://api.hubapi.com/crm/v4/objects/contacts/{contactId}/associations/deals"
 
-        response = request(dict(self.config), url)
+        response = request(self._target._config, url)
 
         response = response.json()
         # Defining the association call -> deal
@@ -109,7 +109,7 @@ class UnifiedSink(HotglueSink):
             for deal in response.get("results"):
                 dealId = deal.get("toObjectId")
                 url = f"{self.base_url}/calls/{callId}/associations/deal/{dealId}/call_to_deal"
-                request_push(dict(self.config), url, {}, method="PUT")
+                request_push(self._target._config, url, {}, method="PUT")
         return data
 
 
@@ -183,7 +183,7 @@ class UnifiedSink(HotglueSink):
         if record.get("id"):
             row.update({"id": record.get("id")})
 
-        contact_search = search_contact_by_email(dict(self.config), row["properties"].get("email"), properties=list(row["properties"].keys()))
+        contact_search = search_contact_by_email(self._target._config, row["properties"].get("email"), properties=list(row["properties"].keys()))
 
         if "id" not in row and row["properties"].get("email"):    
             if contact_search:
@@ -250,7 +250,7 @@ class UnifiedSink(HotglueSink):
         """Check if a list exists in HubSpot."""
         url = f"https://api.hubapi.com/crm/v3/lists/object-type-id/0-1/name/{list_name}"
         try:
-            response = request(dict(self.config), url)
+            response = request(self._target._config, url)
             return response.status_code == 200, response.json().get("list",{}).get("listId")
         except Exception as e:
             self.logger.error(f"Error checking if list exists: {list_name} - {str(e)}")
@@ -265,7 +265,7 @@ class UnifiedSink(HotglueSink):
             "processingType": "MANUAL"
         }
         try:
-            response = request_push(dict(self.config), url, payload)
+            response = request_push(self._target._config, url, payload)
             if response.status_code not in [200, 201]:
                 self.logger.error(f"Failed to create list {list_name}: {response.text}")
             return response.json().get("list",{}).get("listId")
@@ -282,7 +282,7 @@ class UnifiedSink(HotglueSink):
             "listId": list_id
         }
         try:
-            response = request_push(dict(self.config), url, payload, method="PUT")
+            response = request_push(self._target._config, url, payload, method="PUT")
             if response.status_code not in [200, 201]:
                 self.logger.error(f"Failed to subscribe contact {contact_id} to list {list_id}: {response.text}")
         except Exception as e:
@@ -298,7 +298,7 @@ class UnifiedSink(HotglueSink):
             "listId": list_id
         }
         try:
-            response = request_push(dict(self.config), url, payload, method="PUT")
+            response = request_push(self._target._config, url, payload, method="PUT")
             if response.status_code not in [200, 204]:
                 self.logger.error(f"Failed to unsubscribe contact {contact_id} from list {list_id}: {response.text}")
         except Exception as e:
@@ -309,7 +309,7 @@ class UnifiedSink(HotglueSink):
         """Check if a contact is subscribed to a specific list."""
         url = f"https://api.hubapi.com/crm/v3/lists/{list_id}/memberships/join-order"
         try:
-            response = request(dict(self.config), url)
+            response = request(self._target._config, url)
             response = response.json()
             members = [member.get("recordId") for member in response.get("results",[])]
             return contact_id in members
@@ -336,7 +336,7 @@ class UnifiedSink(HotglueSink):
                 payload["type"] = field.get("type")
                 payload["fieldType"] = self.match_field_type_to_type(field.get("type"))
 
-            response = request_push(dict(self.config), url, payload, "POST")
+            response = request_push(self._target._config, url, payload, "POST")
             if response.status_code == 409:
                 self.logger.info(f"Custom field {field['name'].lower()} already exists")
             elif response.status_code == 201:
@@ -357,7 +357,7 @@ class UnifiedSink(HotglueSink):
             url = f"{url}/{contact['id']}"
             del contact["id"]
             method = "PATCH"
-        resp = request_push(dict(self.config), url, contact, None, method)
+        resp = request_push(self._target._config, url, contact, None, method)
         if resp.status_code not in [200, 201, 204]:
             raise Exception(resp.text)
         return resp
@@ -365,7 +365,7 @@ class UnifiedSink(HotglueSink):
     def contacts_batch_upload(self):
         url = f"{self.base_url}/contacts/batch/create"
         contacts = self.contacts
-        request_push(dict(self.config), url, {"inputs": contacts})
+        request_push(self._target._config, url, {"inputs": contacts})
 
     def process_batch(self, context: dict) -> None:
         if self.stream_name == "contacts":
@@ -394,7 +394,7 @@ class UnifiedSink(HotglueSink):
             method = "PATCH"
             action = "updated"
         res = request_push(
-            dict(self.config), url, {"properties": mapping}, None, method
+            self._target._config, url, {"properties": mapping}, None, method
         )
         res = res.json()
         if "id" in res:
@@ -440,7 +440,7 @@ class UnifiedSink(HotglueSink):
             method = "PATCH"
             action = "updated"
         res = request_push(
-            dict(self.config), url, {"properties": mapping}, None, method
+            self._target._config, url, {"properties": mapping}, None, method
         )
         res = res.json()
         if "id" in res:
@@ -461,13 +461,13 @@ class UnifiedSink(HotglueSink):
     def upload_deal_contact_association(self, deal_id, contact_id, contact_email=None):
         if contact_email:
             contact_url = f"https://api.hubapi.com/crm/v3/objects/contacts/{contact_email}?idProperty=email"
-            resp = request(dict(self.config), contact_url, None)
+            resp = request(self._target._config, contact_url, None)
             if resp.status_code == 200:
                 contact_id = resp.json()["id"]
 
         url = f"https://api.hubapi.com/crm/v4/objects/deals/{deal_id}/associations/contact/{contact_id}"
         url_labels = "https://api.hubapi.com/crm/v4/associations/deals/contacts/labels"
-        res = request_push(dict(self.config), url_labels, None, None, "GET")
+        res = request_push(self._target._config, url_labels, None, None, "GET")
         res = res.json()
         label = res["results"][0]
         payload = [
@@ -476,7 +476,7 @@ class UnifiedSink(HotglueSink):
                 "associationTypeId": label["typeId"],
             }
         ]
-        res = request_push(dict(self.config), url, payload, None, "PUT")
+        res = request_push(self._target._config, url, payload, None, "PUT")
         res = res.json()
         if res is not None:
             self.logger.info(
@@ -501,7 +501,7 @@ class UnifiedSink(HotglueSink):
 
 
         if record.get("id") and self.config.get("only_upsert_empty_fields", False):
-                matched_task = search_task_by_id(dict(self.config), record.get("id"), properties=list(mapping.keys()))
+                matched_task = search_task_by_id(self._target._config, record.get("id"), properties=list(mapping.keys()))
                 if matched_task:
                     for key in mapping.keys():
                         if matched_task["properties"].get(key, None) is not None:
@@ -513,7 +513,7 @@ class UnifiedSink(HotglueSink):
             method = "PATCH"
             action = "updated"
         res = request_push(
-            dict(self.config), url, {"properties": mapping}, None, method
+            self._target._config, url, {"properties": mapping}, None, method
         )
         res = res.json()
         if "id" in res:
@@ -545,7 +545,7 @@ class UnifiedSink(HotglueSink):
             })
         
         if record.get("company_name"):
-            companies = search_company_by_name(dict(self.config), record.get("company_name"))
+            companies = search_company_by_name(self._target._config, record.get("company_name"))
             if len(companies) == 1:
                 company = companies[0]
                 associations.append({
@@ -574,7 +574,7 @@ class UnifiedSink(HotglueSink):
             })
         
         if record.get("deal_name"):
-            deals = search_deal_by_name(dict(self.config), record.get("deal_name"))
+            deals = search_deal_by_name(self._target._config, record.get("deal_name"))
             if len(deals) == 1:
                 deal = deals[0]
                 associations.append({
@@ -604,7 +604,7 @@ class UnifiedSink(HotglueSink):
             action = "created"
 
         res = request_push(
-            dict(self.config), url, payload, None, method
+            self._target._config, url, payload, None, method
         )
         res = res.json()
         if "id" in res:
