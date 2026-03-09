@@ -2,6 +2,7 @@
 
 from target_hubspot_v4.client import HubspotSink
 from target_hubspot_v4.utils import request_push, search_objects_by_property
+from hotglue_etl_exceptions import InvalidPayloadError
 
 class FallbackSink(HubspotSink):
     """Precoro target sink class."""
@@ -70,7 +71,7 @@ class FallbackSink(HubspotSink):
             # look contact by email and update id if found
             existing_objects = self.perform_object_lookup(record, self.lookup_fields)
             if existing_objects and len(existing_objects) > 1:
-                raise Exception(f"Multiple objects found for lookup fields {self.lookup_fields} on record {record}")
+                raise InvalidPayloadError(f"Multiple objects found for lookup fields {self.lookup_fields} on record {record}")
             if existing_objects and len(existing_objects) == 1:
                 self.logger.info(f"Found object by {self.lookup_fields} with id '{existing_objects[0]['id']}'")
                 record["id"] = existing_objects[0]["id"]
