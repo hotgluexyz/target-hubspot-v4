@@ -615,6 +615,7 @@ class UnifiedSink(HotglueSink):
 
     def match_field_type_to_type(self, type):
         map_of_types = {
+            "datetime": "date",
             "date": "date",
             "bool": "booleancheckbox",
             "enumeration": "select",
