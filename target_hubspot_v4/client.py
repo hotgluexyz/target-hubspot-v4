@@ -92,6 +92,35 @@ class HubspotSink(HotglueSink):
             obj = json.dumps(obj)
         return obj
 
+    def perform_object_lookup(self, record: dict, lookup_fields):
+        if len(lookup_fields) == 0:
+            return []
+        if len(lookup_fields) == 1:
+            lookup_field = lookup_fields[0]
+            if not record.get(lookup_field):
+                return []
+
+            return utils.search_objects_by_property(
+                self._target._config,
+                self.name,
+                [{"property_name": lookup_field, "value": record[lookup_field]}]
+            )
+        else:
+            if self.lookup_method == "sequential":
+                for lookup_field in lookup_fields:
+                    matches = self.perform_object_lookup(record, [lookup_field])
+                    if matches and len(matches) == 1:
+                        return [matches[0]]
+                return []
+            else:
+                if not all(record.get(lookup_field) for lookup_field in lookup_fields):
+                    return []
+                return utils.search_objects_by_property(
+                    self._target._config,
+                    self.name,
+                    [{"property_name": lookup_field, "value": record[lookup_field]} for lookup_field in lookup_fields]
+                )
+
     def validate_response(self, response: requests.Response) -> None:
         utils.raise_etl_exceptions(response)
         return super().validate_response(response)
