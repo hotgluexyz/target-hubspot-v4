@@ -23,15 +23,20 @@ def build_trace_id(staged: dict) -> str:
     return staged.get("trace_id") or state.get("externalId") or state.get("hash")
 
 
-def dedupe_contacts_by_email(staged_records: List[dict]) -> List[dict]:
-    """Keep the last staged record per email for batch API requests."""
+def _last_staged_by_email(staged_records: List[dict]) -> dict:
+    """Map each lowercase email to the last staged row (last-wins dedupe)."""
     by_email = {}
     for staged in staged_records:
         email = _get_email(staged)
         if not email:
             continue
         by_email[email.lower()] = staged
-    return list(by_email.values())
+    return by_email
+
+
+def dedupe_contacts_by_email(staged_records: List[dict]) -> List[dict]:
+    """Keep the last staged record per email for batch API requests."""
+    return list(_last_staged_by_email(staged_records).values())
 
 
 def build_contact_upsert_payload(staged_records: List[dict]) -> dict:
@@ -116,7 +121,10 @@ def parse_contact_batch_response(
     association_followups = []
     results_by_trace = {}
     errors_by_trace = {}
-    results_by_email = {}
+    winning_trace_ids = {
+        email: build_trace_id(staged)
+        for email, staged in _last_staged_by_email(staged_records).items()
+    }
 
     if response is not None and not is_whole_batch_failure(response):
         body = response.json()
@@ -124,9 +132,6 @@ def parse_contact_batch_response(
             trace_id = result.get("objectWriteTraceId")
             if trace_id:
                 results_by_trace[trace_id] = result
-            email = ((result.get("properties") or {}).get("email") or "").lower()
-            if email:
-                results_by_email[email] = result
         for error in body.get("errors") or []:
             message = error.get("message", "Batch upsert failed")
             for trace_id in error.get("context", {}).get("objectWriteTraceId") or []:
@@ -138,6 +143,7 @@ def parse_contact_batch_response(
         meta = dict(staged.get("state") or {})
         trace_id = build_trace_id(staged)
         email = (_get_email(staged) or "").lower()
+        winner_trace_id = winning_trace_ids.get(email)
 
         if trace_id in errors_by_trace:
             state_updates.append(
@@ -145,7 +151,20 @@ def parse_contact_batch_response(
             )
             continue
 
-        result = results_by_trace.get(trace_id) or results_by_email.get(email)
+        if email and winner_trace_id and trace_id != winner_trace_id:
+            winner_result = results_by_trace.get(winner_trace_id)
+            if winner_result and winner_result.get("id"):
+                state_updates.append(dict(meta, id=winner_result["id"], _duplicate=True))
+                continue
+            if winner_trace_id in errors_by_trace:
+                state_updates.append(_error_state(meta, errors_by_trace[winner_trace_id]))
+                continue
+            state_updates.append(
+                dict(meta, success=False, error="Duplicate email superseded in batch")
+            )
+            continue
+
+        result = results_by_trace.get(trace_id)
         if result and result.get("id"):
             state_updates.append(dict(meta, success=True, id=result["id"]))
             if staged.get("associations"):

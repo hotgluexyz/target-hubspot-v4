@@ -194,9 +194,10 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
                         for followup in result.get("association_followups", []):
                             FallbackSink.put_associations(self, followup["id"], followup["associations"])
                         for state in result.get("state_updates", []):
+                            is_duplicate = state.pop("_duplicate", False)
                             if state.get("success"):
                                 self.logger.info("%s processed id: %s", self.name, state.get("id"))
-                            self.update_state(state)
+                            self.update_state(state, is_duplicate=is_duplicate)
         finally:
             for item in context.get("single_records") or []:
                 self.write_single_tap_record(item["record"], item.get("external_id"), context)
