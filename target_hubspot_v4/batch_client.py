@@ -7,6 +7,7 @@ from hotglue_etl_exceptions import InvalidCredentialsError, InvalidPayloadError
 from hotglue_singer_sdk.target_sdk.client import HotglueBatchSink
 
 from target_hubspot_v4.batch import (
+    BATCH_KIND_UPDATE,
     BATCH_KIND_UPSERT,
     batch_upsert_objects,
     dedupe_staged_by_key,
@@ -59,6 +60,19 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
 
         return record, associations
 
+    def _resolve_lookup_id(self, properties: dict) -> Optional[str]:
+        """Return a HubSpot id when lookup fields match exactly one object."""
+        if not self.lookup_fields:
+            return None
+        existing_objects = self.perform_object_lookup(properties, self.lookup_fields)
+        if existing_objects and len(existing_objects) > 1:
+            raise InvalidPayloadError(
+                f"Multiple objects found for lookup fields {self.lookup_fields} on record {properties}"
+            )
+        if existing_objects and len(existing_objects) == 1:
+            return str(existing_objects[0]["id"])
+        return None
+
     def prepare_staged_record(self, record: dict, context: dict) -> Optional[dict]:
         """Stage a record for batch upsert when it has the configured upsert key."""
         properties, associations = self.parse_fallback_properties(record)
@@ -68,12 +82,14 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
         if not upsert_key:
             return None
 
-        if self.lookup_fields:
-            existing_objects = self.perform_object_lookup(properties, self.lookup_fields)
-            if existing_objects and len(existing_objects) > 1:
-                raise InvalidPayloadError(
-                    f"Multiple objects found for lookup fields {self.lookup_fields} on record {properties}"
-                )
+        found_id = self._resolve_lookup_id(properties)
+        if found_id:
+            return {
+                "properties": properties,
+                "associations": associations,
+                "batch_kind": BATCH_KIND_UPDATE,
+                "id": found_id,
+            }
 
         return {
             "properties": properties,

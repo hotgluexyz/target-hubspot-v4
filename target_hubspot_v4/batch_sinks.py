@@ -2,8 +2,6 @@
 
 from typing import Iterator, List, Optional
 
-from hotglue_etl_exceptions import InvalidPayloadError
-
 from target_hubspot_v4.batch import (
     BATCH_KIND_CREATE,
     BATCH_KIND_UPDATE,
@@ -52,33 +50,23 @@ class CompaniesFallbackSink(HubspotBatchSink):
 
         properties.pop("id", None)
         if self.lookup_fields:
+            found_id = self._resolve_lookup_id(properties)
+            if found_id:
+                return {
+                    "properties": properties,
+                    "associations": associations,
+                    "batch_kind": BATCH_KIND_UPDATE,
+                    "id": found_id,
+                }
+
             upsert_key = properties.get(self.batch_id_property)
             if upsert_key:
-                existing_objects = self.perform_object_lookup(properties, self.lookup_fields)
-                if existing_objects and len(existing_objects) > 1:
-                    raise InvalidPayloadError(
-                        f"Multiple objects found for lookup fields {self.lookup_fields} on record {properties}"
-                    )
                 id_property = self.batch_id_property
                 return {
                     "properties": properties,
                     "associations": associations,
                     "batch_kind": BATCH_KIND_UPSERT,
                     id_property: upsert_key,
-                }
-
-            existing_objects = self.perform_object_lookup(properties, self.lookup_fields)
-            if existing_objects and len(existing_objects) > 1:
-                raise InvalidPayloadError(
-                    f"Multiple objects found for lookup fields {self.lookup_fields} on record {properties}"
-                )
-            if existing_objects and len(existing_objects) == 1:
-                found_id = str(existing_objects[0]["id"])
-                return {
-                    "properties": properties,
-                    "associations": associations,
-                    "batch_kind": BATCH_KIND_UPDATE,
-                    "id": found_id,
                 }
 
         return {
