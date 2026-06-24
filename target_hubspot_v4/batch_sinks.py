@@ -7,6 +7,10 @@ class ContactsFallbackSink(HubspotBatchSink):
     """Batched fallback sink for HubSpot contacts."""
 
     @property
+    def skip_staging_lookup(self) -> bool:
+        return True
+
+    @property
     def batch_id_property(self) -> str:
         return (self.lookup_fields or ["email"])[0]
 

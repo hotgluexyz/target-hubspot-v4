@@ -51,6 +51,11 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
         return False
 
     @property
+    def skip_staging_lookup(self) -> bool:
+        """Return True to skip pre-batch search; batch/upsert handles create/update."""
+        return False
+
+    @property
     @abstractmethod
     def batch_id_property(self) -> str:
         """HubSpot idProperty used for batch/upsert (first lookup field)."""
@@ -114,7 +119,7 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
             )
 
         properties.pop("id", None)
-        if self.lookup_fields:
+        if self.lookup_fields and not self.skip_staging_lookup:
             found_id = self._resolve_lookup_id(properties)
             if found_id:
                 return self._stage_batch_record(
