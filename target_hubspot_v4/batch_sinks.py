@@ -67,6 +67,20 @@ class CompaniesFallbackSink(HubspotBatchSink):
                     id_property: upsert_key,
                 }
 
+            existing_objects = self.perform_object_lookup(properties, self.lookup_fields)
+            if existing_objects and len(existing_objects) > 1:
+                raise InvalidPayloadError(
+                    f"Multiple objects found for lookup fields {self.lookup_fields} on record {properties}"
+                )
+            if existing_objects and len(existing_objects) == 1:
+                found_id = str(existing_objects[0]["id"])
+                return {
+                    "properties": properties,
+                    "associations": associations,
+                    "batch_kind": BATCH_KIND_UPDATE,
+                    "id": found_id,
+                }
+
         return {
             "properties": properties,
             "associations": associations,

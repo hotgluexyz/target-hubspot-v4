@@ -191,11 +191,15 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
                 if is_whole_batch_failure(response):
                     self._fallback_batch_records(parse_records, context)
                 else:
-                    self._apply_batch_result(
-                        self._normalize_batch_parse_result(
-                            batch_spec["parse"](response, parse_records)
+                    try:
+                        self._apply_batch_result(
+                            self._normalize_batch_parse_result(
+                                batch_spec["parse"](response, parse_records)
+                            )
                         )
-                    )
+                    except Exception:
+                        self.logger.exception("Batch result handling failed for %s", self.name)
+                        self._fallback_batch_records(parse_records, context)
 
     def process_record(self, record: dict, context: dict) -> None:
         """Stage a record for batch write, or queue it for single-record FallbackSink."""
