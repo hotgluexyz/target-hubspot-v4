@@ -303,13 +303,26 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
 
         context.setdefault("records", []).append(staged)
 
+    def _get_bookmark_state_by_hash(self, record_hash: str) -> Optional[dict]:
+        """Return the latest bookmark state for a record hash, success or failure."""
+        states = self.latest_state["bookmarks"][self.name]
+        for state in reversed(states):
+            if state.get("hash") == record_hash:
+                return dict(state)
+        return None
+
     def _apply_flush_duplicate_states(self, context: dict) -> None:
         """Mark in-flush duplicate rows using the winner state after batch writes."""
         for dup_state in context.get("flush_duplicate_states") or []:
-            existing_state = self.get_existing_state(dup_state["hash"])
-            if not existing_state:
-                continue
-            state = dict(existing_state)
+            winner_state = self._get_bookmark_state_by_hash(dup_state["hash"])
+            if winner_state:
+                state = dict(winner_state)
+            else:
+                state = dict(
+                    dup_state,
+                    success=False,
+                    error="Duplicate of batch record with no persisted state",
+                )
             external_id = dup_state.get("externalId")
             if external_id:
                 state["externalId"] = external_id
