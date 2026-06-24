@@ -218,7 +218,11 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
 
     def build_staged_record_hash(self, staged: dict) -> str:
         """Hash a staged record the same way FallbackSink hashes preprocessed payloads."""
-        payload = {"properties": staged["properties"]}
+        properties = dict(staged["properties"])
+        hubspot_id = staged.get("id")
+        if hubspot_id and not properties.get("id"):
+            properties["id"] = hubspot_id
+        payload = {"properties": properties}
         if staged.get("associations"):
             payload["associations"] = staged["associations"]
         return self.build_record_hash(payload)

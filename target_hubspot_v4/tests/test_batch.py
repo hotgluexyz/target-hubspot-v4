@@ -12,6 +12,7 @@ from target_hubspot_v4.batch import (
     parse_batch_upsert_response,
 )
 from target_hubspot_v4.batch_sinks import CompaniesFallbackSink, ContactsFallbackSink
+from target_hubspot_v4.sinks import FallbackSink
 
 
 def _make_sink(sink_cls, stream_name, lookup_fields=None):
@@ -98,6 +99,20 @@ class TestContactsStaging:
         sink = _make_sink(ContactsFallbackSink, "contacts", lookup_fields=["email"])
         staged = sink.prepare_staged_record({"email": "a@example.com"}, {})
         assert staged["batch_kind"] == BATCH_KIND_UPDATE
+        assert staged["id"] == "456"
+
+    @patch.object(FallbackSink, "perform_object_lookup", return_value=[{"id": "456"}])
+    @patch.object(ContactsFallbackSink, "perform_object_lookup", return_value=[{"id": "456"}])
+    def test_lookup_update_hash_matches_fallback_preprocess(self, _batch_lookup, _fallback_lookup):
+        sink = _make_sink(ContactsFallbackSink, "contacts", lookup_fields=["email"])
+        record = {"email": "a@example.com", "firstname": "Ann"}
+        staged = sink.prepare_staged_record(record, {})
+        batch_hash = sink.build_staged_record_hash(staged)
+        fallback_sink = FallbackSink(sink._target, "contacts", sink.schema, sink.key_properties)
+        fallback_payload = FallbackSink.preprocess_record(fallback_sink, dict(record), {})
+        fallback_hash = sink.build_record_hash(fallback_payload)
+        assert batch_hash == fallback_hash
+        assert "id" not in staged["properties"]
         assert staged["id"] == "456"
 
 
