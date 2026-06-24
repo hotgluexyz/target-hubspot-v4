@@ -91,6 +91,7 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
 
         yield {
             "records": deduped,
+            "staged_records": staged_records,
             "request": lambda records: batch_upsert_objects(config, object_type, id_property, records),
             "parse": lambda response, records: parse_batch_upsert_response(response, records, id_property),
         }
@@ -177,20 +178,23 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
     def _process_staged_batch(self, staged_records: List[dict], context: dict) -> None:
         """Run each batch request group and fall back to single-record writes on failure."""
         for batch_spec in self.iter_batch_requests(staged_records):
-            records = batch_spec["records"]
-            if not records:
+            api_records = batch_spec["records"]
+            parse_records = batch_spec["staged_records"]
+            if not api_records:
                 continue
             try:
-                response = batch_spec["request"](records)
+                response = batch_spec["request"](api_records)
             except Exception:
                 self.logger.exception("Batch request failed for %s", self.name)
-                self._fallback_batch_records(records, context)
+                self._fallback_batch_records(parse_records, context)
             else:
                 if is_whole_batch_failure(response):
-                    self._fallback_batch_records(records, context)
+                    self._fallback_batch_records(parse_records, context)
                 else:
                     self._apply_batch_result(
-                        self._normalize_batch_parse_result(batch_spec["parse"](response, records))
+                        self._normalize_batch_parse_result(
+                            batch_spec["parse"](response, parse_records)
+                        )
                     )
 
     def process_record(self, record: dict, context: dict) -> None:

@@ -79,28 +79,27 @@ class CompaniesFallbackSink(HubspotBatchSink):
         object_type = self.name
         id_property = self.batch_id_property
 
+        update_staged = [r for r in staged_records if r.get("batch_kind") == BATCH_KIND_UPDATE]
+        upsert_staged = [r for r in staged_records if r.get("batch_kind") == BATCH_KIND_UPSERT]
+        create_staged = [r for r in staged_records if r.get("batch_kind") == BATCH_KIND_CREATE]
+
         by_kind = {
-            BATCH_KIND_UPDATE: dedupe_staged_by_hubspot_id(
-                [r for r in staged_records if r.get("batch_kind") == BATCH_KIND_UPDATE]
-            ),
-            BATCH_KIND_UPSERT: dedupe_staged_by_key(
-                [r for r in staged_records if r.get("batch_kind") == BATCH_KIND_UPSERT],
-                id_property,
-            ),
-            BATCH_KIND_CREATE: [
-                r for r in staged_records if r.get("batch_kind") == BATCH_KIND_CREATE
-            ],
+            BATCH_KIND_UPDATE: dedupe_staged_by_hubspot_id(update_staged),
+            BATCH_KIND_UPSERT: dedupe_staged_by_key(upsert_staged, id_property),
+            BATCH_KIND_CREATE: create_staged,
         }
 
         if by_kind[BATCH_KIND_UPDATE]:
             yield {
                 "records": by_kind[BATCH_KIND_UPDATE],
+                "staged_records": update_staged,
                 "request": lambda records: batch_update_objects(config, object_type, records),
                 "parse": parse_batch_update_response,
             }
         if by_kind[BATCH_KIND_UPSERT]:
             yield {
                 "records": by_kind[BATCH_KIND_UPSERT],
+                "staged_records": upsert_staged,
                 "request": lambda records: batch_upsert_objects(
                     config, object_type, id_property, records
                 ),
@@ -111,6 +110,7 @@ class CompaniesFallbackSink(HubspotBatchSink):
         if by_kind[BATCH_KIND_CREATE]:
             yield {
                 "records": by_kind[BATCH_KIND_CREATE],
+                "staged_records": create_staged,
                 "request": lambda records: batch_create_objects(config, object_type, records),
                 "parse": parse_batch_create_response,
             }
