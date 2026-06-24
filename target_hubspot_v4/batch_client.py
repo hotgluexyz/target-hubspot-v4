@@ -140,13 +140,36 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
             payload["associations"] = staged["associations"]
         return self.build_record_hash(payload)
 
-    def _apply_batch_result(self, result: dict) -> None:
+    def _staged_record_hash(self, staged: dict) -> Optional[str]:
+        """Return the content hash for a staged batch record, if present."""
+        return (staged.get("state") or {}).get("hash")
+
+    def _unapplied_staged_records(self, staged_records: List[dict], applied_hashes: set) -> List[dict]:
+        """Return staged rows whose batch state updates were not applied."""
+        return [
+            staged
+            for staged in staged_records
+            if self._staged_record_hash(staged) not in applied_hashes
+        ]
+
+    def _apply_batch_result(self, result: dict) -> set:
         """Apply parsed batch state updates and association followups."""
+        applied_hashes = set()
         for state in result.get("state_updates", []):
             is_duplicate = state.pop("_duplicate", False)
-            if state.get("success"):
-                self.logger.info("%s processed id: %s", self.name, state.get("id"))
-            self.update_state(state, is_duplicate=is_duplicate)
+            record_hash = state.get("hash")
+            try:
+                if state.get("success"):
+                    self.logger.info("%s processed id: %s", self.name, state.get("id"))
+                self.update_state(state, is_duplicate=is_duplicate)
+                if record_hash:
+                    applied_hashes.add(record_hash)
+            except Exception:
+                self.logger.exception(
+                    "Batch state update failed for %s hash %s",
+                    self.name,
+                    record_hash,
+                )
         for followup in result.get("association_followups", []):
             try:
                 FallbackSink.put_associations(self, followup["id"], followup["associations"])
@@ -156,6 +179,7 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
                     self.name,
                     followup.get("id"),
                 )
+        return applied_hashes
 
     def _fallback_batch_records(self, staged_records: List[dict], context: dict) -> None:
         """Write each staged batch record through single-record FallbackSink."""
@@ -199,14 +223,22 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
                     self._fallback_batch_records(parse_records, context)
                 else:
                     try:
-                        self._apply_batch_result(
-                            self._normalize_batch_parse_result(
-                                batch_spec["parse"](response, parse_records)
-                            )
+                        parsed = self._normalize_batch_parse_result(
+                            batch_spec["parse"](response, parse_records)
                         )
                     except Exception:
-                        self.logger.exception("Batch result handling failed for %s", self.name)
+                        self.logger.exception("Batch result parsing failed for %s", self.name)
                         self._fallback_batch_records(parse_records, context)
+                    else:
+                        applied_hashes = self._apply_batch_result(parsed)
+                        unapplied = self._unapplied_staged_records(parse_records, applied_hashes)
+                        if unapplied:
+                            self.logger.warning(
+                                "Batch apply incomplete for %s; falling back on %d records",
+                                self.name,
+                                len(unapplied),
+                            )
+                            self._fallback_batch_records(unapplied, context)
 
     def process_record(self, record: dict, context: dict) -> None:
         """Stage a record for batch write, or queue it for single-record FallbackSink."""

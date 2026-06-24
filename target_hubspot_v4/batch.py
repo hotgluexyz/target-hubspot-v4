@@ -194,7 +194,7 @@ def is_whole_batch_failure(response) -> bool:
         return True
     if response.status_code in (200, 201, 207):
         return False
-    if response.status_code != 400:
+    if response.status_code not in (400, 409):
         return True
     try:
         body = response.json()
