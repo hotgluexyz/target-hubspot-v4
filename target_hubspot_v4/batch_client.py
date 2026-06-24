@@ -7,11 +7,17 @@ from hotglue_etl_exceptions import InvalidCredentialsError, InvalidPayloadError
 from hotglue_singer_sdk.target_sdk.client import HotglueBatchSink
 
 from target_hubspot_v4.batch import (
+    BATCH_KIND_CREATE,
     BATCH_KIND_UPDATE,
     BATCH_KIND_UPSERT,
+    batch_create_objects,
+    batch_update_objects,
     batch_upsert_objects,
+    dedupe_staged_by_hubspot_id,
     dedupe_staged_by_key,
     is_whole_batch_failure,
+    parse_batch_create_response,
+    parse_batch_update_response,
     parse_batch_upsert_response,
     staged_to_tap_record,
 )
@@ -40,6 +46,11 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
         return self.stream_name
 
     @property
+    def supports_batch_create(self) -> bool:
+        """Return True when rows without an upsert key may use batch/create."""
+        return False
+
+    @property
     @abstractmethod
     def batch_id_property(self) -> str:
         """HubSpot idProperty used for batch/upsert (first lookup field)."""
@@ -60,6 +71,22 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
 
         return record, associations
 
+    def _stage_batch_record(
+        self,
+        batch_kind: str,
+        properties: dict,
+        associations,
+        **extra,
+    ) -> dict:
+        """Build a staged batch record with the shared shape."""
+        staged = {
+            "properties": properties,
+            "associations": associations,
+            "batch_kind": batch_kind,
+        }
+        staged.update(extra)
+        return staged
+
     def _resolve_lookup_id(self, properties: dict) -> Optional[str]:
         """Return a HubSpot id when lookup fields match exactly one object."""
         if not self.lookup_fields:
@@ -74,43 +101,83 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
         return None
 
     def prepare_staged_record(self, record: dict, context: dict) -> Optional[dict]:
-        """Stage a record for batch upsert when it has the configured upsert key."""
+        """Stage a record for batch update, upsert, create, or single-record fallback."""
         properties, associations = self.parse_fallback_properties(record)
+        hubspot_id = properties.get("id")
+
+        if hubspot_id:
+            return self._stage_batch_record(
+                BATCH_KIND_UPDATE,
+                properties,
+                associations,
+                id=str(hubspot_id),
+            )
+
         properties.pop("id", None)
-        id_property = self.batch_id_property
-        upsert_key = properties.get(id_property)
-        if not upsert_key:
-            return None
+        if self.lookup_fields:
+            found_id = self._resolve_lookup_id(properties)
+            if found_id:
+                return self._stage_batch_record(
+                    BATCH_KIND_UPDATE,
+                    properties,
+                    associations,
+                    id=found_id,
+                )
 
-        found_id = self._resolve_lookup_id(properties)
-        if found_id:
-            return {
-                "properties": properties,
-                "associations": associations,
-                "batch_kind": BATCH_KIND_UPDATE,
-                "id": found_id,
-            }
+        upsert_key = properties.get(self.batch_id_property)
+        if upsert_key:
+            return self._stage_batch_record(
+                BATCH_KIND_UPSERT,
+                properties,
+                associations,
+                **{self.batch_id_property: upsert_key},
+            )
 
-        return {
-            "properties": properties,
-            "associations": associations,
-            "batch_kind": BATCH_KIND_UPSERT,
-            id_property: upsert_key,
-        }
+        if self.supports_batch_create:
+            return self._stage_batch_record(BATCH_KIND_CREATE, properties, associations)
+        return None
 
     def iter_batch_requests(self, staged_records: List[dict]) -> Iterator[dict]:
-        """Yield batch request specs for a flush of staged records."""
-        deduped = dedupe_staged_by_key(staged_records, self.batch_id_property)
+        """Route staged records to batch/update, batch/upsert, and batch/create."""
         config = self._target._config
         object_type = self.name
         id_property = self.batch_id_property
 
-        yield {
-            "records": deduped,
-            "staged_records": staged_records,
-            "request": lambda records: batch_upsert_objects(config, object_type, id_property, records),
-            "parse": lambda response, records: parse_batch_upsert_response(response, records, id_property),
+        update_staged = [r for r in staged_records if r.get("batch_kind") == BATCH_KIND_UPDATE]
+        upsert_staged = [r for r in staged_records if r.get("batch_kind") == BATCH_KIND_UPSERT]
+        create_staged = [r for r in staged_records if r.get("batch_kind") == BATCH_KIND_CREATE]
+
+        by_kind = {
+            BATCH_KIND_UPDATE: dedupe_staged_by_hubspot_id(update_staged),
+            BATCH_KIND_UPSERT: dedupe_staged_by_key(upsert_staged, id_property),
+            BATCH_KIND_CREATE: create_staged,
         }
+
+        if by_kind[BATCH_KIND_UPDATE]:
+            yield {
+                "records": by_kind[BATCH_KIND_UPDATE],
+                "staged_records": update_staged,
+                "request": lambda records: batch_update_objects(config, object_type, records),
+                "parse": parse_batch_update_response,
+            }
+        if by_kind[BATCH_KIND_UPSERT]:
+            yield {
+                "records": by_kind[BATCH_KIND_UPSERT],
+                "staged_records": upsert_staged,
+                "request": lambda records: batch_upsert_objects(
+                    config, object_type, id_property, records
+                ),
+                "parse": lambda response, records: parse_batch_upsert_response(
+                    response, records, id_property
+                ),
+            }
+        if by_kind[BATCH_KIND_CREATE]:
+            yield {
+                "records": by_kind[BATCH_KIND_CREATE],
+                "staged_records": create_staged,
+                "request": lambda records: batch_create_objects(config, object_type, records),
+                "parse": parse_batch_create_response,
+            }
 
     def make_batch_request(self, records: List[dict]):
         """Satisfy HotglueBatchSink ABC; batch flushing uses iter_batch_requests instead."""
