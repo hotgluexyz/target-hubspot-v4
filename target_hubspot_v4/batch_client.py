@@ -148,7 +148,14 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
                 self.logger.info("%s processed id: %s", self.name, state.get("id"))
             self.update_state(state, is_duplicate=is_duplicate)
         for followup in result.get("association_followups", []):
-            FallbackSink.put_associations(self, followup["id"], followup["associations"])
+            try:
+                FallbackSink.put_associations(self, followup["id"], followup["associations"])
+            except Exception:
+                self.logger.exception(
+                    "Association follow-up failed for %s id %s",
+                    self.name,
+                    followup.get("id"),
+                )
 
     def _fallback_batch_records(self, staged_records: List[dict], context: dict) -> None:
         """Write each staged batch record through single-record FallbackSink."""
@@ -238,6 +245,20 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
             self.logger.info("Record of type %s already exists with hash: %s", self.name, record_hash)
             return
 
+        flush_hashes = context.setdefault("flush_hashes", set())
+        if record_hash in flush_hashes:
+            self.logger.info(
+                "Record of type %s already staged in flush with hash: %s",
+                self.name,
+                record_hash,
+            )
+            dup_state = {"hash": record_hash}
+            if external_id:
+                dup_state["externalId"] = external_id
+            context.setdefault("flush_duplicate_states", []).append(dup_state)
+            return
+        flush_hashes.add(record_hash)
+
         existing_state = self.get_existing_state(record_hash)
         if existing_state:
             self.update_state(existing_state, is_duplicate=True, record=staged["properties"])
@@ -251,6 +272,18 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
 
         context.setdefault("records", []).append(staged)
 
+    def _apply_flush_duplicate_states(self, context: dict) -> None:
+        """Mark in-flush duplicate rows using the winner state after batch writes."""
+        for dup_state in context.get("flush_duplicate_states") or []:
+            existing_state = self.get_existing_state(dup_state["hash"])
+            if not existing_state:
+                continue
+            state = dict(existing_state)
+            external_id = dup_state.get("externalId")
+            if external_id:
+                state["externalId"] = external_id
+            self.update_state(state, is_duplicate=True)
+
     def process_batch(self, context: dict) -> None:
         """Flush staged batch records, then process any single-record queue."""
         if not self.latest_state:
@@ -260,8 +293,11 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
         try:
             if raw_records:
                 self._process_staged_batch(raw_records, context)
+            self._apply_flush_duplicate_states(context)
         finally:
             for item in context.get("single_records") or []:
                 self.write_single_tap_record(item["record"], item.get("external_id"), context)
             context["records"] = []
             context["single_records"] = []
+            context["flush_hashes"] = set()
+            context["flush_duplicate_states"] = []

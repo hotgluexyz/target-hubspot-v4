@@ -260,7 +260,7 @@ def parse_batch_traced_response(
         if record_key and winner_trace_id and trace_id != winner_trace_id:
             winner_result = results_by_trace.get(winner_trace_id)
             if winner_result and winner_result.get("id"):
-                state_updates.append(dict(meta, id=winner_result["id"], _duplicate=True))
+                state_updates.append(dict(meta, success=True, id=winner_result["id"], _duplicate=True))
                 if staged.get("associations"):
                     association_followups.append(
                         {"id": winner_result["id"], "associations": staged["associations"]}
