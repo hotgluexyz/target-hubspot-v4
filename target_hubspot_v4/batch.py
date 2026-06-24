@@ -343,7 +343,7 @@ def staged_to_tap_record(staged: dict) -> dict:
 def _error_state(meta: dict, message: str) -> dict:
     return dict(
         meta,
-        success=None,
+        success=False,
         error=message,
         hg_error_class="InvalidPayloadError",
     )

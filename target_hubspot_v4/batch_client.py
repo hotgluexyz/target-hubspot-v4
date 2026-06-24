@@ -352,8 +352,7 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
             self.logger.exception("Preprocess record error %s", exc)
             state_updates = {"error": str(exc)}
             state_updates.update(self._error_classification_metadata(exc))
-            success = None if isinstance(exc, InvalidPayloadError) else False
-            error_state = dict(success=success, **state_updates)
+            error_state = dict(success=False, **state_updates)
             if external_id:
                 error_state["externalId"] = external_id
             self.update_state(error_state, record=tap_record)
