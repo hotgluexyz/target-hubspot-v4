@@ -296,8 +296,7 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
             self.update_state(existing_state, is_duplicate=True, record=staged["properties"])
             return
 
-        trace_id = external_id or record_hash
-        staged["trace_id"] = trace_id
+        staged["trace_id"] = record_hash
         staged["state"] = {"hash": record_hash}
         if external_id:
             staged["state"]["externalId"] = external_id

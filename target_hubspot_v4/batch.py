@@ -24,9 +24,9 @@ BATCH_KIND_CREATE = "create"
 
 
 def build_trace_id(staged: dict) -> str:
-    """Return a unique batch trace id from externalId or record hash."""
+    """Return a unique batch trace id from the staged record hash."""
     state = staged.get("state") or {}
-    return staged.get("trace_id") or state.get("externalId") or state.get("hash")
+    return staged.get("trace_id") or state.get("hash")
 
 
 def get_hubspot_id(staged: dict) -> Optional[str]:
