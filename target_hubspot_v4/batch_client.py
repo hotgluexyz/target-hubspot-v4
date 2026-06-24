@@ -1,12 +1,19 @@
 """HubSpot batch sink base class."""
 
 from abc import abstractmethod
-from typing import List, Optional
+from typing import Iterator, List, Optional
 
 from hotglue_etl_exceptions import InvalidCredentialsError, InvalidPayloadError
 from hotglue_singer_sdk.target_sdk.client import HotglueBatchSink
 
-from target_hubspot_v4.batch import is_whole_batch_failure, staged_to_tap_record
+from target_hubspot_v4.batch import (
+    BATCH_KIND_UPSERT,
+    batch_upsert_objects,
+    dedupe_staged_by_key,
+    is_whole_batch_failure,
+    parse_batch_upsert_response,
+    staged_to_tap_record,
+)
 from target_hubspot_v4.client import HubspotSink
 from target_hubspot_v4.sinks import FallbackSink
 
@@ -31,6 +38,12 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
     def name(self):
         return self.stream_name
 
+    @property
+    @abstractmethod
+    def batch_id_property(self) -> str:
+        """HubSpot idProperty used for batch/upsert (first lookup field)."""
+        raise NotImplementedError()
+
     def preprocess_record(self, record: dict, context: dict):
         return record
 
@@ -46,23 +59,47 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
 
         return record, associations
 
-    @abstractmethod
     def prepare_staged_record(self, record: dict, context: dict) -> Optional[dict]:
-        raise NotImplementedError()
+        """Stage a record for batch upsert when it has the configured upsert key."""
+        properties, associations = self.parse_fallback_properties(record)
+        properties.pop("id", None)
+        id_property = self.batch_id_property
+        upsert_key = properties.get(id_property)
+        if not upsert_key:
+            return None
 
-    @abstractmethod
+        if self.lookup_fields:
+            existing_objects = self.perform_object_lookup(properties, self.lookup_fields)
+            if existing_objects and len(existing_objects) > 1:
+                raise InvalidPayloadError(
+                    f"Multiple objects found for lookup fields {self.lookup_fields} on record {properties}"
+                )
+
+        return {
+            "properties": properties,
+            "associations": associations,
+            "batch_kind": BATCH_KIND_UPSERT,
+            id_property: upsert_key,
+        }
+
+    def iter_batch_requests(self, staged_records: List[dict]) -> Iterator[dict]:
+        """Yield batch request specs for a flush of staged records."""
+        deduped = dedupe_staged_by_key(staged_records, self.batch_id_property)
+        config = self._target._config
+        object_type = self.name
+        id_property = self.batch_id_property
+
+        yield {
+            "records": deduped,
+            "request": lambda records: batch_upsert_objects(config, object_type, id_property, records),
+            "parse": lambda response, records: parse_batch_upsert_response(response, records, id_property),
+        }
+
     def make_batch_request(self, records: List[dict]):
-        raise NotImplementedError()
-
-    @abstractmethod
-    def parse_batch_response(self, response, staged_records: List[dict]) -> dict:
-        raise NotImplementedError()
-
-    def get_tap_record_email(self, record: dict) -> Optional[str]:
-        """Return the contact email from a tap-shaped record, if present."""
-        properties = record.get("properties") or record
-        email = properties.get("email")
-        return email if email else None
+        """Satisfy HotglueBatchSink ABC; batch flushing uses iter_batch_requests instead."""
+        for batch_spec in self.iter_batch_requests(records):
+            return batch_spec["request"](batch_spec["records"])
+        return None
 
     def _error_classification_metadata(self, exc: Exception) -> dict:
         if isinstance(exc, (InvalidCredentialsError, InvalidPayloadError)):
@@ -102,6 +139,16 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
             payload["associations"] = staged["associations"]
         return self.build_record_hash(payload)
 
+    def _apply_batch_result(self, result: dict) -> None:
+        """Apply parsed batch state updates and association followups."""
+        for state in result.get("state_updates", []):
+            is_duplicate = state.pop("_duplicate", False)
+            if state.get("success"):
+                self.logger.info("%s processed id: %s", self.name, state.get("id"))
+            self.update_state(state, is_duplicate=is_duplicate)
+        for followup in result.get("association_followups", []):
+            FallbackSink.put_associations(self, followup["id"], followup["associations"])
+
     def _fallback_batch_records(self, staged_records: List[dict], context: dict) -> None:
         """Write each staged batch record through single-record FallbackSink."""
         self.logger.warning(
@@ -118,6 +165,34 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
         tap_record = staged_to_tap_record(staged)
         self.write_single_tap_record(tap_record, external_id, context)
 
+    def _normalize_batch_parse_result(self, parsed) -> dict:
+        if isinstance(parsed, tuple):
+            state_updates, association_followups = parsed
+            return {
+                "state_updates": state_updates,
+                "association_followups": association_followups,
+            }
+        return parsed
+
+    def _process_staged_batch(self, staged_records: List[dict], context: dict) -> None:
+        """Run each batch request group and fall back to single-record writes on failure."""
+        for batch_spec in self.iter_batch_requests(staged_records):
+            records = batch_spec["records"]
+            if not records:
+                continue
+            try:
+                response = batch_spec["request"](records)
+            except Exception:
+                self.logger.exception("Batch request failed for %s", self.name)
+                self._fallback_batch_records(records, context)
+            else:
+                if is_whole_batch_failure(response):
+                    self._fallback_batch_records(records, context)
+                else:
+                    self._apply_batch_result(
+                        self._normalize_batch_parse_result(batch_spec["parse"](response, records))
+                    )
+
     def process_record(self, record: dict, context: dict) -> None:
         """Stage a record for batch write, or queue it for single-record FallbackSink."""
         if not self.latest_state:
@@ -132,16 +207,12 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
             external_id = record.pop(external_id_key, None) or record.pop(external_id_key.lower(), None)
 
         tap_record = dict(record)
-        # Batch upsert needs an email idProperty; no-email records use FallbackSink instead.
-        if not self.get_tap_record_email(tap_record):
-            context.setdefault("single_records", []).append(
-                {"record": tap_record, "external_id": external_id}
-            )
-            return
-
         try:
             staged = self.prepare_staged_record(tap_record, context)
             if not staged:
+                context.setdefault("single_records", []).append(
+                    {"record": tap_record, "external_id": external_id}
+                )
                 return
         except Exception as exc:
             self.logger.exception("Preprocess record error %s", exc)
@@ -164,7 +235,6 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
             self.update_state(existing_state, is_duplicate=True, record=staged["properties"])
             return
 
-        # objectWriteTraceId maps HubSpot 207 results/errors back to this staged row.
         trace_id = external_id or record_hash
         staged["trace_id"] = trace_id
         staged["state"] = {"hash": record_hash}
@@ -181,23 +251,7 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
         raw_records = context.get("records") or []
         try:
             if raw_records:
-                try:
-                    response = self.make_batch_request(raw_records)
-                except Exception:
-                    self.logger.exception("Batch request failed for %s", self.name)
-                    self._fallback_batch_records(raw_records, context)
-                else:
-                    if is_whole_batch_failure(response):
-                        self._fallback_batch_records(raw_records, context)
-                    else:
-                        result = self.parse_batch_response(response, raw_records)
-                        for followup in result.get("association_followups", []):
-                            FallbackSink.put_associations(self, followup["id"], followup["associations"])
-                        for state in result.get("state_updates", []):
-                            is_duplicate = state.pop("_duplicate", False)
-                            if state.get("success"):
-                                self.logger.info("%s processed id: %s", self.name, state.get("id"))
-                            self.update_state(state, is_duplicate=is_duplicate)
+                self._process_staged_batch(raw_records, context)
         finally:
             for item in context.get("single_records") or []:
                 self.write_single_tap_record(item["record"], item.get("external_id"), context)

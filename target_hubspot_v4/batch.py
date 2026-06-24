@@ -1,6 +1,6 @@
 """HubSpot CRM batch API helpers."""
 
-from typing import List, Optional, Tuple
+from typing import Callable, List, Optional, Tuple
 
 import backoff
 import requests
@@ -14,7 +14,13 @@ from target_hubspot_v4.utils import (
     raise_for_status,
 )
 
-CONTACTS_BATCH_UPSERT_URL = "https://api.hubapi.com/crm/v3/objects/contacts/batch/upsert"
+BATCH_UPSERT_URL = "https://api.hubapi.com/crm/v3/objects/{object_type}/batch/upsert"
+BATCH_UPDATE_URL = "https://api.hubapi.com/crm/v3/objects/{object_type}/batch/update"
+BATCH_CREATE_URL = "https://api.hubapi.com/crm/v3/objects/{object_type}/batch/create"
+
+BATCH_KIND_UPDATE = "update"
+BATCH_KIND_UPSERT = "upsert"
+BATCH_KIND_CREATE = "create"
 
 
 def build_trace_id(staged: dict) -> str:
@@ -23,37 +29,104 @@ def build_trace_id(staged: dict) -> str:
     return staged.get("trace_id") or state.get("externalId") or state.get("hash")
 
 
-def _last_staged_by_email(staged_records: List[dict]) -> dict:
-    """Map each lowercase email to the last staged row (last-wins dedupe)."""
-    by_email = {}
+def get_hubspot_id(staged: dict) -> Optional[str]:
+    """Return the HubSpot object id from a staged record."""
+    if staged.get("id"):
+        return str(staged["id"])
+    properties = staged.get("properties") or {}
+    if properties.get("id"):
+        return str(properties["id"])
+    return None
+
+
+def get_upsert_key(staged: dict, id_property: str) -> Optional[str]:
+    """Return the batch upsert key value from a staged record."""
+    if staged.get(id_property):
+        return staged[id_property]
+    properties = staged.get("properties") or {}
+    return properties.get(id_property)
+
+
+def _normalize_key(value: str) -> str:
+    return value.lower()
+
+
+def _last_staged_by_key(
+    staged_records: List[dict],
+    key_fn: Callable[[dict], Optional[str]],
+) -> dict:
+    """Map each normalized key to the last staged row (last-wins dedupe)."""
+    by_key = {}
     for staged in staged_records:
-        email = _get_email(staged)
-        if not email:
+        raw_key = key_fn(staged)
+        if not raw_key:
             continue
-        by_email[email.lower()] = staged
-    return by_email
+        by_key[_normalize_key(str(raw_key))] = staged
+    return by_key
 
 
-def dedupe_contacts_by_email(staged_records: List[dict]) -> List[dict]:
-    """Keep the last staged record per email for batch API requests."""
-    return list(_last_staged_by_email(staged_records).values())
+def dedupe_staged_by_key(staged_records: List[dict], id_property: str) -> List[dict]:
+    """Keep the last staged record per upsert key for batch API requests."""
+    return list(_last_staged_by_key(staged_records, lambda s: get_upsert_key(s, id_property)).values())
 
 
-def build_contact_upsert_payload(staged_records: List[dict]) -> dict:
+def dedupe_staged_by_hubspot_id(staged_records: List[dict]) -> List[dict]:
+    """Keep the last staged record per HubSpot object id."""
+    return list(_last_staged_by_key(staged_records, get_hubspot_id).values())
+
+
+def _batch_properties(staged: dict, drop_id: bool = False) -> dict:
+    properties = dict(staged["properties"])
+    if drop_id:
+        properties.pop("id", None)
+    return properties
+
+
+def build_batch_upsert_payload(staged_records: List[dict], id_property: str) -> dict:
     """Build batch/upsert payload with objectWriteTraceId on each input."""
     inputs = []
     for staged in staged_records:
-        properties = dict(staged["properties"])
-        email = properties.get("email") or staged.get("email")
-        if not email:
+        properties = _batch_properties(staged)
+        upsert_key = get_upsert_key(staged, id_property)
+        if not upsert_key:
             continue
-        properties["email"] = email
+        properties[id_property] = upsert_key
         inputs.append(
             {
                 "objectWriteTraceId": build_trace_id(staged),
-                "id": email,
-                "idProperty": "email",
+                "id": upsert_key,
+                "idProperty": id_property,
                 "properties": properties,
+            }
+        )
+    return {"inputs": inputs}
+
+
+def build_batch_update_payload(staged_records: List[dict]) -> dict:
+    """Build batch/update payload with objectWriteTraceId on each input."""
+    inputs = []
+    for staged in staged_records:
+        hubspot_id = get_hubspot_id(staged)
+        if not hubspot_id:
+            continue
+        inputs.append(
+            {
+                "objectWriteTraceId": build_trace_id(staged),
+                "id": hubspot_id,
+                "properties": _batch_properties(staged, drop_id=True),
+            }
+        )
+    return {"inputs": inputs}
+
+
+def build_batch_create_payload(staged_records: List[dict]) -> dict:
+    """Build batch/create payload with objectWriteTraceId on each input."""
+    inputs = []
+    for staged in staged_records:
+        inputs.append(
+            {
+                "objectWriteTraceId": build_trace_id(staged),
+                "properties": _batch_properties(staged, drop_id=True),
             }
         )
     return {"inputs": inputs}
@@ -67,30 +140,52 @@ def build_contact_upsert_payload(staged_records: List[dict]) -> dict:
     giveup=giveup,
     interval=10,
 )
-def _post_batch_upsert(config: dict, payload: dict):
-    """POST batch/upsert with the same retry behavior as request_push."""
+def _post_batch(config: dict, url: str, payload: dict):
+    """POST a HubSpot batch endpoint with the same retry behavior as request_push."""
     params, headers = get_params_and_headers(config, None)
-    req = requests.Request(
-        "POST", CONTACTS_BATCH_UPSERT_URL, json=payload, headers=headers, params=params
-    ).prepare()
+    req = requests.Request("POST", url, json=payload, headers=headers, params=params).prepare()
     logger.info("POST %s", req.url)
     return SESSION.send(req)
 
 
-def batch_upsert_contacts(config: dict, staged_records: List[dict]):
-    """POST contacts batch/upsert and return the raw response."""
-    payload = build_contact_upsert_payload(staged_records)
-    if not payload["inputs"]:
+def _send_batch(config: dict, url: str, payload: dict):
+    """POST a batch request and return responses that may include partial success."""
+    if not payload.get("inputs"):
         return None
 
-    resp = _post_batch_upsert(config, payload)
-
+    resp = _post_batch(config, url, payload)
     if resp.status_code in (200, 201, 207, 400, 409):
         return resp
 
     raise_etl_exceptions(resp)
     raise_for_status(resp)
     return resp
+
+
+def batch_upsert_objects(
+    config: dict,
+    object_type: str,
+    id_property: str,
+    staged_records: List[dict],
+):
+    """POST batch/upsert for a CRM object type and return the raw response."""
+    payload = build_batch_upsert_payload(staged_records, id_property)
+    url = BATCH_UPSERT_URL.format(object_type=object_type)
+    return _send_batch(config, url, payload)
+
+
+def batch_update_objects(config: dict, object_type: str, staged_records: List[dict]):
+    """POST batch/update for a CRM object type and return the raw response."""
+    payload = build_batch_update_payload(staged_records)
+    url = BATCH_UPDATE_URL.format(object_type=object_type)
+    return _send_batch(config, url, payload)
+
+
+def batch_create_objects(config: dict, object_type: str, staged_records: List[dict]):
+    """POST batch/create for a CRM object type and return the raw response."""
+    payload = build_batch_create_payload(staged_records)
+    url = BATCH_CREATE_URL.format(object_type=object_type)
+    return _send_batch(config, url, payload)
 
 
 def is_whole_batch_failure(response) -> bool:
@@ -112,55 +207,70 @@ def is_whole_batch_failure(response) -> bool:
     return True
 
 
-def parse_contact_batch_response(
-    response,
-    staged_records: List[dict],
-) -> Tuple[List[dict], List[dict]]:
-    """Map batch/upsert results and errors back to staged records for state updates."""
-    state_updates = []
-    association_followups = []
+def _collect_traced_response_maps(response):
+    """Parse batch results and errors indexed by trace id and lookup key."""
     results_by_trace = {}
     errors_by_trace = {}
-    winning_trace_ids = {
-        email: build_trace_id(staged)
-        for email, staged in _last_staged_by_email(staged_records).items()
-    }
+    errors_by_key = {}
+    if response is None or is_whole_batch_failure(response):
+        return results_by_trace, errors_by_trace, errors_by_key
 
-    if response is not None and not is_whole_batch_failure(response):
-        body = response.json()
-        for result in body.get("results") or []:
-            trace_id = result.get("objectWriteTraceId")
-            if trace_id:
-                results_by_trace[trace_id] = result
-        for error in body.get("errors") or []:
-            message = error.get("message", "Batch upsert failed")
-            for trace_id in error.get("context", {}).get("objectWriteTraceId") or []:
-                errors_by_trace[trace_id] = message
-            for email in error.get("context", {}).get("ids") or []:
-                errors_by_trace.setdefault(email.lower(), message)
+    body = response.json()
+    for result in body.get("results") or []:
+        trace_id = result.get("objectWriteTraceId")
+        if trace_id:
+            results_by_trace[trace_id] = result
+
+    for error in body.get("errors") or []:
+        message = error.get("message", "Batch request failed")
+        for trace_id in error.get("context", {}).get("objectWriteTraceId") or []:
+            errors_by_trace[trace_id] = message
+        for err_id in error.get("context", {}).get("ids") or []:
+            errors_by_key.setdefault(_normalize_key(str(err_id)), message)
+
+    return results_by_trace, errors_by_trace, errors_by_key
+
+
+def parse_batch_traced_response(
+    response,
+    staged_records: List[dict],
+    record_key_fn: Callable[[dict], Optional[str]],
+    missing_result_error: str,
+) -> Tuple[List[dict], List[dict]]:
+    """Map batch results and errors back to staged records for state updates."""
+    state_updates = []
+    association_followups = []
+    results_by_trace, errors_by_trace, errors_by_key = _collect_traced_response_maps(response)
+    winning_trace_ids = {
+        key: build_trace_id(staged)
+        for key, staged in _last_staged_by_key(staged_records, record_key_fn).items()
+    }
 
     for staged in staged_records:
         meta = dict(staged.get("state") or {})
         trace_id = build_trace_id(staged)
-        email = (_get_email(staged) or "").lower()
-        winner_trace_id = winning_trace_ids.get(email)
+        raw_key = record_key_fn(staged)
+        record_key = _normalize_key(str(raw_key)) if raw_key else ""
+        winner_trace_id = winning_trace_ids.get(record_key)
 
         if trace_id in errors_by_trace:
-            state_updates.append(
-                _error_state(meta, errors_by_trace[trace_id])
-            )
+            state_updates.append(_error_state(meta, errors_by_trace[trace_id]))
             continue
 
-        if email and winner_trace_id and trace_id != winner_trace_id:
+        if record_key and winner_trace_id and trace_id != winner_trace_id:
             winner_result = results_by_trace.get(winner_trace_id)
             if winner_result and winner_result.get("id"):
                 state_updates.append(dict(meta, id=winner_result["id"], _duplicate=True))
+                if staged.get("associations"):
+                    association_followups.append(
+                        {"id": winner_result["id"], "associations": staged["associations"]}
+                    )
                 continue
             if winner_trace_id in errors_by_trace:
                 state_updates.append(_error_state(meta, errors_by_trace[winner_trace_id]))
                 continue
             state_updates.append(
-                dict(meta, success=False, error="Duplicate email superseded in batch")
+                dict(meta, success=False, error="Duplicate batch key superseded in batch")
             )
             continue
 
@@ -173,19 +283,57 @@ def parse_contact_batch_response(
                 )
             continue
 
-        if email and email in errors_by_trace:
-            state_updates.append(_error_state(meta, errors_by_trace[email]))
+        if record_key and record_key in errors_by_key:
+            state_updates.append(_error_state(meta, errors_by_key[record_key]))
             continue
 
-        state_updates.append(
-            dict(meta, success=False, error="Missing result from batch upsert")
-        )
+        state_updates.append(dict(meta, success=False, error=missing_result_error))
 
     return state_updates, association_followups
 
 
+def parse_batch_upsert_response(
+    response,
+    staged_records: List[dict],
+    id_property: str,
+) -> Tuple[List[dict], List[dict]]:
+    """Map batch/upsert results and errors back to staged records for state updates."""
+    return parse_batch_traced_response(
+        response,
+        staged_records,
+        lambda staged: get_upsert_key(staged, id_property),
+        "Missing result from batch upsert",
+    )
+
+
+def parse_batch_update_response(
+    response,
+    staged_records: List[dict],
+) -> Tuple[List[dict], List[dict]]:
+    """Map batch/update results and errors back to staged records for state updates."""
+    return parse_batch_traced_response(
+        response,
+        staged_records,
+        get_hubspot_id,
+        "Missing result from batch update",
+    )
+
+
+def parse_batch_create_response(
+    response,
+    staged_records: List[dict],
+) -> Tuple[List[dict], List[dict]]:
+    """Map batch/create results and errors back to staged records for state updates."""
+    return parse_batch_traced_response(
+        response,
+        staged_records,
+        lambda _staged: None,
+        "Missing result from batch create",
+    )
+
+
 def staged_to_tap_record(staged: dict) -> dict:
-    """Rebuild a tap-shaped contact record from a staged batch record."""
+    """Rebuild a tap-shaped record from a staged batch record."""
     record = dict(staged["properties"])
     if staged.get("associations"):
         record["associations"] = staged["associations"]
@@ -206,10 +354,3 @@ def _errors_have_trace_ids(errors: List[dict]) -> bool:
         if error.get("context", {}).get("objectWriteTraceId"):
             return True
     return False
-
-
-def _get_email(staged: dict) -> Optional[str]:
-    if staged.get("email"):
-        return staged["email"]
-    properties = staged.get("properties") or {}
-    return properties.get("email")
