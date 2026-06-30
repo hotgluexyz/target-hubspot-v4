@@ -1,11 +1,33 @@
 """Hubspot-v4 target sink class, which handles writing streams."""
 
+import re
+
+
 from target_hubspot_v4.client import HubspotSink
 from target_hubspot_v4.utils import request_push, search_objects_by_property
 from hotglue_etl_exceptions import InvalidPayloadError
+from hotglue_singer_sdk.plugin_base import PluginBase
+from typing import Dict, List, Optional
+
+_UNSUBSCRIBE_ALL_REGEX = re.compile(r"^/?(.+/statuses/)[^/]+/(unsubscribe-all\?.*)$")
+
 
 class FallbackSink(HubspotSink):
     """Precoro target sink class."""
+
+    def __init__(
+        self,
+        target: PluginBase,
+        stream_name: str,
+        schema: Dict,
+        key_properties: Optional[List[str]],
+    ) -> None:
+        """Initialize target sink."""
+        self.api_path = stream_name
+        m = _UNSUBSCRIBE_ALL_REGEX.match(stream_name)
+        if m:
+            stream_name = f"{m.group(1)}{m.group(2)}"
+        super().__init__(target, stream_name, schema, key_properties)
 
     @property
     def is_full_path(self):
@@ -14,9 +36,9 @@ class FallbackSink(HubspotSink):
     @property
     def endpoint(self):
         if self.is_full_path and self.stream_name.startswith("/"):
-            return self.stream_name
+            return self.api_path
 
-        return f"/{self.stream_name}"
+        return f"/{self.api_path}"
     
     @property
     def name(self):
