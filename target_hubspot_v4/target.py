@@ -7,6 +7,7 @@ from hotglue_singer_sdk import typing as th
 from hotglue_singer_sdk.sinks import Sink
 from hotglue_singer_sdk.helpers.capabilities import AlertingLevel
 
+from target_hubspot_v4.batch_sinks import CompaniesFallbackSink, ContactsFallbackSink
 from target_hubspot_v4.sinks import (
     FallbackSink,
 )
@@ -49,13 +50,27 @@ class TargetHubspotv4(TargetHotglue):
         ),
     ).to_dict()
 
+    BATCH_FALLBACK_SINKS = {
+        "contacts": ContactsFallbackSink,
+        "companies": CompaniesFallbackSink,
+    }
+
+    BATCH_CONFIG_KEYS = {
+        "contacts": "batch_contacts",
+        "companies": "batch_companies",
+    }
+
     def get_sink_class(self, stream_name: str) -> Type[Sink]:
         # Check if unified sinks are enabled
         if self.config.get("unified_api_schema", False):
             return UnifiedSink
 
-        for sink_class in self.SINK_TYPES:
-            return FallbackSink
+        if stream_name in self.BATCH_FALLBACK_SINKS:
+            config_key = self.BATCH_CONFIG_KEYS[stream_name]
+            if self.config.get(config_key, True):
+                return self.BATCH_FALLBACK_SINKS[stream_name]
+
+        return FallbackSink
 
 if __name__ == "__main__":
     TargetHubspotv4.cli()

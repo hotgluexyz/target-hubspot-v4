@@ -615,6 +615,7 @@ class UnifiedSink(HotglueSink):
 
     def match_field_type_to_type(self, type):
         map_of_types = {
+            "datetime": "date",
             "date": "date",
             "bool": "booleancheckbox",
             "enumeration": "select",
@@ -623,8 +624,10 @@ class UnifiedSink(HotglueSink):
         }
 
         if type not in map_of_types:
+            valid_types = ", ".join(sorted(map_of_types.keys()))
             raise TypeError(
-                f"Type: {type} provided does not match HubSpot accepted type values. Maybe you meant date, bool, enumeration, string or number?"
+                f"Type: {type} provided does not match HubSpot accepted type values. "
+                f"Maybe you meant one of: {valid_types}?"
             )
 
         return map_of_types[type]
