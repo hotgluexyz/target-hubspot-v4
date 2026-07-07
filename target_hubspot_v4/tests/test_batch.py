@@ -234,9 +234,10 @@ class TestMissingBatchResultFallback:
             "association_followups": [],
         }
 
-        applied_hashes = sink._apply_batch_result(parsed)
+        applied_hashes, deferred_hashes = sink._apply_batch_result(parsed)
 
         assert applied_hashes == {"hash-1"}
+        assert deferred_hashes == {"hash-2"}
         sink.update_state.assert_called_once()
 
     def test_missing_upsert_result_state_is_applied_as_failure(self):
@@ -254,9 +255,10 @@ class TestMissingBatchResultFallback:
             "association_followups": [],
         }
 
-        applied_hashes = sink._apply_batch_result(parsed)
+        applied_hashes, deferred_hashes = sink._apply_batch_result(parsed)
 
         assert applied_hashes == {"hash-2"}
+        assert deferred_hashes == set()
         sink.update_state.assert_called_once()
 
 

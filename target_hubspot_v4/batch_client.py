@@ -245,13 +245,16 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
             if self._staged_record_hash(staged) not in applied_hashes
         ]
 
-    def _apply_batch_result(self, result: dict) -> set:
+    def _apply_batch_result(self, result: dict) -> tuple:
         """Apply parsed batch state updates and association followups."""
         applied_hashes = set()
+        deferred_hashes = set()
         for state in result.get("state_updates", []):
             is_duplicate = state.pop("_duplicate", False)
             record_hash = state.get("hash")
             if not state.get("success") and should_fallback_missing_batch_result(state.get("error")):
+                if record_hash:
+                    deferred_hashes.add(record_hash)
                 continue
             try:
                 if state.get("success"):
@@ -274,7 +277,7 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
                     self.name,
                     followup.get("id"),
                 )
-        return applied_hashes
+        return applied_hashes, deferred_hashes
 
     def _fallback_batch_records(
         self,
@@ -333,32 +336,48 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
                         self.logger.exception("Batch result parsing failed for %s", self.name)
                         self._fallback_batch_records(parse_records, context)
                     else:
-                        applied_hashes = self._apply_batch_result(parsed)
+                        applied_hashes, deferred_hashes = self._apply_batch_result(parsed)
                         unapplied = self._unapplied_staged_records(parse_records, applied_hashes)
-                        fallback_candidates = [
+                        missing_result_candidates = [
                             staged
                             for staged in unapplied
-                            if staged.get("batch_kind") == BATCH_KIND_UPDATE
+                            if self._staged_record_hash(staged) in deferred_hashes
                         ]
-                        if fallback_candidates:
+                        other_unapplied = [
+                            staged
+                            for staged in unapplied
+                            if self._staged_record_hash(staged) not in deferred_hashes
+                        ]
+                        if missing_result_candidates:
                             missing_refs = [
                                 {
                                     "externalId": (staged.get("state") or {}).get("externalId"),
                                     "id": staged.get("id"),
                                     "hash": (staged.get("state") or {}).get("hash"),
                                 }
-                                for staged in fallback_candidates
+                                for staged in missing_result_candidates
                             ]
                             self.logger.warning(
                                 "Batch apply incomplete for %s; %d batch/update records missing HubSpot outcomes: %s",
                                 self.name,
-                                len(fallback_candidates),
+                                len(missing_result_candidates),
                                 missing_refs,
                             )
                             self._fallback_batch_records(
-                                fallback_candidates,
+                                missing_result_candidates,
                                 context,
                                 reason="missing per-record batch update results",
+                            )
+                        if other_unapplied:
+                            self.logger.warning(
+                                "Batch apply incomplete for %s; falling back on %d records",
+                                self.name,
+                                len(other_unapplied),
+                            )
+                            self._fallback_batch_records(
+                                other_unapplied,
+                                context,
+                                reason="batch apply incomplete",
                             )
 
     def process_record(self, record: dict, context: dict) -> None:
