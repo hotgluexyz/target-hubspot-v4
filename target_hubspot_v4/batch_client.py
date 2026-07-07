@@ -10,7 +10,7 @@ from target_hubspot_v4.batch import (
     BATCH_KIND_CREATE,
     BATCH_KIND_UPDATE,
     BATCH_KIND_UPSERT,
-    is_missing_batch_result_error,
+    should_fallback_missing_batch_result,
     batch_create_objects,
     batch_update_objects,
     batch_upsert_objects,
@@ -251,7 +251,7 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
         for state in result.get("state_updates", []):
             is_duplicate = state.pop("_duplicate", False)
             record_hash = state.get("hash")
-            if not state.get("success") and is_missing_batch_result_error(state.get("error")):
+            if not state.get("success") and should_fallback_missing_batch_result(state.get("error")):
                 continue
             try:
                 if state.get("success"):
@@ -335,25 +335,30 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
                     else:
                         applied_hashes = self._apply_batch_result(parsed)
                         unapplied = self._unapplied_staged_records(parse_records, applied_hashes)
-                        if unapplied:
+                        fallback_candidates = [
+                            staged
+                            for staged in unapplied
+                            if staged.get("batch_kind") == BATCH_KIND_UPDATE
+                        ]
+                        if fallback_candidates:
                             missing_refs = [
                                 {
                                     "externalId": (staged.get("state") or {}).get("externalId"),
                                     "id": staged.get("id"),
                                     "hash": (staged.get("state") or {}).get("hash"),
                                 }
-                                for staged in unapplied
+                                for staged in fallback_candidates
                             ]
                             self.logger.warning(
-                                "Batch apply incomplete for %s; %d records missing HubSpot outcomes: %s",
+                                "Batch apply incomplete for %s; %d batch/update records missing HubSpot outcomes: %s",
                                 self.name,
-                                len(unapplied),
+                                len(fallback_candidates),
                                 missing_refs,
                             )
                             self._fallback_batch_records(
-                                unapplied,
+                                fallback_candidates,
                                 context,
-                                reason="missing per-record batch results",
+                                reason="missing per-record batch update results",
                             )
 
     def process_record(self, record: dict, context: dict) -> None:

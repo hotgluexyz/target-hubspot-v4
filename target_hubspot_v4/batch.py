@@ -30,9 +30,9 @@ def missing_batch_result_error(batch_kind: str) -> str:
     return f"{MISSING_BATCH_RESULT_ERROR_PREFIX}{batch_kind}"
 
 
-def is_missing_batch_result_error(message: Optional[str]) -> bool:
-    """Return True when a batch parser could not map a HubSpot per-record outcome."""
-    return bool(message) and message.startswith(MISSING_BATCH_RESULT_ERROR_PREFIX)
+def should_fallback_missing_batch_result(message: Optional[str]) -> bool:
+    """Return True when a missing batch outcome should defer state and single-write fallback."""
+    return message == missing_batch_result_error(BATCH_KIND_UPDATE)
 
 
 def build_trace_id(staged: dict) -> str:
