@@ -10,6 +10,7 @@ from target_hubspot_v4.batch import (
     BATCH_KIND_CREATE,
     BATCH_KIND_UPDATE,
     BATCH_KIND_UPSERT,
+    is_missing_batch_result_error,
     batch_create_objects,
     batch_update_objects,
     batch_upsert_objects,
@@ -250,6 +251,8 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
         for state in result.get("state_updates", []):
             is_duplicate = state.pop("_duplicate", False)
             record_hash = state.get("hash")
+            if not state.get("success") and is_missing_batch_result_error(state.get("error")):
+                continue
             try:
                 if state.get("success"):
                     self.logger.info("%s processed id: %s", self.name, state.get("id"))
@@ -273,11 +276,19 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
                 )
         return applied_hashes
 
-    def _fallback_batch_records(self, staged_records: List[dict], context: dict) -> None:
+    def _fallback_batch_records(
+        self,
+        staged_records: List[dict],
+        context: dict,
+        *,
+        reason: str = "entire batch failure",
+    ) -> None:
         """Write each staged batch record through single-record FallbackSink."""
         self.logger.warning(
-            "Batch request for %s failed entirely; falling back to single-record writes",
+            "Batch request for %s incomplete (%s); falling back to single-record writes for %d records",
             self.name,
+            reason,
+            len(staged_records),
         )
         for staged in staged_records:
             self.write_single_staged_record(staged, context)
@@ -325,12 +336,25 @@ class HubspotBatchSink(HubspotSink, HotglueBatchSink):
                         applied_hashes = self._apply_batch_result(parsed)
                         unapplied = self._unapplied_staged_records(parse_records, applied_hashes)
                         if unapplied:
+                            missing_refs = [
+                                {
+                                    "externalId": (staged.get("state") or {}).get("externalId"),
+                                    "id": staged.get("id"),
+                                    "hash": (staged.get("state") or {}).get("hash"),
+                                }
+                                for staged in unapplied
+                            ]
                             self.logger.warning(
-                                "Batch apply incomplete for %s; falling back on %d records",
+                                "Batch apply incomplete for %s; %d records missing HubSpot outcomes: %s",
                                 self.name,
                                 len(unapplied),
+                                missing_refs,
                             )
-                            self._fallback_batch_records(unapplied, context)
+                            self._fallback_batch_records(
+                                unapplied,
+                                context,
+                                reason="missing per-record batch results",
+                            )
 
     def process_record(self, record: dict, context: dict) -> None:
         """Stage a record for batch write, or queue it for single-record FallbackSink."""
