@@ -8,8 +8,11 @@ from target_hubspot_v4.batch import (
     BATCH_KIND_UPSERT,
     build_trace_id,
     is_whole_batch_failure,
+    missing_batch_result_error,
+    should_fallback_missing_batch_result,
     parse_batch_update_response,
     parse_batch_upsert_response,
+    summarize_batch_response,
 )
 from target_hubspot_v4.batch_sinks import CompaniesFallbackSink, ContactsFallbackSink
 
@@ -52,6 +55,30 @@ class TestBatchHelpers:
             "errors": [],
         }
         assert is_whole_batch_failure(response) is False
+
+    def test_missing_batch_result_helpers(self):
+        assert missing_batch_result_error(BATCH_KIND_UPDATE) == "Missing result from batch update"
+        assert missing_batch_result_error(BATCH_KIND_UPSERT) == "Missing result from batch upsert"
+        assert should_fallback_missing_batch_result(missing_batch_result_error(BATCH_KIND_UPDATE)) is True
+        assert should_fallback_missing_batch_result(missing_batch_result_error(BATCH_KIND_UPSERT)) is False
+        assert should_fallback_missing_batch_result(missing_batch_result_error(BATCH_KIND_CREATE)) is False
+
+    def test_summarize_batch_response_counts_results_and_errors(self):
+        response = MagicMock(status_code=207)
+        response.json.return_value = {
+            "status": "COMPLETE",
+            "numErrors": 1,
+            "results": [{"objectWriteTraceId": "hash-1", "id": "1"}],
+            "errors": [{"message": "boom"}],
+        }
+        assert summarize_batch_response(response, 2) == {
+            "status_code": 207,
+            "inputs": 2,
+            "results": 1,
+            "errors": 1,
+            "num_errors": 1,
+            "completion_status": "COMPLETE",
+        }
 
     def test_parse_superseded_row_gets_success(self):
         response = MagicMock(status_code=207)
@@ -174,6 +201,65 @@ class TestBatchRouting:
         state_updates, _ = parse_batch_update_response(response, staged_records)
         assert state_updates[0]["success"] is True
         assert state_updates[0]["id"] == "123"
+
+    def test_update_response_marks_missing_result_for_fallback(self):
+        response = MagicMock(status_code=207)
+        response.json.return_value = {
+            "results": [{"objectWriteTraceId": "hash-1", "id": "123"}],
+            "errors": [],
+        }
+        staged_records = [
+            _staged("hash-1", properties={"name": "Acme"}, id="123", batch_kind=BATCH_KIND_UPDATE),
+            _staged("hash-2", properties={"name": "Beta"}, id="456", batch_kind=BATCH_KIND_UPDATE),
+        ]
+        state_updates, _ = parse_batch_update_response(response, staged_records)
+        missing = next(s for s in state_updates if s["hash"] == "hash-2")
+        assert missing["success"] is False
+        assert missing["error"] == missing_batch_result_error(BATCH_KIND_UPDATE)
+
+
+class TestMissingBatchResultFallback:
+    """Batch/update rows omitted from HubSpot responses fall back to single writes."""
+
+    def test_missing_update_result_state_is_not_applied(self):
+        sink = _make_sink(CompaniesFallbackSink, "companies")
+        sink.update_state = MagicMock()
+        sink.write_single_staged_record = MagicMock()
+
+        parsed = {
+            "state_updates": [
+                {"hash": "hash-1", "success": True, "id": "123"},
+                {"hash": "hash-2", "success": False, "error": missing_batch_result_error(BATCH_KIND_UPDATE)},
+            ],
+            "association_followups": [],
+        }
+
+        applied_hashes, deferred_hashes = sink._apply_batch_result(parsed)
+
+        assert applied_hashes == {"hash-1"}
+        assert deferred_hashes == {"hash-2"}
+        sink.update_state.assert_called_once()
+
+    def test_missing_upsert_result_state_is_applied_as_failure(self):
+        sink = _make_sink(ContactsFallbackSink, "contacts")
+        sink.update_state = MagicMock()
+
+        parsed = {
+            "state_updates": [
+                {
+                    "hash": "hash-2",
+                    "success": False,
+                    "error": missing_batch_result_error(BATCH_KIND_UPSERT),
+                },
+            ],
+            "association_followups": [],
+        }
+
+        applied_hashes, deferred_hashes = sink._apply_batch_result(parsed)
+
+        assert applied_hashes == {"hash-2"}
+        assert deferred_hashes == set()
+        sink.update_state.assert_called_once()
 
 
 class TestFlushDuplicateStates:

@@ -22,6 +22,18 @@ BATCH_KIND_UPDATE = "update"
 BATCH_KIND_UPSERT = "upsert"
 BATCH_KIND_CREATE = "create"
 
+MISSING_BATCH_RESULT_ERROR_PREFIX = "Missing result from batch "
+
+
+def missing_batch_result_error(batch_kind: str) -> str:
+    """Return the parser error when HubSpot omits a per-record batch outcome."""
+    return f"{MISSING_BATCH_RESULT_ERROR_PREFIX}{batch_kind}"
+
+
+def should_fallback_missing_batch_result(message: Optional[str]) -> bool:
+    """Return True when a missing batch outcome should defer state and single-write fallback."""
+    return message == missing_batch_result_error(BATCH_KIND_UPDATE)
+
 
 def build_trace_id(staged: dict) -> str:
     """Return a unique batch trace id from the staged record hash."""
@@ -148,12 +160,42 @@ def _post_batch(config: dict, url: str, payload: dict):
     return SESSION.send(req)
 
 
+def summarize_batch_response(response, input_count: int) -> dict:
+    """Return a compact summary of a HubSpot batch API response for logging."""
+    summary = {
+        "status_code": getattr(response, "status_code", None),
+        "inputs": input_count,
+        "results": 0,
+        "errors": 0,
+    }
+    if response is None:
+        return summary
+
+    try:
+        body = response.json()
+    except (ValueError, TypeError):
+        summary["body_parse_failed"] = True
+        return summary
+
+    summary["results"] = len(body.get("results") or [])
+    summary["errors"] = len(body.get("errors") or [])
+    if body.get("numErrors") is not None:
+        summary["num_errors"] = body["numErrors"]
+    if body.get("status"):
+        summary["completion_status"] = body["status"]
+    if summary["results"] == 0 and summary["errors"] == 0 and body.get("message"):
+        summary["message"] = str(body["message"])[:200]
+    return summary
+
+
 def _send_batch(config: dict, url: str, payload: dict):
     """POST a batch request and return responses that may include partial success."""
     if not payload.get("inputs"):
         return None
 
+    input_count = len(payload["inputs"])
     resp = _post_batch(config, url, payload)
+    logger.info("Batch response summary: %s", summarize_batch_response(resp, input_count))
     if resp.status_code in (200, 201, 207, 400, 409):
         return resp
 
@@ -302,7 +344,7 @@ def parse_batch_upsert_response(
         response,
         staged_records,
         lambda staged: get_upsert_key(staged, id_property),
-        "Missing result from batch upsert",
+        missing_batch_result_error(BATCH_KIND_UPSERT),
     )
 
 
@@ -315,7 +357,7 @@ def parse_batch_update_response(
         response,
         staged_records,
         get_hubspot_id,
-        "Missing result from batch update",
+        missing_batch_result_error(BATCH_KIND_UPDATE),
     )
 
 
@@ -328,7 +370,7 @@ def parse_batch_create_response(
         response,
         staged_records,
         lambda _staged: None,
-        "Missing result from batch create",
+        missing_batch_result_error(BATCH_KIND_CREATE),
     )
 
 
