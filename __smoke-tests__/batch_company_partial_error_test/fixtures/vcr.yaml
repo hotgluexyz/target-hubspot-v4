@@ -1,0 +1,210 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["crm.objects.owners.read", "tickets",
+        "crm.lists.read", "crm.objects.deals.read", "crm.objects.products.write",
+        "crm.objects.orders.read", "sales-email-read", "crm.objects.contacts.read",
+        "content", "crm.objects.custom.read", "crm.schemas.orders.read", "crm.objects.companies.write",
+        "business-intelligence", "crm.schemas.deals.read", "crm.objects.custom.write",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "crm.schemas.contacts.write",
+        "oauth", "conversations.read", "marketing-email", "crm.objects.contacts.write",
+        "crm.objects.line_items.read", "crm.objects.marketing_events.write", "crm.schemas.contacts.read",
+        "crm.objects.quotes.write", "communication_preferences.write", "crm.schemas.custom.read",
+        "communication_preferences.read", "communication_preferences.read_write",
+        "crm.schemas.line_items.read", "crm.import", "crm.objects.quotes.read", "crm.objects.marketing_events.read",
+        "crm.schemas.companies.read", "crm.pipelines.orders.read", "conversations.write",
+        "integration-sync", "crm.objects.products.read", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a10e2056dbf56348-GRU
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1207'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 24 Jun 2026 19:26:49 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=%2FCORGZ19n5J7i3%2BGP3j6mcdmR%2Ftouqhn6My%2FLZqfGG4GQF4OKkmx%2FQ6MimqSGVnZn%2Fo2E%2BvGEZSQdnqYonfGuQka3YEYhzwLKKbJmHmkyo8Hlz22I%2FsO3%2FGBQcNvnq59dgJ7Gp0YxRFX%2B%2BGr"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '1665'
+      server-timing:
+      - hcid;desc="019efb19-7338-704b-afa6-5e1934265d34", cfr;desc="a10e2057d0a46348-GRU"
+      set-cookie:
+      - __cf_bm=HelSR7eWYg048c4J6JVBPKcpvt57KUuJIMBPltPEI0M-1782329209.4207158-1.0.1.1-vl90Fi8jPj41P_isEPgaZscVx5RxuXrzg1gLZg45eWkgoh9XARL0_YNYydJCjDzx09bhjc42_zgIQkuq.fKJ1DULjTEWPmuIdzzM4gqHM92t38fRbt8_1bBRBlu.UK8i;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=hubapi.com; Expires=Wed, 24
+        Jun 2026 19:56:49 GMT
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 019efb19-7338-704b-afa6-5e1934265d34
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"inputs": [{"objectWriteTraceId": "26ec0141d43e49fc6589e2208b42fb23a254dddf005008651d8af2bd5f023fc2",
+      "properties": {"domain": "hgi10572-batch-partial-ok.example.com"}}, {"objectWriteTraceId":
+      "5427e118c1a42e6108e932cb584c51682c82261c5bf1787548f655853c6187b7", "properties":
+      {"domain": "hgi10572-batch-partial-bad.example.com", "industry": "THISISNOTAREALINDUSTRY"}}]}'
+    headers:
+      Content-Length:
+      - '3'
+      Content-Type:
+      - a
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies/batch/create
+  response:
+    body:
+      string: '{"completedAt":"2026-06-24T19:26:50.109Z","status":"COMPLETE","startedAt":"2026-06-24T19:26:49.969Z","results":[{"id":"55984424509","properties":{"createdate":"2026-06-24T19:26:49.994Z","domain":"hgi10572-batch-partial-ok.example.com","hs_annual_revenue_currency_code":"USD","hs_lastmodifieddate":"2026-06-24T19:26:49.994Z","hs_num_active_contracts":"0","hs_num_blockers":"0","hs_num_child_companies":"0","hs_num_contacts_with_buying_roles":"0","hs_num_decision_makers":"0","hs_num_open_deals":"0","hs_object_id":"55984424509","hs_object_source":"INTEGRATION","hs_object_source_id":"1149586","hs_object_source_label":"INTEGRATION","hs_pipeline":"companies-lifecycle-pipeline","hs_task_label":"hgi10572-batch-partial-ok.example.com","hs_v2_date_entered_current_stage":"2026-06-24T19:26:49.994Z","hs_v2_time_in_current_stage":"2026-06-24T19:26:49.994Z","lifecyclestage":"lead","num_associated_contacts":"0","num_notes":"0","website":"hgi10572-batch-partial-ok.example.com"},"createdAt":"2026-06-24T19:26:49.994Z","updatedAt":"2026-06-24T19:26:49.994Z","archived":false,"objectWriteTraceId":"26ec0141d43e49fc6589e2208b42fb23a254dddf005008651d8af2bd5f023fc2","url":"https://app.hubspot.com/contacts/23170316/record/0-2/55984424509"}],"errors":[{"status":"error","category":"VALIDATION_ERROR","message":"Property
+        values were not valid: [{\"isValid\":false,\"message\":\"THISISNOTAREALINDUSTRY
+        was not one of the allowed options: [ACCOUNTING, AIRLINES_AVIATION, ALTERNATIVE_DISPUTE_RESOLUTION,
+        ALTERNATIVE_MEDICINE, ANIMATION, APPAREL_FASHION, ARCHITECTURE_PLANNING, ARTS_AND_CRAFTS,
+        AUTOMOTIVE, AVIATION_AEROSPACE, BANKING, BIOTECHNOLOGY, BROADCAST_MEDIA, BUILDING_MATERIALS,
+        BUSINESS_SUPPLIES_AND_EQUIPMENT, CAPITAL_MARKETS, CHEMICALS, CIVIC_SOCIAL_ORGANIZATION,
+        CIVIL_ENGINEERING, COMMERCIAL_REAL_ESTATE, COMPUTER_NETWORK_SECURITY, COMPUTER_GAMES,
+        COMPUTER_HARDWARE, COMPUTER_NETWORKING, COMPUTER_SOFTWARE, INTERNET, CONSTRUCTION,
+        CONSUMER_ELECTRONICS, CONSUMER_GOODS, CONSUMER_SERVICES, COSMETICS, DAIRY,
+        DEFENSE_SPACE, DESIGN, EDUCATION_MANAGEMENT, E_LEARNING, ELECTRICAL_ELECTRONIC_MANUFACTURING,
+        ENTERTAINMENT, ENVIRONMENTAL_SERVICES, EVENTS_SERVICES, EXECUTIVE_OFFICE,
+        FACILITIES_SERVICES, FARMING, FINANCIAL_SERVICES, FINE_ART, FISHERY, FOOD_BEVERAGES,
+        FOOD_PRODUCTION, FUND_RAISING, FURNITURE, GAMBLING_CASINOS, GLASS_CERAMICS_CONCRETE,
+        GOVERNMENT_ADMINISTRATION, GOVERNMENT_RELATIONS, GRAPHIC_DESIGN, HEALTH_WELLNESS_AND_FITNESS,
+        HIGHER_EDUCATION, HOSPITAL_HEALTH_CARE, HOSPITALITY, HUMAN_RESOURCES, IMPORT_AND_EXPORT,
+        INDIVIDUAL_FAMILY_SERVICES, INDUSTRIAL_AUTOMATION, INFORMATION_SERVICES, INFORMATION_TECHNOLOGY_AND_SERVICES,
+        INSURANCE, INTERNATIONAL_AFFAIRS, INTERNATIONAL_TRADE_AND_DEVELOPMENT, INVESTMENT_BANKING,
+        INVESTMENT_MANAGEMENT, JUDICIARY, LAW_ENFORCEMENT, LAW_PRACTICE, LEGAL_SERVICES,
+        LEGISLATIVE_OFFICE, LEISURE_TRAVEL_TOURISM, LIBRARIES, LOGISTICS_AND_SUPPLY_CHAIN,
+        LUXURY_GOODS_JEWELRY, MACHINERY, MANAGEMENT_CONSULTING, MARITIME, MARKET_RESEARCH,
+        MARKETING_AND_ADVERTISING, MECHANICAL_OR_INDUSTRIAL_ENGINEERING, MEDIA_PRODUCTION,
+        MEDICAL_DEVICES, MEDICAL_PRACTICE, MENTAL_HEALTH_CARE, MILITARY, MINING_METALS,
+        MOTION_PICTURES_AND_FILM, MUSEUMS_AND_INSTITUTIONS, MUSIC, NANOTECHNOLOGY,
+        NEWSPAPERS, NON_PROFIT_ORGANIZATION_MANAGEMENT, OIL_ENERGY, ONLINE_MEDIA,
+        OUTSOURCING_OFFSHORING, PACKAGE_FREIGHT_DELIVERY, PACKAGING_AND_CONTAINERS,
+        PAPER_FOREST_PRODUCTS, PERFORMING_ARTS, PHARMACEUTICALS, PHILANTHROPY, PHOTOGRAPHY,
+        PLASTICS, POLITICAL_ORGANIZATION, PRIMARY_SECONDARY_EDUCATION, PRINTING, PROFESSIONAL_TRAINING_COACHING,
+        PROGRAM_DEVELOPMENT, PUBLIC_POLICY, PUBLIC_RELATIONS_AND_COMMUNICATIONS, PUBLIC_SAFETY,
+        PUBLISHING, RAILROAD_MANUFACTURE, RANCHING, REAL_ESTATE, RECREATIONAL_FACILITIES_AND_SERVICES,
+        RELIGIOUS_INSTITUTIONS, RENEWABLES_ENVIRONMENT, RESEARCH, RESTAURANTS, RETAIL,
+        SECURITY_AND_INVESTIGATIONS, SEMICONDUCTORS, SHIPBUILDING, SPORTING_GOODS,
+        SPORTS, STAFFING_AND_RECRUITING, SUPERMARKETS, TELECOMMUNICATIONS, TEXTILES,
+        THINK_TANKS, TOBACCO, TRANSLATION_AND_LOCALIZATION, TRANSPORTATION_TRUCKING_RAILROAD,
+        UTILITIES, VENTURE_CAPITAL_PRIVATE_EQUITY, VETERINARY, WAREHOUSING, WHOLESALE,
+        WINE_AND_SPIRITS, WIRELESS, WRITING_AND_EDITING, MOBILE_GAMES]\",\"error\":\"INVALID_OPTION\",\"name\":\"industry\",\"localizedErrorMessage\":\"THISISNOTAREALINDUSTRY
+        was not one of the allowed options: [ACCOUNTING, AIRLINES_AVIATION, ALTERNATIVE_DISPUTE_RESOLUTION,
+        ALTERNATIVE_MEDICINE, ANIMATION, APPAREL_FASHION, ARCHITECTURE_PLANNING, ARTS_AND_CRAFTS,
+        AUTOMOTIVE, AVIATION_AEROSPACE, BANKING, BIOTECHNOLOGY, BROADCAST_MEDIA, BUILDING_MATERIALS,
+        BUSINESS_SUPPLIES_AND_EQUIPMENT, CAPITAL_MARKETS, CHEMICALS, CIVIC_SOCIAL_ORGANIZATION,
+        CIVIL_ENGINEERING, COMMERCIAL_REAL_ESTATE, COMPUTER_NETWORK_SECURITY, COMPUTER_GAMES,
+        COMPUTER_HARDWARE, COMPUTER_NETWORKING, COMPUTER_SOFTWARE, INTERNET, CONSTRUCTION,
+        CONSUMER_ELECTRONICS, CONSUMER_GOODS, CONSUMER_SERVICES, COSMETICS, DAIRY,
+        DEFENSE_SPACE, DESIGN, EDUCATION_MANAGEMENT, E_LEARNING, ELECTRICAL_ELECTRONIC_MANUFACTURING,
+        ENTERTAINMENT, ENVIRONMENTAL_SERVICES, EVENTS_SERVICES, EXECUTIVE_OFFICE,
+        FACILITIES_SERVICES, FARMING, FINANCIAL_SERVICES, FINE_ART, FISHERY, FOOD_BEVERAGES,
+        FOOD_PRODUCTION, FUND_RAISING, FURNITURE, GAMBLING_CASINOS, GLASS_CERAMICS_CONCRETE,
+        GOVERNMENT_ADMINISTRATION, GOVERNMENT_RELATIONS, GRAPHIC_DESIGN, HEALTH_WELLNESS_AND_FITNESS,
+        HIGHER_EDUCATION, HOSPITAL_HEALTH_CARE, HOSPITALITY, HUMAN_RESOURCES, IMPORT_AND_EXPORT,
+        INDIVIDUAL_FAMILY_SERVICES, INDUSTRIAL_AUTOMATION, INFORMATION_SERVICES, INFORMATION_TECHNOLOGY_AND_SERVICES,
+        INSURANCE, INTERNATIONAL_AFFAIRS, INTERNATIONAL_TRADE_AND_DEVELOPMENT, INVESTMENT_BANKING,
+        INVESTMENT_MANAGEMENT, JUDICIARY, LAW_ENFORCEMENT, LAW_PRACTICE, LEGAL_SERVICES,
+        LEGISLATIVE_OFFICE, LEISURE_TRAVEL_TOURISM, LIBRARIES, LOGISTICS_AND_SUPPLY_CHAIN,
+        LUXURY_GOODS_JEWELRY, MACHINERY, MANAGEMENT_CONSULTING, MARITIME, MARKET_RESEARCH,
+        MARKETING_AND_ADVERTISING, MECHANICAL_OR_INDUSTRIAL_ENGINEERING, MEDIA_PRODUCTION,
+        MEDICAL_DEVICES, MEDICAL_PRACTICE, MENTAL_HEALTH_CARE, MILITARY, MINING_METALS,
+        MOTION_PICTURES_AND_FILM, MUSEUMS_AND_INSTITUTIONS, MUSIC, NANOTECHNOLOGY,
+        NEWSPAPERS, NON_PROFIT_ORGANIZATION_MANAGEMENT, OIL_ENERGY, ONLINE_MEDIA,
+        OUTSOURCING_OFFSHORING, PACKAGE_FREIGHT_DELIVERY, PACKAGING_AND_CONTAINERS,
+        PAPER_FOREST_PRODUCTS, PERFORMING_ARTS, PHARMACEUTICALS, PHILANTHROPY, PHOTOGRAPHY,
+        PLASTICS, POLITICAL_ORGANIZATION, PRIMARY_SECONDARY_EDUCATION, PRINTING, PROFESSIONAL_TRAINING_COACHING,
+        PROGRAM_DEVELOPMENT, PUBLIC_POLICY, PUBLIC_RELATIONS_AND_COMMUNICATIONS, PUBLIC_SAFETY,
+        PUBLISHING, RAILROAD_MANUFACTURE, RANCHING, REAL_ESTATE, RECREATIONAL_FACILITIES_AND_SERVICES,
+        RELIGIOUS_INSTITUTIONS, RENEWABLES_ENVIRONMENT, RESEARCH, RESTAURANTS, RETAIL,
+        SECURITY_AND_INVESTIGATIONS, SEMICONDUCTORS, SHIPBUILDING, SPORTING_GOODS,
+        SPORTS, STAFFING_AND_RECRUITING, SUPERMARKETS, TELECOMMUNICATIONS, TEXTILES,
+        THINK_TANKS, TOBACCO, TRANSLATION_AND_LOCALIZATION, TRANSPORTATION_TRUCKING_RAILROAD,
+        UTILITIES, VENTURE_CAPITAL_PRIVATE_EQUITY, VETERINARY, WAREHOUSING, WHOLESALE,
+        WINE_AND_SPIRITS, WIRELESS, WRITING_AND_EDITING, MOBILE_GAMES]\",\"propertyValue\":\"THISISNOTAREALINDUSTRY\",\"portalId\":23170316}]","context":{"objectWriteTraceId":["5427e118c1a42e6108e932cb584c51682c82261c5bf1787548f655853c6187b7"]}}],"numErrors":1}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a10e205999081aad-GRU
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '7288'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 24 Jun 2026 19:26:50 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=xU1RdtYSGB8Ap54jWw%2F7a6ozqYxRU36VhxiMJRmjQU%2F6yJemtBzvJSIGiCyk4byC1u3R4LjqZXLOY559jNCn476u%2F%2F7PlQs%2FXBE%2Fvwktsbjv2S45T1OHKEXJsZsrrtsCVkWKXRDhC48XBgBW"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="019efb19-7468-7595-a28c-57b120d9222d", cfr;desc="a10e2059b47a1aad-IAD"
+      set-cookie:
+      - __cf_bm=6L1nTu6oyQsxJ53VOJTahCepwHaonkNUZlstahx8ops-1782329209.8625572-1.0.1.1-SaSXQRqu4B4OiAMbPHfgtdLHvR97OB_qhKOd160krSUAOk0BkalADkexvPOkmTEn_DIjh2kEurzuY1m40n5VCKzqBTftsYTmDZbR0bFeJ10LYmT1Cq6SgEzk0UkuNwWm;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=hubapi.com; Expires=Wed, 24
+        Jun 2026 19:56:50 GMT
+      x-hubspot-correlation-id:
+      - 019efb19-7468-7595-a28c-57b120d9222d
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '108'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 207
+      message: Multi-Status
+version: 1

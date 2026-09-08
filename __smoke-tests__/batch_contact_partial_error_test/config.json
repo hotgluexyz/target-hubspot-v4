@@ -1,0 +1,11 @@
+{
+    "client_id": "client_id",
+    "client_secret": "client_secret",
+    "refresh_token": "refresh_token",
+    "access_token": "access_token",
+    "start_date": "2005-01-01T00:00:00Z",
+    "redirect_uri": "https://hotglue.xyz/callback",
+    "expires_in": 1782341046,
+    "token_expires": 1782340445.86349,
+    "batch_contacts": true
+}

@@ -1,0 +1,142 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["crm.objects.owners.read", "tickets",
+        "crm.lists.read", "crm.objects.deals.read", "crm.objects.products.write",
+        "crm.objects.orders.read", "sales-email-read", "crm.objects.contacts.read",
+        "content", "crm.objects.custom.read", "crm.schemas.orders.read", "crm.objects.companies.write",
+        "business-intelligence", "crm.schemas.deals.read", "crm.objects.custom.write",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "crm.schemas.contacts.write",
+        "oauth", "conversations.read", "marketing-email", "crm.objects.contacts.write",
+        "crm.objects.line_items.read", "crm.objects.marketing_events.write", "crm.schemas.contacts.read",
+        "crm.objects.quotes.write", "communication_preferences.write", "crm.schemas.custom.read",
+        "communication_preferences.read", "communication_preferences.read_write",
+        "crm.schemas.line_items.read", "crm.import", "crm.objects.quotes.read", "crm.objects.marketing_events.read",
+        "crm.schemas.companies.read", "crm.pipelines.orders.read", "conversations.write",
+        "integration-sync", "crm.objects.products.read", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a10dffb438d71b2f-GRU
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1207'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 24 Jun 2026 19:04:33 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=C8rkyTi%2B4OfKl5XGXGCzdFcl1R9lrQNqi2nHjMhnmqIAHVDgrFm4meXJMUjYHatLtgvbJFK7QCVFzjwlt36OmIlibOm6PSIujGt3PSrp2LnGGw%2FbbThpTf9bgOoYRopJyFrpNpskxF9seYy8"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '1665'
+      server-timing:
+      - hcid;desc="019efb05-0da2-717a-abc7-27e9f5dc28e0", cfr;desc="a10dffb556291b2f-IAD"
+      set-cookie:
+      - __cf_bm=XDStqVCt_TKWptMgUDOQUpcytcFdaJ.8e4MVBJX158Q-1782327872.6777809-1.0.1.1-8lo.U4.JkUquSfj7NLXCu5kSwtsmkB6c.g7SDYY_HBd8lPTTSg8j3Fb66InEMImyIUr49pqO6UmKy3Oym8_fGjCfH0LZT1xwBPRGTI8QlrWp1lknAOJxtkGzhyV6iHjH;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=hubapi.com; Expires=Wed, 24
+        Jun 2026 19:34:33 GMT
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 019efb05-0da2-717a-abc7-27e9f5dc28e0
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"inputs": [{"objectWriteTraceId": "b5174f84386b0f339c9d98650695eef2a601a70d6fd3cdbfa7c059276b3b5eb6",
+      "properties": {"domain": "hgi10572-batch-company-create-only.example.com", "industry":
+      "INFORMATION_TECHNOLOGY_AND_SERVICES"}}]}'
+    headers:
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies/batch/create
+  response:
+    body:
+      string: '{"completedAt":"2026-06-24T19:04:33.409Z","status":"COMPLETE","startedAt":"2026-06-24T19:04:33.220Z","results":[{"id":"55985195893","properties":{"createdate":"2026-06-24T19:04:33.238Z","domain":"hgi10572-batch-company-create-only.example.com","hs_annual_revenue_currency_code":"USD","hs_lastmodifieddate":"2026-06-24T19:04:33.238Z","hs_num_active_contracts":"0","hs_num_blockers":"0","hs_num_child_companies":"0","hs_num_contacts_with_buying_roles":"0","hs_num_decision_makers":"0","hs_num_open_deals":"0","hs_object_id":"55985195893","hs_object_source":"INTEGRATION","hs_object_source_id":"1149586","hs_object_source_label":"INTEGRATION","hs_pipeline":"companies-lifecycle-pipeline","hs_task_label":"hgi10572-batch-company-create-only.example.com","hs_v2_date_entered_current_stage":"2026-06-24T19:04:33.238Z","hs_v2_time_in_current_stage":"2026-06-24T19:04:33.238Z","industry":"INFORMATION_TECHNOLOGY_AND_SERVICES","lifecyclestage":"lead","num_associated_contacts":"0","num_notes":"0","website":"hgi10572-batch-company-create-only.example.com"},"createdAt":"2026-06-24T19:04:33.238Z","updatedAt":"2026-06-24T19:04:33.238Z","archived":false,"objectWriteTraceId":"b5174f84386b0f339c9d98650695eef2a601a70d6fd3cdbfa7c059276b3b5eb6","url":"https://app.hubspot.com/contacts/23170316/record/0-2/55985195893"}]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a10dffb6d81e8778-GRU
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1306'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 24 Jun 2026 19:04:33 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=4rOdUh8MAD521coQkpQkOjDETPGlyIu4g48%2BqajjNpxJ7b1ylwVbewd5Xv8V7qVIrbpSpq1EVH0iu9sesC1NH%2FsvsyuWhVCc3mH2IuLjYIZyZuJpfyS6A4%2B4PZMhyK6JAHr%2BtoezCIXiCZ4G"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="019efb05-0eba-7b50-ab12-e1798bf887f7", cfr;desc="a10dffb6f3db8778-GRU"
+      set-cookie:
+      - __cf_bm=gBbMg6mep1WihwFhPE7CoDyC74lcpyegtWf2GsAVeJE-1782327873.0996075-1.0.1.1-WZQvCLWEDQMWybvq9YWAGcix_DBl9ZxLHKdsfyglsap5UyYvv8pLUsdxpwefeRYxqqIDmHvR3zelbBHPezyyJIZCURlmukKrCxhEHjdVAQ1Dvaz1QkalZuk1x7_UcIXl;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=hubapi.com; Expires=Wed, 24
+        Jun 2026 19:34:33 GMT
+      x-hubspot-correlation-id:
+      - 019efb05-0eba-7b50-ab12-e1798bf887f7
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '108'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 201
+      message: Created
+version: 1

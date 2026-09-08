@@ -1,0 +1,1529 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["collector.graphql_query.execute",
+        "crm.objects.owners.read", "crm.lists.read", "settings.users.teams.read",
+        "crm.objects.deals.read", "crm.objects.subscriptions.read", "crm.objects.services.read",
+        "crm.extensions_calling_transcripts.read", "cms.functions.write", "crm.objects.listings.write",
+        "crm.objects.custom.read", "cms.knowledge_base.settings.read", "conversations.visitor_identification.tokens.create",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "integrations.zoom-app.playbooks.read",
+        "behavioral_events.event_definitions.read_write", "analytics.behavioral_events.send",
+        "media_bridge.read", "settings.users.teams.write", "communication_preferences.read",
+        "settings.security.security_health.read", "crm.schemas.services.read", "crm.objects.orders.write",
+        "scheduler.meetings.meeting-link.read", "crm.schemas.line_items.read", "settings.billing.write",
+        "crm.objects.partner-services.write", "crm.import", "collector.graphql_schema.read",
+        "crm.schemas.deals.write", "crm.schemas.subscriptions.read", "cms.membership.access_groups.write",
+        "crm.schemas.companies.read", "actions", "crm.extensions_calling_transcripts.write",
+        "cms.knowledge_base.articles.write", "crm.objects.commercepayments.read",
+        "crm.objects.products.write", "crm.objects.feedback_submissions.read", "crm.schemas.invoices.write",
+        "crm.objects.services.write", "crm.objects.subscriptions.write", "crm.schemas.commercepayments.write",
+        "communication_preferences.statuses.batch.write", "sales-email-read", "crm.objects.contacts.read",
+        "crm.objects.invoices.read", "crm.schemas.orders.read", "crm.lists.write",
+        "crm.schemas.deals.read", "conversations.custom_channels.write", "crm.objects.deals.write",
+        "e-commerce", "cms.domains.write", "crm.schemas.contacts.write", "crm.objects.projects.read",
+        "crm.schemas.carts.write", "transactional-email", "forms-uploaded-files",
+        "conversations.read", "account-info.security.read", "record_images.signed_urls.read",
+        "settings.currencies.write", "crm.objects.goals.write", "crm.objects.line_items.write",
+        "crm.objects.contacts.write", "crm.objects.line_items.read", "crm.objects.goals.read",
+        "crm.objects.partner-clients.write", "crm.schemas.listings.write", "communication_preferences.write",
+        "crm.schemas.contacts.read", "crm.objects.quotes.write", "crm.objects.leads.read",
+        "crm.objects.leads.write", "files.ui_hidden.read", "crm.schemas.services.write",
+        "communication_preferences.read_write", "crm.schemas.invoices.read", "crm.schemas.forecasts.read",
+        "crm.objects.quotes.read", "crm.objects.partner-clients.read", "marketing.campaigns.read",
+        "crm.objects.courses.read", "timeline", "crm.objects.marketing_events.read",
+        "cms.knowledge_base.settings.write", "conversations.write", "crm.pipelines.orders.read",
+        "cms.domains.read", "crm.objects.products.read", "crm.schemas.projects.read",
+        "external_integrations.forms.access", "accounting", "crm.objects.orders.read",
+        "crm.export", "media_bridge.write", "automation", "crm.objects.companies.write",
+        "crm.schemas.carts.read", "business-intelligence", "crm.dealsplits.read_write",
+        "automation.sequences.enrollments.write", "crm.schemas.listings.read", "crm.objects.forecasts.read",
+        "crm.schemas.companies.write", "crm.schemas.subscriptions.write", "crm.objects.commercepayments.write",
+        "marketing-email", "crm.objects.invoices.write", "cms.knowledge_base.articles.read",
+        "automation.sequences.read", "crm.objects.users.write", "crm.objects.users.read",
+        "crm.objects.partner-services.read", "crm.objects.appointments.write", "files",
+        "marketing.campaigns.revenue.read", "settings.users.write", "crm.objects.carts.write",
+        "hubdb", "tickets", "communication_preferences.statuses.batch.read", "crm.schemas.orders.write",
+        "content", "cms.knowledge_base.articles.publish", "conversations.custom_channels.read",
+        "crm.schemas.courses.write", "cms.functions.read", "crm.schemas.appointments.read",
+        "crm.objects.custom.write", "marketing.campaigns.write", "crm.objects.appointments.read",
+        "crm.schemas.appointments.write", "oauth", "crm.schemas.courses.read", "settings.users.read",
+        "cms.performance.read", "social", "tax_rates.read", "crm.objects.projects.write",
+        "crm.objects.marketing_events.write", "crm.pipelines.orders.write", "crm.schemas.custom.read",
+        "cms.membership.access_groups.read", "crm.objects.carts.read", "crm.objects.courses.write",
+        "crm.schemas.projects.write", "ctas.read", "crm.schemas.commercepayments.read",
+        "crm.objects.listings.read", "settings.currencies.read", "integration-sync",
+        "forms"], "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c8298486f842ef2-EWR
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4621'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:24:57 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=gz4bFXHkvvy%2Bo9hr%2B1QiA1MsJmsd4%2Fb7YthbWvglbYMRVpUWjIED6CaVg%2FBVGcCpmsQoAmu%2FIbdDi7oNq8uYVMo3Jpwz3Kw0sUD3u7u0eBUsM7c3bcMiidmMA3sz%2F1bR"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=9ebp5t6raHDC.PlGKlEDwoETAAUSjz_L2ibpBilUu7Y-1770128697-1.0.1.1-j5VL3gWo8.zvb8ywQW_oBMnG0ZlaNhCTKPJYeW3O_drCLqKYjUdRbkoPp8OQzL9VkxA3yKwvKGi33_.gsVJKiV.d_oB7oi7nsmUWzBiDVF0;
+        path=/; expires=Tue, 03-Feb-26 14:54:57 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '5159'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 6b104a5e-a1ef-4c0e-bcbe-9fd1e8c28eda
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"properties": {"dealname": "Duplicate Deal Name Test", "amount": 10000,
+      "pipeline": null, "priority": null, "closedate": "2024-12-31T00:00:00Z", "dealstage":
+      "qualifiedtobuy"}}'
+    headers:
+      Content-Length:
+      - '1'
+      Content-Type:
+      - a
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/deals
+  response:
+    body:
+      string: '{"id":"55356701455","properties":{"amount":"10000","amount_in_home_currency":"10000","closedate":"2024-12-31T00:00:00Z","createdate":"2026-02-03T14:24:57.953Z","days_to_close":"0","deal_currency_code":"USD","dealname":"Duplicate
+        Deal Name Test","dealstage":"qualifiedtobuy","hs_actual_duration":"0","hs_closed_amount":"0","hs_closed_amount_in_home_currency":"0","hs_closed_deal_close_date":"0","hs_closed_deal_create_date":"0","hs_closed_won_count":"0","hs_createdate":"2026-02-03T14:24:57.953Z","hs_days_to_close_raw":"0","hs_deal_stage_probability_shadow":"0.40000000000000002220446049250313080847263336181640625","hs_forecast_amount":"10000","hs_has_last_meeting_followups":"false","hs_is_closed":"false","hs_is_closed_count":"0","hs_is_closed_lost":"false","hs_is_closed_won":"false","hs_is_deal_split":"false","hs_is_open_count":"1","hs_lastmodifieddate":"2026-02-03T14:24:57.953Z","hs_num_associated_active_deal_registrations":"0","hs_num_associated_deal_registrations":"0","hs_num_associated_deal_splits":"0","hs_num_of_associated_line_items":"0","hs_num_target_accounts":"0","hs_number_of_call_engagements":"0","hs_number_of_inbound_calls":"0","hs_number_of_outbound_calls":"0","hs_number_of_overdue_tasks":"0","hs_object_id":"55356701455","hs_object_source":"INTEGRATION","hs_object_source_id":"28056811","hs_object_source_label":"INTEGRATION","hs_open_amount_in_home_currency":"10000","hs_open_deal_create_date":"1770128697953","hs_projected_amount":"0","hs_projected_amount_in_home_currency":"0","hs_v2_date_entered_current_stage":"2026-02-03T14:24:57.953Z","hs_v2_time_in_current_stage":"2026-02-03T14:24:57.953Z","num_associated_contacts":"0","num_notes":"0","pipeline":"default"},"createdAt":"2026-02-03T14:24:57.953Z","updatedAt":"2026-02-03T14:24:57.953Z","archived":false,"url":"https://app.hubspot.com/contacts/23170316/record/0-3/55356701455"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c829849983341db-EWR
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1862'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:24:58 GMT
+      Location:
+      - https://api.hubapi.com/crm/objects/v3/deals/55356701455
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=rAnUoikegX%2Brhkf58razZ9jVQkSN8BhYZ4ORq2KbI%2FQfuvD9Cdn06t4SHIoCCppo19UaFQE9jLzyIjo87c72iMaY2Kv0lvVuM8NH65ItXYoNRTcQ32ibehzv2GEjS3Pb"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=X3KZcEDXMAm8aQ8i1fPIU1rqgOgB7eNikdPg1dmqfH0-1770128698-1.0.1.1-WzFqISGw7HK4Fh.7m.a_9ab8NGcvzJIS0utCu05AWT0CslbNW5j52s8w6VImrYK67qUZVnO7YY5TLJWuDljm0NM2mtg4tEPLYktHRsuUSgI;
+        path=/; expires=Tue, 03-Feb-26 14:54:58 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      x-hubspot-correlation-id:
+      - 472c5f99-25dc-4185-945a-86714c9d52c8
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["collector.graphql_query.execute",
+        "crm.objects.owners.read", "crm.lists.read", "settings.users.teams.read",
+        "crm.objects.deals.read", "crm.objects.subscriptions.read", "crm.objects.services.read",
+        "crm.extensions_calling_transcripts.read", "cms.functions.write", "crm.objects.listings.write",
+        "crm.objects.custom.read", "cms.knowledge_base.settings.read", "conversations.visitor_identification.tokens.create",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "integrations.zoom-app.playbooks.read",
+        "behavioral_events.event_definitions.read_write", "analytics.behavioral_events.send",
+        "media_bridge.read", "settings.users.teams.write", "communication_preferences.read",
+        "settings.security.security_health.read", "crm.schemas.services.read", "crm.objects.orders.write",
+        "scheduler.meetings.meeting-link.read", "crm.schemas.line_items.read", "settings.billing.write",
+        "crm.objects.partner-services.write", "crm.import", "collector.graphql_schema.read",
+        "crm.schemas.deals.write", "crm.schemas.subscriptions.read", "cms.membership.access_groups.write",
+        "crm.schemas.companies.read", "actions", "crm.extensions_calling_transcripts.write",
+        "cms.knowledge_base.articles.write", "crm.objects.commercepayments.read",
+        "crm.objects.products.write", "crm.objects.feedback_submissions.read", "crm.schemas.invoices.write",
+        "crm.objects.services.write", "crm.objects.subscriptions.write", "crm.schemas.commercepayments.write",
+        "communication_preferences.statuses.batch.write", "sales-email-read", "crm.objects.contacts.read",
+        "crm.objects.invoices.read", "crm.schemas.orders.read", "crm.lists.write",
+        "crm.schemas.deals.read", "conversations.custom_channels.write", "crm.objects.deals.write",
+        "e-commerce", "cms.domains.write", "crm.schemas.contacts.write", "crm.objects.projects.read",
+        "crm.schemas.carts.write", "transactional-email", "forms-uploaded-files",
+        "conversations.read", "account-info.security.read", "record_images.signed_urls.read",
+        "settings.currencies.write", "crm.objects.goals.write", "crm.objects.line_items.write",
+        "crm.objects.contacts.write", "crm.objects.line_items.read", "crm.objects.goals.read",
+        "crm.objects.partner-clients.write", "crm.schemas.listings.write", "communication_preferences.write",
+        "crm.schemas.contacts.read", "crm.objects.quotes.write", "crm.objects.leads.read",
+        "crm.objects.leads.write", "files.ui_hidden.read", "crm.schemas.services.write",
+        "communication_preferences.read_write", "crm.schemas.invoices.read", "crm.schemas.forecasts.read",
+        "crm.objects.quotes.read", "crm.objects.partner-clients.read", "marketing.campaigns.read",
+        "crm.objects.courses.read", "timeline", "crm.objects.marketing_events.read",
+        "cms.knowledge_base.settings.write", "conversations.write", "crm.pipelines.orders.read",
+        "cms.domains.read", "crm.objects.products.read", "crm.schemas.projects.read",
+        "external_integrations.forms.access", "accounting", "crm.objects.orders.read",
+        "crm.export", "media_bridge.write", "automation", "crm.objects.companies.write",
+        "crm.schemas.carts.read", "business-intelligence", "crm.dealsplits.read_write",
+        "automation.sequences.enrollments.write", "crm.schemas.listings.read", "crm.objects.forecasts.read",
+        "crm.schemas.companies.write", "crm.schemas.subscriptions.write", "crm.objects.commercepayments.write",
+        "marketing-email", "crm.objects.invoices.write", "cms.knowledge_base.articles.read",
+        "automation.sequences.read", "crm.objects.users.write", "crm.objects.users.read",
+        "crm.objects.partner-services.read", "crm.objects.appointments.write", "files",
+        "marketing.campaigns.revenue.read", "settings.users.write", "crm.objects.carts.write",
+        "hubdb", "tickets", "communication_preferences.statuses.batch.read", "crm.schemas.orders.write",
+        "content", "cms.knowledge_base.articles.publish", "conversations.custom_channels.read",
+        "crm.schemas.courses.write", "cms.functions.read", "crm.schemas.appointments.read",
+        "crm.objects.custom.write", "marketing.campaigns.write", "crm.objects.appointments.read",
+        "crm.schemas.appointments.write", "oauth", "crm.schemas.courses.read", "settings.users.read",
+        "cms.performance.read", "social", "tax_rates.read", "crm.objects.projects.write",
+        "crm.objects.marketing_events.write", "crm.pipelines.orders.write", "crm.schemas.custom.read",
+        "cms.membership.access_groups.read", "crm.objects.carts.read", "crm.objects.courses.write",
+        "crm.schemas.projects.write", "ctas.read", "crm.schemas.commercepayments.read",
+        "crm.objects.listings.read", "settings.currencies.read", "integration-sync",
+        "forms"], "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c82984d4bbaf78f-EWR
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4621'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:24:58 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=AHHK0wEIo%2B8oiYtcxI4DnkuVradRT6aNvBf%2B848OKQu7rgwO7CP8vWo5e0pmPWTUo87vP1okZ04Q%2BywiKtJboW3PjAhluJQlzXKNhgfC2uPetsc1l7fB7w%2FoX%2BmrC1pQ"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=u_7zl9rI5.AEbLeMGY3Vd_kN1npfDyL5rYcv7_ButMQ-1770128698-1.0.1.1-Qs8VPUvMI7ELyCfG3lxK7NPAPKLMAw46WHvmo2AYXF9.X7ZQGDosQ_3StUG2GSnzMbmgMRyS7exMIg4dlhXF6XSaKhMUndiUsG89scM2Rr4;
+        path=/; expires=Tue, 03-Feb-26 14:54:58 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '5159'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - dacc6a9f-1478-48c4-8442-a96c23714784
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Content-Type:
+      - a
+    method: GET
+    uri: https://api.hubapi.com/crm/v3/objects/contacts/jane.smith@example.com?idProperty=email
+  response:
+    body:
+      string: '{"id":"189429067676","properties":{"createdate":"2025-12-31T16:29:06.609Z","email":"jane.smith@example.com","firstname":"Jane","hs_object_id":"189429067676","lastmodifieddate":"2026-02-03T00:24:48.784Z","lastname":"Smith-Updated"},"createdAt":"2025-12-31T16:29:06.609Z","updatedAt":"2026-02-03T00:24:48.784Z","archived":false,"url":"https://app.hubspot.com/contacts/23170316/record/0-1/189429067676"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c82984e7f41a506-EWR
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '400'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:24:58 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=mz5WWxCf1Z9xAM1Wg6PSIAgfvNEJ42Bxr5c6sMtb70D7cDWuwOigDG0pzz9kJAFw3tLMN3EUi%2Bcm0w7jMejbkJ4OAPRwFSZkWBfWnY4bxHGrOshHTOEBncUeb7WdvwVn"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=h55kTaDai5JRcgrJCMcGT8_Nc3BaAymdHyrQKK3bqyw-1770128698-1.0.1.1-QlU6W5huyOvmQvToDnZjIz7M2QMU7fycryBtXY7rxwVA7MYnQAwHoqISpOVHEwJIs5o1Gj0aRgdxJx_OzMhCNn8gNKqOlrEsTpYbbIByIAE;
+        path=/; expires=Tue, 03-Feb-26 14:54:58 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      x-hubspot-correlation-id:
+      - 336de485-48cd-4d8e-a7bb-39a98443b064
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '108'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["collector.graphql_query.execute",
+        "crm.objects.owners.read", "crm.lists.read", "settings.users.teams.read",
+        "crm.objects.deals.read", "crm.objects.subscriptions.read", "crm.objects.services.read",
+        "crm.extensions_calling_transcripts.read", "cms.functions.write", "crm.objects.listings.write",
+        "crm.objects.custom.read", "cms.knowledge_base.settings.read", "conversations.visitor_identification.tokens.create",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "integrations.zoom-app.playbooks.read",
+        "behavioral_events.event_definitions.read_write", "analytics.behavioral_events.send",
+        "media_bridge.read", "settings.users.teams.write", "communication_preferences.read",
+        "settings.security.security_health.read", "crm.schemas.services.read", "crm.objects.orders.write",
+        "scheduler.meetings.meeting-link.read", "crm.schemas.line_items.read", "settings.billing.write",
+        "crm.objects.partner-services.write", "crm.import", "collector.graphql_schema.read",
+        "crm.schemas.deals.write", "crm.schemas.subscriptions.read", "cms.membership.access_groups.write",
+        "crm.schemas.companies.read", "actions", "crm.extensions_calling_transcripts.write",
+        "cms.knowledge_base.articles.write", "crm.objects.commercepayments.read",
+        "crm.objects.products.write", "crm.objects.feedback_submissions.read", "crm.schemas.invoices.write",
+        "crm.objects.services.write", "crm.objects.subscriptions.write", "crm.schemas.commercepayments.write",
+        "communication_preferences.statuses.batch.write", "sales-email-read", "crm.objects.contacts.read",
+        "crm.objects.invoices.read", "crm.schemas.orders.read", "crm.lists.write",
+        "crm.schemas.deals.read", "conversations.custom_channels.write", "crm.objects.deals.write",
+        "e-commerce", "cms.domains.write", "crm.schemas.contacts.write", "crm.objects.projects.read",
+        "crm.schemas.carts.write", "transactional-email", "forms-uploaded-files",
+        "conversations.read", "account-info.security.read", "record_images.signed_urls.read",
+        "settings.currencies.write", "crm.objects.goals.write", "crm.objects.line_items.write",
+        "crm.objects.contacts.write", "crm.objects.line_items.read", "crm.objects.goals.read",
+        "crm.objects.partner-clients.write", "crm.schemas.listings.write", "communication_preferences.write",
+        "crm.schemas.contacts.read", "crm.objects.quotes.write", "crm.objects.leads.read",
+        "crm.objects.leads.write", "files.ui_hidden.read", "crm.schemas.services.write",
+        "communication_preferences.read_write", "crm.schemas.invoices.read", "crm.schemas.forecasts.read",
+        "crm.objects.quotes.read", "crm.objects.partner-clients.read", "marketing.campaigns.read",
+        "crm.objects.courses.read", "timeline", "crm.objects.marketing_events.read",
+        "cms.knowledge_base.settings.write", "conversations.write", "crm.pipelines.orders.read",
+        "cms.domains.read", "crm.objects.products.read", "crm.schemas.projects.read",
+        "external_integrations.forms.access", "accounting", "crm.objects.orders.read",
+        "crm.export", "media_bridge.write", "automation", "crm.objects.companies.write",
+        "crm.schemas.carts.read", "business-intelligence", "crm.dealsplits.read_write",
+        "automation.sequences.enrollments.write", "crm.schemas.listings.read", "crm.objects.forecasts.read",
+        "crm.schemas.companies.write", "crm.schemas.subscriptions.write", "crm.objects.commercepayments.write",
+        "marketing-email", "crm.objects.invoices.write", "cms.knowledge_base.articles.read",
+        "automation.sequences.read", "crm.objects.users.write", "crm.objects.users.read",
+        "crm.objects.partner-services.read", "crm.objects.appointments.write", "files",
+        "marketing.campaigns.revenue.read", "settings.users.write", "crm.objects.carts.write",
+        "hubdb", "tickets", "communication_preferences.statuses.batch.read", "crm.schemas.orders.write",
+        "content", "cms.knowledge_base.articles.publish", "conversations.custom_channels.read",
+        "crm.schemas.courses.write", "cms.functions.read", "crm.schemas.appointments.read",
+        "crm.objects.custom.write", "marketing.campaigns.write", "crm.objects.appointments.read",
+        "crm.schemas.appointments.write", "oauth", "crm.schemas.courses.read", "settings.users.read",
+        "cms.performance.read", "social", "tax_rates.read", "crm.objects.projects.write",
+        "crm.objects.marketing_events.write", "crm.pipelines.orders.write", "crm.schemas.custom.read",
+        "cms.membership.access_groups.read", "crm.objects.carts.read", "crm.objects.courses.write",
+        "crm.schemas.projects.write", "ctas.read", "crm.schemas.commercepayments.read",
+        "crm.objects.listings.read", "settings.currencies.read", "integration-sync",
+        "forms"], "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c82984fbcd60f4a-EWR
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4621'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:24:58 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=hxc9yNP6x0cMXA0s4PTXDW6BhguXkwmvGGSObHieTEFjQ%2BBOR2%2FiaCEAoO4MXp8ro3SrgPkZJxzeJLG1x2SbhMHCaPXqKiKm4oX%2BNe5Yxb3Et2%2FTxtO6VcNQ1o5nt1Uc"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=NXkI6KyniStHYmgvOTC4tx2KbXM5Ew.k.QVN5uUkUe4-1770128698-1.0.1.1-lsRqhmBM7Sg0aN.PEI5BuQawg8C.6fSwYOFQNCIFlrjhQDwXVPXb3nFsCBrywYaH09vP8AZ2CawdlzUjXK1IWWG89fu3KE4t8FZnGuJMN5s;
+        path=/; expires=Tue, 03-Feb-26 14:54:58 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '5159'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 891d00f3-a980-464f-a810-1bf92d2ad6a0
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Content-Type:
+      - a
+    method: GET
+    uri: https://api.hubapi.com/crm/v4/associations/deals/contacts/labels
+  response:
+    body:
+      string: '{"results":[{"category":"HUBSPOT_DEFINED","typeId":3,"label":null}]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c829850cff81768-EWR
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '68'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:24:59 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=dfmpUDgPnvuVCWVTF9ioGOy%2BfSFzShGW5gAnXFP6k%2F%2B5dMNqHZ5tGsbPvedSCbIWWpzJYSoz43bzzBc08hInSLjgi0sPkm8NzmDQv5W4S4LJLEPIeIx0UBz2ZyoH7u5V"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=Gd8pPyD_W0dxF1B6qPmsDcEa8qs0xQI5CoyrIFqPVLg-1770128699-1.0.1.1-E2tfO2w82byrlT6WKfOjAAEaNA.8L7DBBf3xM4niT3Z3q1_7IU9RVAjASjQccZQ4JhB.dC8kSylP4cK7GeXh_HGNuCoOPDzzNuSfE8b06xA;
+        path=/; expires=Tue, 03-Feb-26 14:54:59 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, Accept-Encoding
+      access-control-allow-credentials:
+      - 'false'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 34359bb5-3380-4f33-87d6-1dcf304cf67d
+    status:
+      code: 200
+      message: OK
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["collector.graphql_query.execute",
+        "crm.objects.owners.read", "crm.lists.read", "settings.users.teams.read",
+        "crm.objects.deals.read", "crm.objects.subscriptions.read", "crm.objects.services.read",
+        "crm.extensions_calling_transcripts.read", "cms.functions.write", "crm.objects.listings.write",
+        "crm.objects.custom.read", "cms.knowledge_base.settings.read", "conversations.visitor_identification.tokens.create",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "integrations.zoom-app.playbooks.read",
+        "behavioral_events.event_definitions.read_write", "analytics.behavioral_events.send",
+        "media_bridge.read", "settings.users.teams.write", "communication_preferences.read",
+        "settings.security.security_health.read", "crm.schemas.services.read", "crm.objects.orders.write",
+        "scheduler.meetings.meeting-link.read", "crm.schemas.line_items.read", "settings.billing.write",
+        "crm.objects.partner-services.write", "crm.import", "collector.graphql_schema.read",
+        "crm.schemas.deals.write", "crm.schemas.subscriptions.read", "cms.membership.access_groups.write",
+        "crm.schemas.companies.read", "actions", "crm.extensions_calling_transcripts.write",
+        "cms.knowledge_base.articles.write", "crm.objects.commercepayments.read",
+        "crm.objects.products.write", "crm.objects.feedback_submissions.read", "crm.schemas.invoices.write",
+        "crm.objects.services.write", "crm.objects.subscriptions.write", "crm.schemas.commercepayments.write",
+        "communication_preferences.statuses.batch.write", "sales-email-read", "crm.objects.contacts.read",
+        "crm.objects.invoices.read", "crm.schemas.orders.read", "crm.lists.write",
+        "crm.schemas.deals.read", "conversations.custom_channels.write", "crm.objects.deals.write",
+        "e-commerce", "cms.domains.write", "crm.schemas.contacts.write", "crm.objects.projects.read",
+        "crm.schemas.carts.write", "transactional-email", "forms-uploaded-files",
+        "conversations.read", "account-info.security.read", "record_images.signed_urls.read",
+        "settings.currencies.write", "crm.objects.goals.write", "crm.objects.line_items.write",
+        "crm.objects.contacts.write", "crm.objects.line_items.read", "crm.objects.goals.read",
+        "crm.objects.partner-clients.write", "crm.schemas.listings.write", "communication_preferences.write",
+        "crm.schemas.contacts.read", "crm.objects.quotes.write", "crm.objects.leads.read",
+        "crm.objects.leads.write", "files.ui_hidden.read", "crm.schemas.services.write",
+        "communication_preferences.read_write", "crm.schemas.invoices.read", "crm.schemas.forecasts.read",
+        "crm.objects.quotes.read", "crm.objects.partner-clients.read", "marketing.campaigns.read",
+        "crm.objects.courses.read", "timeline", "crm.objects.marketing_events.read",
+        "cms.knowledge_base.settings.write", "conversations.write", "crm.pipelines.orders.read",
+        "cms.domains.read", "crm.objects.products.read", "crm.schemas.projects.read",
+        "external_integrations.forms.access", "accounting", "crm.objects.orders.read",
+        "crm.export", "media_bridge.write", "automation", "crm.objects.companies.write",
+        "crm.schemas.carts.read", "business-intelligence", "crm.dealsplits.read_write",
+        "automation.sequences.enrollments.write", "crm.schemas.listings.read", "crm.objects.forecasts.read",
+        "crm.schemas.companies.write", "crm.schemas.subscriptions.write", "crm.objects.commercepayments.write",
+        "marketing-email", "crm.objects.invoices.write", "cms.knowledge_base.articles.read",
+        "automation.sequences.read", "crm.objects.users.write", "crm.objects.users.read",
+        "crm.objects.partner-services.read", "crm.objects.appointments.write", "files",
+        "marketing.campaigns.revenue.read", "settings.users.write", "crm.objects.carts.write",
+        "hubdb", "tickets", "communication_preferences.statuses.batch.read", "crm.schemas.orders.write",
+        "content", "cms.knowledge_base.articles.publish", "conversations.custom_channels.read",
+        "crm.schemas.courses.write", "cms.functions.read", "crm.schemas.appointments.read",
+        "crm.objects.custom.write", "marketing.campaigns.write", "crm.objects.appointments.read",
+        "crm.schemas.appointments.write", "oauth", "crm.schemas.courses.read", "settings.users.read",
+        "cms.performance.read", "social", "tax_rates.read", "crm.objects.projects.write",
+        "crm.objects.marketing_events.write", "crm.pipelines.orders.write", "crm.schemas.custom.read",
+        "cms.membership.access_groups.read", "crm.objects.carts.read", "crm.objects.courses.write",
+        "crm.schemas.projects.write", "ctas.read", "crm.schemas.commercepayments.read",
+        "crm.objects.listings.read", "settings.currencies.read", "integration-sync",
+        "forms"], "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c829851ec214350-EWR
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4621'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:24:59 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=h4xQ3wSOmSZS0tjtBpc5RfcqptX3JpCtrd6gYTet5kxntW4EJkNHifhk6kwRwW7p16ytIKIDk%2FmwIhk172xgEthV4%2FHaz2XV1j0pE7R1bZD9MGu9OPINqpIxtgQ5Svz6"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=ev6.S_cF0Wtn04XWR8pqEtPsdsW8rAXzWvhKMGbvbEU-1770128699-1.0.1.1-cND89Ep4SFxDvOnY9h857cXdbH0sU2o2jrW4DLzKx7sb1dlIFmpeApfCaQ5NwmCNR08QMbHTExWNDVp3qkk6nRrtJddkMgtZ0wNuy6k9nQY;
+        path=/; expires=Tue, 03-Feb-26 14:54:59 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '5159'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 8bb1cafd-d20d-4816-9be7-35038e9241e3
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '[{"associationCategory": "HUBSPOT_DEFINED", "associationTypeId": 3}]'
+    headers:
+      Content-Length:
+      - '6'
+      Content-Type:
+      - a
+    method: PUT
+    uri: https://api.hubapi.com/crm/v4/objects/deals/55356701455/associations/contact/189429067676
+  response:
+    body:
+      string: '{"fromObjectTypeId":"0-3","fromObjectId":55356701455,"toObjectTypeId":"0-1","toObjectId":189429067676,"labels":[]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c829853093941ba-EWR
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '114'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:24:59 GMT
+      Location:
+      - https://api.hubapi.com/crm/objects/v4/deals/55356701455/associations/contact/189429067676/55356701455
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=AK%2BSz2hhqMWcU9MU0NulyNRd0qF7lKEc0jCoqF73Yo%2B20v6bDiXLrrYs4ynX5g3I4%2BkoxtZTfF6q3J9rpqmVafr%2FIDmJ0ayh0SRzPpB%2BUeQvrWIJ0elVsApa2DN6AvrN"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=fv9JiVBAsOeZ6tXbxGTx8o2Ukd_Wxs7F6rxWAx4c9RE-1770128699-1.0.1.1-.bi8jHCJKrXAcw2_RHWsrH8uBexbZoJWv3hRGTYAqyp_yucDO2DMncu4A7aFAhJnhCcdKc.ArQiqVoRN1Tj8ttGqVkYafBVbQ7dvkfZ2VxY;
+        path=/; expires=Tue, 03-Feb-26 14:54:59 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, Accept-Encoding
+      access-control-allow-credentials:
+      - 'false'
+      x-hubspot-correlation-id:
+      - eb6bb9d0-d5eb-4018-abe2-661f4f7dff54
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '106'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["collector.graphql_query.execute",
+        "crm.objects.owners.read", "crm.lists.read", "settings.users.teams.read",
+        "crm.objects.deals.read", "crm.objects.subscriptions.read", "crm.objects.services.read",
+        "crm.extensions_calling_transcripts.read", "cms.functions.write", "crm.objects.listings.write",
+        "crm.objects.custom.read", "cms.knowledge_base.settings.read", "conversations.visitor_identification.tokens.create",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "integrations.zoom-app.playbooks.read",
+        "behavioral_events.event_definitions.read_write", "analytics.behavioral_events.send",
+        "media_bridge.read", "settings.users.teams.write", "communication_preferences.read",
+        "settings.security.security_health.read", "crm.schemas.services.read", "crm.objects.orders.write",
+        "scheduler.meetings.meeting-link.read", "crm.schemas.line_items.read", "settings.billing.write",
+        "crm.objects.partner-services.write", "crm.import", "collector.graphql_schema.read",
+        "crm.schemas.deals.write", "crm.schemas.subscriptions.read", "cms.membership.access_groups.write",
+        "crm.schemas.companies.read", "actions", "crm.extensions_calling_transcripts.write",
+        "cms.knowledge_base.articles.write", "crm.objects.commercepayments.read",
+        "crm.objects.products.write", "crm.objects.feedback_submissions.read", "crm.schemas.invoices.write",
+        "crm.objects.services.write", "crm.objects.subscriptions.write", "crm.schemas.commercepayments.write",
+        "communication_preferences.statuses.batch.write", "sales-email-read", "crm.objects.contacts.read",
+        "crm.objects.invoices.read", "crm.schemas.orders.read", "crm.lists.write",
+        "crm.schemas.deals.read", "conversations.custom_channels.write", "crm.objects.deals.write",
+        "e-commerce", "cms.domains.write", "crm.schemas.contacts.write", "crm.objects.projects.read",
+        "crm.schemas.carts.write", "transactional-email", "forms-uploaded-files",
+        "conversations.read", "account-info.security.read", "record_images.signed_urls.read",
+        "settings.currencies.write", "crm.objects.goals.write", "crm.objects.line_items.write",
+        "crm.objects.contacts.write", "crm.objects.line_items.read", "crm.objects.goals.read",
+        "crm.objects.partner-clients.write", "crm.schemas.listings.write", "communication_preferences.write",
+        "crm.schemas.contacts.read", "crm.objects.quotes.write", "crm.objects.leads.read",
+        "crm.objects.leads.write", "files.ui_hidden.read", "crm.schemas.services.write",
+        "communication_preferences.read_write", "crm.schemas.invoices.read", "crm.schemas.forecasts.read",
+        "crm.objects.quotes.read", "crm.objects.partner-clients.read", "marketing.campaigns.read",
+        "crm.objects.courses.read", "timeline", "crm.objects.marketing_events.read",
+        "cms.knowledge_base.settings.write", "conversations.write", "crm.pipelines.orders.read",
+        "cms.domains.read", "crm.objects.products.read", "crm.schemas.projects.read",
+        "external_integrations.forms.access", "accounting", "crm.objects.orders.read",
+        "crm.export", "media_bridge.write", "automation", "crm.objects.companies.write",
+        "crm.schemas.carts.read", "business-intelligence", "crm.dealsplits.read_write",
+        "automation.sequences.enrollments.write", "crm.schemas.listings.read", "crm.objects.forecasts.read",
+        "crm.schemas.companies.write", "crm.schemas.subscriptions.write", "crm.objects.commercepayments.write",
+        "marketing-email", "crm.objects.invoices.write", "cms.knowledge_base.articles.read",
+        "automation.sequences.read", "crm.objects.users.write", "crm.objects.users.read",
+        "crm.objects.partner-services.read", "crm.objects.appointments.write", "files",
+        "marketing.campaigns.revenue.read", "settings.users.write", "crm.objects.carts.write",
+        "hubdb", "tickets", "communication_preferences.statuses.batch.read", "crm.schemas.orders.write",
+        "content", "cms.knowledge_base.articles.publish", "conversations.custom_channels.read",
+        "crm.schemas.courses.write", "cms.functions.read", "crm.schemas.appointments.read",
+        "crm.objects.custom.write", "marketing.campaigns.write", "crm.objects.appointments.read",
+        "crm.schemas.appointments.write", "oauth", "crm.schemas.courses.read", "settings.users.read",
+        "cms.performance.read", "social", "tax_rates.read", "crm.objects.projects.write",
+        "crm.objects.marketing_events.write", "crm.pipelines.orders.write", "crm.schemas.custom.read",
+        "cms.membership.access_groups.read", "crm.objects.carts.read", "crm.objects.courses.write",
+        "crm.schemas.projects.write", "ctas.read", "crm.schemas.commercepayments.read",
+        "crm.objects.listings.read", "settings.currencies.read", "integration-sync",
+        "forms"], "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c8298545f35aa9f-EWR
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4621'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:24:59 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=rBeVKBLhRA1KUlOf7EXdUsc%2BSSEapCZ8W4N8Cd9F9M0JYA4v%2Faw1x29w%2BqtzSaSlaihqW9OPJBmVW2zJZ8VEFZ%2FlnnQ9%2FVnRK4M2wxCkIQzWGEY5E5z2S%2B0yj%2F5oHP5I"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=ANMolmLsKGuytPxW7VtVfP2V9FIH0JTdelR0wigjZso-1770128699-1.0.1.1-OSlnxG8J9KqMY50M6WUUY7IyD_PwVNJJsxUyg3J012R3LQNPco5NtFHPH0UvNxkn23Vj5nnmrLcUvtVLFHBtLGJk.TNV0Qs2ynjalnHcNaY;
+        path=/; expires=Tue, 03-Feb-26 14:54:59 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '5159'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - a56d2bba-510e-4e83-8525-fa49a8e9ab04
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"properties": {"dealname": "Duplicate Deal Name Test", "amount": 20000,
+      "pipeline": null, "priority": null, "closedate": "2024-12-31T00:00:00Z", "dealstage":
+      "qualifiedtobuy"}}'
+    headers:
+      Content-Length:
+      - '1'
+      Content-Type:
+      - a
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/deals
+  response:
+    body:
+      string: '{"id":"55458337462","properties":{"amount":"20000","amount_in_home_currency":"20000","closedate":"2024-12-31T00:00:00Z","createdate":"2026-02-03T14:24:59.818Z","days_to_close":"0","deal_currency_code":"USD","dealname":"Duplicate
+        Deal Name Test","dealstage":"qualifiedtobuy","hs_actual_duration":"0","hs_closed_amount":"0","hs_closed_amount_in_home_currency":"0","hs_closed_deal_close_date":"0","hs_closed_deal_create_date":"0","hs_closed_won_count":"0","hs_createdate":"2026-02-03T14:24:59.818Z","hs_days_to_close_raw":"0","hs_deal_stage_probability_shadow":"0.40000000000000002220446049250313080847263336181640625","hs_forecast_amount":"20000","hs_has_last_meeting_followups":"false","hs_is_closed":"false","hs_is_closed_count":"0","hs_is_closed_lost":"false","hs_is_closed_won":"false","hs_is_deal_split":"false","hs_is_open_count":"1","hs_lastmodifieddate":"2026-02-03T14:24:59.818Z","hs_num_associated_active_deal_registrations":"0","hs_num_associated_deal_registrations":"0","hs_num_associated_deal_splits":"0","hs_num_of_associated_line_items":"0","hs_num_target_accounts":"0","hs_number_of_call_engagements":"0","hs_number_of_inbound_calls":"0","hs_number_of_outbound_calls":"0","hs_number_of_overdue_tasks":"0","hs_object_id":"55458337462","hs_object_source":"INTEGRATION","hs_object_source_id":"28056811","hs_object_source_label":"INTEGRATION","hs_open_amount_in_home_currency":"20000","hs_open_deal_create_date":"1770128699818","hs_projected_amount":"0","hs_projected_amount_in_home_currency":"0","hs_v2_date_entered_current_stage":"2026-02-03T14:24:59.818Z","hs_v2_time_in_current_stage":"2026-02-03T14:24:59.818Z","num_associated_contacts":"0","num_notes":"0","pipeline":"default"},"createdAt":"2026-02-03T14:24:59.818Z","updatedAt":"2026-02-03T14:24:59.818Z","archived":false,"url":"https://app.hubspot.com/contacts/23170316/record/0-3/55458337462"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c8298557dbcb1f3-EWR
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1862'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:25:00 GMT
+      Location:
+      - https://api.hubapi.com/crm/objects/v3/deals/55458337462
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=iSRMomZ4RDv6u8mXdF159R2COzME54WiRUquC1%2FXREjjvPUHmwTIlixD6LA7IAim7tDT%2FrU5nljlk6csuBz8Ya6QU1zV9H1g9Re97AwF0tGk%2BWNViFgKIDYSY3qtbvEO"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=xPhFYGGbXhaDGEd103exdZNhumEf6dlmP6wzAAokXOc-1770128700-1.0.1.1-L2R0Wgw0RO8NpSpw88BbwHU7ZHNNUxywPuPj1hbzeA22Hd5zGMUQNzIPoecnm8SVo50Uyo1LJ7CmUdhM2NTwAt4ClSxMdvP4x5C3kxSVEh0;
+        path=/; expires=Tue, 03-Feb-26 14:55:00 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      x-hubspot-correlation-id:
+      - eb03ba91-798c-4219-9a29-8b1b871586ff
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '105'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["collector.graphql_query.execute",
+        "crm.objects.owners.read", "crm.lists.read", "settings.users.teams.read",
+        "crm.objects.deals.read", "crm.objects.subscriptions.read", "crm.objects.services.read",
+        "crm.extensions_calling_transcripts.read", "cms.functions.write", "crm.objects.listings.write",
+        "crm.objects.custom.read", "cms.knowledge_base.settings.read", "conversations.visitor_identification.tokens.create",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "integrations.zoom-app.playbooks.read",
+        "behavioral_events.event_definitions.read_write", "analytics.behavioral_events.send",
+        "media_bridge.read", "settings.users.teams.write", "communication_preferences.read",
+        "settings.security.security_health.read", "crm.schemas.services.read", "crm.objects.orders.write",
+        "scheduler.meetings.meeting-link.read", "crm.schemas.line_items.read", "settings.billing.write",
+        "crm.objects.partner-services.write", "crm.import", "collector.graphql_schema.read",
+        "crm.schemas.deals.write", "crm.schemas.subscriptions.read", "cms.membership.access_groups.write",
+        "crm.schemas.companies.read", "actions", "crm.extensions_calling_transcripts.write",
+        "cms.knowledge_base.articles.write", "crm.objects.commercepayments.read",
+        "crm.objects.products.write", "crm.objects.feedback_submissions.read", "crm.schemas.invoices.write",
+        "crm.objects.services.write", "crm.objects.subscriptions.write", "crm.schemas.commercepayments.write",
+        "communication_preferences.statuses.batch.write", "sales-email-read", "crm.objects.contacts.read",
+        "crm.objects.invoices.read", "crm.schemas.orders.read", "crm.lists.write",
+        "crm.schemas.deals.read", "conversations.custom_channels.write", "crm.objects.deals.write",
+        "e-commerce", "cms.domains.write", "crm.schemas.contacts.write", "crm.objects.projects.read",
+        "crm.schemas.carts.write", "transactional-email", "forms-uploaded-files",
+        "conversations.read", "account-info.security.read", "record_images.signed_urls.read",
+        "settings.currencies.write", "crm.objects.goals.write", "crm.objects.line_items.write",
+        "crm.objects.contacts.write", "crm.objects.line_items.read", "crm.objects.goals.read",
+        "crm.objects.partner-clients.write", "crm.schemas.listings.write", "communication_preferences.write",
+        "crm.schemas.contacts.read", "crm.objects.quotes.write", "crm.objects.leads.read",
+        "crm.objects.leads.write", "files.ui_hidden.read", "crm.schemas.services.write",
+        "communication_preferences.read_write", "crm.schemas.invoices.read", "crm.schemas.forecasts.read",
+        "crm.objects.quotes.read", "crm.objects.partner-clients.read", "marketing.campaigns.read",
+        "crm.objects.courses.read", "timeline", "crm.objects.marketing_events.read",
+        "cms.knowledge_base.settings.write", "conversations.write", "crm.pipelines.orders.read",
+        "cms.domains.read", "crm.objects.products.read", "crm.schemas.projects.read",
+        "external_integrations.forms.access", "accounting", "crm.objects.orders.read",
+        "crm.export", "media_bridge.write", "automation", "crm.objects.companies.write",
+        "crm.schemas.carts.read", "business-intelligence", "crm.dealsplits.read_write",
+        "automation.sequences.enrollments.write", "crm.schemas.listings.read", "crm.objects.forecasts.read",
+        "crm.schemas.companies.write", "crm.schemas.subscriptions.write", "crm.objects.commercepayments.write",
+        "marketing-email", "crm.objects.invoices.write", "cms.knowledge_base.articles.read",
+        "automation.sequences.read", "crm.objects.users.write", "crm.objects.users.read",
+        "crm.objects.partner-services.read", "crm.objects.appointments.write", "files",
+        "marketing.campaigns.revenue.read", "settings.users.write", "crm.objects.carts.write",
+        "hubdb", "tickets", "communication_preferences.statuses.batch.read", "crm.schemas.orders.write",
+        "content", "cms.knowledge_base.articles.publish", "conversations.custom_channels.read",
+        "crm.schemas.courses.write", "cms.functions.read", "crm.schemas.appointments.read",
+        "crm.objects.custom.write", "marketing.campaigns.write", "crm.objects.appointments.read",
+        "crm.schemas.appointments.write", "oauth", "crm.schemas.courses.read", "settings.users.read",
+        "cms.performance.read", "social", "tax_rates.read", "crm.objects.projects.write",
+        "crm.objects.marketing_events.write", "crm.pipelines.orders.write", "crm.schemas.custom.read",
+        "cms.membership.access_groups.read", "crm.objects.carts.read", "crm.objects.courses.write",
+        "crm.schemas.projects.write", "ctas.read", "crm.schemas.commercepayments.read",
+        "crm.objects.listings.read", "settings.currencies.read", "integration-sync",
+        "forms"], "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c82985788666b90-EWR
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4621'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:25:00 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=KLNducQEtZUbey%2FKM9lWYqd9q4GG6oHgFIKIUyKduvDKZsTmcJhTq18q8cy3xP8i25nQjKDgsbIEWqZ3Wia7LDaymSW9dN3NUELpyRgi0JKHZSEwA92t%2FQl7f2CmKFy0"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=NwRGAdTHlDZ1sYjCkCRIJIqCyGYo7LU4VcFWmFDL73Q-1770128700-1.0.1.1-MHygiQG3z_5WCBAODyhD0N1gcEA9NHhavVAke3I4ApPcgDSJkqmJIP__xCBGnp9YWsDSHs7g1aq1m.Vr0GcnTJrSVDdZCkwleKq2sr1Jf8g;
+        path=/; expires=Tue, 03-Feb-26 14:55:00 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '5159'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 43a97353-f413-4544-85ff-086de5da6164
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Content-Type:
+      - a
+    method: GET
+    uri: https://api.hubapi.com/crm/v3/objects/contacts/john.doe@example.com?idProperty=email
+  response:
+    body:
+      string: '{"id":"195327102299","properties":{"createdate":"2026-01-22T21:13:26.655Z","email":"john.doe@example.com","firstname":"John","hs_object_id":"195327102299","lastmodifieddate":"2026-02-03T00:24:50.434Z","lastname":"Doe"},"createdAt":"2026-01-22T21:13:26.655Z","updatedAt":"2026-02-03T00:24:50.434Z","archived":false,"url":"https://app.hubspot.com/contacts/23170316/record/0-1/195327102299"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c8298589e0b1016-EWR
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '388'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:25:00 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=lEd791TKjNytYjzE6whJUIiQISdudEZuI74fm6hTe07pcE187QnmgFt0oK9CehTYvPi5%2F1PvNuhm9tIHhKU0IxEwZI%2BfceyykCHXfxqoijNxabxBgdhDKapgnmZ3tUN6"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=GDVMlUWIlD37i3GNPRffrH5JAU4ARNFVCvOi7CgKneU-1770128700-1.0.1.1-oVKZ5yfePKpwk5LDA74SPjqb.KvLmp7fGJj1Mwrwz1cJsmaQuDiM5M4A8FRlkm_wsy_4YJwYyGa.FIDbo.4vDzWhEv5tBQvPOxNb7..HztM;
+        path=/; expires=Tue, 03-Feb-26 14:55:00 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      x-hubspot-correlation-id:
+      - 0243b2a8-6cee-47c3-be5c-83111b1036d7
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '104'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["collector.graphql_query.execute",
+        "crm.objects.owners.read", "crm.lists.read", "settings.users.teams.read",
+        "crm.objects.deals.read", "crm.objects.subscriptions.read", "crm.objects.services.read",
+        "crm.extensions_calling_transcripts.read", "cms.functions.write", "crm.objects.listings.write",
+        "crm.objects.custom.read", "cms.knowledge_base.settings.read", "conversations.visitor_identification.tokens.create",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "integrations.zoom-app.playbooks.read",
+        "behavioral_events.event_definitions.read_write", "analytics.behavioral_events.send",
+        "media_bridge.read", "settings.users.teams.write", "communication_preferences.read",
+        "settings.security.security_health.read", "crm.schemas.services.read", "crm.objects.orders.write",
+        "scheduler.meetings.meeting-link.read", "crm.schemas.line_items.read", "settings.billing.write",
+        "crm.objects.partner-services.write", "crm.import", "collector.graphql_schema.read",
+        "crm.schemas.deals.write", "crm.schemas.subscriptions.read", "cms.membership.access_groups.write",
+        "crm.schemas.companies.read", "actions", "crm.extensions_calling_transcripts.write",
+        "cms.knowledge_base.articles.write", "crm.objects.commercepayments.read",
+        "crm.objects.products.write", "crm.objects.feedback_submissions.read", "crm.schemas.invoices.write",
+        "crm.objects.services.write", "crm.objects.subscriptions.write", "crm.schemas.commercepayments.write",
+        "communication_preferences.statuses.batch.write", "sales-email-read", "crm.objects.contacts.read",
+        "crm.objects.invoices.read", "crm.schemas.orders.read", "crm.lists.write",
+        "crm.schemas.deals.read", "conversations.custom_channels.write", "crm.objects.deals.write",
+        "e-commerce", "cms.domains.write", "crm.schemas.contacts.write", "crm.objects.projects.read",
+        "crm.schemas.carts.write", "transactional-email", "forms-uploaded-files",
+        "conversations.read", "account-info.security.read", "record_images.signed_urls.read",
+        "settings.currencies.write", "crm.objects.goals.write", "crm.objects.line_items.write",
+        "crm.objects.contacts.write", "crm.objects.line_items.read", "crm.objects.goals.read",
+        "crm.objects.partner-clients.write", "crm.schemas.listings.write", "communication_preferences.write",
+        "crm.schemas.contacts.read", "crm.objects.quotes.write", "crm.objects.leads.read",
+        "crm.objects.leads.write", "files.ui_hidden.read", "crm.schemas.services.write",
+        "communication_preferences.read_write", "crm.schemas.invoices.read", "crm.schemas.forecasts.read",
+        "crm.objects.quotes.read", "crm.objects.partner-clients.read", "marketing.campaigns.read",
+        "crm.objects.courses.read", "timeline", "crm.objects.marketing_events.read",
+        "cms.knowledge_base.settings.write", "conversations.write", "crm.pipelines.orders.read",
+        "cms.domains.read", "crm.objects.products.read", "crm.schemas.projects.read",
+        "external_integrations.forms.access", "accounting", "crm.objects.orders.read",
+        "crm.export", "media_bridge.write", "automation", "crm.objects.companies.write",
+        "crm.schemas.carts.read", "business-intelligence", "crm.dealsplits.read_write",
+        "automation.sequences.enrollments.write", "crm.schemas.listings.read", "crm.objects.forecasts.read",
+        "crm.schemas.companies.write", "crm.schemas.subscriptions.write", "crm.objects.commercepayments.write",
+        "marketing-email", "crm.objects.invoices.write", "cms.knowledge_base.articles.read",
+        "automation.sequences.read", "crm.objects.users.write", "crm.objects.users.read",
+        "crm.objects.partner-services.read", "crm.objects.appointments.write", "files",
+        "marketing.campaigns.revenue.read", "settings.users.write", "crm.objects.carts.write",
+        "hubdb", "tickets", "communication_preferences.statuses.batch.read", "crm.schemas.orders.write",
+        "content", "cms.knowledge_base.articles.publish", "conversations.custom_channels.read",
+        "crm.schemas.courses.write", "cms.functions.read", "crm.schemas.appointments.read",
+        "crm.objects.custom.write", "marketing.campaigns.write", "crm.objects.appointments.read",
+        "crm.schemas.appointments.write", "oauth", "crm.schemas.courses.read", "settings.users.read",
+        "cms.performance.read", "social", "tax_rates.read", "crm.objects.projects.write",
+        "crm.objects.marketing_events.write", "crm.pipelines.orders.write", "crm.schemas.custom.read",
+        "cms.membership.access_groups.read", "crm.objects.carts.read", "crm.objects.courses.write",
+        "crm.schemas.projects.write", "ctas.read", "crm.schemas.commercepayments.read",
+        "crm.objects.listings.read", "settings.currencies.read", "integration-sync",
+        "forms"], "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c829859988752d3-EWR
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4621'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:25:00 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=vFlG3z6XL8cG59jxte0rXYwIw%2B%2BORwSTR5WPzNFlOauP9Y0zih46KPFOYeLwf1DR3NnOzvgnO79p6sa1nWlpzAhT37K%2FhI8v42HD9tZoUw7nRKHTfnpYSaxqbxydGWJA"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=NdBZqqVSUJyTs1AxIJJv.P3KeHeheA9mm5dCZjeJ_cY-1770128700-1.0.1.1-SLQDBM42hfMQuoc.lCX.WAvqrKLZB2aYWN1qabXauOjfCqab9DrzHrloCVM5pHcucIsLzEPFiSmzs70AFHtTGYwVWSIr8ZjYTNjba5ZUrb4;
+        path=/; expires=Tue, 03-Feb-26 14:55:00 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '5159'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 3f2db353-2d7e-45b6-a8cc-58818533e6b3
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Content-Type:
+      - a
+    method: GET
+    uri: https://api.hubapi.com/crm/v4/associations/deals/contacts/labels
+  response:
+    body:
+      string: '{"results":[{"category":"HUBSPOT_DEFINED","typeId":3,"label":null}]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c82985a58cbc425-EWR
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '68'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:25:00 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=cU5ev%2FejG1%2Bhu9Z1%2FS2dn3hz706sCjyFiFo79ACMfKqSrz3jhGZ6QgyVBFDSBBEBMbCcMs7cx6gZtZPR0MBanoFCRYHD4S%2FggpIYodshhYdZFyRFA1HIrvCDYr62YBJf"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=XFC.vFwbGYVE5FGJegOp4nMVBnuRUhfFrL6CuwQ1eOs-1770128700-1.0.1.1-aJo7F9e_0kjuVV3JHsDQbRZv1YaBCtLQQbq6jFF84.YEZbiwMcOEJZZlGSphAJkOdF993n2LjnjgENqd_oDXQCH_i1KpjvmjUG7DifBWa0o;
+        path=/; expires=Tue, 03-Feb-26 14:55:00 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, Accept-Encoding
+      access-control-allow-credentials:
+      - 'false'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - f821ee94-49f6-44fe-b02f-246e1a0632e9
+    status:
+      code: 200
+      message: OK
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["collector.graphql_query.execute",
+        "crm.objects.owners.read", "crm.lists.read", "settings.users.teams.read",
+        "crm.objects.deals.read", "crm.objects.subscriptions.read", "crm.objects.services.read",
+        "crm.extensions_calling_transcripts.read", "cms.functions.write", "crm.objects.listings.write",
+        "crm.objects.custom.read", "cms.knowledge_base.settings.read", "conversations.visitor_identification.tokens.create",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "integrations.zoom-app.playbooks.read",
+        "behavioral_events.event_definitions.read_write", "analytics.behavioral_events.send",
+        "media_bridge.read", "settings.users.teams.write", "communication_preferences.read",
+        "settings.security.security_health.read", "crm.schemas.services.read", "crm.objects.orders.write",
+        "scheduler.meetings.meeting-link.read", "crm.schemas.line_items.read", "settings.billing.write",
+        "crm.objects.partner-services.write", "crm.import", "collector.graphql_schema.read",
+        "crm.schemas.deals.write", "crm.schemas.subscriptions.read", "cms.membership.access_groups.write",
+        "crm.schemas.companies.read", "actions", "crm.extensions_calling_transcripts.write",
+        "cms.knowledge_base.articles.write", "crm.objects.commercepayments.read",
+        "crm.objects.products.write", "crm.objects.feedback_submissions.read", "crm.schemas.invoices.write",
+        "crm.objects.services.write", "crm.objects.subscriptions.write", "crm.schemas.commercepayments.write",
+        "communication_preferences.statuses.batch.write", "sales-email-read", "crm.objects.contacts.read",
+        "crm.objects.invoices.read", "crm.schemas.orders.read", "crm.lists.write",
+        "crm.schemas.deals.read", "conversations.custom_channels.write", "crm.objects.deals.write",
+        "e-commerce", "cms.domains.write", "crm.schemas.contacts.write", "crm.objects.projects.read",
+        "crm.schemas.carts.write", "transactional-email", "forms-uploaded-files",
+        "conversations.read", "account-info.security.read", "record_images.signed_urls.read",
+        "settings.currencies.write", "crm.objects.goals.write", "crm.objects.line_items.write",
+        "crm.objects.contacts.write", "crm.objects.line_items.read", "crm.objects.goals.read",
+        "crm.objects.partner-clients.write", "crm.schemas.listings.write", "communication_preferences.write",
+        "crm.schemas.contacts.read", "crm.objects.quotes.write", "crm.objects.leads.read",
+        "crm.objects.leads.write", "files.ui_hidden.read", "crm.schemas.services.write",
+        "communication_preferences.read_write", "crm.schemas.invoices.read", "crm.schemas.forecasts.read",
+        "crm.objects.quotes.read", "crm.objects.partner-clients.read", "marketing.campaigns.read",
+        "crm.objects.courses.read", "timeline", "crm.objects.marketing_events.read",
+        "cms.knowledge_base.settings.write", "conversations.write", "crm.pipelines.orders.read",
+        "cms.domains.read", "crm.objects.products.read", "crm.schemas.projects.read",
+        "external_integrations.forms.access", "accounting", "crm.objects.orders.read",
+        "crm.export", "media_bridge.write", "automation", "crm.objects.companies.write",
+        "crm.schemas.carts.read", "business-intelligence", "crm.dealsplits.read_write",
+        "automation.sequences.enrollments.write", "crm.schemas.listings.read", "crm.objects.forecasts.read",
+        "crm.schemas.companies.write", "crm.schemas.subscriptions.write", "crm.objects.commercepayments.write",
+        "marketing-email", "crm.objects.invoices.write", "cms.knowledge_base.articles.read",
+        "automation.sequences.read", "crm.objects.users.write", "crm.objects.users.read",
+        "crm.objects.partner-services.read", "crm.objects.appointments.write", "files",
+        "marketing.campaigns.revenue.read", "settings.users.write", "crm.objects.carts.write",
+        "hubdb", "tickets", "communication_preferences.statuses.batch.read", "crm.schemas.orders.write",
+        "content", "cms.knowledge_base.articles.publish", "conversations.custom_channels.read",
+        "crm.schemas.courses.write", "cms.functions.read", "crm.schemas.appointments.read",
+        "crm.objects.custom.write", "marketing.campaigns.write", "crm.objects.appointments.read",
+        "crm.schemas.appointments.write", "oauth", "crm.schemas.courses.read", "settings.users.read",
+        "cms.performance.read", "social", "tax_rates.read", "crm.objects.projects.write",
+        "crm.objects.marketing_events.write", "crm.pipelines.orders.write", "crm.schemas.custom.read",
+        "cms.membership.access_groups.read", "crm.objects.carts.read", "crm.objects.courses.write",
+        "crm.schemas.projects.write", "ctas.read", "crm.schemas.commercepayments.read",
+        "crm.objects.listings.read", "settings.currencies.read", "integration-sync",
+        "forms"], "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c82985b484614ed-EWR
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4621'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:25:00 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Lqu%2BWKrYu3VoP71MslRtelVMI6RvKljYL5b8rN4f4Yq0N%2BuDh6TuPNVZnhbZWqMCieC63XnrAqH%2BXPQeDB9QFD8iUk5IZJyWSVxJ3sJZFDk3LL%2Bhp9guAlChem7a6MbZ"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=cq7JZKyeDpNmX1NGRDb2QeMfmA9zsdng8u9f.l4i.Ow-1770128700-1.0.1.1-7IkIqXu.6bRZZRCD_5l7YJfOXER85MFaUaO7mwiLhS.YHfQcfOeqCBqHJZKGyX2D64SvT9dBY7O88iGUwuE0e2.VN4CXW0Wb50ySfIvalLs;
+        path=/; expires=Tue, 03-Feb-26 14:55:00 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '5159'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 539c3b99-59a0-48cc-905d-eba498445895
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '[{"associationCategory": "HUBSPOT_DEFINED", "associationTypeId": 3}]'
+    headers:
+      Content-Length:
+      - '6'
+      Content-Type:
+      - a
+    method: PUT
+    uri: https://api.hubapi.com/crm/v4/objects/deals/55458337462/associations/contact/195327102299
+  response:
+    body:
+      string: '{"fromObjectTypeId":"0-3","fromObjectId":55458337462,"toObjectTypeId":"0-1","toObjectId":195327102299,"labels":[]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c82985c9db3424b-EWR
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '114'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:25:01 GMT
+      Location:
+      - https://api.hubapi.com/crm/objects/v4/deals/55458337462/associations/contact/195327102299/55458337462
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=GLB%2FFi%2FG9XEOID3M%2BXyR1Gu2wdOE%2FzpBVYnhm01OQsvuV%2B6aiNjAZMKZBvzH0Z9We7BIDUvK6qlkd4OxVHxVYF3hyvlY9a6nFYd0Mx0bnb75baGhYm8Fl15PE2lUp78Y"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=5K2pDBMuRY3UffJcaq8lnUx5EHbMSjLvkF1pzchBC4Y-1770128701-1.0.1.1-rzyAsFjn_1tFKKupbARFLtn6y8KLdtGTtjn0Fx_93GboqFMbVX0qqRxu_GX72b3hPDK6iCKJd.Lj1AGThq4inzVSNA08ZBcd4SnaNdlb0As;
+        path=/; expires=Tue, 03-Feb-26 14:55:01 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, Accept-Encoding
+      access-control-allow-credentials:
+      - 'false'
+      x-hubspot-correlation-id:
+      - f584fecb-c388-43b4-ad0f-d8c58a1ee0fb
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '102'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["collector.graphql_query.execute",
+        "crm.objects.owners.read", "crm.lists.read", "settings.users.teams.read",
+        "crm.objects.deals.read", "crm.objects.subscriptions.read", "crm.objects.services.read",
+        "crm.extensions_calling_transcripts.read", "cms.functions.write", "crm.objects.listings.write",
+        "crm.objects.custom.read", "cms.knowledge_base.settings.read", "conversations.visitor_identification.tokens.create",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "integrations.zoom-app.playbooks.read",
+        "behavioral_events.event_definitions.read_write", "analytics.behavioral_events.send",
+        "media_bridge.read", "settings.users.teams.write", "communication_preferences.read",
+        "settings.security.security_health.read", "crm.schemas.services.read", "crm.objects.orders.write",
+        "scheduler.meetings.meeting-link.read", "crm.schemas.line_items.read", "settings.billing.write",
+        "crm.objects.partner-services.write", "crm.import", "collector.graphql_schema.read",
+        "crm.schemas.deals.write", "crm.schemas.subscriptions.read", "cms.membership.access_groups.write",
+        "crm.schemas.companies.read", "actions", "crm.extensions_calling_transcripts.write",
+        "cms.knowledge_base.articles.write", "crm.objects.commercepayments.read",
+        "crm.objects.products.write", "crm.objects.feedback_submissions.read", "crm.schemas.invoices.write",
+        "crm.objects.services.write", "crm.objects.subscriptions.write", "crm.schemas.commercepayments.write",
+        "communication_preferences.statuses.batch.write", "sales-email-read", "crm.objects.contacts.read",
+        "crm.objects.invoices.read", "crm.schemas.orders.read", "crm.lists.write",
+        "crm.schemas.deals.read", "conversations.custom_channels.write", "crm.objects.deals.write",
+        "e-commerce", "cms.domains.write", "crm.schemas.contacts.write", "crm.objects.projects.read",
+        "crm.schemas.carts.write", "transactional-email", "forms-uploaded-files",
+        "conversations.read", "account-info.security.read", "record_images.signed_urls.read",
+        "settings.currencies.write", "crm.objects.goals.write", "crm.objects.line_items.write",
+        "crm.objects.contacts.write", "crm.objects.line_items.read", "crm.objects.goals.read",
+        "crm.objects.partner-clients.write", "crm.schemas.listings.write", "communication_preferences.write",
+        "crm.schemas.contacts.read", "crm.objects.quotes.write", "crm.objects.leads.read",
+        "crm.objects.leads.write", "files.ui_hidden.read", "crm.schemas.services.write",
+        "communication_preferences.read_write", "crm.schemas.invoices.read", "crm.schemas.forecasts.read",
+        "crm.objects.quotes.read", "crm.objects.partner-clients.read", "marketing.campaigns.read",
+        "crm.objects.courses.read", "timeline", "crm.objects.marketing_events.read",
+        "cms.knowledge_base.settings.write", "conversations.write", "crm.pipelines.orders.read",
+        "cms.domains.read", "crm.objects.products.read", "crm.schemas.projects.read",
+        "external_integrations.forms.access", "accounting", "crm.objects.orders.read",
+        "crm.export", "media_bridge.write", "automation", "crm.objects.companies.write",
+        "crm.schemas.carts.read", "business-intelligence", "crm.dealsplits.read_write",
+        "automation.sequences.enrollments.write", "crm.schemas.listings.read", "crm.objects.forecasts.read",
+        "crm.schemas.companies.write", "crm.schemas.subscriptions.write", "crm.objects.commercepayments.write",
+        "marketing-email", "crm.objects.invoices.write", "cms.knowledge_base.articles.read",
+        "automation.sequences.read", "crm.objects.users.write", "crm.objects.users.read",
+        "crm.objects.partner-services.read", "crm.objects.appointments.write", "files",
+        "marketing.campaigns.revenue.read", "settings.users.write", "crm.objects.carts.write",
+        "hubdb", "tickets", "communication_preferences.statuses.batch.read", "crm.schemas.orders.write",
+        "content", "cms.knowledge_base.articles.publish", "conversations.custom_channels.read",
+        "crm.schemas.courses.write", "cms.functions.read", "crm.schemas.appointments.read",
+        "crm.objects.custom.write", "marketing.campaigns.write", "crm.objects.appointments.read",
+        "crm.schemas.appointments.write", "oauth", "crm.schemas.courses.read", "settings.users.read",
+        "cms.performance.read", "social", "tax_rates.read", "crm.objects.projects.write",
+        "crm.objects.marketing_events.write", "crm.pipelines.orders.write", "crm.schemas.custom.read",
+        "cms.membership.access_groups.read", "crm.objects.carts.read", "crm.objects.courses.write",
+        "crm.schemas.projects.write", "ctas.read", "crm.schemas.commercepayments.read",
+        "crm.objects.listings.read", "settings.currencies.read", "integration-sync",
+        "forms"], "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c82985dcdddc2ef-EWR
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4621'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:25:01 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=%2F2ig5crOwFK%2BMeqov%2F6bClfQtgWfIvkNECjkiA%2F120qiHIkJ3osDdUlnNuCJyaSh%2BDEM98aZ52TxT6aytcaYrUBNGs%2BGLKgpmkezwDXUci8BjJT%2BZGP0ikPvTxglqSpg"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=HSqI7bVoqVr6_5lan8A6eBZqlrss1WQjQh5mKpewoRI-1770128701-1.0.1.1-P9_wfP6.V_2V951YqPzcfnzp1.w9dJYvoOrHRD4S_ImYXoYLc75xDXkCWMiTMT84.JsKk2CuN6k2yC9oKqR.PrA0UyO6nVU1FbxTScHHeVo;
+        path=/; expires=Tue, 03-Feb-26 14:55:01 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '5159'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 1fd9aa30-9e34-441a-94ea-8ae77c9e33f5
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"filterGroups": [{"filters": [{"propertyName": "dealname", "operator":
+      "EQ", "value": "Duplicate Deal Name Test"}]}]}'
+    headers:
+      Content-Length:
+      - '1'
+      Content-Type:
+      - a
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/deals/search
+  response:
+    body:
+      string: '{"total":4,"results":[{"id":"55408107447","properties":{"amount":"10000","closedate":"2024-12-31T00:00:00Z","createdate":"2026-02-02T22:24:43.327Z","dealname":"Duplicate
+        Deal Name Test","dealstage":"qualifiedtobuy","hs_lastmodifieddate":"2026-02-03T00:24:51.461Z","hs_object_id":"55408107447","pipeline":"default"},"createdAt":"2026-02-02T22:24:43.327Z","updatedAt":"2026-02-03T00:24:51.461Z","archived":false,"url":"https://app.hubspot.com/contacts/23170316/record/0-3/55408107447"},{"id":"55405355419","properties":{"amount":"20000","closedate":"2024-12-31T00:00:00Z","createdate":"2026-02-02T22:24:44.976Z","dealname":"Duplicate
+        Deal Name Test","dealstage":"qualifiedtobuy","hs_lastmodifieddate":"2026-02-02T22:25:56.351Z","hs_object_id":"55405355419","pipeline":"default"},"createdAt":"2026-02-02T22:24:44.976Z","updatedAt":"2026-02-02T22:25:56.351Z","archived":false,"url":"https://app.hubspot.com/contacts/23170316/record/0-3/55405355419"},{"id":"55430471028","properties":{"amount":"10000","closedate":"2024-12-31T00:00:00Z","createdate":"2026-02-03T00:24:46.163Z","dealname":"Duplicate
+        Deal Name Test","dealstage":"qualifiedtobuy","hs_lastmodifieddate":"2026-02-03T00:25:54.312Z","hs_object_id":"55430471028","pipeline":"default"},"createdAt":"2026-02-03T00:24:46.163Z","updatedAt":"2026-02-03T00:25:54.312Z","archived":false,"url":"https://app.hubspot.com/contacts/23170316/record/0-3/55430471028"},{"id":"55429318764","properties":{"amount":"20000","closedate":"2024-12-31T00:00:00Z","createdate":"2026-02-03T00:24:47.995Z","dealname":"Duplicate
+        Deal Name Test","dealstage":"qualifiedtobuy","hs_lastmodifieddate":"2026-02-03T00:25:55.205Z","hs_object_id":"55429318764","pipeline":"default"},"createdAt":"2026-02-03T00:24:47.995Z","updatedAt":"2026-02-03T00:25:55.205Z","archived":false,"url":"https://app.hubspot.com/contacts/23170316/record/0-3/55429318764"}]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c82985e99291c6f-EWR
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1871'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 03 Feb 2026 14:25:01 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=cUBcDRWvA%2B5TC18qIBriFT%2FKye1xu%2BE0RRVa9fvB7ubNrfp3I3o8ztp2ag7T9MzErW05G1NTn2x6qLvDwUnDf50RkBJY7WyEmBRuhZM%2F%2Bi%2FKlfyabi6t3lTaMWB9Y12H"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=r1vmw_YZ36wgBtENkA34TgnDImI0sstBTs.VL6s9Jow-1770128701-1.0.1.1-jcgDx5o6rkNJb2qGG2M_BN4wYYCWWXHXcMc14OP718q5VZxD4zSQhEWrduqIkjGiidjh056Nzu3gFYGDMRf6DQM475gpPm4ohcwqLf7ppes;
+        path=/; expires=Tue, 03-Feb-26 14:55:01 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 6b407128-de38-4236-bf70-6f9998335973
+    status:
+      code: 200
+      message: OK
+version: 1

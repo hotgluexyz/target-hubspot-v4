@@ -1,0 +1,182 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["collector.graphql_query.execute",
+        "crm.objects.owners.read", "crm.lists.read", "settings.users.teams.read",
+        "crm.objects.deals.read", "crm.objects.subscriptions.read", "crm.objects.services.read",
+        "crm.extensions_calling_transcripts.read", "cms.functions.write", "crm.objects.listings.write",
+        "crm.objects.custom.read", "cms.knowledge_base.settings.read", "conversations.visitor_identification.tokens.create",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "integrations.zoom-app.playbooks.read",
+        "behavioral_events.event_definitions.read_write", "analytics.behavioral_events.send",
+        "media_bridge.read", "settings.users.teams.write", "communication_preferences.read",
+        "settings.security.security_health.read", "crm.schemas.services.read", "crm.objects.orders.write",
+        "scheduler.meetings.meeting-link.read", "crm.schemas.line_items.read", "settings.billing.write",
+        "crm.objects.partner-services.write", "crm.import", "collector.graphql_schema.read",
+        "crm.schemas.deals.write", "crm.schemas.subscriptions.read", "cms.membership.access_groups.write",
+        "crm.schemas.companies.read", "actions", "crm.extensions_calling_transcripts.write",
+        "cms.knowledge_base.articles.write", "crm.objects.commercepayments.read",
+        "crm.objects.products.write", "crm.objects.feedback_submissions.read", "crm.schemas.invoices.write",
+        "crm.objects.services.write", "crm.objects.subscriptions.write", "crm.schemas.commercepayments.write",
+        "communication_preferences.statuses.batch.write", "sales-email-read", "crm.objects.contacts.read",
+        "crm.objects.invoices.read", "crm.schemas.orders.read", "crm.lists.write",
+        "crm.schemas.deals.read", "conversations.custom_channels.write", "crm.objects.deals.write",
+        "e-commerce", "cms.domains.write", "crm.schemas.contacts.write", "crm.objects.projects.read",
+        "crm.schemas.carts.write", "transactional-email", "forms-uploaded-files",
+        "conversations.read", "account-info.security.read", "record_images.signed_urls.read",
+        "settings.currencies.write", "crm.objects.goals.write", "crm.objects.line_items.write",
+        "crm.objects.contacts.write", "crm.objects.line_items.read", "crm.objects.goals.read",
+        "crm.objects.partner-clients.write", "crm.schemas.listings.write", "communication_preferences.write",
+        "crm.schemas.contacts.read", "crm.objects.quotes.write", "crm.objects.leads.read",
+        "crm.objects.leads.write", "files.ui_hidden.read", "crm.schemas.services.write",
+        "communication_preferences.read_write", "crm.schemas.invoices.read", "crm.schemas.forecasts.read",
+        "crm.objects.quotes.read", "crm.objects.partner-clients.read", "marketing.campaigns.read",
+        "crm.objects.courses.read", "timeline", "crm.objects.marketing_events.read",
+        "cms.knowledge_base.settings.write", "conversations.write", "crm.pipelines.orders.read",
+        "cms.domains.read", "crm.objects.products.read", "crm.schemas.projects.read",
+        "external_integrations.forms.access", "accounting", "crm.objects.orders.read",
+        "crm.export", "media_bridge.write", "automation", "crm.objects.companies.write",
+        "crm.schemas.carts.read", "business-intelligence", "crm.dealsplits.read_write",
+        "automation.sequences.enrollments.write", "crm.schemas.listings.read", "crm.objects.forecasts.read",
+        "crm.schemas.companies.write", "crm.schemas.subscriptions.write", "crm.objects.commercepayments.write",
+        "marketing-email", "crm.objects.invoices.write", "cms.knowledge_base.articles.read",
+        "automation.sequences.read", "crm.objects.users.write", "crm.objects.users.read",
+        "crm.objects.partner-services.read", "crm.objects.appointments.write", "files",
+        "marketing.campaigns.revenue.read", "settings.users.write", "crm.objects.carts.write",
+        "hubdb", "tickets", "communication_preferences.statuses.batch.read", "crm.schemas.orders.write",
+        "content", "cms.knowledge_base.articles.publish", "conversations.custom_channels.read",
+        "crm.schemas.courses.write", "cms.functions.read", "crm.schemas.appointments.read",
+        "crm.objects.custom.write", "marketing.campaigns.write", "crm.objects.appointments.read",
+        "crm.schemas.appointments.write", "oauth", "crm.schemas.courses.read", "settings.users.read",
+        "cms.performance.read", "social", "tax_rates.read", "crm.objects.projects.write",
+        "crm.objects.marketing_events.write", "crm.pipelines.orders.write", "crm.schemas.custom.read",
+        "cms.membership.access_groups.read", "crm.objects.carts.read", "crm.objects.courses.write",
+        "crm.schemas.projects.write", "ctas.read", "crm.schemas.commercepayments.read",
+        "crm.objects.listings.read", "settings.currencies.read", "integration-sync",
+        "forms"], "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c7d2b33f9dd2c56-EWR
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4621'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Mon, 02 Feb 2026 22:36:41 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=ipCOwe0qwAk29wp%2FUPkGx2ZlaCpc3owA17sB1%2BwGiwCOyt1ZR8j2kEoeb5NXuzaiqNC922dgPzftJ4SRDesSNYzrRYvqnlhNiPYnF26%2Bx3W6kJXxTnWpdiAXS6GGtNIC"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=m2amUuuZ8GFjSXnXe0ga9eB.ffOd_qRghZQnMyyV1Fg-1770071801-1.0.1.1-NtT4qOUf9tDff6bhVHrE7KILOgwqXz7.U_B3aQOMK1B4UdaoQOqRZOOHroaGqETfNpqrzFUUC2YXeOjYDDgeUFvnvqWkVzgzHHx6FZp35p0;
+        path=/; expires=Mon, 02-Feb-26 23:06:41 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '5159'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 9ce7b831-d63d-4570-8449-02849ee407d1
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"properties": {"hs_timestamp": "invalid", "hs_task_body": null, "hs_task_subject":
+      null, "hs_task_status": "INVALID_STATUS", "hs_task_priority": null}}'
+    headers:
+      Content-Length:
+      - '1'
+      Content-Type:
+      - a
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/tasks
+  response:
+    body:
+      string: '{"status":"error","message":"Property values were not valid: [{\"isValid\":false,\"message\":\"INVALID_STATUS
+        was not one of the allowed options: [COMPLETED, DEFERRED, IN_PROGRESS, NOT_STARTED,
+        WAITING]\",\"error\":\"INVALID_OPTION\",\"name\":\"hs_task_status\",\"localizedErrorMessage\":\"INVALID_STATUS
+        was not one of the allowed options: [COMPLETED, DEFERRED, IN_PROGRESS, NOT_STARTED,
+        WAITING]\",\"propertyValue\":\"INVALID_STATUS\",\"portalId\":23170316},{\"isValid\":false,\"message\":\"invalid
+        was not a valid long. Portal 23170316, object type 0-27\",\"error\":\"INVALID_LONG\",\"name\":\"hs_timestamp\",\"localizedErrorMessage\":\"invalid
+        was not a valid long. Portal 23170316, object type 0-27\",\"propertyValue\":\"invalid\",\"portalId\":23170316}]","correlationId":"50fe81d5-981b-4cf5-bc9f-a73170684d79","errors":[{"message":"INVALID_STATUS
+        was not one of the allowed options: [COMPLETED, DEFERRED, IN_PROGRESS, NOT_STARTED,
+        WAITING]","code":"INVALID_OPTION","context":{"propertyName":["hs_task_status"]}},{"message":"invalid
+        was not a valid long. Portal 23170316, object type 0-27","code":"INVALID_LONG","context":{"propertyName":["hs_timestamp"]}}],"category":"VALIDATION_ERROR"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9c7d2b358a5f4a5f-EWR
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1193'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Mon, 02 Feb 2026 22:36:41 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=9sn57f%2FX0437x5zRiH%2BkxWIghhUnO3m6Ut331IIk4U1wC5ow8W%2Fpmkp%2Fcgp%2BnCbvqt8vX2z4tHut0Z6NiUd%2Bf30rgEJXK6OwRRGObcDLPdEbSAdKBy6zXTmGnajM0R3I"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=Ctg_DwQ_KKhcICwtvkTRRriy6QCnJVPlWokZuQi91rw-1770071801-1.0.1.1-_VpsbfpeFD0gVLkNlSSNcXa2yNmwrwkUOyPf0Ihi6GrjTxV_f68SZQ1qJw6HZFU4qJ8Byu.Pyj8qlGA7mGTeFrxK53ruAZxeKFJnaJ5SUKk;
+        path=/; expires=Mon, 02-Feb-26 23:06:41 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, Accept-Encoding
+      access-control-allow-credentials:
+      - 'false'
+      x-hubspot-correlation-id:
+      - 50fe81d5-981b-4cf5-bc9f-a73170684d79
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '108'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 400
+      message: Bad Request
+version: 1

@@ -1,0 +1,3 @@
+{"type": "SCHEMA", "stream": "contacts", "schema": {"type": ["object", "null"], "properties": {"properties": {"type": ["object", "null"], "properties": {"firstname": {"type": ["string", "null"]}, "lastname": {"type": ["string", "null"]}, "email": {"type": ["string", "null"]}, "id": {"type": ["string", "null"]}}}}}, "key_properties": []}
+{"type":"RECORD","stream":"contacts","record":{"properties":{"email":"batch.partial.ok.v2.smoke@testdomain.com","firstname":"Batch","lastname":"Partial-Ok"}}}
+{"type":"RECORD","stream":"contacts","record":{"properties":{"email":"not-an-email","firstname":"Batch","lastname":"Partial-Bad"}}}

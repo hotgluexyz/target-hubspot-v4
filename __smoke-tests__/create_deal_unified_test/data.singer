@@ -1,0 +1,2 @@
+{"type": "SCHEMA", "stream": "deals", "schema": {"type": ["object", "null"], "properties": {"title": {"type": ["string", "null"]}, "monetary_amount": {"type": ["number", "null"]}, "close_date": {"type": ["string", "null"]}, "status": {"type": ["string", "null"]}, "contact_email": {"type": ["string", "null"]}}}, "key_properties": []}
+{"type": "RECORD", "stream": "deals", "record": {"title": "New Deal", "monetary_amount": 50000, "close_date": "2024-12-31T00:00:00Z", "status": "qualifiedtobuy", "contact_email": "john.doe@example.com"}}

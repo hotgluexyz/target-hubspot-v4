@@ -1,0 +1,198 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["crm.objects.owners.read", "tickets",
+        "crm.lists.read", "crm.objects.deals.read", "crm.objects.products.write",
+        "crm.objects.orders.read", "sales-email-read", "crm.objects.contacts.read",
+        "content", "crm.objects.custom.read", "crm.schemas.orders.read", "crm.objects.companies.write",
+        "business-intelligence", "crm.schemas.deals.read", "crm.objects.custom.write",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "crm.schemas.contacts.write",
+        "oauth", "conversations.read", "marketing-email", "crm.objects.contacts.write",
+        "crm.objects.line_items.read", "crm.objects.marketing_events.write", "crm.schemas.contacts.read",
+        "crm.objects.quotes.write", "communication_preferences.write", "crm.schemas.custom.read",
+        "communication_preferences.read", "communication_preferences.read_write",
+        "crm.schemas.line_items.read", "crm.import", "crm.objects.quotes.read", "crm.objects.marketing_events.read",
+        "crm.schemas.companies.read", "crm.pipelines.orders.read", "conversations.write",
+        "integration-sync", "crm.objects.products.read", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a10dff8cbb5074c3-GRU
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1207'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 24 Jun 2026 19:04:26 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=W%2FUivZKySx7Rc8hQvNHCTKHYIFygdZgPBbuE9U5kNIchy11226pzUaUFYmRwzESKgXnm2BskDBbaBz%2FaH2bPQWp03NgNfoejD6W6R7FHES%2F9kWvChmvJ0YLGZ5snT55POf8yieoymuolVHJK"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '1665'
+      server-timing:
+      - hcid;desc="019efb04-f4d1-7f2d-99e2-bd9db618fa2c", cfr;desc="a10dff8d92af74c3-IAD"
+      set-cookie:
+      - __cf_bm=RvLD23cfNP3JNLuObixM1EDd8FiWu6jCEviRQdKhWwA-1782327866.3525603-1.0.1.1-vtGlrUDgQOod8N0kPraTzwLtoULXhlpWKxPSfae0hZJSd751L_e6dCjLDcdecVyjRf6D5HIvNSPQe7SReWV1kSjry2ukANcoxhRSk75e55sfpQv9jXFd2J.AhK7VtI1J;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=hubapi.com; Expires=Wed, 24
+        Jun 2026 19:34:26 GMT
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 019efb04-f4d1-7f2d-99e2-bd9db618fa2c
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"filterGroups": [{"filters": [{"propertyName": "name", "operator": "EQ",
+      "value": "Lookup Tech Solutions"}]}]}'
+    headers:
+      Content-Length:
+      - '1'
+      Content-Type:
+      - a
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies/search
+  response:
+    body:
+      string: '{"total":1,"results":[{"id":"51149864021","properties":{"createdate":"2026-02-11T20:44:11.799Z","domain":"lookuptech-updated.com","hs_lastmodifieddate":"2026-02-11T20:44:16.758Z","hs_object_id":"51149864021","name":"Lookup
+        Tech Solutions"},"createdAt":"2026-02-11T20:44:11.799Z","updatedAt":"2026-02-11T20:44:16.758Z","archived":false,"url":"https://app.hubspot.com/contacts/23170316/record/0-2/51149864021"}]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a10dff8f7b6d2bf9-GRU
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '410'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 24 Jun 2026 19:04:26 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=%2BM7RsXCeOi2wrt2Szuc9UAkYHoOHZL4EGtbW5W6ZyvEOC1BiYfWeJw%2FEvHmR88D11OfpAH9vxokXpZsHD5VtigWNt%2BHtCSOJRjwamcuzeMcriryDqOqUXjA9g6lTZUSViwNpThW5LcoJKZq2"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="019efb04-f602-756f-a234-8e86e6dcb9ac", cfr;desc="a10dff8f841f2bf9-IAD"
+      set-cookie:
+      - __cf_bm=XgFuJ1nM3.YSgnKFYHyiP0BkfmLiC9GKV112EZ.aE90-1782327866.7938273-1.0.1.1-Ib4AMczYffKYuAEDNh_59crdXQEqr.I14y51ea9MTM9IYkGdKJJ1Ozmhx2NoAIlWKNwNWxTu91i5.bh9nSrOHGtuzuGF.NAW7rzvngB111n_QD.stka6B8zCx6vvTvqk;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=hubapi.com; Expires=Wed, 24
+        Jun 2026 19:34:26 GMT
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 019efb04-f602-756f-a234-8e86e6dcb9ac
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"inputs": [{"objectWriteTraceId": "cfc995f80dc398eb22aacb30a5ebc0586000488ea6b1fd10b0604a1a70835a5e",
+      "id": "51149864021", "properties": {"name": "Lookup Tech Solutions", "domain":
+      "hgi10572-batch-company-lookup-update.example.com", "industry": "FINANCIAL_SERVICES"}}]}'
+    headers:
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies/batch/update
+  response:
+    body:
+      string: '{"completedAt":"2026-06-24T19:04:27.307Z","status":"COMPLETE","startedAt":"2026-06-24T19:04:27.183Z","results":[{"id":"51149864021","properties":{"createdate":"2026-02-11T20:44:11.799Z","domain":"hgi10572-batch-company-lookup-update.example.com","hs_lastmodifieddate":"2026-06-24T19:04:27.216Z","hs_object_id":"51149864021","hs_object_source":"INTEGRATION","hs_object_source_id":"28056811","hs_object_source_label":"INTEGRATION","hs_pipeline":"companies-lifecycle-pipeline","hs_task_label":"Lookup
+        Tech Solutions","hs_v2_date_entered_current_stage":"2026-02-11T20:44:11.799Z","hs_v2_time_in_current_stage":"2026-02-11T20:44:11.799Z","industry":"FINANCIAL_SERVICES","lifecyclestage":"lead","name":"Lookup
+        Tech Solutions"},"createdAt":"2026-02-11T20:44:11.799Z","updatedAt":"2026-06-24T19:04:27.216Z","archived":false,"objectWriteTraceId":"cfc995f80dc398eb22aacb30a5ebc0586000488ea6b1fd10b0604a1a70835a5e","url":"https://app.hubspot.com/contacts/23170316/record/0-2/51149864021"}]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a10dff913858402c-GRU
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '979'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 24 Jun 2026 19:04:27 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=cfufnXReSgnk5OwfiQD14r1pOCQkFwQZ%2FcMMxYlViKr6I%2FmLupSu2LUo9TC5cGW%2FyMM5W9h0bhfsg8ucU1V2RFRaZfB79UWKTxLMQxxTHa84YH1Ro3%2FczfUp4fJserF6Ye4AZgatGCPPVj9W"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="019efb04-f724-70c9-ae08-2c96fcb0ca27", cfr;desc="a10dff9151d1402c-GRU"
+      set-cookie:
+      - __cf_bm=9BFELh58htrtXoYI2LKjeSn.3j2q6x.ujSEV52LssrA-1782327867.0796978-1.0.1.1-DHZUNRdUkxS2GRc7RHvtjZiX2P3dOPiP2jaLqa7o5EuJPcuGE94Mmu1PxcMj8xNojnmk34r0Bz2Ejkypc3qf56lVzmxNDaVjv7knhoP8yDU.CpI3EQmi5lZY3kqc7e82;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=hubapi.com; Expires=Wed, 24
+        Jun 2026 19:34:27 GMT
+      x-hubspot-correlation-id:
+      - 019efb04-f724-70c9-ae08-2c96fcb0ca27
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 200
+      message: OK
+version: 1

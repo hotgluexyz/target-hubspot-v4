@@ -1,0 +1,445 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["collector.graphql_query.execute",
+        "crm.objects.owners.read", "crm.lists.read", "settings.users.teams.read",
+        "crm.objects.deals.read", "crm.objects.subscriptions.read", "crm.objects.services.read",
+        "crm.extensions_calling_transcripts.read", "cms.functions.write", "crm.objects.listings.write",
+        "crm.objects.custom.read", "cms.knowledge_base.settings.read", "conversations.visitor_identification.tokens.create",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "integrations.zoom-app.playbooks.read",
+        "behavioral_events.event_definitions.read_write", "analytics.behavioral_events.send",
+        "media_bridge.read", "settings.users.teams.write", "communication_preferences.read",
+        "settings.security.security_health.read", "crm.schemas.services.read", "crm.objects.orders.write",
+        "scheduler.meetings.meeting-link.read", "crm.schemas.line_items.read", "settings.billing.write",
+        "crm.objects.partner-services.write", "crm.import", "collector.graphql_schema.read",
+        "crm.schemas.deals.write", "crm.schemas.subscriptions.read", "cms.membership.access_groups.write",
+        "crm.schemas.companies.read", "actions", "crm.extensions_calling_transcripts.write",
+        "cms.knowledge_base.articles.write", "crm.objects.commercepayments.read",
+        "crm.objects.products.write", "crm.objects.feedback_submissions.read", "crm.schemas.invoices.write",
+        "crm.objects.services.write", "crm.objects.subscriptions.write", "crm.schemas.commercepayments.write",
+        "communication_preferences.statuses.batch.write", "sales-email-read", "crm.objects.contacts.read",
+        "crm.objects.invoices.read", "crm.schemas.orders.read", "crm.lists.write",
+        "crm.schemas.deals.read", "conversations.custom_channels.write", "crm.objects.deals.write",
+        "e-commerce", "cms.domains.write", "crm.schemas.contacts.write", "crm.objects.projects.read",
+        "crm.schemas.carts.write", "transactional-email", "forms-uploaded-files",
+        "conversations.read", "account-info.security.read", "record_images.signed_urls.read",
+        "settings.currencies.write", "crm.objects.goals.write", "crm.objects.line_items.write",
+        "crm.objects.contacts.write", "crm.objects.line_items.read", "crm.objects.goals.read",
+        "crm.objects.partner-clients.write", "crm.schemas.listings.write", "communication_preferences.write",
+        "crm.schemas.contacts.read", "crm.objects.quotes.write", "crm.objects.leads.read",
+        "crm.objects.leads.write", "files.ui_hidden.read", "crm.schemas.services.write",
+        "communication_preferences.read_write", "crm.schemas.invoices.read", "crm.schemas.forecasts.read",
+        "crm.objects.quotes.read", "crm.objects.partner-clients.read", "marketing.campaigns.read",
+        "crm.objects.courses.read", "timeline", "crm.objects.marketing_events.read",
+        "cms.knowledge_base.settings.write", "conversations.write", "crm.pipelines.orders.read",
+        "cms.domains.read", "crm.objects.products.read", "crm.schemas.projects.read",
+        "external_integrations.forms.access", "accounting", "crm.objects.orders.read",
+        "crm.export", "media_bridge.write", "automation", "crm.objects.companies.write",
+        "crm.schemas.carts.read", "business-intelligence", "crm.dealsplits.read_write",
+        "automation.sequences.enrollments.write", "crm.schemas.listings.read", "crm.objects.forecasts.read",
+        "crm.schemas.companies.write", "crm.schemas.subscriptions.write", "crm.objects.commercepayments.write",
+        "marketing-email", "crm.objects.invoices.write", "cms.knowledge_base.articles.read",
+        "automation.sequences.read", "crm.objects.users.write", "crm.objects.users.read",
+        "crm.objects.partner-services.read", "crm.objects.appointments.write", "files",
+        "marketing.campaigns.revenue.read", "settings.users.write", "crm.objects.carts.write",
+        "hubdb", "tickets", "communication_preferences.statuses.batch.read", "crm.schemas.orders.write",
+        "content", "cms.knowledge_base.articles.publish", "conversations.custom_channels.read",
+        "crm.schemas.courses.write", "cms.functions.read", "crm.schemas.appointments.read",
+        "crm.objects.custom.write", "marketing.campaigns.write", "crm.objects.appointments.read",
+        "crm.schemas.appointments.write", "oauth", "crm.schemas.courses.read", "settings.users.read",
+        "cms.performance.read", "social", "tax_rates.read", "crm.objects.projects.write",
+        "crm.objects.marketing_events.write", "crm.pipelines.orders.write", "crm.schemas.custom.read",
+        "cms.membership.access_groups.read", "crm.objects.carts.read", "crm.objects.courses.write",
+        "crm.schemas.projects.write", "ctas.read", "crm.schemas.commercepayments.read",
+        "crm.objects.listings.read", "settings.currencies.read", "integration-sync",
+        "forms"], "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9cc6c0b98bdc9bb4-EWR
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4621'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 11 Feb 2026 20:56:25 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=GBKwJ1WBjO10pG%2Fp%2Ft34kcmrN7OBK2ypAJip40uTZ%2FrdoShDCBEz82Vo%2BaNvyobMCcdsGWPw7LY%2B3svqZ5KjjvhqW8sfzZw4MpESo%2FzjuMJSjceFxN1OExNzK6ltV4nR"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=9gbmtHTra_9vfwMLmspb5b0tu8fiVRg4eUSbj85oWA8-1770843385-1.0.1.1-rRsvravHqlxCQqu_DEvdtz83crpxNXBbYeeGSkT1tr0zrRGZEIZzXUsJA9hdarfOkd.hEeiHO0Cbw5MTQuc2I9rGEt88QvzQgsCE2PLm2uw;
+        path=/; expires=Wed, 11-Feb-26 21:26:25 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '5159'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - ee15de6f-55dc-4ee0-ade6-e70ba318daf7
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"filterGroups": [{"filters": [{"propertyName": "name", "operator": "EQ",
+      "value": "Lookup Industries Inc"}]}]}'
+    headers:
+      Content-Length:
+      - '1'
+      Content-Type:
+      - a
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies/search
+  response:
+    body:
+      string: '{"total":0,"results":[]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9cc6c0baba003e9d-EWR
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '24'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 11 Feb 2026 20:56:26 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=OHql2qzZCcfRi8mGsejyajIP2Ng%2Fxh3s77LgMshOaE6Y2eYCmW1BTzF8rvni2l%2BjW43485k90kO7Gs3s181wzFYAwNJc3Xx2gpzFT7iW%2BWoiH2NYaSFqMaFBTElrd04Y"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=C7hYku8Ng7cUJE0ztWj6ULq5t2tKkN7YDaKhQAySMt0-1770843386-1.0.1.1-ClRQ3XMraqxa8qBbNixBquEsha6nceTSwTcPQtVdOWrw.EULgzC_gs_tOV0LcczxYdYjQbzaXO8yqm0Umr6IBxSXCTdbz1bhZgCEsmR0M_Q;
+        path=/; expires=Wed, 11-Feb-26 21:26:26 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, Accept-Encoding
+      access-control-allow-credentials:
+      - 'false'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 3ddb8016-a3af-4837-a642-9d1a6cfb2992
+    status:
+      code: 200
+      message: OK
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '2'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "<REDACTED>", "access_token":
+        "<REDACTED>", "hub_id": 23170316, "scopes": ["collector.graphql_query.execute",
+        "crm.objects.owners.read", "crm.lists.read", "settings.users.teams.read",
+        "crm.objects.deals.read", "crm.objects.subscriptions.read", "crm.objects.services.read",
+        "crm.extensions_calling_transcripts.read", "cms.functions.write", "crm.objects.listings.write",
+        "crm.objects.custom.read", "cms.knowledge_base.settings.read", "conversations.visitor_identification.tokens.create",
+        "crm.schemas.quotes.read", "crm.objects.companies.read", "integrations.zoom-app.playbooks.read",
+        "behavioral_events.event_definitions.read_write", "analytics.behavioral_events.send",
+        "media_bridge.read", "settings.users.teams.write", "communication_preferences.read",
+        "settings.security.security_health.read", "crm.schemas.services.read", "crm.objects.orders.write",
+        "scheduler.meetings.meeting-link.read", "crm.schemas.line_items.read", "settings.billing.write",
+        "crm.objects.partner-services.write", "crm.import", "collector.graphql_schema.read",
+        "crm.schemas.deals.write", "crm.schemas.subscriptions.read", "cms.membership.access_groups.write",
+        "crm.schemas.companies.read", "actions", "crm.extensions_calling_transcripts.write",
+        "cms.knowledge_base.articles.write", "crm.objects.commercepayments.read",
+        "crm.objects.products.write", "crm.objects.feedback_submissions.read", "crm.schemas.invoices.write",
+        "crm.objects.services.write", "crm.objects.subscriptions.write", "crm.schemas.commercepayments.write",
+        "communication_preferences.statuses.batch.write", "sales-email-read", "crm.objects.contacts.read",
+        "crm.objects.invoices.read", "crm.schemas.orders.read", "crm.lists.write",
+        "crm.schemas.deals.read", "conversations.custom_channels.write", "crm.objects.deals.write",
+        "e-commerce", "cms.domains.write", "crm.schemas.contacts.write", "crm.objects.projects.read",
+        "crm.schemas.carts.write", "transactional-email", "forms-uploaded-files",
+        "conversations.read", "account-info.security.read", "record_images.signed_urls.read",
+        "settings.currencies.write", "crm.objects.goals.write", "crm.objects.line_items.write",
+        "crm.objects.contacts.write", "crm.objects.line_items.read", "crm.objects.goals.read",
+        "crm.objects.partner-clients.write", "crm.schemas.listings.write", "communication_preferences.write",
+        "crm.schemas.contacts.read", "crm.objects.quotes.write", "crm.objects.leads.read",
+        "crm.objects.leads.write", "files.ui_hidden.read", "crm.schemas.services.write",
+        "communication_preferences.read_write", "crm.schemas.invoices.read", "crm.schemas.forecasts.read",
+        "crm.objects.quotes.read", "crm.objects.partner-clients.read", "marketing.campaigns.read",
+        "crm.objects.courses.read", "timeline", "crm.objects.marketing_events.read",
+        "cms.knowledge_base.settings.write", "conversations.write", "crm.pipelines.orders.read",
+        "cms.domains.read", "crm.objects.products.read", "crm.schemas.projects.read",
+        "external_integrations.forms.access", "accounting", "crm.objects.orders.read",
+        "crm.export", "media_bridge.write", "automation", "crm.objects.companies.write",
+        "crm.schemas.carts.read", "business-intelligence", "crm.dealsplits.read_write",
+        "automation.sequences.enrollments.write", "crm.schemas.listings.read", "crm.objects.forecasts.read",
+        "crm.schemas.companies.write", "crm.schemas.subscriptions.write", "crm.objects.commercepayments.write",
+        "marketing-email", "crm.objects.invoices.write", "cms.knowledge_base.articles.read",
+        "automation.sequences.read", "crm.objects.users.write", "crm.objects.users.read",
+        "crm.objects.partner-services.read", "crm.objects.appointments.write", "files",
+        "marketing.campaigns.revenue.read", "settings.users.write", "crm.objects.carts.write",
+        "hubdb", "tickets", "communication_preferences.statuses.batch.read", "crm.schemas.orders.write",
+        "content", "cms.knowledge_base.articles.publish", "conversations.custom_channels.read",
+        "crm.schemas.courses.write", "cms.functions.read", "crm.schemas.appointments.read",
+        "crm.objects.custom.write", "marketing.campaigns.write", "crm.objects.appointments.read",
+        "crm.schemas.appointments.write", "oauth", "crm.schemas.courses.read", "settings.users.read",
+        "cms.performance.read", "social", "tax_rates.read", "crm.objects.projects.write",
+        "crm.objects.marketing_events.write", "crm.pipelines.orders.write", "crm.schemas.custom.read",
+        "cms.membership.access_groups.read", "crm.objects.carts.read", "crm.objects.courses.write",
+        "crm.schemas.projects.write", "ctas.read", "crm.schemas.commercepayments.read",
+        "crm.objects.listings.read", "settings.currencies.read", "integration-sync",
+        "forms"], "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9cc6c0bbaf38439a-EWR
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4621'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 11 Feb 2026 20:56:26 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=5zBGmwOydqzdXeTLHf4YVCuJKVBAoM2IU3%2FqtWumqAejGMlfLWRFJtLcsqYh2V6edMkOsqSRe1UtOKXlZ2OuPO8EfcC1%2BLMxBScMEqXlH7w9g3IruPVTU2n4PhJjpi7h"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=G7pdT4RHfIkKUni08C1wHYsdj2VdlbONz3EQ0VGNwQ0-1770843386-1.0.1.1-65l.DMP5RGBJAhXcALNp0Dm2QUUvncqJY.YfC5NVhRy6.11TNWmXnNtU72G.UK.C34bpI0U6KR4h8nZ2W4WZieC5KmfGgFG3VDcAWko8U_k;
+        path=/; expires=Wed, 11-Feb-26 21:26:26 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '5159'
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - c884e932-1c74-4ac7-9872-8c889905da58
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"properties": {"name": "Lookup Industries Inc", "website": "https://lookupindustries-updated.com",
+      "industry": "THISISNOTAREALINDUSTRY"}}'
+    headers:
+      Accept:
+      - '*'
+      Accept-Encoding:
+      - g
+      Connection:
+      - k
+      Content-Length:
+      - '1'
+      Content-Type:
+      - a
+      User-Agent:
+      - p
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies
+  response:
+    body:
+      string: '{"status":"error","message":"Property values were not valid: [{\"isValid\":false,\"message\":\"THISISNOTAREALINDUSTRY
+        was not one of the allowed options: [ACCOUNTING, AIRLINES_AVIATION, ALTERNATIVE_DISPUTE_RESOLUTION,
+        ALTERNATIVE_MEDICINE, ANIMATION, APPAREL_FASHION, ARCHITECTURE_PLANNING, ARTS_AND_CRAFTS,
+        AUTOMOTIVE, AVIATION_AEROSPACE, BANKING, BIOTECHNOLOGY, BROADCAST_MEDIA, BUILDING_MATERIALS,
+        BUSINESS_SUPPLIES_AND_EQUIPMENT, CAPITAL_MARKETS, CHEMICALS, CIVIC_SOCIAL_ORGANIZATION,
+        CIVIL_ENGINEERING, COMMERCIAL_REAL_ESTATE, COMPUTER_NETWORK_SECURITY, COMPUTER_GAMES,
+        COMPUTER_HARDWARE, COMPUTER_NETWORKING, COMPUTER_SOFTWARE, INTERNET, CONSTRUCTION,
+        CONSUMER_ELECTRONICS, CONSUMER_GOODS, CONSUMER_SERVICES, COSMETICS, DAIRY,
+        DEFENSE_SPACE, DESIGN, EDUCATION_MANAGEMENT, E_LEARNING, ELECTRICAL_ELECTRONIC_MANUFACTURING,
+        ENTERTAINMENT, ENVIRONMENTAL_SERVICES, EVENTS_SERVICES, EXECUTIVE_OFFICE,
+        FACILITIES_SERVICES, FARMING, FINANCIAL_SERVICES, FINE_ART, FISHERY, FOOD_BEVERAGES,
+        FOOD_PRODUCTION, FUND_RAISING, FURNITURE, GAMBLING_CASINOS, GLASS_CERAMICS_CONCRETE,
+        GOVERNMENT_ADMINISTRATION, GOVERNMENT_RELATIONS, GRAPHIC_DESIGN, HEALTH_WELLNESS_AND_FITNESS,
+        HIGHER_EDUCATION, HOSPITAL_HEALTH_CARE, HOSPITALITY, HUMAN_RESOURCES, IMPORT_AND_EXPORT,
+        INDIVIDUAL_FAMILY_SERVICES, INDUSTRIAL_AUTOMATION, INFORMATION_SERVICES, INFORMATION_TECHNOLOGY_AND_SERVICES,
+        INSURANCE, INTERNATIONAL_AFFAIRS, INTERNATIONAL_TRADE_AND_DEVELOPMENT, INVESTMENT_BANKING,
+        INVESTMENT_MANAGEMENT, JUDICIARY, LAW_ENFORCEMENT, LAW_PRACTICE, LEGAL_SERVICES,
+        LEGISLATIVE_OFFICE, LEISURE_TRAVEL_TOURISM, LIBRARIES, LOGISTICS_AND_SUPPLY_CHAIN,
+        LUXURY_GOODS_JEWELRY, MACHINERY, MANAGEMENT_CONSULTING, MARITIME, MARKET_RESEARCH,
+        MARKETING_AND_ADVERTISING, MECHANICAL_OR_INDUSTRIAL_ENGINEERING, MEDIA_PRODUCTION,
+        MEDICAL_DEVICES, MEDICAL_PRACTICE, MENTAL_HEALTH_CARE, MILITARY, MINING_METALS,
+        MOTION_PICTURES_AND_FILM, MUSEUMS_AND_INSTITUTIONS, MUSIC, NANOTECHNOLOGY,
+        NEWSPAPERS, NON_PROFIT_ORGANIZATION_MANAGEMENT, OIL_ENERGY, ONLINE_MEDIA,
+        OUTSOURCING_OFFSHORING, PACKAGE_FREIGHT_DELIVERY, PACKAGING_AND_CONTAINERS,
+        PAPER_FOREST_PRODUCTS, PERFORMING_ARTS, PHARMACEUTICALS, PHILANTHROPY, PHOTOGRAPHY,
+        PLASTICS, POLITICAL_ORGANIZATION, PRIMARY_SECONDARY_EDUCATION, PRINTING, PROFESSIONAL_TRAINING_COACHING,
+        PROGRAM_DEVELOPMENT, PUBLIC_POLICY, PUBLIC_RELATIONS_AND_COMMUNICATIONS, PUBLIC_SAFETY,
+        PUBLISHING, RAILROAD_MANUFACTURE, RANCHING, REAL_ESTATE, RECREATIONAL_FACILITIES_AND_SERVICES,
+        RELIGIOUS_INSTITUTIONS, RENEWABLES_ENVIRONMENT, RESEARCH, RESTAURANTS, RETAIL,
+        SECURITY_AND_INVESTIGATIONS, SEMICONDUCTORS, SHIPBUILDING, SPORTING_GOODS,
+        SPORTS, STAFFING_AND_RECRUITING, SUPERMARKETS, TELECOMMUNICATIONS, TEXTILES,
+        THINK_TANKS, TOBACCO, TRANSLATION_AND_LOCALIZATION, TRANSPORTATION_TRUCKING_RAILROAD,
+        UTILITIES, VENTURE_CAPITAL_PRIVATE_EQUITY, VETERINARY, WAREHOUSING, WHOLESALE,
+        WINE_AND_SPIRITS, WIRELESS, WRITING_AND_EDITING, MOBILE_GAMES]\",\"error\":\"INVALID_OPTION\",\"name\":\"industry\",\"localizedErrorMessage\":\"THISISNOTAREALINDUSTRY
+        was not one of the allowed options: [ACCOUNTING, AIRLINES_AVIATION, ALTERNATIVE_DISPUTE_RESOLUTION,
+        ALTERNATIVE_MEDICINE, ANIMATION, APPAREL_FASHION, ARCHITECTURE_PLANNING, ARTS_AND_CRAFTS,
+        AUTOMOTIVE, AVIATION_AEROSPACE, BANKING, BIOTECHNOLOGY, BROADCAST_MEDIA, BUILDING_MATERIALS,
+        BUSINESS_SUPPLIES_AND_EQUIPMENT, CAPITAL_MARKETS, CHEMICALS, CIVIC_SOCIAL_ORGANIZATION,
+        CIVIL_ENGINEERING, COMMERCIAL_REAL_ESTATE, COMPUTER_NETWORK_SECURITY, COMPUTER_GAMES,
+        COMPUTER_HARDWARE, COMPUTER_NETWORKING, COMPUTER_SOFTWARE, INTERNET, CONSTRUCTION,
+        CONSUMER_ELECTRONICS, CONSUMER_GOODS, CONSUMER_SERVICES, COSMETICS, DAIRY,
+        DEFENSE_SPACE, DESIGN, EDUCATION_MANAGEMENT, E_LEARNING, ELECTRICAL_ELECTRONIC_MANUFACTURING,
+        ENTERTAINMENT, ENVIRONMENTAL_SERVICES, EVENTS_SERVICES, EXECUTIVE_OFFICE,
+        FACILITIES_SERVICES, FARMING, FINANCIAL_SERVICES, FINE_ART, FISHERY, FOOD_BEVERAGES,
+        FOOD_PRODUCTION, FUND_RAISING, FURNITURE, GAMBLING_CASINOS, GLASS_CERAMICS_CONCRETE,
+        GOVERNMENT_ADMINISTRATION, GOVERNMENT_RELATIONS, GRAPHIC_DESIGN, HEALTH_WELLNESS_AND_FITNESS,
+        HIGHER_EDUCATION, HOSPITAL_HEALTH_CARE, HOSPITALITY, HUMAN_RESOURCES, IMPORT_AND_EXPORT,
+        INDIVIDUAL_FAMILY_SERVICES, INDUSTRIAL_AUTOMATION, INFORMATION_SERVICES, INFORMATION_TECHNOLOGY_AND_SERVICES,
+        INSURANCE, INTERNATIONAL_AFFAIRS, INTERNATIONAL_TRADE_AND_DEVELOPMENT, INVESTMENT_BANKING,
+        INVESTMENT_MANAGEMENT, JUDICIARY, LAW_ENFORCEMENT, LAW_PRACTICE, LEGAL_SERVICES,
+        LEGISLATIVE_OFFICE, LEISURE_TRAVEL_TOURISM, LIBRARIES, LOGISTICS_AND_SUPPLY_CHAIN,
+        LUXURY_GOODS_JEWELRY, MACHINERY, MANAGEMENT_CONSULTING, MARITIME, MARKET_RESEARCH,
+        MARKETING_AND_ADVERTISING, MECHANICAL_OR_INDUSTRIAL_ENGINEERING, MEDIA_PRODUCTION,
+        MEDICAL_DEVICES, MEDICAL_PRACTICE, MENTAL_HEALTH_CARE, MILITARY, MINING_METALS,
+        MOTION_PICTURES_AND_FILM, MUSEUMS_AND_INSTITUTIONS, MUSIC, NANOTECHNOLOGY,
+        NEWSPAPERS, NON_PROFIT_ORGANIZATION_MANAGEMENT, OIL_ENERGY, ONLINE_MEDIA,
+        OUTSOURCING_OFFSHORING, PACKAGE_FREIGHT_DELIVERY, PACKAGING_AND_CONTAINERS,
+        PAPER_FOREST_PRODUCTS, PERFORMING_ARTS, PHARMACEUTICALS, PHILANTHROPY, PHOTOGRAPHY,
+        PLASTICS, POLITICAL_ORGANIZATION, PRIMARY_SECONDARY_EDUCATION, PRINTING, PROFESSIONAL_TRAINING_COACHING,
+        PROGRAM_DEVELOPMENT, PUBLIC_POLICY, PUBLIC_RELATIONS_AND_COMMUNICATIONS, PUBLIC_SAFETY,
+        PUBLISHING, RAILROAD_MANUFACTURE, RANCHING, REAL_ESTATE, RECREATIONAL_FACILITIES_AND_SERVICES,
+        RELIGIOUS_INSTITUTIONS, RENEWABLES_ENVIRONMENT, RESEARCH, RESTAURANTS, RETAIL,
+        SECURITY_AND_INVESTIGATIONS, SEMICONDUCTORS, SHIPBUILDING, SPORTING_GOODS,
+        SPORTS, STAFFING_AND_RECRUITING, SUPERMARKETS, TELECOMMUNICATIONS, TEXTILES,
+        THINK_TANKS, TOBACCO, TRANSLATION_AND_LOCALIZATION, TRANSPORTATION_TRUCKING_RAILROAD,
+        UTILITIES, VENTURE_CAPITAL_PRIVATE_EQUITY, VETERINARY, WAREHOUSING, WHOLESALE,
+        WINE_AND_SPIRITS, WIRELESS, WRITING_AND_EDITING, MOBILE_GAMES]\",\"propertyValue\":\"THISISNOTAREALINDUSTRY\",\"portalId\":23170316}]","correlationId":"f8498f96-c3aa-4a52-8381-7ef394c2703a","errors":[{"message":"THISISNOTAREALINDUSTRY
+        was not one of the allowed options: [ACCOUNTING, AIRLINES_AVIATION, ALTERNATIVE_DISPUTE_RESOLUTION,
+        ALTERNATIVE_MEDICINE, ANIMATION, APPAREL_FASHION, ARCHITECTURE_PLANNING, ARTS_AND_CRAFTS,
+        AUTOMOTIVE, AVIATION_AEROSPACE, BANKING, BIOTECHNOLOGY, BROADCAST_MEDIA, BUILDING_MATERIALS,
+        BUSINESS_SUPPLIES_AND_EQUIPMENT, CAPITAL_MARKETS, CHEMICALS, CIVIC_SOCIAL_ORGANIZATION,
+        CIVIL_ENGINEERING, COMMERCIAL_REAL_ESTATE, COMPUTER_NETWORK_SECURITY, COMPUTER_GAMES,
+        COMPUTER_HARDWARE, COMPUTER_NETWORKING, COMPUTER_SOFTWARE, INTERNET, CONSTRUCTION,
+        CONSUMER_ELECTRONICS, CONSUMER_GOODS, CONSUMER_SERVICES, COSMETICS, DAIRY,
+        DEFENSE_SPACE, DESIGN, EDUCATION_MANAGEMENT, E_LEARNING, ELECTRICAL_ELECTRONIC_MANUFACTURING,
+        ENTERTAINMENT, ENVIRONMENTAL_SERVICES, EVENTS_SERVICES, EXECUTIVE_OFFICE,
+        FACILITIES_SERVICES, FARMING, FINANCIAL_SERVICES, FINE_ART, FISHERY, FOOD_BEVERAGES,
+        FOOD_PRODUCTION, FUND_RAISING, FURNITURE, GAMBLING_CASINOS, GLASS_CERAMICS_CONCRETE,
+        GOVERNMENT_ADMINISTRATION, GOVERNMENT_RELATIONS, GRAPHIC_DESIGN, HEALTH_WELLNESS_AND_FITNESS,
+        HIGHER_EDUCATION, HOSPITAL_HEALTH_CARE, HOSPITALITY, HUMAN_RESOURCES, IMPORT_AND_EXPORT,
+        INDIVIDUAL_FAMILY_SERVICES, INDUSTRIAL_AUTOMATION, INFORMATION_SERVICES, INFORMATION_TECHNOLOGY_AND_SERVICES,
+        INSURANCE, INTERNATIONAL_AFFAIRS, INTERNATIONAL_TRADE_AND_DEVELOPMENT, INVESTMENT_BANKING,
+        INVESTMENT_MANAGEMENT, JUDICIARY, LAW_ENFORCEMENT, LAW_PRACTICE, LEGAL_SERVICES,
+        LEGISLATIVE_OFFICE, LEISURE_TRAVEL_TOURISM, LIBRARIES, LOGISTICS_AND_SUPPLY_CHAIN,
+        LUXURY_GOODS_JEWELRY, MACHINERY, MANAGEMENT_CONSULTING, MARITIME, MARKET_RESEARCH,
+        MARKETING_AND_ADVERTISING, MECHANICAL_OR_INDUSTRIAL_ENGINEERING, MEDIA_PRODUCTION,
+        MEDICAL_DEVICES, MEDICAL_PRACTICE, MENTAL_HEALTH_CARE, MILITARY, MINING_METALS,
+        MOTION_PICTURES_AND_FILM, MUSEUMS_AND_INSTITUTIONS, MUSIC, NANOTECHNOLOGY,
+        NEWSPAPERS, NON_PROFIT_ORGANIZATION_MANAGEMENT, OIL_ENERGY, ONLINE_MEDIA,
+        OUTSOURCING_OFFSHORING, PACKAGE_FREIGHT_DELIVERY, PACKAGING_AND_CONTAINERS,
+        PAPER_FOREST_PRODUCTS, PERFORMING_ARTS, PHARMACEUTICALS, PHILANTHROPY, PHOTOGRAPHY,
+        PLASTICS, POLITICAL_ORGANIZATION, PRIMARY_SECONDARY_EDUCATION, PRINTING, PROFESSIONAL_TRAINING_COACHING,
+        PROGRAM_DEVELOPMENT, PUBLIC_POLICY, PUBLIC_RELATIONS_AND_COMMUNICATIONS, PUBLIC_SAFETY,
+        PUBLISHING, RAILROAD_MANUFACTURE, RANCHING, REAL_ESTATE, RECREATIONAL_FACILITIES_AND_SERVICES,
+        RELIGIOUS_INSTITUTIONS, RENEWABLES_ENVIRONMENT, RESEARCH, RESTAURANTS, RETAIL,
+        SECURITY_AND_INVESTIGATIONS, SEMICONDUCTORS, SHIPBUILDING, SPORTING_GOODS,
+        SPORTS, STAFFING_AND_RECRUITING, SUPERMARKETS, TELECOMMUNICATIONS, TEXTILES,
+        THINK_TANKS, TOBACCO, TRANSLATION_AND_LOCALIZATION, TRANSPORTATION_TRUCKING_RAILROAD,
+        UTILITIES, VENTURE_CAPITAL_PRIVATE_EQUITY, VETERINARY, WAREHOUSING, WHOLESALE,
+        WINE_AND_SPIRITS, WIRELESS, WRITING_AND_EDITING, MOBILE_GAMES]","code":"INVALID_OPTION","context":{"propertyName":["industry"]}}],"category":"VALIDATION_ERROR"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 9cc6c0bcd94cc33d-EWR
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '8900'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 11 Feb 2026 20:56:26 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=6ZtxuTCgehLcTW%2BoAQLRaQdsTWb00FOxrb8y0S1uplqUPV7NKViQ6%2F%2Fdaqew98167loOodFtMvXp6fd07d%2BKTz30gbm9%2FX%2FTMv3wA524gJ0TAe966FkiDhB8UeT9QeYn"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=nA3jfSR1EV83UcWT9aX76lw45QCbW0K.LcTBdhK.8Ik-1770843386-1.0.1.1-67ZsubjtVIMcl3uu1tAY.0TONCxuYrF9ydl0aE5oafUE01MvAHAdQehk2LEyncSLzH9bVUjR8szbMSWdiCugh1Rd9bZrM23xrPwZt9D1whc;
+        path=/; expires=Wed, 11-Feb-26 21:26:26 GMT; domain=.hubapi.com; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, Accept-Encoding
+      access-control-allow-credentials:
+      - 'false'
+      x-hubspot-correlation-id:
+      - f8498f96-c3aa-4a52-8381-7ef394c2703a
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 400
+      message: Bad Request
+version: 1

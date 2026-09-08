@@ -1,0 +1,2 @@
+{"type": "SCHEMA", "stream": "deals", "schema": {"type": ["object", "null"], "properties": {"title": {"type": ["string", "null"]}, "monetary_amount": {"type": ["number", "null"]}, "contact_email": {"type": ["string", "null"]}}}, "key_properties": []}
+{"type": "RECORD", "stream": "deals", "record": {"title": "New Deal with Contact", "monetary_amount": 100000, "contact_email": "jane.smith@example.com"}}

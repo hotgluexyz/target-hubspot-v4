@@ -1,0 +1,3 @@
+{"type": "SCHEMA", "stream": "companies", "schema": {"type": ["object", "null"], "properties": {"properties": {"type": ["object", "null"], "properties": {"name": {"type": ["string", "null"]}, "domain": {"type": ["string", "null"]}, "industry": {"type": ["string", "null"]}, "id": {"type": ["string", "null"]}}}}}, "key_properties": []}
+{"type":"RECORD","stream":"companies","record":{"properties":{"id":"56503292710","name":"HGI10681 Smoke Stale Fallback","domain":"hgi10681-smoke-primary.example.com","industry":"COMPUTER_SOFTWARE"}}}
+{"type":"RECORD","stream":"companies","record":{"properties":{"id":"56515959971","name":"HGI10681 Smoke Control","domain":"hgi10681-smoke-control.example.com","industry":"COMPUTER_SOFTWARE"}}}

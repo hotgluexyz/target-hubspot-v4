@@ -1,0 +1,1 @@
+{"bookmarks": {"deals": [{"hash": "ff013ead1234cb1aa32f87dee9dc75e4faf73ad70a6c219ed628ff582705f0db", "success": false, "error": "not-a-number was not a valid number., invalid-date-format was not a valid long. Portal 23170316, object type 0-3", "hg_error_class": "InvalidPayloadError"}]}, "summary": {"deals": {"success": 0, "fail": 1, "existing": 0, "updated": 0}}}

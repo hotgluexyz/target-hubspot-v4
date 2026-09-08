@@ -1,0 +1,1 @@
+{"bookmarks": {"contacts": [{"hash": "5830120834926a7ff078cff69134422d3ebcb43db158a4152a766f39fa8a1df5", "success": false, "error": "Email address not-an-email is invalid", "hg_error_class": "InvalidPayloadError"}]}, "summary": {"contacts": {"success": 0, "fail": 1, "existing": 0, "updated": 0}}}

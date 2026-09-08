@@ -1,0 +1,1 @@
+{"bookmarks": {"contacts": [{"hash": "ceecbc8b7cf7c5205c8cb2e460fd1d5f521c68443dc3d263045eac429d89989e", "success": false, "error": "to id is required for {'to': {'id': None, 'objectType': 'companies'}, 'types': [{'associationCategory': 'HUBSPOT_DEFINED', 'associationTypeId': 279}]}"}]}, "summary": {"contacts": {"success": 0, "fail": 1, "existing": 0, "updated": 0}}}

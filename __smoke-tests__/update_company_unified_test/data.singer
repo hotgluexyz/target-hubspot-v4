@@ -1,0 +1,2 @@
+{"type": "SCHEMA", "stream": "companies", "schema": {"type": ["object", "null"], "properties": {"id": {"type": ["string", "null"]}, "name": {"type": ["string", "null"]}, "website": {"type": ["string", "null"]}, "industry": {"type": ["string", "null"]}}}, "key_properties": []}
+{"type": "RECORD", "stream": "companies", "record": {"name": "Test Company for Associations", "website": "https://updated-assoc.com", "industry": "COMPUTER_SOFTWARE"}}

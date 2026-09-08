@@ -1,0 +1,2 @@
+{"type": "SCHEMA", "stream": "activities", "schema": {"type": ["object", "null"], "properties": {"id": {"type": ["string", "null"]}, "type": {"type": ["string", "null"]}, "end_datetime": {"type": ["string", "null"]}, "title": {"type": ["string", "null"]}, "status": {"type": ["string", "null"]}}}, "key_properties": []}
+{"type": "RECORD", "stream": "activities", "record": {"id": "103050305801", "type": "task", "end_datetime": "2024-01-22T17:00:00Z", "title": "Task to Delete", "status": "COMPLETED"}}

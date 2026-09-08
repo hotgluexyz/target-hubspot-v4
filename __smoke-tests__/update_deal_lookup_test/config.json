@@ -1,0 +1,13 @@
+{
+    "client_id": "client_id",
+    "client_secret": "client_secret",
+    "refresh_token": "<REDACTED>",
+    "access_token": "<REDACTED>",
+    "start_date": "2005-01-01T00:00:00Z",
+    "redirect_uri": "https://hotglue.xyz/callback",
+    "lookup_fields": {
+        "deals": "dealname"
+    },
+    "expires_in": 1788895767,
+    "token_expires": 1788895167.030832
+}

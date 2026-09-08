@@ -1,0 +1,2 @@
+{"type": "SCHEMA", "stream": "contacts", "schema": {"type": ["object", "null"], "properties": {"properties": {"type": ["object", "null"]}, "associations": {"type": ["array", "null"]}}}, "key_properties": []}
+{"type":"RECORD","stream":"contacts","record":{"properties":{"email":"batch.assoc.v2.smoke@testdomain.com","firstname":"Batch","lastname":"Association"},"associations":[{"to":{"id":"50349449041","objectType":"companies"},"types":[{"associationCategory":"HUBSPOT_DEFINED","associationTypeId":279}]}]}}

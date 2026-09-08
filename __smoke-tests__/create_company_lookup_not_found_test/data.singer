@@ -1,0 +1,2 @@
+{"type": "SCHEMA", "stream": "companies", "schema": {"type": ["object", "null"], "properties": {"properties": {"type": ["object", "null"], "properties": {"name": {"type": ["string", "null"]}, "website": {"type": ["string", "null"]}, "industry": {"type": ["string", "null"]}}}}}, "key_properties": []}
+{"type": "RECORD", "stream": "companies", "record": {"properties": {"name": "New Lookup Company", "website": "https://newlookup.com", "industry": "RETAIL"}}}

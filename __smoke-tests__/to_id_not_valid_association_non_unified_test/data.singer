@@ -1,0 +1,2 @@
+{"type": "SCHEMA", "stream": "contacts", "schema": {"type": ["object", "null"], "properties": {"properties": {"type": ["object", "null"]}, "associations": {"type": ["array", "null"]}}}, "key_properties": []}
+{"type": "RECORD", "stream": "contacts", "record": {"properties": {"email": "invalid@example.com", "firstname": "Invalid", "lastname": "Association"}, "associations": [{"to": {"id": null, "objectType": "companies"}, "types": [{"associationCategory": "HUBSPOT_DEFINED", "associationTypeId": 279}]}]}}

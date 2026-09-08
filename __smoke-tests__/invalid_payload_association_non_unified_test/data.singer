@@ -1,0 +1,2 @@
+{"type": "SCHEMA", "stream": "contacts", "schema": {"type": ["object", "null"], "properties": {"properties": {"type": ["object", "null"]}, "associations": {"type": ["array", "null"]}}}, "key_properties": []}
+{"type": "RECORD", "stream": "contacts", "record": {"properties": {"email": "malformed@example.com"}, "associations": [[]]}}

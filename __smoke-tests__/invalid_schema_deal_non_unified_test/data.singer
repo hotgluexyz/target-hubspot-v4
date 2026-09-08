@@ -1,0 +1,2 @@
+{"type": "SCHEMA", "stream": "deals", "schema": {"type": ["object", "null"], "properties": {"properties": {"type": ["object", "null"], "properties": {"dealname": {"type": ["string", "null"]}, "amount": {"type": ["string", "null"]}, "closedate": {"type": ["string", "null"]}}}}}, "key_properties": []}
+{"type": "RECORD", "stream": "deals", "record": {"properties": {"dealname": null, "amount": "not-a-number", "closedate": "invalid-date-format"}}}

@@ -1,0 +1,2 @@
+{"type": "SCHEMA", "stream": "contacts", "schema": {"type": ["object", "null"], "properties": {"id": {"type": ["string", "null"]}, "first_name": {"type": ["string", "null"]}, "last_name": {"type": ["string", "null"]}, "email": {"type": ["string", "null"]}}}, "key_properties": []}
+{"type": "RECORD", "stream": "contacts", "record": {"first_name": "Jane", "last_name": "Smith-Updated", "email": "jane.smith@example.com"}}

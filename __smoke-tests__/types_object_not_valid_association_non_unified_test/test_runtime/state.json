@@ -1,0 +1,1 @@
+{"bookmarks": {"contacts": [{"success": false, "error": "types is required for {'to': {'id': '50349449041', 'objectType': 'companiess'}, 'types': []}", "hash": "9f1f4d0d60ab7f1d7bc70ab171ef45a4fdcf5bd5cbf0f8f28d51392f00597fe5"}]}, "summary": {"contacts": {"success": 0, "fail": 1, "existing": 0, "updated": 0}}}

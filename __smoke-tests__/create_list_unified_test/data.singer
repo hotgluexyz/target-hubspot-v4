@@ -1,0 +1,2 @@
+{"type": "SCHEMA", "stream": "contacts", "schema": {"type": ["object", "null"], "properties": {"first_name": {"type": ["string", "null"]}, "last_name": {"type": ["string", "null"]}, "email": {"type": ["string", "null"]}, "lists": {"type": ["array", "null"]}, "subscribe_status": {"type": ["string", "null"]}}}, "key_properties": []}
+{"type": "RECORD", "stream": "contacts", "record": {"first_name": "Create", "last_name": "List", "email": "createlist@example.com", "lists": ["Brand New List"], "subscribe_status": "subscribed"}}
