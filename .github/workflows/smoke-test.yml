@@ -26,48 +26,20 @@ jobs:
           python-version: '3.10'
 
 
-      - name: Checkout test-framework repository
-        uses: actions/checkout@v4
-        with:
-          repository: hotgluexyz/test-framework
-          path: test-framework
-          token: ${{ secrets.TEST_GITHUB_ACCESS_TOKEN }}
-          fetch-depth: 0
-
-
-      - name: Set REPO_ROOT environment variable
-        run: |
-          echo "REPO_ROOT=$(pwd)" >> $GITHUB_ENV
-
-
       - name: Setup current repository dependencies
         run: |
           python -m venv .venv
           source .venv/bin/activate
           pip install .
-          pip install deepdiff
+          pip install "hotglue-smoke-test>=1.1.3"
           deactivate
 
 
       - name: Setup and run tests
+        env:
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
         run: |
-          cd test-framework
-          # Try to switch to the same branch as the current PR
-          BRANCH_NAME=${{ github.head_ref }}
-          echo "BRANCH_NAME: $BRANCH_NAME"
-          echo "Available branches in test-framework:"
-          git branch -a
-          if git show-ref --verify refs/remotes/origin/$BRANCH_NAME; then
-            git checkout $BRANCH_NAME
-          else
-            echo "Branch $BRANCH_NAME not found in test-framework repository"
-            git checkout main
-          fi
-
-          python -m venv .venv
           source .venv/bin/activate
-          pip install -r requirements.txt
-          REPO_NAME=$(echo "${{ github.event.repository.name }}" | sed -e 's/^tap-//' -e 's/^target-//')
 
           # Create timestamp and output file
           TIMESTAMP=$(date +%Y%m%d_%H%M%S)
@@ -76,8 +48,8 @@ jobs:
           # Initialize test status flag
           TEST_FAILED=0
 
-          # Run the test and capture both stdout and stderr
-          ./bin/smoke_test.sh "$REPO_NAME" '*' --tap-directory ${{ github.workspace }} target > "$OUTPUT_FILE" 2>&1 || TEST_FAILED=1
+          # Run colocated smoke tests and capture both stdout and stderr
+          hotglue-smoke-test run > "$OUTPUT_FILE" 2>&1 || TEST_FAILED=1
 
           # Configure AWS credentials
           aws configure set aws_access_key_id ${{ secrets.SMOKETEST_AWS_ACCESS_KEY_ID }}
