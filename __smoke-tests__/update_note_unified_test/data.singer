@@ -1,2 +1,0 @@
-{"type": "SCHEMA", "stream": "notes", "schema": {"type": ["object", "null"], "properties": {"id": {"type": ["string", "null"]}, "created_at": {"type": ["string", "null"]}, "content": {"type": ["string", "null"]}, "customer_id": {"type": ["integer", "null"]}}}, "key_properties": []}
-{"type": "RECORD", "stream": "notes", "record": {"id": "103063021171", "created_at": "2024-01-15T11:00:00.000Z", "content": "Updated note content", "customer_id": 189429067676}}
