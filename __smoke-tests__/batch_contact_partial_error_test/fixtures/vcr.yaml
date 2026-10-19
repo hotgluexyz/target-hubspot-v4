@@ -1,0 +1,146 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "7f0***", "access_token":
+        "CKC***", "hub_id": 23170316, "scopes": ["oauth", "crm.objects.owners.read",
+        "crm.lists.read", "crm.objects.contacts.write", "crm.objects.deals.read",
+        "crm.objects.marketing_events.write", "crm.schemas.contacts.read", "crm.schemas.custom.read",
+        "crm.objects.contacts.read", "crm.objects.custom.read", "crm.import", "crm.schemas.deals.read",
+        "crm.objects.custom.write", "crm.objects.companies.read", "crm.objects.marketing_events.read",
+        "crm.schemas.companies.read", "integration-sync", "crm.schemas.contacts.write",
+        "crm.objects.quotes.write", "crm.objects.quotes.read", "crm.schemas.quotes.read",
+        "crm.objects.line_items.read", "crm.schemas.line_items.read", "sales-email-read",
+        "crm.objects.products.read", "crm.objects.products.write", "crm.objects.companies.write",
+        "tickets", "crm.pipelines.orders.read", "crm.schemas.orders.read", "crm.objects.orders.read",
+        "forms", "business-intelligence", "communication_preferences.read", "communication_preferences.write",
+        "communication_preferences.read_write", "marketing-email", "content", "conversations.read",
+        "conversations.write"], "token_use": "access_token", "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4b6f4909fb861b6-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Fri, 16 Oct 2026 12:09:34 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Dc935KZeqYUwBnz5jRIKtvFoQ%2B%2BDhTNKJC4W%2FSdoeg%2F4oMxSDJ8xTAxr%2BGX%2FQmUpFd9iPnZrx0E9rIDo5oE10CalX3G7lhzvSQvBvW4GOHmu0QZGdblyyh%2F05J%2BppPBb"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '1671'
+      server-timing:
+      - hcid;desc="01a1449e-1893-7657-8e39-306e1332a9b2", cfr;desc="a4b6f4937ab061b6-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a1449e-1893-7657-8e39-306e1332a9b2
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"inputs": [{"objectWriteTraceId": "b3767252adcabffbdff2e87a64c1206802dcff2d64f436d657ed3c948bc414b7",
+      "id": "test@domain.com", "idProperty": "email", "properties": {"email": "test@domain.com",
+      "firstname": "Test", "lastname": "User"}}, {"objectWriteTraceId": "961f425132716050ced95b99689d3d8da830e7a5e85bee67f43eafcf8f817ae9",
+      "id": "not-an-email", "idProperty": "email", "properties": {"email": "not-an-email",
+      "firstname": "Test", "lastname": "User"}}]}'
+    headers:
+      Content-Length:
+      - '456'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/contacts/batch/upsert
+  response:
+    body:
+      string: '{"completedAt": "2026-10-16T12:09:34.834Z", "status": "COMPLETE", "startedAt":
+        "2026-10-16T12:09:34.656Z", "results": [{"id": "255512338956", "properties":
+        {"createdate": "2026-10-16T11:33:47.179Z", "email": "test@domain.com", "firstname":
+        "Test", "hs_full_name_or_email": "-Fallback-scrubbed-npyzpifVe", "hs_is_unworked":
+        "true", "hs_object_id": "255512338956", "hs_object_source": "-Fallback-scrubbed-xnxpshYnsnX",
+        "hs_object_source_id": "1149586", "hs_object_source_label": "-Fallback-scrubbed-xnxpshYnsnX",
+        "hs_pipeline": "-Fallback-scrubbed-kPsokmtIwyLBUZHNlXOrvPwpiAd", "hs_v2_date_entered_current_stage":
+        "2026-10-16T11:33:47.179Z", "hs_v2_time_in_current_stage": "2026-10-16T11:33:47.179Z",
+        "lastmodifieddate": "2026-10-16T11:52:25.276Z", "lastname": "User", "lifecyclestage":
+        "-Fallback-scrubbed-uKIR"}, "createdAt": "2026-10-16T11:33:47.179Z", "updatedAt":
+        "2026-10-16T11:52:25.276Z", "archived": false, "objectWriteTraceId": "b3767252adcabffbdff2e87a64c1206802dcff2d64f436d657ed3c948bc414b7",
+        "url": "https://app.hubspot.com/contacts/23170316/record/0-1/255512338956",
+        "new": false}], "errors": [{"status": "error", "category": "-Fallback-scrubbed-gcBXZxigVqxmitgS",
+        "message": "-Fallback-scrubbed-mwZfVEFZTGukfviBPjnYIlJIuSbfITgpSvRLJgOMYFAWXrgVETFLVBPbVMUiupSElYesTpjXLqqyaTLYBNwumuRgXIitBHoiRGXNvMUymlzmREUjViCXLqGqfkDXMtBxaySsorJLqUww",
+        "context": {"objectWriteTraceId": ["961f425132716050ced95b99689d3d8da830e7a5e85bee67f43eafcf8f817ae9"]}}],
+        "numErrors": 1}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4b6f496be399093-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Fri, 16 Oct 2026 12:09:34 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=eV5ZwoFgIIKZkNXSP8DLzwqYFiyC7hFGGIuSU8em1yJqWIsqsGez887OnP6Hu056OjEEYAegFIq6IXusD9Q3xguRBOGBkgvmMDmbOB4EzZ5TugeMAkQRR4cCJx1u5CnB"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="01a1449e-1ab0-7f07-ba02-22fe6de4c52b", cfr;desc="a4b6f496d8a79093-IAD"
+      x-hubspot-correlation-id:
+      - 01a1449e-1ab0-7f07-ba02-22fe6de4c52b
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 207
+      message: Multi-Status
+version: 1

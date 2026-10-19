@@ -1,0 +1,18 @@
+{
+    "access_token": "CO2***",
+    "refresh_token": "7f0***",
+    "client_id": "787***",
+    "client_secret": "620***",
+    "start_date": "2005-01-01T00:00:00Z",
+    "redirect_uri": "https://hotglue.xyz/callback",
+    "lookup_fields": {
+        "contacts": [
+            "email",
+            "firstname"
+        ]
+    },
+    "lookup_method": "sequential",
+    "batch_contacts": false,
+    "token_expires": 1792425055.45302,
+    "expires_in": 1792425655
+}
