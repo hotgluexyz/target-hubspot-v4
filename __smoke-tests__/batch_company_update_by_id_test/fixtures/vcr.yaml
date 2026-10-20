@@ -1,0 +1,141 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "7f0***", "access_token":
+        "CKH***", "hub_id": 23170316, "scopes": ["oauth", "crm.objects.owners.read",
+        "crm.lists.read", "crm.objects.contacts.write", "crm.objects.deals.read",
+        "crm.objects.marketing_events.write", "crm.schemas.contacts.read", "crm.schemas.custom.read",
+        "crm.objects.contacts.read", "crm.objects.custom.read", "crm.import", "crm.schemas.deals.read",
+        "crm.objects.custom.write", "crm.objects.companies.read", "crm.objects.marketing_events.read",
+        "crm.schemas.companies.read", "integration-sync", "crm.schemas.contacts.write",
+        "crm.objects.quotes.write", "crm.objects.quotes.read", "crm.schemas.quotes.read",
+        "crm.objects.line_items.read", "crm.schemas.line_items.read", "sales-email-read",
+        "crm.objects.products.read", "crm.objects.products.write", "crm.objects.companies.write",
+        "tickets", "crm.pipelines.orders.read", "crm.schemas.orders.read", "crm.objects.orders.read",
+        "forms", "business-intelligence", "communication_preferences.read", "communication_preferences.write",
+        "communication_preferences.read_write", "marketing-email", "content", "conversations.read",
+        "conversations.write"], "token_use": "access_token", "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4b6d1f18f174e55-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Fri, 16 Oct 2026 11:45:56 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=pxkMXwmTNZ22Ny6ylWctkp0Rl5StxmyqzCLvT1uLxv8bS1yaWC9ylm%2BC2GSg6HlstXzR39nkFFQWfC38r5Q5%2B9xpmOV6ntpQ0tLSNPN8wIF%2FkGMeCnsq%2BndVzOpmhYn6"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '1671'
+      server-timing:
+      - hcid;desc="01a14488-751f-7d55-9264-8bb2b76b9d7a", cfr;desc="a4b6d1f45b544e55-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a14488-751f-7d55-9264-8bb2b76b9d7a
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"inputs": [{"objectWriteTraceId": "12234c130b60d9ae258fae8daea9bdd34f83450a475b72a950a1e2c004865f90",
+      "id": "55983800892", "properties": {"name": "Test", "domain": "hgi10572-batch-company-by-id-v2.example.com",
+      "industry": "COMPUTER_SOFTWARE"}}]}'
+    headers:
+      Content-Length:
+      - '247'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies/batch/update
+  response:
+    body:
+      string: '{"completedAt": "2026-10-16T11:45:56.534Z", "status": "COMPLETE", "startedAt":
+        "2026-10-16T11:45:56.407Z", "results": [{"id": "55983800892", "properties":
+        {"createdate": "2026-06-24T19:03:26.395Z", "domain": "hgi10572-batch-company-by-id-v2.example.com",
+        "hs_lastmodifieddate": "2026-10-16T11:45:56.440Z", "hs_object_id": "55983800892",
+        "hs_object_source": "-Fallback-scrubbed-xnxpshYnsnX", "hs_object_source_id":
+        "1149586", "hs_object_source_label": "-Fallback-scrubbed-xnxpshYnsnX", "hs_pipeline":
+        "-Fallback-scrubbed-ZetzVmhDkaqZxPfuQgYBDIokUcwe", "hs_task_label": "Test",
+        "hs_v2_date_entered_current_stage": "2026-06-24T19:03:26.395Z", "hs_v2_time_in_current_stage":
+        "2026-06-24T19:03:26.395Z", "industry": "COMPUTER_SOFTWARE", "lifecyclestage":
+        "-Fallback-scrubbed-uKIR", "name": "Test"}, "createdAt": "2026-06-24T19:03:26.395Z",
+        "updatedAt": "2026-10-16T11:45:56.440Z", "archived": false, "objectWriteTraceId":
+        "12234c130b60d9ae258fae8daea9bdd34f83450a475b72a950a1e2c004865f90", "url":
+        "https://app.hubspot.com/contacts/23170316/record/0-2/55983800892"}]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4b6d1f6be79a81f-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Fri, 16 Oct 2026 11:45:56 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ZFHyy7dFEDJVg4xU9p0sIGVs1v6qPg%2Bte7ZH%2F4JnyuuZP4VV%2FCKMgpoDDJSWkfp7cQWTcEWxGZZWpIYtRQeLiRGNu%2BsMDcsQV0ri4uVij%2BzhDGtR6Zexh0c%2BJbhvPb9d"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="01a14488-76aa-759f-99bd-7a6a91d0321c", cfr;desc="a4b6d1f6cd3ca81f-IAD"
+      x-hubspot-correlation-id:
+      - 01a14488-76aa-759f-99bd-7a6a91d0321c
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 200
+      message: OK
+version: 1

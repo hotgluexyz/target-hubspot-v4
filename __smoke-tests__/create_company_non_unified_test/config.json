@@ -1,0 +1,10 @@
+{
+    "access_token": "CMT***",
+    "refresh_token": "7f0***",
+    "client_id": "787***",
+    "client_secret": "620***",
+    "start_date": "2005-01-01T00:00:00Z",
+    "redirect_uri": "https://hotglue.xyz/callback",
+    "batch_companies": false,
+    "expires_in": 1792541063
+}
