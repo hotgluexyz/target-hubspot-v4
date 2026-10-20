@@ -18,25 +18,20 @@ interactions:
     uri: https://api.hubapi.com/oauth/v1/token
   response:
     body:
-      string: '{"token_type": "bearer", "refresh_token": "7f0***", "access_token":
-        "CIS***", "hub_id": 23170316, "scopes": ["oauth", "crm.objects.owners.read",
-        "crm.lists.read", "crm.objects.contacts.write", "crm.objects.deals.read",
-        "crm.objects.marketing_events.write", "crm.schemas.contacts.read", "crm.schemas.custom.read",
-        "crm.objects.contacts.read", "crm.objects.custom.read", "crm.import", "crm.schemas.deals.read",
-        "crm.objects.custom.write", "crm.objects.companies.read", "crm.objects.marketing_events.read",
-        "crm.schemas.companies.read", "integration-sync", "crm.schemas.contacts.write",
-        "crm.objects.quotes.write", "crm.objects.quotes.read", "crm.schemas.quotes.read",
-        "crm.objects.line_items.read", "crm.schemas.line_items.read", "sales-email-read",
-        "crm.objects.products.read", "crm.objects.products.write", "crm.objects.companies.write",
-        "tickets", "crm.pipelines.orders.read", "crm.schemas.orders.read", "crm.objects.orders.read",
-        "forms", "business-intelligence", "communication_preferences.read", "communication_preferences.write",
-        "communication_preferences.read_write", "marketing-email", "content", "conversations.read",
-        "conversations.write"], "token_use": "access_token", "expires_in": 1800}'
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "CNb***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
     headers:
       CF-Cache-Status:
       - DYNAMIC
       CF-Ray:
-      - a4cf7c217fd2c910-KHI
+      - a4da2e575b9c24a3-KHI
       Cache-Control:
       - no-store, no-transform
       Connection:
@@ -44,13 +39,13 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Mon, 19 Oct 2026 11:36:25 GMT
+      - Tue, 20 Oct 2026 18:45:42 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
       Pragma:
       - no-cache
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=lRZOLqvUbevYSYyeoHn5tGqQD%2BWBvB8S5IhpZqjz94sguDPx3xq0sFQr2KBQqhELHliIcy9N7bfs3YKhfsfGdQuFeYrZOFCI%2B7fc7zW6dWFebpkWRqjPL8BDaDVGV4oA"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=eY2J6Wk%2BJWGsdBAETSM4DKnEPxPM27G3PEHTNQL%2BuJu9LfOIHHG0%2BK48sXw%2B%2FDFYKkaRz%2BghZwyjMSj%2BGEWmqxYlsqyVKXQTeVoQl9a%2BOICKAGy6BzvlmxvWfVsKey9h"}]}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -60,13 +55,13 @@ interactions:
       access-control-allow-credentials:
       - 'false'
       content-length:
-      - '1671'
+      - '959'
       server-timing:
-      - hcid;desc="01a153f2-d329-70e9-929d-d34f14d3527e", cfr;desc="a4cf7c246ab2c910-IAD"
+      - hcid;desc="01a15aa2-343f-7528-be7e-bde7eb485da2", cfr;desc="a4da2e595c1fdf61-KHI"
       x-content-type-options:
       - nosniff
       x-hubspot-correlation-id:
-      - 01a153f2-d329-70e9-929d-d34f14d3527e
+      - 01a15aa2-343f-7528-be7e-bde7eb485da2
     status:
       code: 200
       message: OK
@@ -92,17 +87,17 @@ interactions:
       CF-Cache-Status:
       - DYNAMIC
       CF-Ray:
-      - a4cf7c283c1dc908-KHI
+      - a4da2e5bde999081-KHI
       Connection:
       - keep-alive
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Mon, 19 Oct 2026 11:36:25 GMT
+      - Tue, 20 Oct 2026 18:45:42 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=DcNq2IcTK5Gt0MZ%2FvAWeE6aLDA7yUTcU1r%2B2ZVrZ%2FoGCChTcNT4WxoUUfxgO2zfzeijW4xxTsagUPN6%2FKZaPOTOjxUVTuzwz2da32TW8VIfVdM0Sqj9N68CJVUgOlcEZ"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=4TmQkr2TtDkKw5ZcGTA0%2FiyBSI8vyb1HDUTcqhl7hmKdkXhQCKVACLHN2hQZouYtIbdZcv4qabqu5gYtMYGdopRjsurt17iPavw69%2BO37BCaEJLACnmMIKMU3wKaRp5X"}]}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -114,11 +109,11 @@ interactions:
       access-control-allow-credentials:
       - 'false'
       server-timing:
-      - hcid;desc="01a153f2-d59c-777b-88be-5c1d93333724", cfr;desc="a4cf7c2849cfc908-IAD"
+      - hcid;desc="01a15aa2-35d9-7a44-bb32-fc500c4306cb", cfr;desc="a4da2e5bee34df61-KHI"
       x-content-type-options:
       - nosniff
       x-hubspot-correlation-id:
-      - 01a153f2-d59c-777b-88be-5c1d93333724
+      - 01a15aa2-35d9-7a44-bb32-fc500c4306cb
     status:
       code: 200
       message: OK
@@ -141,25 +136,20 @@ interactions:
     uri: https://api.hubapi.com/oauth/v1/token
   response:
     body:
-      string: '{"token_type": "bearer", "refresh_token": "7f0***", "access_token":
-        "CKC***", "hub_id": 23170316, "scopes": ["oauth", "crm.objects.owners.read",
-        "crm.lists.read", "crm.objects.contacts.write", "crm.objects.deals.read",
-        "crm.objects.marketing_events.write", "crm.schemas.contacts.read", "crm.schemas.custom.read",
-        "crm.objects.contacts.read", "crm.objects.custom.read", "crm.import", "crm.schemas.deals.read",
-        "crm.objects.custom.write", "crm.objects.companies.read", "crm.objects.marketing_events.read",
-        "crm.schemas.companies.read", "integration-sync", "crm.schemas.contacts.write",
-        "crm.objects.quotes.write", "crm.objects.quotes.read", "crm.schemas.quotes.read",
-        "crm.objects.line_items.read", "crm.schemas.line_items.read", "sales-email-read",
-        "crm.objects.products.read", "crm.objects.products.write", "crm.objects.companies.write",
-        "tickets", "crm.pipelines.orders.read", "crm.schemas.orders.read", "crm.objects.orders.read",
-        "forms", "business-intelligence", "communication_preferences.read", "communication_preferences.write",
-        "communication_preferences.read_write", "marketing-email", "content", "conversations.read",
-        "conversations.write"], "token_use": "access_token", "expires_in": 1800}'
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "CJP***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
     headers:
       CF-Cache-Status:
       - DYNAMIC
       CF-Ray:
-      - a4cf7c2b1d719089-KHI
+      - a4da2e5e29e2959e-KHI
       Cache-Control:
       - no-store, no-transform
       Connection:
@@ -167,13 +157,13 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Mon, 19 Oct 2026 11:36:26 GMT
+      - Tue, 20 Oct 2026 18:45:43 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
       Pragma:
       - no-cache
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=JfkIIpoZUFR%2FBfrmg8BdvksfvjZpnepatZKc7A827s4PAPzYTZg6oZwe7hwsyHUL7PQ8l8N0QokTBc0StxqUzz1uCr2T2EGcHW7uGoFfjuo%2BsZY%2F5GUOG6JSO%2BfnMAoG"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=hr%2F6YJ6wOlJSK3bimX3i1RS3fUcaqCwPj9PkGVF8cTSAOSSO5D6B%2FKu7TWMttvpHbOahJPg0cRuPEuR7X7n674dfb43q6s6eqQGsWEL2AQWMApLDEP4hiDS9aeXNZ%2BPD"}]}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -183,13 +173,13 @@ interactions:
       access-control-allow-credentials:
       - 'false'
       content-length:
-      - '1671'
+      - '959'
       server-timing:
-      - hcid;desc="01a153f2-d926-7377-91dc-c9ed200e3034", cfr;desc="a4cf7c2e08a69089-KHI"
+      - hcid;desc="01a15aa2-3891-76de-b0eb-53a981910f24", cfr;desc="a4da2e6048e5df61-KHI"
       x-content-type-options:
       - nosniff
       x-hubspot-correlation-id:
-      - 01a153f2-d926-7377-91dc-c9ed200e3034
+      - 01a15aa2-3891-76de-b0eb-53a981910f24
     status:
       code: 200
       message: OK
@@ -227,17 +217,17 @@ interactions:
       CF-Cache-Status:
       - DYNAMIC
       CF-Ray:
-      - a4cf7c305e849bc5-KHI
+      - a4da2e62bdfb35d4-KHI
       Connection:
       - keep-alive
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Mon, 19 Oct 2026 11:36:27 GMT
+      - Tue, 20 Oct 2026 18:45:43 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=xBrAEB1pW%2FlHolLYsZBnB8Whq8QE2kHaLCfF0ttfJn4iiIxP2kRUdmbq84EuQgYeKEXT7kUEQhKeY6feKRB6qIcOd7HO95my%2FCIg%2BF8ul5cFO%2B50KbPERquzikH7sfA9"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=O2D2zP7dqpJ%2FDFUxsx49s6kJNT5dIEOnPjQpAEiKvcnR1Q%2FOhi%2B6RLo4BIwbc6PSrfGgHZgJ09tpdYd%2F6UsJxe8T6Ggoz%2BjJiTnuMKv%2FV3iT3QeZilyHQsfXzzYHP4s0"}]}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -249,9 +239,9 @@ interactions:
       content-length:
       - '738'
       server-timing:
-      - hcid;desc="01a153f2-daa4-76e9-a627-5bdac006849e", cfr;desc="a4cf7c3059f49bc5-IAD"
+      - hcid;desc="01a15aa2-3a1d-7634-87d8-932443fc3b28", cfr;desc="a4da2e62ca0935d4-KHI"
       x-hubspot-correlation-id:
-      - 01a153f2-daa4-76e9-a627-5bdac006849e
+      - 01a15aa2-3a1d-7634-87d8-932443fc3b28
       x-hubspot-ratelimit-interval-milliseconds:
       - '10000'
       x-hubspot-ratelimit-max:

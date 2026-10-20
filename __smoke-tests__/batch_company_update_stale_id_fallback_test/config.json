@@ -6,6 +6,6 @@
     "start_date": "2005-01-01T00:00:00Z",
     "redirect_uri": "https://hotglue.xyz/callback",
     "batch_companies": true,
-    "token_expires": 1792425039.965823,
-    "expires_in": 1792425640
+    "token_expires": 1792540451.853156,
+    "expires_in": 1792541052
 }

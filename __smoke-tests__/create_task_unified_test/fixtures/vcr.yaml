@@ -1,0 +1,143 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "CIu***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d93fb2cea490a7-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 16:02:47 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=%2F7ivRQJzFZPfZWqgIJij%2B8pW%2FUQDrukEEdMIyCHeeqzEE42hHtseKJIfUYAnD2iZ%2FfZ1YAvdu7In3I0Mi9oxb7oUMXnc8zXzM8msWnBLvCogJbxDGdpy7DS%2Fk898bT62"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '959'
+      server-timing:
+      - hcid;desc="01a15a0d-0d78-7eb8-abb8-0c51d39c6c3a", cfr;desc="a4d93fb4ec3b90a7-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15a0d-0d78-7eb8-abb8-0c51d39c6c3a
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"properties": {"hs_timestamp": "2024-01-20T15:00:00Z", "hs_task_body":
+      "-Fallback-scrubbed-mAGYJOXTlWURMCmrbMrsc", "hs_task_subject": "Client Follow-up",
+      "hs_task_status": "NOT_STARTED", "hs_task_priority": "HIGH"}}'
+    headers:
+      Content-Length:
+      - '216'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/tasks
+  response:
+    body:
+      string: '{"id": "119109253788", "properties": {"hs_body_preview": "-Fallback-scrubbed-mAGYJOXTlWURMCmrbMrsc",
+        "hs_body_preview_html": "-Fallback-scrubbed-zbTSCpQUEwpjPOXbJzefUILUGHHjAAMtVJIAdBkbanIdiSfLNhRfNHvMPhahUhrvi",
+        "hs_body_preview_is_truncated": "false", "hs_createdate": "2026-10-20T16:02:47.785Z",
+        "hs_engagements_last_contacted": "2024-01-20T15:00:00Z", "hs_lastmodifieddate":
+        "2026-10-20T16:02:47.785Z", "hs_obj_coords": "-Fallback-scrubbed-zFPmQWotsAQNHSccz",
+        "hs_object_id": "119109253788", "hs_object_source": "-Fallback-scrubbed-xnxpshYnsnX",
+        "hs_object_source_id": "19539769", "hs_object_source_label": "-Fallback-scrubbed-xnxpshYnsnX",
+        "hs_start_date_with_fallback": "2026-10-20T16:02:47.785Z", "hs_task_body":
+        "-Fallback-scrubbed-mAGYJOXTlWURMCmrbMrsc", "hs_task_completion_count": "0",
+        "hs_task_family": "-Fallback-scrubbed-Avbtn", "hs_task_for_object_type": "-Fallback-scrubbed-oLCNN",
+        "hs_task_is_all_day": "false", "hs_task_is_completed": "0", "hs_task_is_completed_call":
+        "0", "hs_task_is_completed_email": "0", "hs_task_is_completed_linked_in":
+        "0", "hs_task_is_completed_sequence": "0", "hs_task_is_overdue": "true", "hs_task_is_past_due_date":
+        "true", "hs_task_is_sub_task": "false", "hs_task_missed_due_date": "true",
+        "hs_task_missed_due_date_count": "1", "hs_task_priority": "HIGH", "hs_task_status":
+        "NOT_STARTED", "hs_task_subject": "Client Follow-up", "hs_task_type": "-Fallback-scrubbed-Vyoe",
+        "hs_timestamp": "2024-01-20T15:00:00Z"}, "createdAt": "2026-10-20T16:02:47.785Z",
+        "updatedAt": "2026-10-20T16:02:47.785Z", "archived": false, "url": "https://app.hubspot.com/tasks/23170316/view/all/task/119109253788"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d93fb78df7908c-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 16:02:48 GMT
+      Location:
+      - https://api.hubapi.com/crm/objects/v3/tasks/119109253788
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Wv8gjKZmrRNSh74dF2h0%2FuaPWeWqdk%2BsUIjRSYpLVyz%2B9HKqnlNzgHnLVc2pyDrqVS%2BHhjeTJ3FQBPaLsKNqGpjp%2F28%2FG9lj8jQ5AGymUPce0qUmjIB0OdiD4YdoE7Oa"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="01a15a0d-0f54-7e2a-9509-88fd3ebbaf56", cfr;desc="a4d93fb7e929908c-KHI"
+      x-hubspot-correlation-id:
+      - 01a15a0d-0f54-7e2a-9509-88fd3ebbaf56
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 201
+      message: Created
+version: 1

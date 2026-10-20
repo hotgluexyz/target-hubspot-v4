@@ -18,25 +18,20 @@ interactions:
     uri: https://api.hubapi.com/oauth/v1/token
   response:
     body:
-      string: '{"token_type": "bearer", "refresh_token": "7f0***", "access_token":
-        "CPi***", "hub_id": 23170316, "scopes": ["oauth", "crm.objects.owners.read",
-        "crm.lists.read", "crm.objects.contacts.write", "crm.objects.deals.read",
-        "crm.objects.marketing_events.write", "crm.schemas.contacts.read", "crm.schemas.custom.read",
-        "crm.objects.contacts.read", "crm.objects.custom.read", "crm.import", "crm.schemas.deals.read",
-        "crm.objects.custom.write", "crm.objects.companies.read", "crm.objects.marketing_events.read",
-        "crm.schemas.companies.read", "integration-sync", "crm.schemas.contacts.write",
-        "crm.objects.quotes.write", "crm.objects.quotes.read", "crm.schemas.quotes.read",
-        "crm.objects.line_items.read", "crm.schemas.line_items.read", "sales-email-read",
-        "crm.objects.products.read", "crm.objects.products.write", "crm.objects.companies.write",
-        "tickets", "crm.pipelines.orders.read", "crm.schemas.orders.read", "crm.objects.orders.read",
-        "forms", "business-intelligence", "communication_preferences.read", "communication_preferences.write",
-        "communication_preferences.read_write", "marketing-email", "content", "conversations.read",
-        "conversations.write"], "token_use": "access_token", "expires_in": 1800}'
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "CIy***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
     headers:
       CF-Cache-Status:
       - DYNAMIC
       CF-Ray:
-      - a4cf796588bb11bb-KHI
+      - a4da2ca3dcdd6add-KHI
       Cache-Control:
       - no-store, no-transform
       Connection:
@@ -44,13 +39,13 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Mon, 19 Oct 2026 11:34:33 GMT
+      - Tue, 20 Oct 2026 18:44:32 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
       Pragma:
       - no-cache
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=KUs3mb9YBUeoE7TN93l15zWUsZYMw%2B7Nw5I2f4b76jUwM%2BRLCvt%2BXpLIRMblv5uxvRK6e5Qu7%2B5Yoznu56hOjLjg6w4jOzgo26AJ4HXgBYa5VA5FcDkcwvPOYz0TByrI"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=%2Be%2FMc5GNV5R%2FVfZ6M3WWxWDczNPLlQKW8qQciRz58cllmWnjooP2C7GpUyOGG1LWBrTd6ZwcsXue6PDhnlQfQFM9iItZcWdeu%2F2%2FvN%2BTnHnhQfL3Bc1GoLWYkjCOeO1w"}]}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -60,13 +55,13 @@ interactions:
       access-control-allow-credentials:
       - 'false'
       content-length:
-      - '1671'
+      - '959'
       server-timing:
-      - hcid;desc="01a153f1-1da6-7f68-9e74-b06708d0cbaa", cfr;desc="a4cf79686ac111bb-KHI"
+      - hcid;desc="01a15aa1-2403-70c7-ac17-712282e6b2ab", cfr;desc="a4da2ca5c9cddf61-KHI"
       x-content-type-options:
       - nosniff
       x-hubspot-correlation-id:
-      - 01a153f1-1da6-7f68-9e74-b06708d0cbaa
+      - 01a15aa1-2403-70c7-ac17-712282e6b2ab
     status:
       code: 200
       message: OK
@@ -84,24 +79,24 @@ interactions:
     body:
       string: '{"total": 1, "results": [{"id": "255565391393", "properties": {"createdate":
         "2026-10-16T15:23:26.155Z", "email": "test-1@example.com", "firstname": "Test",
-        "hs_object_id": "255565391393", "lastmodifieddate": "2026-10-16T22:57:31.719Z",
-        "lastname": "User"}, "createdAt": "2026-10-16T15:23:26.155Z", "updatedAt":
-        "2026-10-16T22:57:31.719Z", "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-1/255565391393"}]}'
+        "hs_object_id": "255565391393", "lastmodifieddate": "2026-10-20T18:16:09.327Z",
+        "lastname": "User-1"}, "createdAt": "2026-10-16T15:23:26.155Z", "updatedAt":
+        "2026-10-20T18:16:09.327Z", "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-1/255565391393"}]}'
     headers:
       CF-Cache-Status:
       - DYNAMIC
       CF-Ray:
-      - a4cf796c0cca35d4-KHI
+      - a4da2ca8387cc6da-KHI
       Connection:
       - keep-alive
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Mon, 19 Oct 2026 11:34:33 GMT
+      - Tue, 20 Oct 2026 18:44:32 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=tBAkhZ37ftrbbMTGQiUnOQkNIdO7N%2F0HyvAlDtiCElzpssi%2B3XjEZ03SObkDt0vY2RMCNKYnbYhphl06%2Fn8rT4Ym5h53q53n7JKcF5ttbZAv4kJxD%2BRHtlNdYq4TK4Us"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=%2BIpUFMlydEDQUOc6s0Ad%2FBQnDJDbHzDEBxxuhMOp%2FdTm5oFl6Aw%2FvH9iun9Hr2WBqBuLH39woZvSm4rf77iRJrVH%2BgRu6lfkbJHaBclKcx4DGnLT6P7eTpvComCXrdjz"}]}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -113,11 +108,11 @@ interactions:
       access-control-allow-credentials:
       - 'false'
       server-timing:
-      - hcid;desc="01a153f1-1ff2-7566-8369-174f8bcd851b", cfr;desc="a4cf796c1e0735d4-KHI"
+      - hcid;desc="01a15aa1-2590-772a-8275-30a33932e77e", cfr;desc="a4da2ca84b4fdf61-KHI"
       x-content-type-options:
       - nosniff
       x-hubspot-correlation-id:
-      - 01a153f1-1ff2-7566-8369-174f8bcd851b
+      - 01a15aa1-2590-772a-8275-30a33932e77e
     status:
       code: 200
       message: OK
@@ -140,25 +135,20 @@ interactions:
     uri: https://api.hubapi.com/oauth/v1/token
   response:
     body:
-      string: '{"token_type": "bearer", "refresh_token": "7f0***", "access_token":
-        "CLW***", "hub_id": 23170316, "scopes": ["oauth", "crm.objects.owners.read",
-        "crm.lists.read", "crm.objects.contacts.write", "crm.objects.deals.read",
-        "crm.objects.marketing_events.write", "crm.schemas.contacts.read", "crm.schemas.custom.read",
-        "crm.objects.contacts.read", "crm.objects.custom.read", "crm.import", "crm.schemas.deals.read",
-        "crm.objects.custom.write", "crm.objects.companies.read", "crm.objects.marketing_events.read",
-        "crm.schemas.companies.read", "integration-sync", "crm.schemas.contacts.write",
-        "crm.objects.quotes.write", "crm.objects.quotes.read", "crm.schemas.quotes.read",
-        "crm.objects.line_items.read", "crm.schemas.line_items.read", "sales-email-read",
-        "crm.objects.products.read", "crm.objects.products.write", "crm.objects.companies.write",
-        "tickets", "crm.pipelines.orders.read", "crm.schemas.orders.read", "crm.objects.orders.read",
-        "forms", "business-intelligence", "communication_preferences.read", "communication_preferences.write",
-        "communication_preferences.read_write", "marketing-email", "content", "conversations.read",
-        "conversations.write"], "token_use": "access_token", "expires_in": 1800}'
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "COO***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
     headers:
       CF-Cache-Status:
       - DYNAMIC
       CF-Ray:
-      - a4cf796e7833df61-KHI
+      - a4da2caa9f3bfc5c-KHI
       Cache-Control:
       - no-store, no-transform
       Connection:
@@ -166,13 +156,13 @@ interactions:
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Mon, 19 Oct 2026 11:34:34 GMT
+      - Tue, 20 Oct 2026 18:44:33 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
       Pragma:
       - no-cache
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=DaRrdYrbByax305%2FcZ1J7vYp6iq9%2F0KDo4TIQ%2FqPJ8hMPuZjoSW0dWoOlsvxZeIEWv5ieI9lTRJXxRD4UMU2k2LILqeYmJhyiYK5axQbyIfhx5WjUUrbK8xfNL4e80wL"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=l%2Fi4o1mOrE5x%2BPvmgdGQSzqVmrG3je3PswSto%2BfBpdpyzWU309uzLa9TT29ZfmuTp4L7XglR%2F0%2F8lpGdCXASRq%2FiNTEzLQK8%2FdG7I1YJ5Qgaj0BCu8PpQNn5GrBjDkId"}]}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -182,13 +172,13 @@ interactions:
       access-control-allow-credentials:
       - 'false'
       content-length:
-      - '1671'
+      - '959'
       server-timing:
-      - hcid;desc="01a153f1-2336-7080-bdf6-8907e515476c", cfr;desc="a4cf79715ad3df61-KHI"
+      - hcid;desc="01a15aa1-284f-7565-a252-bb66aba33b57", cfr;desc="a4da2cacaaa2fc5c-KHI"
       x-content-type-options:
       - nosniff
       x-hubspot-correlation-id:
-      - 01a153f1-2336-7080-bdf6-8907e515476c
+      - 01a15aa1-284f-7565-a252-bb66aba33b57
     status:
       code: 200
       message: OK
@@ -213,30 +203,32 @@ interactions:
   response:
     body:
       string: '{"id": "255565391393", "properties": {"createdate": "2026-10-16T15:23:26.155Z",
-        "email": "test-1@example.com", "firstname": "Test", "hs_full_name_or_email":
-        "-Fallback-scrubbed-npyzpifVe", "hs_is_unworked": "true", "hs_object_id":
-        "255565391393", "hs_object_source": "-Fallback-scrubbed-xnxpshYnsnX", "hs_object_source_id":
+        "email": "test-1@example.com", "first_deal_created_date": "2026-10-20T16:32:04.339Z",
+        "firstname": "Test", "hs_full_name_or_email": "-Fallback-scrubbed-npyzpifVe",
+        "hs_is_contact": "true", "hs_is_unworked": "true", "hs_object_id": "255565391393",
+        "hs_object_source": "-Fallback-scrubbed-xnxpshYnsnX", "hs_object_source_id":
         "1149586", "hs_object_source_label": "-Fallback-scrubbed-xnxpshYnsnX", "hs_pipeline":
-        "-Fallback-scrubbed-kPsokmtIwyLBUZHNlXOrvPwpiAd", "hs_v2_date_entered_current_stage":
-        "2026-10-16T15:23:26.155Z", "hs_v2_time_in_current_stage": "2026-10-16T15:23:26.155Z",
-        "lastmodifieddate": "2026-10-16T22:57:31.719Z", "lastname": "User", "lifecyclestage":
-        "-Fallback-scrubbed-uKIR"}, "createdAt": "2026-10-16T15:23:26.155Z", "updatedAt":
-        "2026-10-16T22:57:31.719Z", "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-1/255565391393"}'
+        "-Fallback-scrubbed-kPsokmtIwyLBUZHNlXOrvPwpiAd", "hs_time_between_contact_creation_and_deal_creation":
+        "349718184", "hs_v2_date_entered_current_stage": "2026-10-20T16:32:05.601Z",
+        "hs_v2_time_in_current_stage": "2026-10-20T16:32:05.601Z", "lastmodifieddate":
+        "2026-10-20T18:44:34.030Z", "lastname": "User", "lifecyclestage": "-Fallback-scrubbed-uJdKooOGOtQ"},
+        "createdAt": "2026-10-16T15:23:26.155Z", "updatedAt": "2026-10-20T18:44:34.030Z",
+        "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-1/255565391393"}'
     headers:
       CF-Cache-Status:
       - DYNAMIC
       CF-Ray:
-      - a4cf7974ef2d9bc5-KHI
+      - a4da2caf8f914dd8-KHI
       Connection:
       - keep-alive
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Mon, 19 Oct 2026 11:34:35 GMT
+      - Tue, 20 Oct 2026 18:44:34 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=GjDZx%2BfPMiHBD9iis7z8ipi%2FHMUGBnsHj%2FDglbz%2FPxlUP6mUzLTLixIxhlOeeGVWRNBKLYg8SdJvbKOoaEdBU6VMJUir9Nk7wK%2F5U1hwWl0etwa7Bv7cUX1eisGFeRjW"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=nB9aFuwRRfLHynzjXuVGR2X%2BI57kmmRNCjyrSTakE76Q%2F%2BcWLP%2FSkHJPK7aof6CMXOfn5AGKgdkq6FZ%2BrjEuNdLwRkEhX6tqBEepIR%2Fa23DhK6EukYiS%2F5jfJXehl1kt"}]}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -246,11 +238,11 @@ interactions:
       access-control-allow-credentials:
       - 'false'
       content-length:
-      - '738'
+      - '886'
       server-timing:
-      - hcid;desc="01a153f1-257a-7c5d-b04a-f7631e0cecd5", cfr;desc="a4cf7974faed9bc5-KHI"
+      - hcid;desc="01a15aa1-2a27-739f-a75a-6e8c92a5763d", cfr;desc="a4da2caf9c6f4dd8-KHI"
       x-hubspot-correlation-id:
-      - 01a153f1-257a-7c5d-b04a-f7631e0cecd5
+      - 01a15aa1-2a27-739f-a75a-6e8c92a5763d
       x-hubspot-ratelimit-interval-milliseconds:
       - '10000'
       x-hubspot-ratelimit-max:

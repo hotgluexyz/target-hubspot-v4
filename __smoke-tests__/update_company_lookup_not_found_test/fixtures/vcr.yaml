@@ -1,0 +1,257 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "CNH***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d9b37da9eb0f26-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 17:21:50 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ssuBnF8QUNAAp2gFNiH9dQhgDxzxDu2paUDVzTz2Q0PgvpZC3BQhXSPFoSCgfBr4EF%2Fdo9UhCB%2B1tLxlSAVweIBIZlJp1HrutNAkTzOXzB8O8ci%2FMXkhV2vBpcvwTFqt"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '959'
+      server-timing:
+      - hcid;desc="01a15a55-6c3e-7575-ba02-dfe8c52fce98", cfr;desc="a4d9b37fbd940f26-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15a55-6c3e-7575-ba02-dfe8c52fce98
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"filterGroups": [{"filters": [{"propertyName": "name", "operator": "EQ",
+      "value": "Fake-Christina Murphy"}]}]}'
+    headers:
+      Content-Length:
+      - '111'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies/search
+  response:
+    body:
+      string: '{"total": 1, "results": [{"id": "51218040393", "properties": {"createdate":
+        "2026-02-11T20:44:01.299Z", "domain": "newlookup.com", "hs_lastmodifieddate":
+        "2026-02-11T20:49:55.106Z", "hs_object_id": "51218040393", "name": "Fake-Christina
+        Murphy"}, "createdAt": "2026-02-11T20:44:01.299Z", "updatedAt": "2026-02-11T20:49:55.106Z",
+        "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-2/51218040393"}]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d9b3823e85ccfc-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 17:21:50 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=DIbV7FK61NmRkbSNF9RoCaY%2BQv%2FFQMcIQM3cRPt6Kbh5dsPw3aKXcy6L8TLJVO%2BQQv0JdjzzChvfw%2Fx8Tx0KimJaXBxhs%2BzW63CgkdTtBTcvthviMn%2BEkggaoU0exBzi"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="01a15a55-6dd6-71ba-9189-2107bbac841a", cfr;desc="a4d9b38249d2ccfc-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15a55-6dd6-71ba-9189-2107bbac841a
+    status:
+      code: 200
+      message: OK
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "CNH***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d9b384ccdb90aa-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 17:21:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=g3JAmhNK4tcdiIAe705hqqy%2Fw67SXGxO51TXH5E%2FNEgpXWezyNj9EITastbdcMpnXE%2FLgjFb793EMk6oCTrFYLweKWP0iCstlrdi%2FNnQmP%2FHw43o7wZjEZU%2F0c3qcoi4"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '959'
+      server-timing:
+      - hcid;desc="01a15a55-70ca-7ccb-81d8-e2160fe80ee9", cfr;desc="a4d9b3870e3790aa-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15a55-70ca-7ccb-81d8-e2160fe80ee9
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"properties": {"name": "Fake-Christina Murphy", "website": "https://newlookup-updated.com",
+      "industry": "RETAIL"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '115'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.31.0
+    method: PATCH
+    uri: https://api.hubapi.com/crm/v3/objects/companies/51218040393
+  response:
+    body:
+      string: '{"id": "51218040393", "properties": {"createdate": "2026-02-11T20:44:01.299Z",
+        "domain": "newlookup.com", "hs_lastmodifieddate": "2026-02-11T20:49:55.106Z",
+        "hs_object_id": "51218040393", "hs_object_source": "-Fallback-scrubbed-xnxpshYnsnX",
+        "hs_object_source_id": "28056811", "hs_object_source_label": "-Fallback-scrubbed-xnxpshYnsnX",
+        "hs_pipeline": "-Fallback-scrubbed-ZetzVmhDkaqZxPfuQgYBDIokUcwe", "hs_task_label":
+        "Fake-Christina Murphy", "hs_v2_date_entered_current_stage": "2026-02-11T20:44:01.299Z",
+        "hs_v2_time_in_current_stage": "2026-02-11T20:44:01.299Z", "industry": "RETAIL",
+        "lifecyclestage": "-Fallback-scrubbed-uKIR", "name": "Fake-Christina Murphy",
+        "website": "https://newlookup-updated.com"}, "createdAt": "2026-02-11T20:44:01.299Z",
+        "updatedAt": "2026-02-11T20:49:55.106Z", "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-2/51218040393"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d9b389fe8e721a-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 17:21:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=5zcGwzAE1H8fcDQI4d5FvAVCteBnrhXZF9M1RWrQMGj6E8p6HW8XlX0YrIntBoPJ2FHWBtkMKx9O1%2BRxTajkNjDXWZzspZNI4QeimE1bxbmGp%2FXoot4t%2FMlK8o2zzSvq"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '766'
+      server-timing:
+      - hcid;desc="01a15a55-72a5-7973-8d24-14d0c1cc5727", cfr;desc="a4d9b38a09e7721a-KHI"
+      x-hubspot-correlation-id:
+      - 01a15a55-72a5-7973-8d24-14d0c1cc5727
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 200
+      message: OK
+version: 1

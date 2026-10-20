@@ -1,8 +1,8 @@
 {
-    "access_token": "CKC***",
-    "refresh_token": "7f0***",
-    "client_id": "787***",
-    "client_secret": "620***",
+    "access_token": "CNb***",
+    "refresh_token": "na1***",
+    "client_id": "f8a***",
+    "client_secret": "6e2***",
     "start_date": "2005-01-01T00:00:00Z",
     "redirect_uri": "https://hotglue.xyz/callback",
     "lookup_fields": {
@@ -13,6 +13,6 @@
     },
     "lookup_method": "all",
     "batch_contacts": false,
-    "token_expires": 1792425385.323934,
-    "expires_in": 1792425987
+    "token_expires": 1792540466.737983,
+    "expires_in": 1792541067
 }

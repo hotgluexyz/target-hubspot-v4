@@ -20,6 +20,7 @@ class TargetHubspotv4TestRunner(VCRTargetTestRunner):
         "grant_type",
         "token_type",
         "id",
+        "contact_id",
         "title",
         "idProperty",
         "propertyName",
@@ -34,6 +35,7 @@ class TargetHubspotv4TestRunner(VCRTargetTestRunner):
         "industry",
         "domain",
         "status",
+        "priority",
         # Unified activities (calls/tasks) — routing + HubSpot association type labels
         "type",
         # process_call hardcodes COMPLETED; must match cassette on replay
@@ -42,10 +44,22 @@ class TargetHubspotv4TestRunner(VCRTargetTestRunner):
         # CRM list create (POST /crm/v3/lists) — enum-like API fields, not list titles
         "objectTypeId",
         "processingType",
+        "message",
+        "call_direction",
+        "hs_call_direction",
+        "hs_call_title",
+        "dealname",
+        "deal_name",
+        "deal_title",
+        "dealstage",
+        "category",
+        "amount",
     }
 
     # Non-PII literals the target branches on (not emails, person/company/list names).
     PRESERVE_VALUES = {
+        "invalid",
+        "invalid@example.com",
         "Lookup Tech Solutions",
         "subscribed",
         "unsubscribed",
@@ -54,11 +68,12 @@ class TargetHubspotv4TestRunner(VCRTargetTestRunner):
         "Test",
         "User",
         "Test-1",
+        "User-1",
+        "User-updated",
         "test@domain.com",
         "test-11@domain.com",
         "test@example.com",
         "test-1@example.com",
-        "test-seq@domain.com",
     }
 
     def module(self) -> str:
