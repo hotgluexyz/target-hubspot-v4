@@ -43,7 +43,7 @@ class HubspotSink(HotglueSink):
             self.api_key = self.config.get("hapikey")
             return HubspotApiKeyAuthenticator()
         # auth with acces token
-        url = "https://api.hubapi.com/oauth/v1/token"
+        url = "https://api.hubapi.com/oauth/2026-03/token"
         return HubspotAuthenticator(
             self._target, self.auth_state, url
         )
