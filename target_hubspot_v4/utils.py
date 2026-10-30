@@ -47,13 +47,12 @@ def on_giveup(details):
 def acquire_access_token_from_refresh_token(config):
     payload = {
         "grant_type": "refresh_token",
-        "redirect_uri": config["redirect_uri"],
         "refresh_token": config["refresh_token"],
         "client_id": config["client_id"],
         "client_secret": config["client_secret"],
     }
 
-    resp = requests.post(BASE_URL + "/oauth/v1/token", data=payload)
+    resp = requests.post(BASE_URL + "/oauth/2026-03/token", data=payload)
     cred_errors = ["BAD_CLIENT_ID", "BAD_CLIENT_SECRET", "BAD_REFRESH_TOKEN"]
     if any(error in resp.text for error in cred_errors):
         try:

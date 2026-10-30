@@ -46,7 +46,6 @@ class HubspotAuthenticator:
         """Define the OAuth request body for the hubspot API."""
         return {
         "grant_type": "refresh_token",
-        "redirect_uri": self._config.get("redirect_uri"),
         "refresh_token": self._config.get("refresh_token"),
         "client_id": self._config.get("client_id"),
         "client_secret": self._config.get("client_secret"),
