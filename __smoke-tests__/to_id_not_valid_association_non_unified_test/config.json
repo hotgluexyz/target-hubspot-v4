@@ -1,0 +1,11 @@
+{
+    "access_token": "CIz***",
+    "refresh_token": "na1***",
+    "client_id": "f8a***",
+    "client_secret": "6e2***",
+    "start_date": "2005-01-01T00:00:00Z",
+    "redirect_uri": "https://hotglue.xyz/callback",
+    "batch_contacts": false,
+    "token_expires": 1792539758.791185,
+    "expires_in": 1792540359
+}

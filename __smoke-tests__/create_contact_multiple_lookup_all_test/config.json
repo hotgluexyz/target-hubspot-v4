@@ -1,0 +1,18 @@
+{
+    "access_token": "CNb***",
+    "refresh_token": "na1***",
+    "client_id": "f8a***",
+    "client_secret": "6e2***",
+    "start_date": "2005-01-01T00:00:00Z",
+    "redirect_uri": "https://hotglue.xyz/callback",
+    "lookup_fields": {
+        "contacts": [
+            "email",
+            "firstname"
+        ]
+    },
+    "lookup_method": "all",
+    "batch_contacts": false,
+    "token_expires": 1792540466.737983,
+    "expires_in": 1792541067
+}

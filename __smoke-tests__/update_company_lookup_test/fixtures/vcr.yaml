@@ -1,0 +1,257 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "CN3***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4da3d351f554e55-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 18:55:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=%2BFZIxkI%2BQrmAnxJDpQgWS4e65IIegqEr2P63EuLdc90q0TS7WSikUNKK8sVsIhwXUfM0c3GCvivDI1XQh9sY%2FHCdR9zIeHU1AB17lcfddWZTevt0Gspu1nki2Qh0f619"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '959'
+      server-timing:
+      - hcid;desc="01a15aab-7ed4-7029-96cb-22685ef8c052", cfr;desc="a4da3d371b07df61-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15aab-7ed4-7029-96cb-22685ef8c052
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"filterGroups": [{"filters": [{"propertyName": "name", "operator": "EQ",
+      "value": "Lookup Tech Solutions"}]}]}'
+    headers:
+      Content-Length:
+      - '111'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies/search
+  response:
+    body:
+      string: '{"total": 1, "results": [{"id": "59395066890", "properties": {"createdate":
+        "2026-10-16T14:45:42.545Z", "domain": "https://testcompany.com", "hs_lastmodifieddate":
+        "2026-10-20T15:50:59.137Z", "hs_object_id": "59395066890", "name": "Lookup
+        Tech Solutions"}, "createdAt": "2026-10-16T14:45:42.545Z", "updatedAt": "2026-10-20T15:50:59.137Z",
+        "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-2/59395066890"}]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4da3d398b400241-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 18:55:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=hnrRPUcufy1FdHfcSOySduvlVClR95qyH38WQ2yM53NzAbFhdVS%2FiTfA5BfMC14k7NFokB1UfzUXyJ4W5z3fKC2pEOVjGB68I%2F8DlsRF8YfnoawDc8CZVQ5qCSOucgOK"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="01a15aab-805b-71b8-a88d-2be7a5ca6b46", cfr;desc="a4da3d398f440241-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15aab-805b-71b8-a88d-2be7a5ca6b46
+    status:
+      code: 200
+      message: OK
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "CJn***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4da3d3bda5c721a-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 18:55:52 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=h0J91ifptIidhOyYD5QD%2BdxneNEZqxJ4vCsS5LYNkIwEae0FFL9D7083gy1FDGEUgL91f9ZHjaCBqBhQBHzjg8qE7IK%2BAFMzlarqap8wLSZJU46Q3P%2BXRreiBlk%2BZwM0"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '959'
+      server-timing:
+      - hcid;desc="01a15aab-8307-740f-bce4-be4e12162f00", cfr;desc="a4da3d3dce53df61-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15aab-8307-740f-bce4-be4e12162f00
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"properties": {"name": "Lookup Tech Solutions", "website": "https://lookupindustries-updated.com",
+      "industry": "ACCOUNTING"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '126'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.31.0
+    method: PATCH
+    uri: https://api.hubapi.com/crm/v3/objects/companies/59395066890
+  response:
+    body:
+      string: '{"id": "59395066890", "properties": {"createdate": "2026-10-16T14:45:42.545Z",
+        "domain": "https://testcompany.com", "hs_lastmodifieddate": "2026-10-20T18:55:52.534Z",
+        "hs_object_id": "59395066890", "hs_object_source": "-Fallback-scrubbed-xnxpshYnsnX",
+        "hs_object_source_id": "1149586", "hs_object_source_label": "-Fallback-scrubbed-xnxpshYnsnX",
+        "hs_pipeline": "-Fallback-scrubbed-ZetzVmhDkaqZxPfuQgYBDIokUcwe", "hs_task_label":
+        "Lookup Tech Solutions", "hs_v2_date_entered_current_stage": "2026-10-16T14:45:42.545Z",
+        "hs_v2_time_in_current_stage": "2026-10-16T14:45:42.545Z", "industry": "ACCOUNTING",
+        "lifecyclestage": "-Fallback-scrubbed-uKIR", "name": "Lookup Tech Solutions",
+        "website": "https://lookupindustries-updated.com"}, "createdAt": "2026-10-16T14:45:42.545Z",
+        "updatedAt": "2026-10-20T18:55:52.534Z", "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-2/59395066890"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4da3d404e2a9bc5-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 18:55:52 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=IInzDCUg0iA2OMTndz50m2yUf8GflpS40bGTNOKUwBDZpjbSoLS5rAagnI3qgl%2FZshg3BkTLAI5xU9YJK%2BfIDp99Ook5HHUUzY0gfGbdomN9Nznjytd09%2BJ%2F5yWEyEN1"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '792'
+      server-timing:
+      - hcid;desc="01a15aab-849c-7f47-b481-1d737ba66923", cfr;desc="a4da3d405fecdf61-KHI"
+      x-hubspot-correlation-id:
+      - 01a15aab-849c-7f47-b481-1d737ba66923
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 200
+      message: OK
+version: 1

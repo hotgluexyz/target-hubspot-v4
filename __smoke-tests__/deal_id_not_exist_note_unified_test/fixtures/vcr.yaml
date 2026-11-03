@@ -1,0 +1,127 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "CM-***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d98dae49d4ccfc-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 16:56:01 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Vn6rGKIKmZjm78EmsISVUlf%2FyoQXdOW90h3PTHFrB%2FaKR6k9wTl%2BjPiZiNtBYen%2BIslQ0u3ttSbKzOdhVaB5rHWAltAeH16rG92bZlz5rqkIyskfN47nvxxizFwT3qui"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '959'
+      server-timing:
+      - hcid;desc="01a15a3d-ca97-7572-9583-9d35d4a8e748", cfr;desc="a4d98db04e57ccfc-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15a3d-ca97-7572-9583-9d35d4a8e748
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"properties": {"hs_timestamp": 1705312800000, "hs_note_body": "-Fallback-scrubbed-PeXjqfUpznZFEhmNpPDedioVBpjGSAW"},
+      "associations": [{"to": {"id": "999999999"}, "types": [{"associationCategory":
+      "HUBSPOT_DEFINED", "associationTypeId": 214}]}]}'
+    headers:
+      Content-Length:
+      - '245'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/notes
+  response:
+    body:
+      string: '{"status": "error", "message": "one or more associations are not valid",
+        "correlationId": "01a15a3d-cc52-7669-adbb-fec30c217341", "errors": [{"message":
+        "0-3=999999999 is not a valid object", "context": {"validationResult": ["-Fallback-scrubbed-FGOmZPwvEtSDFwokHCW"]}}],
+        "category": "-Fallback-scrubbed-UqTeIppewHN"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d98db30dba959e-KHI
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '316'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 16:56:02 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=tPRs1diSxEOeKhZSyPFpbSW8QhR7TZWYZVMAe3fPPsEyh8QbVGoyO3%2FwMMmOM1UtIHSoQREWGTwjBfhWpz8GFQz8BPxgdEMuNUBwT%2FEqeMa82eiER5EcOfRHVMq64E3G"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="01a15a3d-cc52-7669-adbb-fec30c217341", cfr;desc="a4d98db3198d959e-KHI"
+      x-hubspot-correlation-id:
+      - 01a15a3d-cc52-7669-adbb-fec30c217341
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 400
+      message: Bad Request
+version: 1

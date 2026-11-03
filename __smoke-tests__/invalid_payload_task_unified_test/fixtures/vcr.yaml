@@ -1,0 +1,135 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "CNC***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d997c4d8b015a7-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 17:02:54 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Obdoffp7YWCWD2tYnXABVFhKcbuaRfxkLP2ZfDu2V%2B397tXo0A17nHj%2BbB1FQYSJdv8%2FJ%2BdpAb12TE8Kdeyt9e9fmgM5JUIbUrgnE%2Fq1su3ljuGRRAjzApMxU4mRx7lB"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '959'
+      server-timing:
+      - hcid;desc="01a15a44-18aa-78ce-b873-dc75dcee7866", cfr;desc="a4d997c6d86a15a7-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15a44-18aa-78ce-b873-dc75dcee7866
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"properties": {"hs_timestamp": "invalid", "hs_task_body": null, "hs_task_subject":
+      null, "hs_task_status": "INVALID_STATUS", "hs_task_priority": null}}'
+    headers:
+      Content-Length:
+      - '152'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/tasks
+  response:
+    body:
+      string: '{"status": "error", "message": "Property values were not valid: [{\"isValid\":false,\"message\":\"invalid
+        was not a valid long. Portal 23170316, object type 0-27\",\"error\":\"INVALID_LONG\",\"name\":\"hs_timestamp\",\"localizedErrorMessage\":\"invalid
+        was not a valid long. Portal 23170316, object type 0-27\",\"propertyValue\":\"invalid\",\"portalId\":23170316},{\"isValid\":false,\"message\":\"INVALID_STATUS
+        was not one of the allowed options: [COMPLETED, DEFERRED, IN_PROGRESS, NOT_STARTED,
+        WAITING]\",\"error\":\"INVALID_OPTION\",\"name\":\"hs_task_status\",\"localizedErrorMessage\":\"INVALID_STATUS
+        was not one of the allowed options: [COMPLETED, DEFERRED, IN_PROGRESS, NOT_STARTED,
+        WAITING]\",\"propertyValue\":\"INVALID_STATUS\",\"portalId\":23170316}]",
+        "correlationId": "01a15a44-1abc-7250-afe1-0edd6fcf3159", "errors": [{"message":
+        "invalid was not a valid long. Portal 23170316, object type 0-27", "code":
+        "-Fallback-scrubbed-GJQjJrhpvJtK", "context": {"propertyName": ["hs_timestamp"]}},
+        {"message": "INVALID_STATUS was not one of the allowed options: [COMPLETED,
+        DEFERRED, IN_PROGRESS, NOT_STARTED, WAITING]", "code": "-Fallback-scrubbed-VYDWLHrXxNSMVS",
+        "context": {"propertyName": ["hs_task_status"]}}], "category": "-Fallback-scrubbed-gcBXZxigVqxmitgS"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d997ca2d3ff452-KHI
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1272'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 17:02:55 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=wXWY8Ye6XChjmDN24oAVw7ZIvk6co3zFA1fscfn7L9ZF%2FaVVfPzD6I8cA8YFhw2TBSgIULwXgABk7Vk%2FMVT6r8iCY9ISotgnlFxCbA1UCHesUsZiADM%2F7FSLiXjLtBYm"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="01a15a44-1abc-7250-afe1-0edd6fcf3159", cfr;desc="a4d997ca28a8f452-KHI"
+      x-hubspot-correlation-id:
+      - 01a15a44-1abc-7250-afe1-0edd6fcf3159
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 400
+      message: Bad Request
+version: 1

@@ -1,0 +1,9 @@
+{
+    "access_token": "CNP***",
+    "refresh_token": "na1***",
+    "client_id": "130***",
+    "client_secret": "e14***",
+    "start_date": "2005-01-01T00:00:00Z",
+    "redirect_uri": "https://hotglue.xyz/callback",
+    "unified_api_schema": true
+}

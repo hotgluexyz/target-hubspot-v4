@@ -1,0 +1,151 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "7f0***", "access_token":
+        "CMT***", "hub_id": 23170316, "scopes": ["oauth", "crm.objects.owners.read",
+        "crm.lists.read", "crm.objects.contacts.write", "crm.objects.deals.read",
+        "crm.objects.marketing_events.write", "crm.schemas.contacts.read", "crm.schemas.custom.read",
+        "crm.objects.contacts.read", "crm.objects.custom.read", "crm.import", "crm.schemas.deals.read",
+        "crm.objects.custom.write", "crm.objects.companies.read", "crm.objects.marketing_events.read",
+        "crm.schemas.companies.read", "integration-sync", "crm.schemas.contacts.write",
+        "crm.objects.quotes.write", "crm.objects.quotes.read", "crm.schemas.quotes.read",
+        "crm.objects.line_items.read", "crm.schemas.line_items.read", "sales-email-read",
+        "crm.objects.products.read", "crm.objects.products.write", "crm.objects.companies.write",
+        "tickets", "crm.pipelines.orders.read", "crm.schemas.orders.read", "crm.objects.orders.read",
+        "forms", "business-intelligence", "communication_preferences.read", "communication_preferences.write",
+        "communication_preferences.read_write", "marketing-email", "content", "conversations.read",
+        "conversations.write"], "token_use": "access_token", "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4b7ccaf3b1a9bc5-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Fri, 16 Oct 2026 14:37:06 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Qw%2BlzLqmPAAtxe2YtkalECpHGfSyqU2z79uwaWBEwWyqq2VIVMfV2o6YsdNLPOFWEkLqCAiJBQa9Q4LOsm%2FeIqXiM3XxgL1sQH3lyJW3owQ5%2F%2BTWD%2F2nU6FExI1Tlr2a"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '1671'
+      server-timing:
+      - hcid;desc="01a14525-2b34-7526-91ae-370c4460cbcb", cfr;desc="a4b7ccb13a8c9bc5-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a14525-2b34-7526-91ae-370c4460cbcb
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"properties": {"name": "Fake-Raymond Rosario", "domain": "testcompany.com",
+      "industry": "INFORMATION_TECHNOLOGY_AND_SERVICES"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '128'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies
+  response:
+    body:
+      string: '{"id": "59386549334", "properties": {"createdate": "2026-10-16T14:37:06.737Z",
+        "domain": "testcompany.com", "hs_annual_revenue_currency_code": "USD", "hs_lastmodifieddate":
+        "2026-10-16T14:37:06.737Z", "hs_num_active_contracts": "0", "hs_num_blockers":
+        "0", "hs_num_child_companies": "0", "hs_num_contacts_with_buying_roles": "0",
+        "hs_num_decision_makers": "0", "hs_num_open_deals": "0", "hs_object_id": "59386549334",
+        "hs_object_source": "-Fallback-scrubbed-xnxpshYnsnX", "hs_object_source_id":
+        "1149586", "hs_object_source_label": "-Fallback-scrubbed-xnxpshYnsnX", "hs_pipeline":
+        "-Fallback-scrubbed-ZetzVmhDkaqZxPfuQgYBDIokUcwe", "hs_task_label": "Fake-Raymond
+        Rosario", "hs_v2_date_entered_current_stage": "2026-10-16T14:37:06.737Z",
+        "hs_v2_time_in_current_stage": "2026-10-16T14:37:06.737Z", "industry": "INFORMATION_TECHNOLOGY_AND_SERVICES",
+        "lifecyclestage": "-Fallback-scrubbed-uKIR", "name": "Fake-Raymond Rosario",
+        "num_associated_contacts": "0", "num_notes": "0", "website": "-Fallback-scrubbed-UZQiZwAsAWsewQf"},
+        "createdAt": "2026-10-16T14:37:06.737Z", "updatedAt": "2026-10-16T14:37:06.737Z",
+        "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-2/59386549334"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4b7ccb4198361b6-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Fri, 16 Oct 2026 14:37:07 GMT
+      Location:
+      - https://api.hubapi.com/crm/objects/v3/companies/59386549334
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Unsp7p1pPpJHiv8%2Bom81XOPshfQCKfx9DWiBiHKp7MPCOdvLZT5dAd%2FNVRO2qijkQVg5lq8uvcMtBK7p5Eqx%2BzIRBwm%2Frz03i55fXPX9KKRLo6sfOQAFAGI33G%2FUFEh%2B"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '1038'
+      server-timing:
+      - hcid;desc="01a14525-2d05-7ade-9905-806d2f60648c", cfr;desc="a4b7ccb42db661b6-IAD"
+      x-hubspot-correlation-id:
+      - 01a14525-2d05-7ade-9905-806d2f60648c
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 201
+      message: Created
+version: 1

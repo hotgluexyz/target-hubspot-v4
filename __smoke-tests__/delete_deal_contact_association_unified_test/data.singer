@@ -1,0 +1,2 @@
+{"type": "SCHEMA", "stream": "deals", "schema": {"type": ["object", "null"], "properties": {"id": {"type": ["string", "null"]}, "title": {"type": ["string", "null"]}, "monetary_amount": {"type": ["number", "null"]}}}, "key_properties": []}
+{"type": "RECORD", "stream": "deals", "record": {"title": "Test Deal for Associations", "monetary_amount": 50000}}

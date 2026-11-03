@@ -1,0 +1,255 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "CMj***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d95cd3dc3a9086-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 16:22:40 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=6kVY%2BId1JU%2BrzCzBvo6hYwtbH88RFBjITJ5UNuXek89Zez8JikaWzLGc4%2BVvi7rn%2Bn3p54VnulyzxdccsGliIQQHyfSFwYdVR%2FsfgwhghndZYIFeft90jNPkHO4KcOmK"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '959'
+      server-timing:
+      - hcid;desc="01a15a1f-423d-7a78-bffe-61ef8f0f0048", cfr;desc="a4d95cd5f9549086-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15a1f-423d-7a78-bffe-61ef8f0f0048
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"properties": {"name": "Test Company Duplicate", "domain": "https://duplicate-1.com",
+      "industry": "INFORMATION_TECHNOLOGY_AND_SERVICES"}}'
+    headers:
+      Content-Length:
+      - '138'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies
+  response:
+    body:
+      string: '{"id": "59695046177", "properties": {"createdate": "2026-10-20T16:22:40.960Z",
+        "domain": "https://duplicate-1.com", "hs_annual_revenue_currency_code": "USD",
+        "hs_lastmodifieddate": "2026-10-20T16:22:40.960Z", "hs_num_active_contracts":
+        "0", "hs_num_blockers": "0", "hs_num_child_companies": "0", "hs_num_contacts_with_buying_roles":
+        "0", "hs_num_decision_makers": "0", "hs_num_open_deals": "0", "hs_object_id":
+        "59695046177", "hs_object_source": "-Fallback-scrubbed-xnxpshYnsnX", "hs_object_source_id":
+        "19539769", "hs_object_source_label": "-Fallback-scrubbed-xnxpshYnsnX", "hs_pipeline":
+        "-Fallback-scrubbed-ZetzVmhDkaqZxPfuQgYBDIokUcwe", "hs_task_label": "Test
+        Company Duplicate", "hs_v2_date_entered_current_stage": "2026-10-20T16:22:40.960Z",
+        "hs_v2_time_in_current_stage": "2026-10-20T16:22:40.960Z", "industry": "INFORMATION_TECHNOLOGY_AND_SERVICES",
+        "lifecyclestage": "-Fallback-scrubbed-uKIR", "name": "Test Company Duplicate",
+        "num_associated_contacts": "0", "num_notes": "0", "website": "https://duplicate-1.com"},
+        "createdAt": "2026-10-20T16:22:40.960Z", "updatedAt": "2026-10-20T16:22:40.960Z",
+        "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-2/59695046177"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d95cd8b812c53c-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 16:22:41 GMT
+      Location:
+      - https://api.hubapi.com/crm/objects/v3/companies/59695046177
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=GMSaZaMLh4eOtOfKQ6fiz860YlMed%2BaRkAEMxP8sVHjk8CVQft84BVlZUT%2BHeopNLsm7edJR2y4k8ka89kYa75zxLT%2FyvQ%2FipZgWCFn%2BIUsOrdUOtuZyI1ohTwZYL2zM"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="01a15a1f-43ff-7e8a-bfe3-05adbbb71b83", cfr;desc="a4d95cd8bf0cc53c-KHI"
+      x-hubspot-correlation-id:
+      - 01a15a1f-43ff-7e8a-bfe3-05adbbb71b83
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: '{"properties": {"name": "Test Company Duplicate", "domain": "https://duplicate-2.com",
+      "industry": "FINANCIAL_SERVICES"}}'
+    headers:
+      Content-Length:
+      - '121'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies
+  response:
+    body:
+      string: '{"id": "59674119180", "properties": {"createdate": "2026-10-20T16:22:41.523Z",
+        "domain": "https://duplicate-2.com", "hs_annual_revenue_currency_code": "USD",
+        "hs_lastmodifieddate": "2026-10-20T16:22:41.523Z", "hs_num_active_contracts":
+        "0", "hs_num_blockers": "0", "hs_num_child_companies": "0", "hs_num_contacts_with_buying_roles":
+        "0", "hs_num_decision_makers": "0", "hs_num_open_deals": "0", "hs_object_id":
+        "59674119180", "hs_object_source": "-Fallback-scrubbed-xnxpshYnsnX", "hs_object_source_id":
+        "19539769", "hs_object_source_label": "-Fallback-scrubbed-xnxpshYnsnX", "hs_pipeline":
+        "-Fallback-scrubbed-ZetzVmhDkaqZxPfuQgYBDIokUcwe", "hs_task_label": "Test
+        Company Duplicate", "hs_v2_date_entered_current_stage": "2026-10-20T16:22:41.523Z",
+        "hs_v2_time_in_current_stage": "2026-10-20T16:22:41.523Z", "industry": "FINANCIAL_SERVICES",
+        "lifecyclestage": "-Fallback-scrubbed-uKIR", "name": "Test Company Duplicate",
+        "num_associated_contacts": "0", "num_notes": "0", "website": "https://duplicate-2.com"},
+        "createdAt": "2026-10-20T16:22:41.523Z", "updatedAt": "2026-10-20T16:22:41.523Z",
+        "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-2/59674119180"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d95cdc8ec20048-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 16:22:41 GMT
+      Location:
+      - https://api.hubapi.com/crm/objects/v3/companies/59674119180
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=y62FGWHZb9EuyI0dn4ILmu1hGYkxY%2F2upq2HukZTWXsU5gu6VB1n63IM2eSYIogpx8Wc4jxYfUuzcuz5rUzU7TB5LnTPysnjdREith0UtlZToWDf%2BQF6mqleeWfCg8nT"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="01a15a1f-465b-74a5-bc19-4bfc9ae6e9c6", cfr;desc="a4d95cdc99480048-KHI"
+      x-hubspot-correlation-id:
+      - 01a15a1f-465b-74a5-bc19-4bfc9ae6e9c6
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '108'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: '{"filterGroups": [{"filters": [{"propertyName": "name", "operator": "EQ",
+      "value": "Test Company Duplicate"}]}]}'
+    headers:
+      Content-Length:
+      - '112'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies/search
+  response:
+    body:
+      string: '{"total": 0, "results": []}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4d95cdfec609074-KHI
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '27'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 16:22:42 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=G5eZ0GqbuAEVfGei69FeK2ACKXzfK0ocPC%2Fij4r92wGwp%2BPZaYLsqFf76NN%2Fo263r2YjxRdDpAJFA54Q%2FVhRVkg3Nx43MLUWGN%2BdNZEReDKTb0QbBuR1ILXqg5Swge5O"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="01a15a1f-4880-7944-bcf1-6aab7a098714", cfr;desc="a4d95ce00a0f9074-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15a1f-4880-7944-bcf1-6aab7a098714
+    status:
+      code: 200
+      message: OK
+version: 1

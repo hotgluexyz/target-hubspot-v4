@@ -1,0 +1,149 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "7f0***", "access_token":
+        "CPn***", "hub_id": 23170316, "scopes": ["oauth", "crm.objects.owners.read",
+        "crm.lists.read", "crm.objects.contacts.write", "crm.objects.deals.read",
+        "crm.objects.marketing_events.write", "crm.schemas.contacts.read", "crm.schemas.custom.read",
+        "crm.objects.contacts.read", "crm.objects.custom.read", "crm.import", "crm.schemas.deals.read",
+        "crm.objects.custom.write", "crm.objects.companies.read", "crm.objects.marketing_events.read",
+        "crm.schemas.companies.read", "integration-sync", "crm.schemas.contacts.write",
+        "crm.objects.quotes.write", "crm.objects.quotes.read", "crm.schemas.quotes.read",
+        "crm.objects.line_items.read", "crm.schemas.line_items.read", "sales-email-read",
+        "crm.objects.products.read", "crm.objects.products.write", "crm.objects.companies.write",
+        "tickets", "crm.pipelines.orders.read", "crm.schemas.orders.read", "crm.objects.orders.read",
+        "forms", "business-intelligence", "communication_preferences.read", "communication_preferences.write",
+        "communication_preferences.read_write", "marketing-email", "content", "conversations.read",
+        "conversations.write"], "token_use": "access_token", "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4afd3decd046add-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Thu, 15 Oct 2026 15:23:54 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=rVoZICe3V9rMO29pyVyp0bO%2Bw%2FqCnZvJJSwu49RHnuGutoYmTpzVih1kzrN9Fdd03yW%2ByR%2FcBhQnwqfUJy8%2FhcvBWTL2y8asCsr%2Fz3QemgY%2FPxSaqQAsVwe7rVvOwptT"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '1671'
+      server-timing:
+      - hcid;desc="01a14029-a960-7de7-a152-a43bdef9e4fb", cfr;desc="a4afd3e19a596add-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a14029-a960-7de7-a152-a43bdef9e4fb
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"inputs": [{"objectWriteTraceId": "26ec0141d43e49fc6589e2208b42fb23a254dddf005008651d8af2bd5f023fc2",
+      "properties": {"domain": "hgi10572-batch-partial-ok.example.com"}}, {"objectWriteTraceId":
+      "5427e118c1a42e6108e932cb584c51682c82261c5bf1787548f655853c6187b7", "properties":
+      {"domain": "hgi10572-batch-partial-bad.example.com", "industry": "THISISNOTAREALINDUSTRY"}}]}'
+    headers:
+      Content-Length:
+      - '369'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies/batch/create
+  response:
+    body:
+      string: '{"completedAt": "2026-10-15T15:23:55.302Z", "status": "-Fallback-scrubbed-eecaTBZG",
+        "startedAt": "2026-10-15T15:23:55.060Z", "results": [{"id": "59304700801",
+        "properties": {"createdate": "2026-10-15T15:23:55.098Z", "domain": "hgi10572-batch-partial-ok.example.com",
+        "hs_annual_revenue_currency_code": "USD", "hs_lastmodifieddate": "2026-10-15T15:23:55.098Z",
+        "hs_num_active_contracts": "0", "hs_num_blockers": "0", "hs_num_child_companies":
+        "0", "hs_num_contacts_with_buying_roles": "0", "hs_num_decision_makers": "0",
+        "hs_num_open_deals": "0", "hs_object_id": "59304700801", "hs_object_source":
+        "-Fallback-scrubbed-xnxpshYnsnX", "hs_object_source_id": "1149586", "hs_object_source_label":
+        "-Fallback-scrubbed-xnxpshYnsnX", "hs_pipeline": "-Fallback-scrubbed-ZetzVmhDkaqZxPfuQgYBDIokUcwe",
+        "hs_task_label": "-Fallback-scrubbed-rCHYpvvKsWTpybOptVrodIJxzKwIWLcJMtxtV",
+        "hs_v2_date_entered_current_stage": "2026-10-15T15:23:55.098Z", "hs_v2_time_in_current_stage":
+        "2026-10-15T15:23:55.098Z", "lifecyclestage": "-Fallback-scrubbed-uKIR", "num_associated_contacts":
+        "0", "num_notes": "0", "website": "-Fallback-scrubbed-rCHYpvvKsWTpybOptVrodIJxzKwIWLcJMtxtV"},
+        "createdAt": "2026-10-15T15:23:55.098Z", "updatedAt": "2026-10-15T15:23:55.098Z",
+        "archived": false, "objectWriteTraceId": "26ec0141d43e49fc6589e2208b42fb23a254dddf005008651d8af2bd5f023fc2",
+        "url": "https://app.hubspot.com/contacts/23170316/record/0-2/59304700801"}],
+        "errors": [{"status": "-Fallback-scrubbed-OtdWA", "category": "-Fallback-scrubbed-gcBXZxigVqxmitgS",
+        "message": "-Fallback-scrubbed-kHYIZldNXZdYEMsPXCDnWbNSpNbXxIKljmanZaWeKQdDuKWitgaArUzYtchSEtRlZTXznZEfsgpxgnySkrWDDrKUwGsaiNTkwSlpJILQVqGTCUPBDkMZiBUHSbbVodOfKVtruWqtzmixJhocjPPJcAvcoKtoUdcYvaWrZicqohofEQCXxWwActZBTrIGxMpYHjoDsaqYeyubJdjlQNVOCiassPjMVdPSjisPRmJxZZagSZUpCfcPUFKOjIsuXRkgbOGLAUSCdTRfTuDlQcfVyICyBRAdoUHQYvQIdzvVtelwgsuZtxXJAWRZORJIsIzXqcSXWmbeSGpkAieBOPhJRMZbjkSCZGrQOwtJpVOUYvCnzVusbHhirDdPEReRbSBfhZqGzjeumeHuUQJtIKwFaWXfMLLebTbWLTXLVDErzwHTdemTMeJjIuEgNJeRiZjIRuvLxqCsBEijGaXtdmWMBgbaxgjuBWXccHXekUlxcmXGdRVLrYrBLFWLWHnOJkTXvSwmAuANWXCLFdIhGRagEggvDMpbIlMeuzXOsdoHeJJJhZhgSXrygogDLeGAjNLbAECyPkYyADEhYPCJQNTacPVyALYYaSxZaSWeSMLisaXWlrNPavLFYkBnrNXVYJDcAteglsNBPhPsAIYjexlZsNahHMTttIHQmeyJayfgHeVmhEIPKERUKkyLiIbDsHsAGoORUIWjZaJsDUGAFqLEklFDrxwnQgybeybccGmEtoicjoohOXOGFNNcPSqTltnIUPunLDuEoweLIWUlVTFtwrHFZdjBBFaQNRMqSrWHXZfeqLjhKniJMQkKErUvvnlUInYZgwUQmMcmZlnTYPwNdWUBnlllxFWrhDSXfvrcyGvpfwzBPQZBylTMlUPlBFFgjeLqgsGdpwBZXfzDPwqNmtQmLOFkrcxikOHxRuIavksyDGDuaYQpQOzPJbvAmdpjFINSpGvbxYADWoyblwvxNbspFjrIbcjIAWrZSPPRFiVknCybJlnNIvZaQQBUPQOwdNqcOGqUPdICNisWmdUZpDBixNzftzpoBQRySMmnymLRhjreIAYYmoujGihsFEJZdJNrMGlJrnMLqckKIxLCWeXxPGVGPJIGvccOQqvaZZMikRisUzFhXBxqbquvUiaIeKMhBOktIwHrzuoZApYpCEByDkDbTcVrvSWYsHcUwAZjWbXvJfLoKjKrLuMlSPuoHjRfvAgUgNSfYsMqugCxrHWfKWzjedTBQJWCMgQxzAxNvlsxetMlglqiDtwDscIWHcTQTHQwyeJHlgEEnvylyfCqyxtjKboZDNJRRwSqMWbthJrEhdSkGswQGVRTxdutpdCIJeDDUbBMFSIRVlkFHaCnqZHcpKXcKAoGQKzAXjgYWiEQmYWCgkhBnwpOcVNiUgKctQjRuZKwkkgKsgTwZYKQRpdmqjvkYjVBRvpjEwUqQnqttNrhNqFtXAqtcLvxIBSIbzIObTmlNYdeIcEmTCzFkmKiqXTPJApbDnHYBGIYXQhzEowuMYKZwaopEpPUnlYSqwBtbjeTyMSbdNeDKGHDYFQpJoJLPPLuQKnAnDArZiPvRPGIFXJIPWmbSohqsLNpWTUqgcSUWdybjpZioHhxyCpUVGVThuQgRgbhEppokUEpYEwoiSgocNgmozmNBHacoBAqmFeYMJzxcaiuRVPckhJZidjisDuYrFOhBpOcYtMxvKjISKWStOYEKpNHSnZiDmOVTARYJFzsXVCTNCUrJFyfvIhOnCBkbVDzffZYoMLIRUjMlRpExbJwyLNGETjqhZzgXqZtOkcyDdcYoyaWclgwvgXyWGDjalZVkKpYYKzPYgcVFFcGOePMRecblSUqUunjTgLSpyOqkvAOaajPfkFGEfCTbyLDNgEoNLVPnBBFbfRdnQCMMYbHJgwYZyeuTsWvybDNSPuSbCgqzQMArcCBeMPlXsAFqSkNyzCKhuiFDtgiFpgMysCjWAfuxwZfeEUtwLSKdMqhpAevELWQpJaJLjstNgnJPzniqFnJNXmIIysEcRVxKnjNgcITgVyIjbKBLaKMDIKlqjAqAaZVtekkomeUProzRkBWBFqNiKWguLkfCFUnpnqGLMArRBekchyoXUiGHRxOhbrJjOxGsDqRKszjArvhoRnoiwsEbTdHVHKKtMOAkFGhkudpeGcBYCseDdTBnxBEwkUXkodvENuxorttFleLmniZZvVeFEkAEZAoceOutounRMjADUSZovvUYBIIeExXsnfkrWhNeOOZrkhYENzyWMdxcGTDOjVQdIHvZUPyrHDGHWHEEXXJeQHWqdiwOketPvuaOALznmRuuqzlUItKDoxPWNyJzlhZZEWIxHoeCCyBhYNGaKOHBLMveMLaoyYALtIdmtSCJwSttbsnPSSfAsoahOHJZAHTzARKnQGRCoFiYNrKlfsGoaqHIAHdUKNQKNjTmvCtCnolnxarwnFbFKXNAFTKFDqUEFxzpjscqgjbVcFNfuvECYJUkXxdnSanXTOwgsaGfAJBaerijODNrDjgGzwUQnOAagchZjeBCXlwevlxVNfpSwZKhGpZqpzYGgOAadsToHROjEiypyZASRuckizjFAVwPUWlMeeivLaTPYBnUFsslkWsGhvQSokjrAkxXbTthatyJGiXwGbeVMBYtnHwFFPIDXzybhJOoVuCcILnHAhVlVnZGIAXLReGgQFxeXiAfpBjclZcxzIfzLllZXNXIECslKLWXsHQMYpbpzwNYzOgUMvyjgJKuojKigazWcYfPgPKqvZpSyaHJaaktJtwGxwrnLPlMNMPRAIqTiiwkzIuRrsvnSUdisJyuyplLKpArFhYgJKsKjPeGFDqAYfIpTVXFWLzLamkiMiHfdnhQHyaKmqurXKfAOpLXwyOUhWUiGybkwWivUUbeutzKULoSkIliXZAaDZGUdxsOJHobrkAFbAAtArlXmrYlVncEIjvAKgvgQQmgOaSdIHoSeWuDGnzOkcLaHTsrnKLadWdhaayIHDAWHkbfCNugWwFgKVrpYTTzwTBvNwXhTXnpzmOxDkzfeAYnkFKAxnoFVyWMyBcwMnMxkbEvJBsXcZozQmdsrbvmmmUWQVHuhyYvtFZzmYpNmCnOwdZbAwWeDYPVLuaRrRyxvbNltyqOAiLHRoDOeJNbUzYzUfRBKuRvaZVwBgefSwmxiYQkXFPKTDfuDwTwWWGyWfUJBwSKuhYgOQpRyrSNlJyTpwssaTjcwRascycvFvczBuswyjbDKIYrvmvvhqRxzEoNYouXlfMubpyoLDTLLrjYMQuicLvbaPCkXrmqUgNkMXMRotPsPzVxCOvsooMkCUnwqqNrrlhDIajlJcQBEQmuSIcjZrtxMUTHWDAsbAARRQIeFpjRqvshBCOOQVYtVzbjAqgHGdSFjLEYFxOWuAlCHIrXTiuPgJMaJRGdTbgMyzNZhBJhVprsoRjKkHeaAfWSIFFfENPiVpZmNzIQMGJjwCBaeaCjaTeUIifEqCMwXdvTyhJukZLpjXnAFizLGURTigzTxKjqVbyaCfXDaTdAUmxxmQwEmLKMnwoOsdYAjTbEsObphzOvRRvnrBnqAqxyyowGGMZxYwhjSLtyNmdxOUGdIvOUEjSWtggiggidIPSrzdhOzrNbrbgOwHhQIRGfrUJSshfGRyYBNoKPmeQQaHLhpvAgWcLcezMhUyigUYbRtpBbnuWvTWDjUryLgoDIrnUwOdNOyLfhtTDUZpyNnpDVhDUujEKpPkhwLvIQyHBeGdmjhiqnpMTplxQTBxsnvgsqeAYmQygkisNDMZaZKoxhlAwTvorLTazAwYcKTILVbfSviqxUdtvyvnVxAUGbdjHqvACzOxnNwSisgovlDngNSWBDDBQBPifeyuBRPJTkRkQrZIyYYClIomFCwNLgYJgfuVJYvYvPAmXIdPRjqMUnaBfEtzYISVusHJoFtRJntQMiKvPWTWdlVbzFizYDOQpCpIulTkOMSEXjawMQVmoTjYDzNzArkRNmYkKtQTiQbyJkfTfZZnDizUkoAVMyZyvjnpBiMkchjzUQOBMNIbPzvLokKYKRskVjXsDDAYCSkmULhIFOiXBDzqbcznubMBsnqeMKyMOmRjtEKkcVqTXfeOgTmwRuGZwSthiVjipqAwHSLYcGFXLItPtZhgmnVQDqqpgEEjUPbpxQYzGwmKvPzmAPqwvsUtDDxAYRPdAQRRRoBzhiIlBYEgLRlLqYVuGfixgdedRcOyYQhstLhhqtKHrpUYskQsGOCKgUgpJIMKIGYWOupBPXhOvlhcxCQFnpApVaJEWDQXBEapDvbBKIBVaORlDCPMQsgmElgXCKTthDPACdcIJnuOTEJcwEqAZPAgNSSIlufbqDgrixjuAaNbzJBvpilPpCmjUyaGniaiOgSMrjwQqlfbdTklqddXeaPyDrOBStvxvEVONbxgkXjYaeiqrMrpkrYEYtdbPvEQcPpsvEDwPXlRJDVqhFuARrjBKdzJHwYLEOgZLaDfuHdOuVeXkaVRKauliqutDtIZNEaIzltrJNruLqmPVBLoxEkwDOlTStqBYVkIoKBwYQmDeYKmQypxhKGYclNgebIthXDQIJRUskRIIKosCrVDxlXJqWNTZBASxXXUazmkoqnSrHgsUZdBYiFHbkkdZKXfSTAppRcOsPwIaqsZZXmcsqhRnnOhbhfZnTPJczOPyjikdBhvdakxEOtNlDICrrmUIqGCqkRVuCssXMZWWLagNhaoBaMmpKzdGccXsfLIBPRRVOOXpkKbJHpKEpuazajSGiRzkEFfDzQCRYVwjbPUWMUtPLaUowwRNWFEFYVSmCGVocqMebmgZFPTPLKWurEGMqnNONKzrmipqTwJBOytXNmUmRMDlrpirgtzDYsEnFAieykWLgDIDpCqIYLLdYSMWyAwqAaSirrtIinJuAljUIhnxPlHYGnsZXdWInnZlZxegYwxQZyWfIXGLsQWFPxsPxEmBkdiBCyREtvgWvjRhvSSiDkUhzSSqRQHflFuNsjUpcSkFocCoYqqIwPlkaAtvzcDydwYcFDdNtNNQihMKfsDUkpvGuotqJRCJibCuvGiEkivifgtDnAMjLLtYqZUEVrjHIfDESjMdsBVgdARNxskbyQvsaMTShDMrDyvdajQcfTZfeXqiLpxfQmNApuIOrmKLUZRknHTSTyzmQAAwqGjsQrsuRIhGYulfSMdrLYePmQzRUcMHAXcWvBcoRgPYjVdqWdaQoZgHuItuMsDpVHzXmFSAEYmzlWnGWrpbPgDZrDcPtMfsMZwdUjjkmsoOoBlvPBcGRwtwInYMsJHlmFhGOmusSLjkhGSfCJbgbEGcdQipJxbeTLlFMojTNuiOSAzsnrWiwLixGnuSPHvfQNbZrLwiKsTFOYTgtXlSXHwAOfOTQEoWOHchaumGsYPQcoZvPBzSuXObZDVONCfRMxnrdBdUwTMaPszTLkTCKghnqVOICpOzRkhwjksaecAfTLIqRXnhgQDXWnnHxAmCNQXijFUuzrsVFLbdfBvPbskxuEcmkuKAkXZhWwJoPuTfFECYgGdRWpCGOJtoFvCpsguUlyHEwaOsNoHgThmGqBUHClBTXsQemIkeImWLtYeqodqRjQyDPQMAuZmtBThYpAshOhuanhfsEzWGekrXsqcLYpOWPrQhxrCIYoKoBoHdHjuGYKHOXXUhDtxWuUwsYEbNEhPIrxDtPWGoxcsbkAjYfXrrdINMAoeJveWjUAvEsnlpfUlRbAUVjUCLecWkmwbjaMgieBrSfTPSvwNmxjwPIdJeSVtWnMOCIekjNuZbSKccBeCJdkozyubqNaVZvRhbE",
+        "context": {"objectWriteTraceId": ["5427e118c1a42e6108e932cb584c51682c82261c5bf1787548f655853c6187b7"]}}],
+        "numErrors": 1}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4afd3e44f9e90ab-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Thu, 15 Oct 2026 15:23:55 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=UukL7TXCmuNq1sAQYbMwkcIoJPBfgToG8NPwz21sqVnEOW4zjy5b0ZLCFUWj7zt3kVJJzg63MRv5jqLACyU%2FKMIGatIWwqr5mtK3AWeXHgGzJdxdPCB71Dv3Ftfyavkf"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="01a14029-ab22-7a23-bd7e-0d398dfb70a7", cfr;desc="a4afd3e458c790ab-KHI"
+      x-hubspot-correlation-id:
+      - 01a14029-ab22-7a23-bd7e-0d398dfb70a7
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 207
+      message: Multi-Status
+version: 1

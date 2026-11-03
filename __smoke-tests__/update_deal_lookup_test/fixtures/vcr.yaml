@@ -1,0 +1,267 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "COO***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4da401aacd3fc5c-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 18:57:49 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Wd0WYyf1tIyq3SdFjPWB4Pgzi59819TwLYfe7gyhBf8INKE5ISat8esIJhaw9XMFJ5yWEwjkw9reYtAAI9U6c3Ey0XvS8yxnnrJnsoJm7U9IwYUibo0CwsQ9kxERxE%2FG"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '959'
+      server-timing:
+      - hcid;desc="01a15aad-4eec-7b03-8130-d3ccd3109bb7", cfr;desc="a4da401d9c5edf61-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15aad-4eec-7b03-8130-d3ccd3109bb7
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"filterGroups": [{"filters": [{"propertyName": "dealname", "operator":
+      "EQ", "value": "Lookup Premium Contract"}]}]}'
+    headers:
+      Content-Length:
+      - '117'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/deals/search
+  response:
+    body:
+      string: '{"total": 1, "results": [{"id": "56091932500", "properties": {"amount":
+        "400000", "closedate": "2024-12-31T00:00:00Z", "createdate": "2026-02-11T20:50:02.869Z",
+        "dealname": "Lookup Premium Contract", "dealstage": "qualifiedtobuy", "hs_lastmodifieddate":
+        "2026-10-20T18:23:35.392Z", "hs_object_id": "56091932500", "pipeline": "-Fallback-scrubbed-okQuOWP"},
+        "createdAt": "2026-02-11T20:50:02.869Z", "updatedAt": "2026-10-20T18:23:35.392Z",
+        "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-3/56091932500"}]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4da4020096b909f-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 18:57:50 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=jaxiATB9yrbiswTGbyBKQ%2FKZVG4VVtYdXzxpXvwwJa1EkpP3AVlVwjt0C%2Bo8ELAWC81BS%2FOpqmsGXWnFR%2FDHsictVKi4igGsw4IfEh8t4H951C5BaLLKuBG68Yeuyd4g"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="01a15aad-5073-750b-b1b4-52bc3a6db906", cfr;desc="a4da40201d9cdf61-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15aad-5073-750b-b1b4-52bc3a6db906
+    status:
+      code: 200
+      message: OK
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "na1***", "access_token":
+        "CJy***", "hub_id": 23170316, "scopes": ["crm.objects.orders.write", "oauth",
+        "crm.objects.orders.read", "crm.objects.contacts.write", "crm.objects.custom.read",
+        "crm.objects.custom.write", "crm.objects.companies.write", "crm.lists.write",
+        "crm.objects.companies.read", "crm.lists.read", "crm.objects.deals.read",
+        "crm.schemas.contacts.read", "crm.objects.deals.write", "crm.objects.contacts.read",
+        "tickets", "crm.objects.products.read", "marketing.campaigns.read", "communication_preferences.statuses.batch.read",
+        "communication_preferences.statuses.batch.write", "forms"], "token_use": "access_token",
+        "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4da40223fc4a305-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 18:57:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=WJZ8OS8xug5ragzw1n7LbU2%2F%2BiEyNka3jBQfzQvP1NxkmvmowvX1ZnxWBy5GLna%2FXAwD7GlVtgEkCU2Q0fLDuKCTgRzMrwzSm61s4FI8cerd2rlLDjmVbCo1kfCoDSbt"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '959'
+      server-timing:
+      - hcid;desc="01a15aad-5396-7d62-b6b3-1b9745119b3e", cfr;desc="a4da4025188adf61-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a15aad-5396-7d62-b6b3-1b9745119b3e
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"properties": {"dealname": "Lookup Premium Contract", "amount": 400000,
+      "closedate": "2024-12-31T00:00:00Z", "dealstage": "qualifiedtobuy"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '141'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.31.0
+    method: PATCH
+    uri: https://api.hubapi.com/crm/v3/objects/deals/56091932500
+  response:
+    body:
+      string: '{"id": "56091932500", "properties": {"amount": "400000", "amount_in_home_currency":
+        "400000", "closedate": "2024-12-31T00:00:00Z", "createdate": "2026-02-11T20:50:02.869Z",
+        "days_to_close": "0", "dealname": "Lookup Premium Contract", "dealstage":
+        "qualifiedtobuy", "hs_actual_duration": "0", "hs_closed_amount": "0", "hs_closed_amount_in_home_currency":
+        "0", "hs_closed_deal_close_date": "0", "hs_closed_deal_create_date": "0",
+        "hs_closed_won_count": "0", "hs_days_to_close_raw": "0", "hs_deal_stage_probability":
+        "0.40000000000000002220446049250313080847263336181640625", "hs_deal_stage_probability_shadow":
+        "0.40000000000000002220446049250313080847263336181640625", "hs_forecast_amount":
+        "400000", "hs_is_closed": "false", "hs_is_closed_count": "0", "hs_is_closed_won":
+        "false", "hs_is_open_count": "1", "hs_lastmodifieddate": "2026-10-20T18:23:35.392Z",
+        "hs_object_id": "56091932500", "hs_object_source": "-Fallback-scrubbed-xnxpshYnsnX",
+        "hs_object_source_id": "28056811", "hs_object_source_label": "-Fallback-scrubbed-xnxpshYnsnX",
+        "hs_open_amount_in_home_currency": "400000", "hs_open_deal_create_date": "1770843002869",
+        "hs_projected_amount": "160000.00000000000888178419700125232338905334472656250000000",
+        "hs_projected_amount_in_home_currency": "160000.00000000000888178419700125232338905334472656250000000",
+        "hs_v2_date_entered_current_stage": "2026-10-20T18:23:25.195Z", "hs_v2_time_in_current_stage":
+        "2026-10-20T18:23:25.195Z", "hs_weighted_pipeline_in_company_currency": "160000.00000000000888178419700125232338905334472656250000000",
+        "pipeline": "-Fallback-scrubbed-okQuOWP"}, "createdAt": "2026-02-11T20:50:02.869Z",
+        "updatedAt": "2026-10-20T18:23:35.392Z", "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-3/56091932500"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4da402789f0f3cf-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Tue, 20 Oct 2026 18:57:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=BWI9WHu7xyzFP9mG9FuKTlOTQUyGw%2Bso%2B%2FwPBPdBSAYZQPGgUtdU2yHayx7JjRfRgxb%2FkRP6WvSJ3bUVD0OyYJvmEHSHbe5B0lBFkNbR4lMEDZLmayDn44qSkvE8HLXI"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '1632'
+      server-timing:
+      - hcid;desc="01a15aad-5520-7335-872c-814fda847d33", cfr;desc="a4da40279944f3cf-KHI"
+      x-hubspot-correlation-id:
+      - 01a15aad-5520-7335-872c-814fda847d33
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 200
+      message: OK
+version: 1

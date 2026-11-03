@@ -1,0 +1,143 @@
+interactions:
+- request:
+    body: grant_type=refresh_token&redirect_uri=https%3A%2F%2Fhotglue.xyz%2Fcallback
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '74'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - python-requests/2.31.0
+    method: POST
+    uri: https://api.hubapi.com/oauth/v1/token
+  response:
+    body:
+      string: '{"token_type": "bearer", "refresh_token": "7f0***", "access_token":
+        "CKe***", "hub_id": 23170316, "scopes": ["oauth", "crm.objects.owners.read",
+        "crm.lists.read", "crm.objects.contacts.write", "crm.objects.deals.read",
+        "crm.objects.marketing_events.write", "crm.schemas.contacts.read", "crm.schemas.custom.read",
+        "crm.objects.contacts.read", "crm.objects.custom.read", "crm.import", "crm.schemas.deals.read",
+        "crm.objects.custom.write", "crm.objects.companies.read", "crm.objects.marketing_events.read",
+        "crm.schemas.companies.read", "integration-sync", "crm.schemas.contacts.write",
+        "crm.objects.quotes.write", "crm.objects.quotes.read", "crm.schemas.quotes.read",
+        "crm.objects.line_items.read", "crm.schemas.line_items.read", "sales-email-read",
+        "crm.objects.products.read", "crm.objects.products.write", "crm.objects.companies.write",
+        "tickets", "crm.pipelines.orders.read", "crm.schemas.orders.read", "crm.objects.orders.read",
+        "forms", "business-intelligence", "communication_preferences.read", "communication_preferences.write",
+        "communication_preferences.read_write", "marketing-email", "content", "conversations.read",
+        "conversations.write"], "token_use": "access_token", "expires_in": 1800}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4b7d9458ad2a703-KHI
+      Cache-Control:
+      - no-store, no-transform
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Fri, 16 Oct 2026 14:45:42 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=sS3SgjwCo1QtWyUJsE89nkJWgIMku%2FaQTa%2FWh1SMvrysA5qDo9k0XHobaK2WGhRUzfIGxHIWkdUpt%2F3EXka5jDBF%2Fr0DdKWl3oEFKW4szvW8DaUYvV2kJnu0C4IghXr5"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      content-length:
+      - '1671'
+      server-timing:
+      - hcid;desc="01a1452d-09a1-7831-8202-da05772ef541", cfr;desc="a4b7d9486ddea703-KHI"
+      x-content-type-options:
+      - nosniff
+      x-hubspot-correlation-id:
+      - 01a1452d-09a1-7831-8202-da05772ef541
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"properties": {"name": "Lookup Tech Solutions", "domain": "https://testcompany.com",
+      "industry": "INFORMATION_TECHNOLOGY_AND_SERVICES"}}'
+    headers:
+      Content-Length:
+      - '137'
+      Content-Type:
+      - application/json
+    method: POST
+    uri: https://api.hubapi.com/crm/v3/objects/companies
+  response:
+    body:
+      string: '{"id": "59395066890", "properties": {"createdate": "2026-10-16T14:45:42.545Z",
+        "domain": "https://testcompany.com", "hs_annual_revenue_currency_code": "USD",
+        "hs_lastmodifieddate": "2026-10-16T14:45:42.545Z", "hs_num_active_contracts":
+        "0", "hs_num_blockers": "0", "hs_num_child_companies": "0", "hs_num_contacts_with_buying_roles":
+        "0", "hs_num_decision_makers": "0", "hs_num_open_deals": "0", "hs_object_id":
+        "59395066890", "hs_object_source": "-Fallback-scrubbed-xnxpshYnsnX", "hs_object_source_id":
+        "1149586", "hs_object_source_label": "-Fallback-scrubbed-xnxpshYnsnX", "hs_pipeline":
+        "-Fallback-scrubbed-ZetzVmhDkaqZxPfuQgYBDIokUcwe", "hs_task_label": "Lookup
+        Tech Solutions", "hs_v2_date_entered_current_stage": "2026-10-16T14:45:42.545Z",
+        "hs_v2_time_in_current_stage": "2026-10-16T14:45:42.545Z", "industry": "INFORMATION_TECHNOLOGY_AND_SERVICES",
+        "lifecyclestage": "-Fallback-scrubbed-uKIR", "name": "Lookup Tech Solutions",
+        "num_associated_contacts": "0", "num_notes": "0", "website": "https://testcompany.com"},
+        "createdAt": "2026-10-16T14:45:42.545Z", "updatedAt": "2026-10-16T14:45:42.545Z",
+        "archived": false, "url": "https://app.hubspot.com/contacts/23170316/record/0-2/59395066890"}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - a4b7d94bcc15d055-KHI
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Fri, 16 Oct 2026 14:45:42 GMT
+      Location:
+      - https://api.hubapi.com/crm/objects/v3/companies/59395066890
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.01,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=CrAHwfIXCFnCj8HsJmLvX6nIVKyKvXknydR84GcN5v3ynZFSZsbtnGcfLanTLQpU5ChSV3T0%2BjpiaWNPV%2BvyvYgXoTrJxcVDYf%2B1WbUMHUzuFskSB4sWKci8%2FraQQHEJ"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - origin, accept-encoding
+      access-control-allow-credentials:
+      - 'false'
+      server-timing:
+      - hcid;desc="01a1452d-0bd2-7913-a21a-b42aedb366f8", cfr;desc="a4b7d94bdc4fd055-KHI"
+      x-hubspot-correlation-id:
+      - 01a1452d-0bd2-7913-a21a-b42aedb366f8
+      x-hubspot-ratelimit-interval-milliseconds:
+      - '10000'
+      x-hubspot-ratelimit-max:
+      - '110'
+      x-hubspot-ratelimit-remaining:
+      - '109'
+      x-hubspot-ratelimit-secondly:
+      - '11'
+      x-hubspot-ratelimit-secondly-remaining:
+      - '10'
+    status:
+      code: 201
+      message: Created
+version: 1

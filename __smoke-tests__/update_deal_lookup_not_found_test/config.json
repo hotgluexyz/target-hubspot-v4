@@ -1,0 +1,13 @@
+{
+    "access_token": "CMy***",
+    "refresh_token": "na1***",
+    "client_id": "f8a***",
+    "client_secret": "6e2***",
+    "start_date": "2005-01-01T00:00:00Z",
+    "redirect_uri": "https://hotglue.xyz/callback",
+    "lookup_fields": {
+        "deals": "dealname"
+    },
+    "token_expires": 1792540127.501125,
+    "expires_in": 1792540728
+}
