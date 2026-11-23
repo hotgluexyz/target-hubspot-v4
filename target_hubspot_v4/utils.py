@@ -19,14 +19,20 @@ logging.basicConfig(
 SESSION = requests.Session()
 
 BASE_URL = "https://api.hubapi.com"
+OAUTH_TOKEN_URL = BASE_URL + "/oauth/2026-03/token"
 
 
 def giveup(exc):
-    return (
-        exc.response is not None
-        and 400 <= exc.response.status_code < 500
-        and exc.response.status_code != 429
-    )
+    response = exc.response
+    if response is None:
+        return False
+
+    status_code = response.status_code
+    if status_code == 400 and response.url == OAUTH_TOKEN_URL:
+        logger.warning("HubSpot token endpoint returned unexpected HTTP %s", status_code)
+        return False
+
+    return 400 <= status_code < 500 and status_code != 429
 
 
 def on_giveup(details):
@@ -52,7 +58,7 @@ def acquire_access_token_from_refresh_token(config):
         "client_secret": config["client_secret"],
     }
 
-    resp = requests.post(BASE_URL + "/oauth/2026-03/token", data=payload)
+    resp = requests.post(OAUTH_TOKEN_URL, data=payload)
     cred_errors = ["BAD_CLIENT_ID", "BAD_CLIENT_SECRET", "BAD_REFRESH_TOKEN"]
     if any(error in resp.text for error in cred_errors):
         try:
